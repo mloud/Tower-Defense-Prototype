@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4cbcb7ffd1462db6ed2d5060825c9a, type: 3}
+  m_Name: HeroDefinitionsTable
+  m_EditorClassIdentifier: 
+  data:
+  - UnitId: arcus
+    AttackInterval: 4
+    Damage: 45
+    Hp: 20
+  - UnitId: lawris
+    AttackInterval: 1.5
+    Damage: 2
+    Hp: 30
+  - UnitId: fulgure
+    AttackInterval: 0.5
+    Damage: 2
+    Hp: 20
