@@ -4,6 +4,7 @@ using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Battle.Logic.Systems;
+using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Data;
 using Cysharp.Threading.Tasks;
 using Unity.Entities;
@@ -56,6 +57,8 @@ namespace CastlePrototype.Battle.Logic
             systemHandles.ForEach(world.DestroySystem);
             world.EntityManager.DestroyEntity(world.EntityManager.UniversalQuery);
             WorldManagers.Clear(world);
+            
+            VisualManager.Default.Dispose();
         }
     }
 }

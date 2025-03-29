@@ -46,12 +46,17 @@ namespace CastlePrototype.Battle.Logic.Systems
                 spawnPosition = new float3(0, 0, 7),
                 spawnBox = new float3(6,0,3),
                 spawnInterval = 0.1f,
-                waveInterval = 20f,
-                enemiesPerWave = 10,
                 totalWaves = 3,
                 currentWave = 0,
                 currentWaveChanged = true,
                 enemyId = new FixedString64Bytes("boss_default")
+            };
+
+            spawnerComponent.waves = new FixedList4096Bytes<Wave>
+            {
+                new(0, 10, "zombie", 0.1f),
+                new(20, 6, "zombie", 0.1f),
+                new(30, 1, "boss_default", 0.1f)
             };
             
             state.EntityManager.AddComponentData(spawnerEntity, spawnerComponent);

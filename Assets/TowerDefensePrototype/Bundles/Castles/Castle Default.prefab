@@ -74,7 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +99,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: slot_3
-  effects: []
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
 --- !u!1 &3330747489228111414
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +178,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,7 +203,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: slot_0
-  effects: []
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
 --- !u!1 &6269122007930409860
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2990737624792592761}
-  - component: {fileID: 8851327648349572596}
+  - component: {fileID: 8375295192366065601}
   m_Layer: 0
   m_Name: Castle Default
   m_TagString: Untagged
@@ -235,7 +245,7 @@ Transform:
   - {fileID: 6872401780425447603}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8851327648349572596
+--- !u!114 &8375295192366065601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,12 +254,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6269122007930409860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262e5fd8ac384ca2890adef2ccbfa02e, type: 3}
+  m_Script: {fileID: 11500000, guid: 162e9e6754ba46e9930b2572d4d56e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: default_castle
-  effects: []
-  weaponSlot: {fileID: 7627074098554306938}
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
 --- !u!1 &7437450840305446581
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +337,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -348,7 +362,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: slot_1
-  effects: []
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
 --- !u!1 &8453541861262409225
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +441,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -447,7 +466,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: slot_2
-  effects: []
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
 --- !u!1 &8595847644019451270
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +545,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f89c6491aa2a94a9da7508fd7c48b82b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -546,4 +570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: weapon_slot
-  effects: []
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  defaultHeight: 0
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}

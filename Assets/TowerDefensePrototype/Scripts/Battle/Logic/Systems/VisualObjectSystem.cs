@@ -11,8 +11,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     [UpdateInGroup(typeof(VisualGroup))]
     public partial struct VisualObjectSystem : ISystem 
     {
-        private static readonly int Speed = Animator.StringToHash("Speed");
-
+      
         public void OnUpdate(ref SystemState state)
         {
             foreach (var visualC in SystemAPI.Query<RefRW<VisualComponent>>())
@@ -37,8 +36,16 @@ namespace CastlePrototype.Battle.Logic.Systems
             foreach (var (moveC, visualC) in SystemAPI.Query<RefRO<MovementComponent>, RefRO<VisualComponent>>())
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
-                visual.Animator.SetFloat(Speed, moveC.ValueRO.Speed / moveC.ValueRO.MaxSpeed);
+                
+                visual.SetMoveSpeed(moveC.ValueRO.Speed / moveC.ValueRO.MaxSpeed);
             }   
+            
+            // Sync  visuals' hp
+            foreach (var (hpC, visualC) in SystemAPI.Query<RefRO<HpComponent>, RefRO<VisualComponent>>())
+            {
+                var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
+                visual.SetHp(hpC.ValueRO.Hp / hpC.ValueRO.MaxHp);
+            } 
             
             
             // Sync attack
@@ -50,7 +57,7 @@ namespace CastlePrototype.Battle.Logic.Systems
               
                 if (attackC.ValueRW.PlayAttack)
                 {
-                    visual.PlayEffect("Attack");
+                    visual.Attack();
                     attackC.ValueRW.PlayAttack = false;
                 }
             }  

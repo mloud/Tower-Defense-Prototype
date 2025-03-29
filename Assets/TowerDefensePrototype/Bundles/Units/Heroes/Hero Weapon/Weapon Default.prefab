@@ -19244,8 +19244,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4795219791600268}
-  - component: {fileID: 1813278432939433735}
-  - component: {fileID: 4216291940045759829}
   m_Layer: 10
   m_Name: Weapon Default
   m_TagString: Untagged
@@ -19271,37 +19269,6 @@ Transform:
   - {fileID: 4877050138446582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813278432939433735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401014823036408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a66e2811ef452486174e1b71a99ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: weapon_default
-  effects: []
-  defaultHeight: 0
-  hpProgressBar: {fileID: 0}
-  cooldownProgressBar: {fileID: 379906567760766944}
---- !u!114 &4216291940045759829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401014823036408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d080c491f99449ba50333ce0ba4e454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: attack
-  particleSystem: {fileID: 198895463405124220}
 --- !u!1 &1405071060733274
 GameObject:
   m_ObjectHideFlags: 0
@@ -43770,18 +43737,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc0caf244fd543d8a478f3b56eb7cfb, type: 3}
---- !u!114 &379906567760766944 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8339379544327281352, guid: 1fc0caf244fd543d8a478f3b56eb7cfb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8574535383138614568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5912b93228b24b9c9d3ecfda11b40a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4309609523981706884 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5561964811663661996, guid: 1fc0caf244fd543d8a478f3b56eb7cfb,

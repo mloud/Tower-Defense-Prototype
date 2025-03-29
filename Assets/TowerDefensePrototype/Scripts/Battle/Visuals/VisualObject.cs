@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CastlePrototype.Battle.Visuals.Effects;
 using UnityEngine;
 
@@ -6,23 +5,33 @@ namespace CastlePrototype.Battle.Visuals
 {
     public class VisualObject : MonoBehaviour
     {
+        [Header("Id")]
         [SerializeField] private string id;
-        [SerializeField] private List<BaseEffect> effects;
-        [SerializeField] private float defaultHeight;
 
+        [Header("Modules")]
+        [SerializeField] private AnimationModule animationModule;
+        [SerializeField] private EffectModule effectModule;
+
+        [Header("Progress bars")]
         [SerializeField] private ProgressBar hpProgressBar;
         [SerializeField] private ProgressBar cooldownProgressBar;
-        
-        protected static readonly int Speed = Animator.StringToHash("Speed");
-        private static readonly int Attack = Animator.StringToHash("Attack");
-        private static readonly int Die = Animator.StringToHash("Die");
+       
+        [Header("Settings")]
+        [SerializeField] private float defaultHeight;
+        [SerializeField] private bool permanentHpBar;
 
+        
         public string Id => id;
         public float DefaultHeight => defaultHeight;
         public int Index { get; private set; }
 
-        public Animator Animator { get; private set; }
-
+        private void Awake()
+        {
+            Index = VisualManager.Default.TrackVisualObject(this);
+            animationModule = GetComponent<AnimationModule>();
+            effectModule = GetComponent<EffectModule>();
+        }
+        
         public void Initialize()
         {
             if (hpProgressBar != null)
@@ -34,7 +43,29 @@ namespace CastlePrototype.Battle.Visuals
                 cooldownProgressBar.PlaceToCanvas();
             }
         }
-        public void Destroy(float time)
+
+        public void SetMoveSpeed(float moveSpeed)
+        {
+            if (animationModule != null)
+            {
+                animationModule.SetFloat(AnimationModule.Speed, moveSpeed);
+            }
+        }
+        public void Attack()
+        {
+            if (animationModule != null)
+            {
+                animationModule.PlayAttack();
+            }
+
+            if (effectModule != null)
+            {
+                effectModule.PlayEffect("Attack");
+            }
+        }
+
+       
+        public void Destroy(bool immediate)
         {
             if (hpProgressBar != null)
             {
@@ -46,9 +77,16 @@ namespace CastlePrototype.Battle.Visuals
                 cooldownProgressBar.ReturnFromCanvas();
                 cooldownProgressBar.enabled = false;
             }
-            
-            Destroy(gameObject, time);
-            
+
+            if (immediate)
+            {
+                Object.Destroy(gameObject);
+            }
+            else
+            {
+                bool deathPlayed = animationModule != null && animationModule.PlayDeath();
+                Object.Destroy(gameObject, deathPlayed ? 2.0f : 0.0f);
+            }
         }
 
         public void SetAttackCooldown(float progress01)
@@ -64,30 +102,10 @@ namespace CastlePrototype.Battle.Visuals
             if (hpProgressBar == null)
                 return;
             
+            hpProgressBar.gameObject.SetActive(permanentHpBar || progress01 < 1);
             hpProgressBar.SetProgress(progress01);
         }
-        
-        public bool PlayEffect(string effectId)
-        {
-            bool found = false;
-            for (int i = 0; i < effects.Count; i++)
-            {
-                if (effects[i].Id == effectId)
-                {
-                    effects[i].Play();
-                    found = true;
-                }
-            }
-
-            return found;
-        }
-        
-        private void Awake()
-        {
-            Index = VisualManager.Default.TrackVisualObject(this);
-            Animator = GetComponentInChildren<Animator>();
-        }
-
+       
         private void OnDestroy()
         {
             VisualManager.Default?.UnTrackVisualObject(this);

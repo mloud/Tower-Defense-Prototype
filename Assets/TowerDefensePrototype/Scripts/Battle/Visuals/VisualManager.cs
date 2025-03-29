@@ -36,7 +36,7 @@ namespace CastlePrototype.Battle.Visuals
      
         public void Dispose()
         {
-            VisualObjectsByIndex.Values.ForEach(x => Object.Destroy(x.gameObject));
+            VisualObjectsByIndex.Values.ForEach(x => x.Destroy(true));
             VisualObjectsByIndex.Clear();
             VisualObjectsById.Clear();
             Default = null;
@@ -88,8 +88,7 @@ namespace CastlePrototype.Battle.Visuals
         public void DestroyVisualObject(int index)
         {
             var visualObject = GetVisualObject(index);
-            var effectFound = visualObject.PlayEffect("Die");
-            visualObject.Destroy(effectFound ? 2.0f : 0.0f);
+            visualObject.Destroy(false);
         }
 
         public void PlayEffect(string effectId, Vector3 position)

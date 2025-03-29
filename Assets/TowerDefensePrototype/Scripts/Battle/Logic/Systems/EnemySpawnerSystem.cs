@@ -4,83 +4,73 @@ using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-
 namespace CastlePrototype.Battle.Logic.Systems
 {
     [DisableAutoCreation]
-    public partial struct EnemySpawnerSystem : ISystem 
+    public partial struct EnemySpawnerSystem : ISystem
     {
-        private NativeList<EnemySpawnerData> entitiesToCreate;
-        
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<EnemySpawnerComponent>();
-            entitiesToCreate = new NativeList<EnemySpawnerData>(Allocator.Persistent);
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-            if (entitiesToCreate.IsCreated)
-                entitiesToCreate.Dispose();
-        }
-        
         public void OnUpdate(ref SystemState state)
         {
-            var currentTime = SystemAPI.Time.ElapsedTime;
-
             if (!SystemAPI.HasSingleton<EnemySpawnerComponent>())
                 return;
-            
+            var deltaTime = SystemAPI.Time.DeltaTime;
             var spawner = SystemAPI.GetSingleton<EnemySpawnerComponent>();
-            
+        
             // Stop if max waves reached
-            if (spawner.currentWave >= spawner.totalWaves)
+            if (spawner.currentWave >= spawner.waves.Length)
                 return; 
 
-            if (spawner.spawnedThisWave < spawner.enemiesPerWave)
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            spawner.elapsedTime += deltaTime;
+
+            
+            if (spawner.elapsedTime > spawner.waves[spawner.currentWave].time)
             {
-                if (currentTime - spawner.lastSpawnTime >= spawner.spawnInterval)
+                if (spawner.spawnedThisWave < spawner.waves[spawner.currentWave].enemiesCount)
                 {
-                    spawner.lastSpawnTime = currentTime;
-                    entitiesToCreate.Add(new EnemySpawnerData
+                    if (spawner.elapsedTime - spawner.lastSpawnTime >= spawner.spawnInterval)
                     {
-                        enemyId = spawner.enemyId,
-                        spawnPosition = spawner.spawnPosition,
-                        spawnBox = spawner.spawnBox
-                    });
-                    spawner.spawnedThisWave++;
+                        spawner.lastSpawnTime = spawner.elapsedTime;
+                        SpawnEnemy(ref state, ref ecb,
+                            new EnemySpawnerData
+                        {
+                            enemyId = spawner.waves[spawner.currentWave].enemyId,
+                            spawnPosition = spawner.spawnPosition,
+                            spawnBox = spawner.spawnBox
+                        });
+                        spawner.spawnedThisWave++;
+                    }
+                }
+                else if (spawner.currentWave < spawner.waves.Length - 1 && spawner.elapsedTime > spawner.waves[spawner.currentWave + 1].time)
+                {
+                    spawner.currentWave++;
+                    spawner.currentWaveChanged = true;
+                    spawner.spawnedThisWave = 0;
                 }
             }
-            else if (currentTime - spawner.lastWaveTime >= spawner.waveInterval)
-            {
-                spawner.currentWave++;
-                spawner.currentWaveChanged = true;
-                spawner.spawnedThisWave = 0;
-                spawner.lastWaveTime = currentTime;
-            }
- 
+           
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
             SystemAPI.SetSingleton(spawner);
-
-            for (int i = 0; i < entitiesToCreate.Length; i++)
-            {
-                SpawnEnemy(ref state, ref entitiesToCreate.ElementAt(i));
-            }
-
-            entitiesToCreate.Clear();
         }
 
-        private void SpawnEnemy(ref SystemState state, ref EnemySpawnerData spawnData)
+        private void SpawnEnemy(ref SystemState state, ref EntityCommandBuffer ecb, EnemySpawnerData spawnData)
         {
-            var entity = state.EntityManager.CreateEntity();
+            var entity = ecb.CreateEntity();
             var localTransform = LocalTransform.FromPositionRotation(
                     Utils.GetRandomPosition(spawnData.spawnPosition, spawnData.spawnBox),
                     quaternion.identity);
             
-            state.EntityManager.AddComponentData(entity, localTransform);
-            state.EntityManager.AddComponentData(entity, new MovementComponent { Speed = 0.4f, MaxSpeed = 0.4f});
+            ecb.AddComponent(entity, localTransform);
+            ecb.AddComponent(entity, new MovementComponent { Speed = 0.4f, MaxSpeed = 0.4f});
          
             // Create an EntityQuery for WallComponent
-            state.EntityManager.AddComponentData(entity, new AttackComponent
+            ecb.AddComponent(entity, new AttackComponent
             {
                 AttackDamage = 1,
                 AttackDistance = 1,
@@ -88,10 +78,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                 TargetRange = 20,
                 AttackType = AttackType.Melee
             });
-            state.EntityManager.AddComponentData(entity, new SettingComponent { DistanceAxes = new float3(1,0,1) });
-            state.EntityManager.AddComponentData(entity, new HpComponent { Hp = 2, MaxHp = 2});
-            state.EntityManager.AddComponentData(entity, new TeamComponent {Team = Team.Enemy});
-            state.EntityManager.AddComponentData(entity, new VisualComponent {VisualId = spawnData.enemyId});
+            ecb.AddComponent(entity, new SettingComponent { DistanceAxes = new float3(1,0,1) });
+            ecb.AddComponent(entity, new HpComponent { Hp = 2, MaxHp = 2});
+            ecb.AddComponent(entity, new TeamComponent {Team = Team.Enemy});
+            ecb.AddComponent(entity, new VisualComponent {VisualId = spawnData.enemyId});
         }
     }
     public struct EnemySpawnerData
