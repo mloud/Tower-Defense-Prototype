@@ -1,16 +1,25 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Battle.Visuals;
 using Unity.Entities;
 using UnityEngine;
 
 namespace CastlePrototype.Battle.Logic.Systems
 {
     [DisableAutoCreation]
-    public partial struct DamageSystem : ISystem 
+    public partial struct DamageSystem : ISystem
     {
+        private ComponentLookup<VisualComponent> visualLookup;
+
+        public void OnCreate(ref SystemState state)
+        {
+            visualLookup = state.GetComponentLookup<VisualComponent>();
+        }
         
         public void OnUpdate(ref SystemState state)
         {
+            visualLookup.Update(ref state);
+
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             
             foreach (var (damageC, hpC, teamC, entity) in 
@@ -24,6 +33,14 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (teamC.ValueRO.Team == Team.Player)
                 {
                     WorldManagers.Get<BattleEventsManager>(state.World).UpdatePlayerHp(hpC.ValueRO);
+                }
+                else
+                {
+                    if (visualLookup.HasComponent(entity))
+                    {
+                        VisualManager.Default.GetVisualObject(visualLookup[entity].VisualIndex)
+                            .ShowDamage(damageC.ValueRO.Damage);
+                    }
                 }
                 
                 // death

@@ -503,6 +503,7 @@ MonoBehaviour:
   effectPrefabs:
   - {fileID: 5006832699339623847, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   - {fileID: -5900503717101630879, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  - {fileID: 6530454564851918629, guid: 6695b97db5f804bcdb90b2e4ad8cd943, type: 3}
 --- !u!1 &7340027612712531598
 GameObject:
   m_ObjectHideFlags: 0

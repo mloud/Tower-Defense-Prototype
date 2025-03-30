@@ -5,7 +5,7 @@ namespace CastlePrototype.Battle.Visuals.Effects
     public class ParticleEffect : BaseEffect
     {
         [SerializeField] private ParticleSystem particleSystem;
-        public override void Play()
+        public override void Play(object data = null)
         {
             particleSystem.Play();
         }

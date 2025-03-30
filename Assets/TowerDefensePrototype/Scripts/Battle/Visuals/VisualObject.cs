@@ -64,7 +64,12 @@ namespace CastlePrototype.Battle.Visuals
             }
         }
 
-       
+
+        public void ShowDamage(float amount)
+        {
+            VisualManager.Default.PlayEffect("TextDamage", transform.position, amount);
+        }
+        
         public void Destroy(bool immediate)
         {
             if (hpProgressBar != null)

@@ -91,11 +91,23 @@ namespace CastlePrototype.Battle.Visuals
             visualObject.Destroy(false);
         }
 
-        public void PlayEffect(string effectId, Vector3 position)
+        public void PlayEffect(string effectId, Vector3 position, object data = null)
         {
             var effect = EffectFactory.Create<BaseEffect>(effectId);
-            effect.transform.position = position + new Vector3(0, 0.3f, 0);
-            effect.Play();
+
+            if (effect.IsScreenSpace)
+            {
+                effect.transform.SetParent(Default.UiPanel);
+                var screenPosition = Camera.main.WorldToScreenPoint(position);
+                screenPosition.z = 0;
+                effect.transform.position = screenPosition;
+            }
+            else
+            {
+                effect.transform.position = position + new Vector3(0, 0.3f, 0);
+            }
+
+            effect.Play(data);
         }
     }
 }
