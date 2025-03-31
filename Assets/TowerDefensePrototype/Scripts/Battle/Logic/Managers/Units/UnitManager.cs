@@ -62,6 +62,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 Bounce = definition.Bounce,
                 Fireagain = definition.Fireagain,
                 Knockback = definition.Knockback,
+                Penetration = definition.Penetration,
                 
                 ProjectileVisualId = definition.ProjectileVisualId, //"projectile_rocket"
                 ProjectileSpeed = definition.ProjectileSpeed,

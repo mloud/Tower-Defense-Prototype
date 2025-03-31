@@ -10,7 +10,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     [DisableAutoCreation]
     public partial struct ProjectileSystem : ISystem
     {
-        private const float TargetTreshold = 0.7f;
+        private const float TargetTreshold = 0.2f;
         private ComponentLookup<LocalTransform> localTransformLookup;
         private EntityQuery aoeDamageEntityQuery;
         
@@ -31,8 +31,8 @@ namespace CastlePrototype.Battle.Logic.Systems
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             var deltaTime = SystemAPI.Time.DeltaTime;
 
-            foreach (var (projectileC, transformC, projectileEntity) in 
-                     SystemAPI.Query<RefRW<ProjectileComponent>, RefRW<LocalTransform>>().WithEntityAccess())
+            foreach (var (projectileC, transformC, teamC, projectileEntity) in 
+                     SystemAPI.Query<RefRW<ProjectileComponent>, RefRW<LocalTransform>, RefRO<TeamComponent>>().WithEntityAccess())
             {
                 var directionNorm = math.normalize(projectileC.ValueRO.TargetPosition - transformC.ValueRO.Position);
                 var step = projectileC.ValueRO.Speed * deltaTime;
@@ -42,6 +42,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 // AOE
                 if (projectileC.ValueRO.AoeRadius > 0)
                 {
+                    Debug.Assert(projectileC.ValueRO.PenetrationCounter == 0, "Aoe projectiles should not have penetrations set");
                     var distanceToInitialTargetPositionSqr = Utils.Distance2DSqr(
                         transformC.ValueRO.Position, 
                         projectileC.ValueRO.TargetPosition);
@@ -67,42 +68,55 @@ namespace CastlePrototype.Battle.Logic.Systems
                 // NOT AOE
                 else
                 {
-                    // Target still alive
-                    if (state.EntityManager.Exists(projectileC.ValueRO.Target))
-                    {
-                        var distanceToCurrentTargetPositionSqr = Utils.Distance2DSqr(
-                            transformC.ValueRO.Position,
-                            localTransformLookup[projectileC.ValueRO.Target].Position);
-                        // we hit the target on the way
-                        if (distanceToCurrentTargetPositionSqr < TargetTreshold * TargetTreshold)
-                        {
-                            VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[projectileC.ValueRO.Target].Position, "effect_hit_small");
-                            AttackUtils.ApplyMeleeDamage(ref state, ref ecb, projectileC.ValueRO.Target,  projectileC.ValueRO.Damage, projectileC.ValueRO.KnockBack);
-                            ecb.AddComponent<DestroyComponent>(projectileEntity);
-                        }
-                        // we reached target position
-                        else
-                        {
-                            var distanceToInitialTargetPositionSqr = Utils.Distance2DSqr(
-                                transformC.ValueRO.Position, 
-                                projectileC.ValueRO.TargetPosition);
+                    var distanceToTargetPosition = Utils.Distance2DSqr(
+                        transformC.ValueRO.Position, 
+                        projectileC.ValueRO.TargetPosition);
                         
-                            if (distanceToInitialTargetPositionSqr < TargetTreshold * TargetTreshold)
+                    const float hitDistanceSqr = TargetTreshold * TargetTreshold;
+                    if (distanceToTargetPosition < hitDistanceSqr)
+                    {
+                        ecb.AddComponent<DestroyComponent>(projectileEntity);
+                    }
+                    // check if for any hit
+                    else
+                    {
+                        foreach (var (otherLocalPosC, otherTeamC, otherHpC, otherEntity) in
+                                 SystemAPI.Query<RefRO<LocalTransform>, RefRW<TeamComponent>, RefRO<HpComponent>>()
+                                     .WithEntityAccess())
+                        {
+                            if (otherTeamC.ValueRO.Team == teamC.ValueRO.Team)
+                                continue;
+                            if (otherHpC.ValueRO.Hp <=0)
+                                continue;
+                            if (Utils.Distance2DSqr(otherLocalPosC.ValueRO.Position, transformC.ValueRO.Position) > hitDistanceSqr)
+                                continue;
+
+                            bool otherEntityAlreadyHit = false;
+                            for (int i = 0; i < projectileC.ValueRO.HitEntities.Length; i++)
+                            {
+                                if (projectileC.ValueRO.HitEntities[i] == otherEntity)
+                                {
+                                    otherEntityAlreadyHit = true;
+                                    break;
+                                }
+                            }
+                            if (otherEntityAlreadyHit)
+                                continue;
+                            
+                            
+                            // we hit enemy
+                            VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[otherEntity].Position, "effect_hit_small");
+                            AttackUtils.ApplyMeleeDamage(ref state, ref ecb, otherEntity,  projectileC.ValueRO.Damage, projectileC.ValueRO.KnockBack);
+
+                            if (projectileC.ValueRO.PenetrationCounter == 0)
                             {
                                 ecb.AddComponent<DestroyComponent>(projectileEntity);
                             }
-                        }
-                    }
-                    // target destroyed
-                    else
-                    {
-                        var distanceToInitialTargetPositionSqr = Utils.Distance2DSqr(
-                            transformC.ValueRO.Position, 
-                            projectileC.ValueRO.TargetPosition);
-                        // we reached target position
-                        if (distanceToInitialTargetPositionSqr < TargetTreshold * TargetTreshold)
-                        {
-                            ecb.AddComponent<DestroyComponent>(projectileEntity);
+                            else
+                            {
+                                projectileC.ValueRW.HitEntities.Add(otherEntity);
+                                projectileC.ValueRW.PenetrationCounter--;
+                            }
                         }
                     }
                 }

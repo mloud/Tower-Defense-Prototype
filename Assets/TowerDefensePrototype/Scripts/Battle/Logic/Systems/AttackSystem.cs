@@ -19,6 +19,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<BattleFieldComponent>();
             transformLookup = state.GetComponentLookup<LocalTransform>(true);
             settingLookup = state.GetComponentLookup<SettingComponent>(true);
             hpLookup = state.GetComponentLookup<HpComponent>(true);
@@ -102,6 +103,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                                 break;
                             //RANGE
                             case AttackType.Range:
+
+                                var battleFieldComponent = SystemAPI.GetSingleton<BattleFieldComponent>();
+                                
+                                
                                 AttackUtils.ShootProjectile(
                                     ref state, 
                                     ref ecb, 
@@ -110,10 +115,13 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     transformC.ValueRO.Position,
                                     teamC.ValueRO.Team,
                                     targetPositionC.ValueRO.Position,
+                                    battleFieldComponent.MinCorner,
+                                    battleFieldComponent.MaxCorner,
                                     attackC.ValueRO.AttackDamage,
                                     attackC.ValueRO.AoeRadius,
                                     attackC.ValueRO.ProjectileSpeed,
                                     attackC.ValueRO.Knockback,
+                                    attackC.ValueRO.Penetration,
                                     attackC.ValueRO.ProjectileVisualId
                                     );
                                 break;

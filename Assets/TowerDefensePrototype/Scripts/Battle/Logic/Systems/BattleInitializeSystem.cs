@@ -22,14 +22,16 @@ namespace CastlePrototype.Battle.Logic.Systems
             if (finished) return;
          
             var ecb = new EntityCommandBuffer(Allocator.Temp);
+            CreateBattleFieldComponent(ref state);
             CreateBattleProgression(ref state);
             CreateEnemySpawner(ref state);
+            
             var wallEntity = CreateWall(ref state);
             WorldManagers.Get<BattleEventsManager>(state.World)
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
             
             var slot = WorldManagers.Get<SlotManager>(state.World).GetInitialSlot();
-            WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "weapon");
+            WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "turret");
 
             //HeroFactoryUtils.CreateHeroFromArchetype(ref ecb, "weapon_default", slot.Position);
             slot.IsOccupied = true;
@@ -83,6 +85,16 @@ namespace CastlePrototype.Battle.Logic.Systems
                 BattlePoints = 0,
                 BattlePointsNeeded = 5,
                 BattlePointsUpdated = true
+            });
+        }
+
+        private void CreateBattleFieldComponent(ref SystemState state)
+        {
+            var fieldEntity = state.EntityManager.CreateEntity();
+            state.EntityManager.AddComponentData(fieldEntity, new BattleFieldComponent()
+            {
+                MinCorner = new float2(-8.7f/2, -15.54f/2),
+                MaxCorner = new float2(8.7f/2, 15.54f/2),
             });
         }
     }

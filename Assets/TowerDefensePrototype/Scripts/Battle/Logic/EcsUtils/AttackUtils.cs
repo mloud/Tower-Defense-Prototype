@@ -30,14 +30,25 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             Entity targetEntity,
             float3 attackerPosition, 
             Team attackerTeam,
-            float3 targetPosition, 
+            float3 targetPosition,
+            float2 minFieldCoordinate,
+            float2 maxFieldCoordinate,
             float damage,
             float aoeRadius, 
             float projectileSpeed,
             bool knockBack,
+            int penetrations,
             FixedString64Bytes visualId)
         {
-            var direction = Utils.Direction2D(attackerPosition, targetPosition);
+            var direction = targetPosition - attackerPosition;
+
+            var projectileDestination2D = Utils.CalculateIntersectionFromRectangleInside(
+                minFieldCoordinate,
+                maxFieldCoordinate,
+                new float2(attackerPosition.x, attackerPosition.z),
+                new float2(direction.x, direction.z)).ExitPoint;
+            var projectileDestination3D = new float3(projectileDestination2D.x, 0, projectileDestination2D.y);
+            
             //rotate attacker towards target
             var targetDirection = Quaternion.LookRotation(direction);
             attackerTransform.Rotation = targetDirection;
@@ -46,12 +57,13 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             ecb.AddComponent(projectile, new ProjectileComponent
             {
                 Target = targetEntity,
-                TargetPosition = targetPosition,
+                TargetPosition = projectileDestination3D,
                 Speed = projectileSpeed,
                 Damage = damage,
                 AttackerTeam = attackerTeam,
                 AoeRadius = aoeRadius,
-                KnockBack = knockBack
+                KnockBack = knockBack,
+                PenetrationCounter = penetrations
             });
 
             ecb.AddComponent(projectile, new LocalTransform
@@ -62,6 +74,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             });
 
             ecb.AddComponent(projectile, new VisualComponent { VisualId = visualId });
+            
+            ecb.AddComponent(projectile, new TeamComponent {Team =attackerTeam });
         }
         
         
