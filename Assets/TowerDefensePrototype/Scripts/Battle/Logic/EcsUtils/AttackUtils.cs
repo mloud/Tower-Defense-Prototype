@@ -42,13 +42,19 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
         {
             var direction = targetPosition - attackerPosition;
 
-            var projectileDestination2D = Utils.CalculateIntersectionFromRectangleInside(
-                minFieldCoordinate,
-                maxFieldCoordinate,
-                new float2(attackerPosition.x, attackerPosition.z),
-                new float2(direction.x, direction.z)).ExitPoint;
-            var projectileDestination3D = new float3(projectileDestination2D.x, 0, projectileDestination2D.y);
-            
+            float3 projectileDestination3D = targetPosition;
+
+            // NOT AOE projectiles flies to the edge of playground
+            if (aoeRadius <= 0)
+            {
+                var projectileDestination2D = Utils.CalculateIntersectionFromRectangleInside(
+                    minFieldCoordinate,
+                    maxFieldCoordinate,
+                    new float2(attackerPosition.x, attackerPosition.z),
+                    new float2(direction.x, direction.z)).ExitPoint;
+                projectileDestination3D = new float3(projectileDestination2D.x, 0, projectileDestination2D.y);
+            }
+
             //rotate attacker towards target
             var targetDirection = Quaternion.LookRotation(direction);
             attackerTransform.Rotation = targetDirection;
