@@ -58,7 +58,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                             new float3(1, 0, 1),
                             projectileC.ValueRO.AttackerTeam,
                             projectileC.ValueRO.Damage,
-                            projectileC.ValueRO.AoeRadius);
+                            projectileC.ValueRO.AoeRadius,
+                            projectileC.ValueRO.KnockBack
+                            );
                         ecb.AddComponent<DestroyComponent>(projectileEntity);
                     }
                 }
@@ -75,7 +77,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                         if (distanceToCurrentTargetPositionSqr < TargetTreshold * TargetTreshold)
                         {
                             VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[projectileC.ValueRO.Target].Position, "effect_hit_small");
-                            AttackUtils.ApplyMeleeDamage(ref state, ref ecb, projectileC.ValueRO.Target,  projectileC.ValueRO.Damage);
+                            AttackUtils.ApplyMeleeDamage(ref state, ref ecb, projectileC.ValueRO.Target,  projectileC.ValueRO.Damage, projectileC.ValueRO.KnockBack);
                             ecb.AddComponent<DestroyComponent>(projectileEntity);
                         }
                         // we reached target position

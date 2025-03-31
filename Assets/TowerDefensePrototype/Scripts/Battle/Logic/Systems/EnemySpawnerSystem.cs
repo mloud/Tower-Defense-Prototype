@@ -80,7 +80,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 AttackType = AttackType.Melee
             });
             ecb.AddComponent(entity, new SettingComponent { DistanceAxes = new float3(1,0,1) });
-            ecb.AddComponent(entity, new HpComponent { Hp = 2, MaxHp = 2});
+            ecb.AddComponent(entity, new HpComponent { Hp = 260, MaxHp = 260});
             ecb.AddComponent(entity, new TeamComponent {Team = Team.Enemy});
             ecb.AddComponent(entity, new VisualComponent {VisualId = spawnData.enemyId});
         }

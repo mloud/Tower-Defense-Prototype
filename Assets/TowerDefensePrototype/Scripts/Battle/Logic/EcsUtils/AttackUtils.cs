@@ -13,11 +13,13 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             ref SystemState state, 
             ref EntityCommandBuffer ecb, 
             Entity entity, 
-            float damage)
+            float damage, 
+            bool knockBack)
         {
             ecb.AddComponent(entity, new DamageComponent
             {
-                Damage = damage
+                Damage = damage,
+                Knockback = knockBack
             });
         }
         
@@ -32,6 +34,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             float damage,
             float aoeRadius, 
             float projectileSpeed,
+            bool knockBack,
             FixedString64Bytes visualId)
         {
             var direction = Utils.Direction2D(attackerPosition, targetPosition);
@@ -47,7 +50,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
                 Speed = projectileSpeed,
                 Damage = damage,
                 AttackerTeam = attackerTeam,
-                AoeRadius = aoeRadius
+                AoeRadius = aoeRadius,
+                KnockBack = knockBack
             });
 
             ecb.AddComponent(projectile, new LocalTransform
@@ -69,7 +73,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             float3 attackerDistanceAxes,
             Team attackerTeam,
             float damage,
-            float radius)
+            float radius,
+            bool knockBack)
         {
             var aoeRadiusSqr = radius * radius;
 
@@ -98,7 +103,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
 
                 if (sqrDistance < aoeRadiusSqr)
                 {
-                    ecb.AddComponent(entities[i], new DamageComponent { Damage = damage });
+                    ecb.AddComponent(entities[i], new DamageComponent { Damage = damage, Knockback = knockBack});
                 }
             }
 

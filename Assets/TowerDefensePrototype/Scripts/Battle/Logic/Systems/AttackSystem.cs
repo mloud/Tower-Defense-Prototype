@@ -97,7 +97,8 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref state, 
                                     ref ecb,
                                     targetC.ValueRO.Target, 
-                                    attackC.ValueRO.AttackDamage);
+                                    attackC.ValueRO.AttackDamage, 
+                                    attackC.ValueRO.Knockback);
                                 break;
                             //RANGE
                             case AttackType.Range:
@@ -112,6 +113,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     attackC.ValueRO.AttackDamage,
                                     attackC.ValueRO.AoeRadius,
                                     attackC.ValueRO.ProjectileSpeed,
+                                    attackC.ValueRO.Knockback,
                                     attackC.ValueRO.ProjectileVisualId
                                     );
                                 break;
@@ -124,7 +126,8 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     settingC.ValueRO.DistanceAxes, 
                                     teamC.ValueRO.Team,
                                     attackC.ValueRO.AttackDamage, 
-                                    attackC.ValueRO.AoeRadius);
+                                    attackC.ValueRO.AoeRadius,
+                                    attackC.ValueRO.Knockback);
                                 break;
                             default:
                                 Debug.Assert(false, $"Unknown attack type {attackC.ValueRO.AttackType}");

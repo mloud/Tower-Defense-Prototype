@@ -10,7 +10,7 @@ namespace CastlePrototype.Battle.Logic.Components
         public float Damage;
         public float AoeRadius;
         public Team AttackerTeam;
-        
+        public bool KnockBack;
         
         // runtime data
         public Entity Target;

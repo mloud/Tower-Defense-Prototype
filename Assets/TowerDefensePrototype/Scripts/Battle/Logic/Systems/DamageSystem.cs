@@ -2,6 +2,8 @@ using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Visuals;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace CastlePrototype.Battle.Logic.Systems
@@ -22,11 +24,12 @@ namespace CastlePrototype.Battle.Logic.Systems
 
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             
-            foreach (var (damageC, hpC, teamC, entity) in 
+            foreach (var (damageC, hpC, teamC, localTrC, entity) in 
                      SystemAPI.Query<
                          RefRW<DamageComponent>, 
                          RefRW<HpComponent>,
-                         RefRO<TeamComponent>>().WithEntityAccess())
+                         RefRO<TeamComponent>,
+                         RefRW<LocalTransform>>().WithEntityAccess())
             {
                 hpC.ValueRW.Hp = Mathf.Max(0, hpC.ValueRO.Hp - damageC.ValueRO.Damage);
 
@@ -47,6 +50,13 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (hpC.ValueRO.Hp <= 0)
                 {
                     ecb.AddComponent<DestroyComponent>(entity);
+                }
+                else
+                {
+                    if (damageC.ValueRO.Knockback)
+                    {
+                        localTrC.ValueRW.Position += new float3(0, 0, 0.2f);
+                    }
                 }
                 ecb.RemoveComponent<DamageComponent>(entity);
             }
