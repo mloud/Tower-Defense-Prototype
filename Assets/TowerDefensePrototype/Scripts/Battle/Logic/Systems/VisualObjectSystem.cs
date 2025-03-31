@@ -53,7 +53,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
 
-                visual.SetAttackCooldown((float)(SystemAPI.Time.ElapsedTime - attackC.ValueRO.LastAttackTime) / attackC.ValueRO.AttackInterval);
+                visual.SetAttackCooldown((float)(SystemAPI.Time.ElapsedTime - attackC.ValueRO.LastAttackTime) / attackC.ValueRO.Cooldown);
               
                 if (attackC.ValueRW.PlayAttack)
                 {

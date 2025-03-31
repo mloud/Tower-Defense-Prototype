@@ -20,7 +20,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         {
             Debug.Assert(RelatedEntity != Entity.Null);
             var attackC = entityManager.GetComponentData<AttackComponent>(RelatedEntity);
-            attackC.AttackInterval *= (1 - Value / 100);
+            attackC.Cooldown *= (1 - Value / 100);
             entityManager.SetComponentData(RelatedEntity, attackC);
         }
     }

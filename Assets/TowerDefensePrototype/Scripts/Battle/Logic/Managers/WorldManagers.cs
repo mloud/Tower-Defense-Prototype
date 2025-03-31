@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using OneDay.Core.Extensions;
 using Unity.Entities;
 using UnityEngine;
@@ -24,6 +26,14 @@ namespace CastlePrototype.Battle.Logic.Managers
                     Worlds.Add(value, new Dictionary<Type, IWorldManager>());
                 }
                 defaultWorldManagers = Worlds[value];
+            }
+        }
+
+        public static async UniTask Initialize(World world)
+        {
+            foreach (var worldManager in Worlds[world].Values)
+            {
+                await worldManager.Initialize();
             }
         }
         

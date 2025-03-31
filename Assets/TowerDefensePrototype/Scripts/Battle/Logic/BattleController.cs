@@ -5,8 +5,8 @@ using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Battle.Logic.Systems;
 using CastlePrototype.Battle.Visuals;
-using CastlePrototype.Data;
 using Cysharp.Threading.Tasks;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
 using UnityEngine;
 
@@ -21,6 +21,16 @@ namespace CastlePrototype.Battle.Logic
             systemHandles = new List<SystemHandle>();
             var world = World.DefaultGameObjectInjectionWorld;
             var rootSystemGroup = world.GetExistingSystemManaged<SimulationSystemGroup>();
+            
+            WorldManagers.Register(world, new SkillManager(world));
+            WorldManagers.Register(world, new SlotManager(world));
+            WorldManagers.Register(world, new BattleEventsManager(world));
+            WorldManagers.Register(world, new UnitManager(world));
+
+            WorldManagers.DefaultWorld = world;
+            await WorldManagers.Initialize(world);
+            
+            
             rootSystemGroup.AddSystemToUpdateList(world.CreateSystem<VisualGroup>());
 
             systemHandles.Add(world.GetOrCreateSystem<BattleInitializeSystem>());
@@ -40,10 +50,6 @@ namespace CastlePrototype.Battle.Logic
             systemHandles.ForEach(rootSystemGroup.AddSystemToUpdateList);
             //simulationGroup.SortSystems();
 
-            WorldManagers.Register(world, new SkillManager(world));
-            WorldManagers.Register(world, new SlotManager(world));
-            WorldManagers.Register(world, new BattleEventsManager(world));
-            WorldManagers.DefaultWorld = world;
         }
 
         public void Dispose()

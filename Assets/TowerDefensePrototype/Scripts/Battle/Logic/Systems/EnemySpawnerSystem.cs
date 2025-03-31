@@ -1,4 +1,5 @@
 using CastlePrototype.Battle.Logic.Components;
+using CastlePrototype.Data;
 using Unity.Entities;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -74,7 +75,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 AttackDamage = 1,
                 AttackDistance = 1,
-                AttackInterval = 2,
+                Cooldown = 2,
                 TargetRange = 20,
                 AttackType = AttackType.Melee
             });

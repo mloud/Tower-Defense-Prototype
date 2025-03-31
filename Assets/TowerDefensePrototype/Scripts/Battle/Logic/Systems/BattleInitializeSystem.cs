@@ -4,6 +4,7 @@ using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using Cysharp.Threading.Tasks;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -28,7 +29,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
             
             var slot = WorldManagers.Get<SlotManager>(state.World).GetInitialSlot();
-            HeroFactoryUtils.CreateHeroFromArchetype(ref ecb, "weapon_default", slot.Position);
+            WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "weapon");
+
+            //HeroFactoryUtils.CreateHeroFromArchetype(ref ecb, "weapon_default", slot.Position);
             slot.IsOccupied = true;
             
             finished = true;

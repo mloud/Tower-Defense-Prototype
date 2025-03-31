@@ -1,14 +1,36 @@
 using System;
 using OneDay.Core.Modules.Data;
+using UnityEngine;
 
 namespace CastlePrototype.Data.Definitions
 {
     [Serializable]
     public class HeroDefinition : BaseDataObject
     {
+        // ID
+        [Header("Ids")]
         public string UnitId;
-        public float AttackInterval;
+        public string VisualId;
+        public string ProjectileVisualId;
+        
+        // BASIC STATS
+        [Header("Basic stats")]
+        public float ProjectileSpeed;
+        public float Cooldown;
         public float Damage;
-        public float Hp;
+        public float AttackDistance;
+        public float TargetRange;
+     
+        // SPECIFIC
+        [Header("Specific stats")]
+        public int Bounce;
+        public int Penetration;
+        public int Fireagain;
+        public bool Knockback;
+    
+        // AOE - either projectile or direct AOE      
+        [Header("AOE stats")]
+        public float AoeRadius;
+        public float AoeDamage;
     }
 }

@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: HeroDefinitionsTable
   m_EditorClassIdentifier: 
   data:
-  - UnitId: arcus
-    AttackInterval: 4
-    Damage: 45
-    Hp: 20
-  - UnitId: lawris
-    AttackInterval: 1.5
-    Damage: 2
-    Hp: 30
-  - UnitId: fulgure
-    AttackInterval: 0.5
-    Damage: 2
-    Hp: 20
+  - UnitId: weapon
+    VisualId: weapon
+    ProjectileVisualId: projectile_weapon
+    ProjectileSpeed: 5
+    Cooldown: 4
+    Damage: 140
+    AttackDistance: -1
+    TargetRange: -1
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 1
+    Knockback: 1
+    AoeRadius: 0
+    AoeDamage: 0

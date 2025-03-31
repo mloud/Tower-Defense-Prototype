@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4879338131508977915}
   - component: {fileID: 1605859257531162493}
   m_Layer: 0
-  m_Name: Projectile Default
+  m_Name: Projectile Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,9 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a66e2811ef452486174e1b71a99ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: projectile_default
-  effects: []
+  id: projectile_weapon
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
   defaultHeight: 0.5
+  permanentHpBar: 0
 --- !u!1 &2813917184434894885
 GameObject:
   m_ObjectHideFlags: 0

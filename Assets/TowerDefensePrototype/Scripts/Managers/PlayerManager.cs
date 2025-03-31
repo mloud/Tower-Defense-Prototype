@@ -39,7 +39,7 @@ namespace CastlePrototype.Managers
         {
             await CreateProgressIfNeeded(()=>new Player
             {
-                EquippedWeapon = "canon"
+                EquippedWeapon = "weapon"
             });
             
             await CreateProgressIfNeeded(()=>new PlayerProgress

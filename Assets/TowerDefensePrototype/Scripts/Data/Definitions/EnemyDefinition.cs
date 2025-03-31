@@ -5,6 +5,7 @@ namespace CastlePrototype.Data.Definitions
     public class EnemyDefinition : BaseDataObject
     {
         public string UnitId;
+        public string VisualId;
         public float MoveSpeed;
         public float AttackInterval;
         public float Damage;

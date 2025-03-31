@@ -1,4 +1,3 @@
-using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Battle.Visuals.Effects;
 using DG.Tweening;
 using TMPro;

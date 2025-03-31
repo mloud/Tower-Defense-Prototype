@@ -19245,7 +19245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4795219791600268}
   m_Layer: 10
-  m_Name: Weapon Default
+  m_Name: Weapon_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

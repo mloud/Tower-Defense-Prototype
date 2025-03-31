@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: id
-      value: weapon_default
+      value: weapon
       objectReference: {fileID: 0}
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d080c491f99449ba50333ce0ba4e454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isScreenSpace: 0
   id: Attack
   particleSystem: {fileID: 7951489572087717575}
 --- !u!4 &6916126188992900868 stripped

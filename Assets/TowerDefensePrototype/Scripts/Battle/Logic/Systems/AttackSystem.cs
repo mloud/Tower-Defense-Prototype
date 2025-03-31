@@ -1,5 +1,6 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
+using CastlePrototype.Data;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -57,11 +58,37 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance)
                 {
                     attackC.ValueRW.IsInAttackDistance = true;
-                    if (currentTime - attackC.ValueRO.LastAttackTime > attackC.ValueRO.AttackInterval)
+
+                    double attackTime = attackC.ValueRO.NextMainAttackTime;
+                    bool isMainAttack = true;
+                    //resolve attack time (secondary or main)
+                    for (int i = 0; i < attackC.ValueRO.SecondaryAttackTimes.Length; i++)
+                    {
+                        if (currentTime > attackC.ValueRO.SecondaryAttackTimes[i])
+                        {
+                            attackTime = attackC.ValueRO.SecondaryAttackTimes[i];
+                            isMainAttack = false;
+                            break;
+                        }
+                    }
+                    
+                    if (currentTime > attackTime)
                     {
                         attackC.ValueRW.PlayAttack = true;
-                        attackC.ValueRW.LastAttackTime = currentTime;
+                        // prepare next attack(s)
+                        if (isMainAttack)
+                        {     
+                            attackC.ValueRW.LastAttackTime = currentTime;
+                            attackC.ValueRW.NextMainAttackTime = currentTime + attackC.ValueRO.Cooldown;
+                            Debug.Assert(attackC.ValueRO.SecondaryAttackTimes.Length == 0, "There are unprocessed secondary attacks");
 
+                            for (int i = 0; i < attackC.ValueRO.Fireagain; i++)
+                            {
+                                double secondaryAttackTimeDelay = 0.5f;
+                                attackC.ValueRW.SecondaryAttackTimes.Add(currentTime+(i+1) * secondaryAttackTimeDelay);
+                            }
+                        }
+                        
                         switch (attackC.ValueRO.AttackType)
                         {
                             // MELEE
@@ -102,7 +129,12 @@ namespace CastlePrototype.Battle.Logic.Systems
                             default:
                                 Debug.Assert(false, $"Unknown attack type {attackC.ValueRO.AttackType}");
                                 break;
-                        }          
+                        }
+
+                        if (!isMainAttack)
+                        {
+                            attackC.ValueRW.SecondaryAttackTimes.RemoveAt(0);
+                        }
                     }
                 }
                 else

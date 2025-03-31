@@ -1,4 +1,5 @@
 using CastlePrototype.Battle.Logic.Components;
+using CastlePrototype.Data;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -33,7 +34,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             {
                 AttackDamage = 2,
                 AttackDistance = 10,
-                AttackInterval = 7,
+                Cooldown = 7,
                 TargetRange = 13,
                 AoeRadius = 2,
                 AttackType = AttackType.Range,
@@ -55,7 +56,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             {
                 AttackDamage = 1,
                 AttackDistance = 7,
-                AttackInterval = 3,
+                Cooldown = 3,
                 TargetRange = 10,
                 AttackType = AttackType.Range,
                 ProjectileVisualId = "projectile_default",
@@ -76,7 +77,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             {
                 AttackDamage = 2,
                 AttackDistance = 15,
-                AttackInterval = 4,
+                Cooldown = 4,
                 TargetRange = 15,
                 AttackType = AttackType.Range,
                 ProjectileVisualId = "projectile_default",
