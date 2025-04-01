@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
-using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
@@ -18,6 +17,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
     {
         private IDataManager dataManager;
         protected Dictionary<string, HeroDefinition> heroDefinitions;
+        protected Dictionary<string, EnemyDefinition> enemyDefinitions;
 
         public UnitManager(World world) : base(world)
         {
@@ -28,31 +28,55 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         {
             var heroes = await dataManager.GetAll<HeroDefinition>();
             heroDefinitions = heroes.ToDictionary(x => x.UnitId, x => x);
+            var enemies = await dataManager.GetAll<EnemyDefinition>();
+            enemyDefinitions = enemies.ToDictionary(x => x.UnitId, x => x);
         }
+
 
         public Entity CreateHeroUnit(ref EntityCommandBuffer ecb, float3 position, string heroId)
         {
             if (heroDefinitions.TryGetValue(heroId, out var definition))
             {
-                return CreateHeroUnit(ref ecb, position, definition);
+                return CreateUnit(ref ecb, position, definition, Team.Player);
             }
 
             Debug.Assert(false, $"No such hero definition with id {heroId} exists");
             return Entity.Null;
         }
-
-        private Entity CreateHeroUnit(ref EntityCommandBuffer ecb, float3 position, HeroDefinition definition)
+        
+        public Entity CreateEnemyUnit(ref EntityCommandBuffer ecb, float3 position, string heroId)
         {
-            var soldierEntity = ecb.CreateEntity();
-            ecb.AddComponent(soldierEntity, new UnitComponent { DefinitionId = definition.UnitId });
-            ecb.AddComponent(soldierEntity, new LocalTransform { Position = position });
-            ecb.AddComponent(soldierEntity, new TeamComponent { Team = Team.Player });
-            ecb.AddComponent(soldierEntity, new VisualComponent { VisualId = definition.VisualId });
-            ecb.AddComponent(soldierEntity, new SettingComponent { DistanceAxes = new float3(1, 0, 1) });
-            ecb.AddComponent(soldierEntity, new AttackComponent
+            if (enemyDefinitions.TryGetValue(heroId, out var definition))
+            {
+                return CreateUnit(ref ecb, position, definition, Team.Enemy);
+            }
+
+            Debug.Assert(false, $"No such enemy definition with id {heroId} exists");
+            return Entity.Null;
+        }
+
+        private Entity CreateUnit(ref EntityCommandBuffer ecb, float3 position, HeroDefinition definition, Team team)
+        {
+            var entity = ecb.CreateEntity();
+            if (definition.MoveSpeed > 0)
+            {
+                ecb.AddComponent(entity, new MovementComponent { Speed = definition.MoveSpeed, MaxSpeed = definition.MoveSpeed});
+            }
+
+            if (definition.Hp > 0)
+            {
+                ecb.AddComponent(entity, new HpComponent { Hp = definition.Hp, MaxHp = definition.Hp});
+            }
+            
+            ecb.AddComponent(entity, new UnitComponent { DefinitionId = definition.UnitId });
+            ecb.AddComponent(entity, new LocalTransform { Position = position });
+            ecb.AddComponent(entity, new TeamComponent { Team = team });
+            ecb.AddComponent(entity, new VisualComponent { VisualId = definition.VisualId });
+            ecb.AddComponent(entity, new SettingComponent { DistanceAxes = new float3(1, 0, 1) });
+            ecb.AddComponent(entity, new AttackComponent
             {
                 // HEROES ARE ALWAYS RANGED
-                AttackType = AttackType.Range,
+                AttackType = definition.AttackType,
                 AttackDamage = definition.Damage,
                 AttackDistance = definition.AttackDistance < 0 ? 999:definition.AttackDistance,
                 Cooldown = definition.Cooldown,
@@ -60,14 +84,14 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 AoeRadius = definition.AoeRadius,
                 AoeDamage = definition.AoeDamage,
                 Bounce = definition.Bounce,
-                Fireagain = definition.Fireagain,
-                Knockback = definition.Knockback,
+                FireAgain = definition.Fireagain,
+                KnockBack = definition.Knockback,
                 Penetration = definition.Penetration,
-                
-                ProjectileVisualId = definition.ProjectileVisualId, //"projectile_rocket"
+                AoeOnly = definition.AoeOnly,
+                ProjectileVisualId = definition.ProjectileVisualId,
                 ProjectileSpeed = definition.ProjectileSpeed,
             });
-            return soldierEntity;
+            return entity;
         }
 
         protected override void OnRelease()

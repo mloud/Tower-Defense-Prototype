@@ -34,9 +34,11 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             float2 minFieldCoordinate,
             float2 maxFieldCoordinate,
             float damage,
+            float aoeDamage,
             float aoeRadius, 
             float projectileSpeed,
             bool knockBack,
+            bool aoeOnly,
             int penetrations,
             int bounces,
             FixedString64Bytes visualId)
@@ -67,12 +69,14 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
                             
             var projectile = ecb.CreateEntity();
             ecb.AddComponent(projectile, new ProjectileComponent
-            {
+            {  
                 Target = targetEntity,
                 TargetPosition = projectileDestination3D,
                 Direction = math.normalize(direction),
                 Speed = projectileSpeed,
                 Damage = damage,
+                AoeDamage = aoeDamage,
+                AoeOnly = aoeOnly,
                 AttackerTeam = attackerTeam,
                 AoeRadius = aoeRadius,
                 KnockBack = knockBack,
@@ -103,7 +107,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             Team attackerTeam,
             float damage,
             float radius,
-            bool knockBack)
+            bool knockBack,
+            Entity skipEntity)
         {
             var aoeRadiusSqr = radius * radius;
 
@@ -117,6 +122,10 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
 
             for (int i = 0; i < entities.Length; i++)
             {
+                // skip this entity
+                if (entities[i] == skipEntity)
+                    continue;
+                
                 // Check team
                 if (teamArray[i].Team == attackerTeam)
                     continue;

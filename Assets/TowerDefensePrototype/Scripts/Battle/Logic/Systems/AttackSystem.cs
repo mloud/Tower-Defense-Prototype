@@ -83,7 +83,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                             attackC.ValueRW.NextMainAttackTime = currentTime + attackC.ValueRO.Cooldown;
                             Debug.Assert(attackC.ValueRO.SecondaryAttackTimes.Length == 0, "There are unprocessed secondary attacks");
 
-                            for (int i = 0; i < attackC.ValueRO.Fireagain; i++)
+                            for (int i = 0; i < attackC.ValueRO.FireAgain; i++)
                             {
                                 double secondaryAttackTimeDelay = 0.5f;
                                 attackC.ValueRW.SecondaryAttackTimes.Add(currentTime+(i+1) * secondaryAttackTimeDelay);
@@ -99,13 +99,12 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref ecb,
                                     targetC.ValueRO.Target, 
                                     attackC.ValueRO.AttackDamage, 
-                                    attackC.ValueRO.Knockback);
+                                    attackC.ValueRO.KnockBack);
                                 break;
                             //RANGE
                             case AttackType.Range:
 
                                 var battleFieldComponent = SystemAPI.GetSingleton<BattleFieldComponent>();
-                                
                                 
                                 AttackUtils.ShootProjectile(
                                     ref state, 
@@ -118,15 +117,18 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     battleFieldComponent.MinCorner,
                                     battleFieldComponent.MaxCorner,
                                     attackC.ValueRO.AttackDamage,
+                                    attackC.ValueRO.AoeDamage,
                                     attackC.ValueRO.AoeRadius,
                                     attackC.ValueRO.ProjectileSpeed,
-                                    attackC.ValueRO.Knockback,
+                                    attackC.ValueRO.KnockBack,
+                                    attackC.ValueRO.AoeOnly,
                                     attackC.ValueRO.Penetration,
                                     attackC.ValueRO.Bounce,
                                     attackC.ValueRO.ProjectileVisualId
                                     );
                                 break;
                             case AttackType.Aoe:
+                                Debug.Assert(attackC.ValueRO.AttackDamage == 0, "Aoe attack should not have direct damage set");
                                 AttackUtils.ApplyAoeDamage(
                                     ref state, 
                                     ref ecb,
@@ -134,9 +136,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     transformC.ValueRO.Position, 
                                     settingC.ValueRO.DistanceAxes, 
                                     teamC.ValueRO.Team,
-                                    attackC.ValueRO.AttackDamage, 
+                                    attackC.ValueRO.AoeDamage, 
                                     attackC.ValueRO.AoeRadius,
-                                    attackC.ValueRO.Knockback);
+                                    attackC.ValueRO.KnockBack,
+                                    Entity.Null);
                                 break;
                             default:
                                 Debug.Assert(false, $"Unknown attack type {attackC.ValueRO.AttackType}");

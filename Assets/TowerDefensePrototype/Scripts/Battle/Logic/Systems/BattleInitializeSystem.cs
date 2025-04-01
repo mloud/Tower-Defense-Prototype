@@ -31,9 +31,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
             
             var slot = WorldManagers.Get<SlotManager>(state.World).GetInitialSlot();
-            WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "turret");
-
-            //HeroFactoryUtils.CreateHeroFromArchetype(ref ecb, "weapon_default", slot.Position);
+            WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "weapon");
             slot.IsOccupied = true;
             
             finished = true;
@@ -59,9 +57,9 @@ namespace CastlePrototype.Battle.Logic.Systems
 
             spawnerComponent.waves = new FixedList4096Bytes<Wave>
             {
-                new(0, 10, "zombie", 0.1f),
-                new(20, 6, "zombie", 0.1f),
-                new(30, 1, "boss_default", 0.1f)
+                new(0, 6, "zombie", 0.1f),
+                new(30, 8, "zombie", 0.1f),
+                new(40, 1, "boss", 0.1f)
             };
             
             state.EntityManager.AddComponentData(spawnerEntity, spawnerComponent);
@@ -70,7 +68,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         {
             var wallEntity = state.EntityManager.CreateEntity();
             state.EntityManager.AddComponentData(wallEntity, new HpComponent { Hp = 50, MaxHp = 50 });
-            state.EntityManager.AddComponentData(wallEntity, new LocalTransform { Position = new float3(0, 0, -5) });
+            state.EntityManager.AddComponentData(wallEntity, new LocalTransform { Position = new float3(0, 0, -6) });
             state.EntityManager.AddComponentData(wallEntity, new TeamComponent { Team = Team.Player });
             state.EntityManager.AddComponentData(wallEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
             state.EntityManager.AddComponentData(wallEntity, new VisualComponent { VisualId = "wall" });

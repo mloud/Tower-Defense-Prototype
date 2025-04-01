@@ -1,5 +1,7 @@
+using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers.Slots;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             Debug.Assert(slot != null);
             Debug.Assert(!slot.IsOccupied);
             slot.IsOccupied = true;
-            HeroFactoryUtils.CreateHeroFromArchetype(ref ecb, DefinitionId, slot.Position);
+            WorldManagers.Get<UnitManager>(entityManager.World).CreateHeroUnit(ref ecb, slot.Position, DefinitionId);
             ecb.Playback(entityManager);
             ecb.Dispose();
         }

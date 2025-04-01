@@ -16,42 +16,72 @@ MonoBehaviour:
   - UnitId: weapon
     VisualId: weapon
     ProjectileVisualId: projectile_weapon
+    AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 4
-    Damage: 140
+    Damage: 180
     AttackDistance: -1
     TargetRange: -1
+    MoveSpeed: 0
+    Hp: 0
     Bounce: 0
     Penetration: 0
     Fireagain: 0
     Knockback: 1
     AoeRadius: 0
     AoeDamage: 0
+    AoeOnly: 0
   - UnitId: soldier
     VisualId: soldier
     ProjectileVisualId: projectile_soldier
+    AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 4
     Damage: 80
     AttackDistance: -1
     TargetRange: -1
+    MoveSpeed: 0
+    Hp: 0
     Bounce: 0
     Penetration: 0
     Fireagain: 1
     Knockback: 0
     AoeRadius: 0
     AoeDamage: 0
+    AoeOnly: 0
   - UnitId: turret
     VisualId: turret
     ProjectileVisualId: projectile_turret
+    AttackType: 1
     ProjectileSpeed: 10
     Cooldown: 8
     Damage: 150
     AttackDistance: -1
     TargetRange: -1
+    MoveSpeed: 0
+    Hp: 0
     Bounce: 0
     Penetration: 1
     Fireagain: 0
     Knockback: 0
     AoeRadius: 0
     AoeDamage: 0
+    AoeOnly: 0
+  - UnitId: dron
+    VisualId: dron
+    ProjectileVisualId: projectile_dron
+    AttackType: 1
+    ProjectileSpeed: 8
+    Cooldown: 9
+    Damage: 350
+    AttackDistance: 10
+    TargetRange: 10
+    MoveSpeed: 0
+    Hp: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    AoeRadius: 2
+    AoeDamage: 100
+    AoeOnly: 0

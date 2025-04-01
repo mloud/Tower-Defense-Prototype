@@ -12,7 +12,9 @@ namespace CastlePrototype.Data.Definitions
         public string UnitId;
         public string VisualId;
         public string ProjectileVisualId;
-        
+
+        [Header("Unit type stats")] 
+        public AttackType AttackType;
         // BASIC STATS
         [Header("Basic stats")]
         public float ProjectileSpeed;
@@ -20,6 +22,8 @@ namespace CastlePrototype.Data.Definitions
         public float Damage;
         public float AttackDistance;
         public float TargetRange;
+        public float MoveSpeed;
+        public float Hp;
      
         // SPECIFIC
         [Header("Specific stats")]
@@ -32,5 +36,6 @@ namespace CastlePrototype.Data.Definitions
         [Header("AOE stats")]
         public float AoeRadius;
         public float AoeDamage;
+        public bool AoeOnly;
     }
 }

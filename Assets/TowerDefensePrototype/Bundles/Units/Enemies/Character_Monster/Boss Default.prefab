@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: id
-      value: boss_default
+      value: boss
       objectReference: {fileID: 0}
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}

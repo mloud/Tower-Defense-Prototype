@@ -18,12 +18,13 @@ namespace CastlePrototype.Battle.Logic.Components
         public float AoeRadius;
         public float AoeDamage;
         public float ProjectileSpeed;
+        public bool AoeOnly;
         
         // specific
         public int Penetration;
-        public int Fireagain;
+        public int FireAgain;
         public int Bounce;
-        public bool Knockback;
+        public bool KnockBack;
         
         // runtime data
         public double LastAttackTime;

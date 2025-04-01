@@ -40,8 +40,8 @@ namespace CastlePrototype.Battle.Logic.Systems
                 var newPosition = transformC.ValueRO.Position + directionNorm * step;
                 transformC.ValueRW.Position = newPosition;
 
-                // AOE
-                if (projectileC.ValueRO.AoeRadius > 0)
+                // AOE ONLY - aka trajectory projectiles that hits ground only
+                if (projectileC.ValueRO.AoeRadius > 0 && projectileC.ValueRO.AoeOnly)
                 {
                     Debug.Assert(projectileC.ValueRO.PenetrationCounter == 0, "Aoe projectiles should not have penetrations set");
                     var distanceToInitialTargetPositionSqr = Utils.Distance2DSqr(
@@ -59,14 +59,15 @@ namespace CastlePrototype.Battle.Logic.Systems
                             transformC.ValueRO.Position,
                             new float3(1, 0, 1),
                             projectileC.ValueRO.AttackerTeam,
-                            projectileC.ValueRO.Damage,
+                            projectileC.ValueRO.AoeDamage,
                             projectileC.ValueRO.AoeRadius,
-                            projectileC.ValueRO.KnockBack
+                            projectileC.ValueRO.KnockBack,
+                            Entity.Null
                             );
                         ecb.AddComponent<DestroyComponent>(projectileEntity);
                     }
                 }
-                // NOT AOE
+                // NOT AOE or projectile with aoe damage after enemy hit
                 else
                 {
                     var distanceToTargetPosition = Utils.Distance2DSqr(
@@ -104,6 +105,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                     // check if for any hit
                     else
                     {
+                        // check all enemy entities around for hit
                         foreach (var (otherLocalPosC, otherTeamC, otherHpC, otherEntity) in
                                  SystemAPI.Query<RefRO<LocalTransform>, RefRW<TeamComponent>, RefRO<HpComponent>>()
                                      .WithEntityAccess())
@@ -132,15 +134,39 @@ namespace CastlePrototype.Battle.Logic.Systems
                             VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[otherEntity].Position, "effect_hit_small");
                             AttackUtils.ApplyMeleeDamage(ref state, ref ecb, otherEntity,  projectileC.ValueRO.Damage, projectileC.ValueRO.KnockBack);
 
+                            if (projectileC.ValueRO.AoeRadius > 0)
+                            {
+                                // make aoe damage on other units as well
+                                VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition, "effect_hit_aoe");
+                        
+                                AttackUtils.ApplyAoeDamage(
+                                    ref state,
+                                    ref ecb,
+                                    ref aoeDamageEntityQuery,
+                                    transformC.ValueRO.Position,
+                                    new float3(1, 0, 1),
+                                    projectileC.ValueRO.AttackerTeam,
+                                    projectileC.ValueRO.AoeDamage,
+                                    projectileC.ValueRO.AoeRadius,
+                                    projectileC.ValueRO.KnockBack,
+                                    // skip other entity, it already got direct hit
+                                    otherEntity
+                                );
+                            }
+                            
                             if (projectileC.ValueRO.PenetrationCounter == 0)
                             {
                                 ecb.AddComponent<DestroyComponent>(projectileEntity);
                             }
                             else
                             {
+                                // ad hit entity to list of hit entities to prevent next hit when projectiles continues flyes
                                 projectileC.ValueRW.HitEntities.Add(otherEntity);
                                 projectileC.ValueRW.PenetrationCounter--;
                             }
+                            
+                            // we hit just ones
+                            break;
                         }
                     }
                 }

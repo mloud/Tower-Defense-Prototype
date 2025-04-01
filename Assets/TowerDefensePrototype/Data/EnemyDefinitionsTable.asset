@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cfdbbd1335401ba36715c68f235c7e, type: 3}
+  m_Name: EnemyDefinitionsTable
+  m_EditorClassIdentifier: 
+  data:
+  - UnitId: zombie
+    VisualId: zombie
+    ProjectileVisualId: 
+    AttackType: 0
+    ProjectileSpeed: 0
+    Cooldown: 2
+    Damage: 1
+    AttackDistance: 1
+    TargetRange: 20
+    MoveSpeed: 0.4
+    Hp: 200
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    AoeOnly: 0
+  - UnitId: boss
+    VisualId: boss
+    ProjectileVisualId: 
+    AttackType: 0
+    ProjectileSpeed: 0
+    Cooldown: 4
+    Damage: 4
+    AttackDistance: 1
+    TargetRange: 20
+    MoveSpeed: 0.3
+    Hp: 2500
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    AoeOnly: 0
