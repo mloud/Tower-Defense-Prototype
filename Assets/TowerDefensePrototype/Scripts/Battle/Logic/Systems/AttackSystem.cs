@@ -122,6 +122,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     attackC.ValueRO.ProjectileSpeed,
                                     attackC.ValueRO.Knockback,
                                     attackC.ValueRO.Penetration,
+                                    attackC.ValueRO.Bounce,
                                     attackC.ValueRO.ProjectileVisualId
                                     );
                                 break;

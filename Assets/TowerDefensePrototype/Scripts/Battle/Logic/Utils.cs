@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CastlePrototype.Battle.Logic
@@ -33,6 +34,18 @@ namespace CastlePrototype.Battle.Logic
             return x * x * combinedDistanceAxes.x + y * y * combinedDistanceAxes.y + z * z * combinedDistanceAxes.z;
         }
 
+        public static float2 To2D(float3 position)
+        {
+            Debug.Assert(position.y == 0);
+            return new float2(position.x, position.z);
+        }
+        
+        public static float3 To3D(float2 position)
+        {
+            return new float3(position.x, 0, position.y);
+        }
+
+        
         public static float3 Direction2D(float3 from, float3 to)
         {
             float3 dir = to - from;
@@ -49,6 +62,14 @@ namespace CastlePrototype.Battle.Logic
             public bool HasIntersection;
         }
 
+        public static float3 ComputeBounce(float3 direction, float3 normal)
+        {
+            direction = math.normalize(direction);
+            normal = math.normalize(normal);
+
+            return direction - 2 * math.dot(direction, normal) * normal;
+        }
+        
         /// <summary>
         /// Calculate intersection between a ray originating inside a rectangle and the rectangle boundaries
         /// </summary>

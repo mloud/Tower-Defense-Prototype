@@ -16,6 +16,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<BattleFieldComponent>();
             aoeDamageEntityQuery = state.GetEntityQuery(
                 ComponentType.ReadWrite<HpComponent>(),
                 ComponentType.ReadOnly<LocalTransform>(),
@@ -75,7 +76,30 @@ namespace CastlePrototype.Battle.Logic.Systems
                     const float hitDistanceSqr = TargetTreshold * TargetTreshold;
                     if (distanceToTargetPosition < hitDistanceSqr)
                     {
-                        ecb.AddComponent<DestroyComponent>(projectileEntity);
+                        if (projectileC.ValueRO.BounceCounter > 0)
+                        {
+                            var battleFieldC = SystemAPI.GetSingleton<BattleFieldComponent>();
+                            
+                            var bouncedDirection =
+                                Utils.ComputeBounce(projectileC.ValueRO.Direction, projectileC.ValueRO.EdgeNormal);
+
+                            var intersectionResult = Utils.CalculateIntersectionFromRectangleInside(
+                                battleFieldC.MinCorner,
+                                battleFieldC.MaxCorner,
+                                Utils.To2D(transformC.ValueRO.Position),
+                                Utils.To2D(bouncedDirection));
+                            Debug.Assert(intersectionResult.HasIntersection);
+                            
+                            
+                            projectileC.ValueRW.TargetPosition = Utils.To3D(intersectionResult.ExitPoint);
+                            projectileC.ValueRW.EdgeNormal = Utils.To3D(intersectionResult.Normal);
+                            
+                            projectileC.ValueRW.BounceCounter--;
+                        }
+                        else
+                        {
+                            ecb.AddComponent<DestroyComponent>(projectileEntity);
+                        }
                     }
                     // check if for any hit
                     else

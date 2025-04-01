@@ -38,21 +38,27 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             float projectileSpeed,
             bool knockBack,
             int penetrations,
+            int bounces,
             FixedString64Bytes visualId)
         {
             var direction = targetPosition - attackerPosition;
-
+            var edgeNormal = float2.zero;
             float3 projectileDestination3D = targetPosition;
-
+            
+            bool targetPositionOnEdge = false;
             // NOT AOE projectiles flies to the edge of playground
             if (aoeRadius <= 0)
             {
-                var projectileDestination2D = Utils.CalculateIntersectionFromRectangleInside(
+                var intersectionResult = Utils.CalculateIntersectionFromRectangleInside(
                     minFieldCoordinate,
                     maxFieldCoordinate,
                     new float2(attackerPosition.x, attackerPosition.z),
-                    new float2(direction.x, direction.z)).ExitPoint;
-                projectileDestination3D = new float3(projectileDestination2D.x, 0, projectileDestination2D.y);
+                    new float2(direction.x, direction.z));
+                
+                var projectileDestination2D = intersectionResult.ExitPoint;
+                projectileDestination3D = Utils.To3D(projectileDestination2D);
+                edgeNormal = intersectionResult.Normal;
+                targetPositionOnEdge = true;
             }
 
             //rotate attacker towards target
@@ -64,12 +70,15 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             {
                 Target = targetEntity,
                 TargetPosition = projectileDestination3D,
+                Direction = math.normalize(direction),
                 Speed = projectileSpeed,
                 Damage = damage,
                 AttackerTeam = attackerTeam,
                 AoeRadius = aoeRadius,
                 KnockBack = knockBack,
-                PenetrationCounter = penetrations
+                PenetrationCounter = penetrations,
+                BounceCounter = targetPositionOnEdge ? bounces : -1,
+                EdgeNormal = Utils.To3D(edgeNormal)
             });
 
             ecb.AddComponent(projectile, new LocalTransform

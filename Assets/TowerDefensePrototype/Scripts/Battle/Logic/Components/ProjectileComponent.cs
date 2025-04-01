@@ -15,8 +15,13 @@ namespace CastlePrototype.Battle.Logic.Components
        
         // runtime data
         public Entity Target;
+        public float3 Direction;
         public float3 TargetPosition;
         public int PenetrationCounter;
+        
+        // edge bounce data
+        public float3 EdgeNormal;
+        public int BounceCounter;
 
         public FixedList512Bytes<Entity> HitEntities;
     }
