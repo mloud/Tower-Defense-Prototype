@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 6840195826090332988, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: settings.Array.data[0].Value
-      value: 0.5
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}

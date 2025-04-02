@@ -28,6 +28,7 @@ MonoBehaviour:
     Penetration: 0
     Fireagain: 0
     Knockback: 0
+    KnockbackResistent: 0
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
     Penetration: 0
     Fireagain: 0
     Knockback: 0
+    KnockbackResistent: 1
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0

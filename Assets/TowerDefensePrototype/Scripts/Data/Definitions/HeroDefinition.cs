@@ -31,6 +31,7 @@ namespace CastlePrototype.Data.Definitions
         public int Penetration;
         public int Fireagain;
         public bool Knockback;
+        public bool KnockbackResistent;
     
         // AOE - either projectile or direct AOE      
         [Header("AOE stats")]

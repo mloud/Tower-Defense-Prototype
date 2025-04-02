@@ -26,7 +26,7 @@ namespace CastlePrototype.Battle.Visuals
 
         private void Awake()
         {
-            animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<Animator>(true);
             if (animator != null)
             {
                 cachedParameters = animator.parameters.Select(x => x.nameHash).ToHashSet();

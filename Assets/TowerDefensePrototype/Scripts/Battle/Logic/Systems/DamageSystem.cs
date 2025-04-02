@@ -53,7 +53,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 }
                 else
                 {
-                    if (damageC.ValueRO.Knockback)
+                    if (damageC.ValueRO.Knockback && !state.EntityManager.HasComponent<KnockBackResistent>(entity))
                     {
                         localTrC.ValueRW.Position += new float3(0, 0, 0.2f);
                     }

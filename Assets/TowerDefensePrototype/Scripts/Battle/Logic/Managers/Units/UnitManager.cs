@@ -91,6 +91,11 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 ProjectileVisualId = definition.ProjectileVisualId,
                 ProjectileSpeed = definition.ProjectileSpeed,
             });
+
+            if (definition.KnockbackResistent)
+            {
+                ecb.AddComponent(entity, new KnockBackResistent());
+            }
             return entity;
         }
 

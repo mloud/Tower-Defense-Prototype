@@ -26,6 +26,8 @@ namespace CastlePrototype.Battle.Logic
             WorldManagers.Register(world, new SlotManager(world));
             WorldManagers.Register(world, new BattleEventsManager(world));
             WorldManagers.Register(world, new UnitManager(world));
+            WorldManagers.Register(world, new StageManager(world));
+
 
             WorldManagers.DefaultWorld = world;
             await WorldManagers.Initialize(world);

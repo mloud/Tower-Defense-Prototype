@@ -6,17 +6,17 @@
     {
         public struct Wave
         {
-            public float time;
-            public int enemiesCount;
-            public FixedString64Bytes enemyId;
-            public float spawnInterval;
+            public float Time;
+            public int EnemiesCount;
+            public FixedString64Bytes EnemyId;
+            public float SpawnInterval;
 
             public Wave(float time, int enemiesCount, FixedString64Bytes enemyId, float spawnInterval)
             {
-                this.time = time;
-                this.enemiesCount = enemiesCount;
-                this.enemyId = enemyId;
-                this.spawnInterval = spawnInterval;
+                Time = time;
+                EnemiesCount = enemiesCount;
+                EnemyId = enemyId;
+                SpawnInterval = spawnInterval;
             }
     }
         
@@ -25,13 +25,7 @@
             // definition
             public float3 spawnPosition; // Base spawn position
             public float3 spawnBox;
-            
-            
-            // OLD
-            public float spawnInterval; // Time between individual spawns
-            public int totalWaves; // Total number of waves
-            public FixedString64Bytes enemyId;
-            
+               
             // NEW
             public FixedList4096Bytes<Wave> waves;
             

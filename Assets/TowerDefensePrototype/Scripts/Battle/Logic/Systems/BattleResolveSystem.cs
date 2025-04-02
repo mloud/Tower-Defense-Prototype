@@ -40,7 +40,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                     PauseUtils.SetLogicPaused(true);
                     ServiceLocator.Get<IUiManager>().OpenPopup<DefeatPopup>(null);
                     break;
-                case 0 when enemySpawnerC.currentWave >= enemySpawnerC.totalWaves - 1:
+                case 0 when enemySpawnerC.currentWave >= enemySpawnerC.waves.Length - 1:
                     PauseUtils.SetLogicPaused(true);
                     ServiceLocator.Get<IUiManager>().OpenPopup<VictoryPopup>(null);
                     break;

@@ -54,6 +54,7 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDeck>(new LocalStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<Player>(new LocalStorage());
 
+        ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<WeaponDefinition>(new AddressableScriptableObjectStorage());
@@ -64,6 +65,7 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<WeaponDeck>(TypeToDataKeyBinding.WeaponDeck);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDeck>(TypeToDataKeyBinding.HeroDeck);
 
+        ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<StageDefinition>(TypeToDataKeyBinding.StageDefinitionsTable);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<EnemyDefinition>(TypeToDataKeyBinding.EnemyDefinitionsTable);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDefinition>(TypeToDataKeyBinding.HeroDefinitionsTable);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<WeaponDefinition>(TypeToDataKeyBinding.WeaponDefinitionsTable);

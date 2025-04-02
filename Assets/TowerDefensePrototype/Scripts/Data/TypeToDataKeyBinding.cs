@@ -9,6 +9,7 @@ namespace CastlePrototype.Data
         public const string Player = "Player";
         
         // definitions
+        public const string StageDefinitionsTable = "StageDefinitionsTable";
         public const string EnemyDefinitionsTable = "EnemyDefinitionsTable";
         public const string HeroDefinitionsTable = "HeroDefinitionsTable";
         public const string WeaponDefinitionsTable = "WeaponDefinitionsTable";

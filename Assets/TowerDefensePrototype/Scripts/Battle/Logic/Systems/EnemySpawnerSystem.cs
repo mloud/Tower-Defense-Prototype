@@ -30,24 +30,24 @@ namespace CastlePrototype.Battle.Logic.Systems
             spawner.elapsedTime += deltaTime;
 
             
-            if (spawner.elapsedTime > spawner.waves[spawner.currentWave].time)
+            if (spawner.elapsedTime > spawner.waves[spawner.currentWave].Time)
             {
-                if (spawner.spawnedThisWave < spawner.waves[spawner.currentWave].enemiesCount)
+                if (spawner.spawnedThisWave < spawner.waves[spawner.currentWave].EnemiesCount)
                 {
-                    if (spawner.elapsedTime - spawner.lastSpawnTime >= spawner.spawnInterval)
+                    if (spawner.elapsedTime - spawner.lastSpawnTime >= spawner.waves[spawner.currentWave].SpawnInterval)
                     {
                         spawner.lastSpawnTime = spawner.elapsedTime;
                         SpawnEnemy(ref state, ref ecb,
                             new EnemySpawnerData
                         {
-                            enemyId = spawner.waves[spawner.currentWave].enemyId,
+                            enemyId = spawner.waves[spawner.currentWave].EnemyId,
                             spawnPosition = spawner.spawnPosition,
                             spawnBox = spawner.spawnBox
                         });
                         spawner.spawnedThisWave++;
                     }
                 }
-                else if (spawner.currentWave < spawner.waves.Length - 1 && spawner.elapsedTime > spawner.waves[spawner.currentWave + 1].time)
+                else if (spawner.currentWave < spawner.waves.Length - 1 && spawner.elapsedTime > spawner.waves[spawner.currentWave + 1].Time)
                 {
                     spawner.currentWave++;
                     spawner.currentWaveChanged = true;
