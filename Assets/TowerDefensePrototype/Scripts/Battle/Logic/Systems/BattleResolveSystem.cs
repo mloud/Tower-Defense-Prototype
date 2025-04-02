@@ -1,8 +1,12 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
+using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Scripts.Ui.Popups;
+using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Ui;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using Unity.Entities;
 
 
@@ -38,11 +42,13 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 case > 0 when playerTotalHp <= 0:
                     PauseUtils.SetLogicPaused(true);
-                    ServiceLocator.Get<IUiManager>().OpenPopup<DefeatPopup>(null);
+                    WorldManagers.Get<UiHelperManager>(state.World).OpenDefeatPopup().Forget();
+                    VisualManager.Default.SetBattleMusicPlaying(false);
                     break;
                 case 0 when enemySpawnerC.currentWave >= enemySpawnerC.waves.Length - 1:
-                    PauseUtils.SetLogicPaused(true);
-                    ServiceLocator.Get<IUiManager>().OpenPopup<VictoryPopup>(null);
+                    PauseUtils.SetLogicPaused(true, true);
+                    WorldManagers.Get<UiHelperManager>(state.World).OpenVictoryPopup().Forget();
+                    VisualManager.Default.SetBattleMusicPlaying(false);
                     break;
             }
         }

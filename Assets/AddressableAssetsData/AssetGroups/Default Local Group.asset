@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c1d09ef68c8344f1a37f0779b72edb7
+    m_Address: BattleMusic
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69c73db73802d4eeaaa56a6d6a8089b5
     m_Address: StageDefinitionsTable
     m_ReadOnly: 0

@@ -6,6 +6,7 @@ using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Battle.Logic.Systems;
 using CastlePrototype.Battle.Visuals;
 using Cysharp.Threading.Tasks;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace CastlePrototype.Battle.Logic
             WorldManagers.Register(world, new BattleEventsManager(world));
             WorldManagers.Register(world, new UnitManager(world));
             WorldManagers.Register(world, new StageManager(world));
-
+            WorldManagers.Register(world, new UiHelperManager(world));
 
             WorldManagers.DefaultWorld = world;
             await WorldManagers.Initialize(world);

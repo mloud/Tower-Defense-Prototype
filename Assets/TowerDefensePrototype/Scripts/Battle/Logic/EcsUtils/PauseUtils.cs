@@ -5,7 +5,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
 {
     public static class PauseUtils
     {
-        public static void SetLogicPaused(bool isPaused)
+        public static void SetLogicPaused(bool isPaused, bool keepDestroySystem = false)
         {
             var world = World.DefaultGameObjectInjectionWorld.Unmanaged;
             world.GetExistingSystemState<AttackSystem>().Enabled = !isPaused;
@@ -17,7 +17,11 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             world.GetExistingSystemState<MovementSystem>().Enabled = !isPaused;
             world.GetExistingSystemState<TargetingSystem>().Enabled = !isPaused;
             world.GetExistingSystemState<VisualObjectSystem>().Enabled = !isPaused;
-            world.GetExistingSystemState<DestroyEntitySystem>().Enabled = !isPaused;
+            if (!keepDestroySystem)
+            {
+                world.GetExistingSystemState<DestroyEntitySystem>().Enabled = !isPaused;
+            }
+
             world.GetExistingSystemState<ProjectileSystem>().Enabled = !isPaused;
         }
     }

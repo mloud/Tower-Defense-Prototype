@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Battle.Visuals.Effects;
+using OneDay.Core;
 using OneDay.Core.Extensions;
+using OneDay.Core.Modules.Audio;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -108,6 +110,18 @@ namespace CastlePrototype.Battle.Visuals
             }
 
             effect.Play(data);
+        }
+
+        public void SetBattleMusicPlaying(bool isPlaying)
+        {
+            if (isPlaying)
+            {
+                ServiceLocator.Get<IAudioManager>().PlayMusic("BattleMusic");
+            }
+            else
+            {
+                ServiceLocator.Get<IAudioManager>().StopMusic();
+            }
         }
     }
 }

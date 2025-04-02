@@ -5,7 +5,9 @@ using CastlePrototype.States;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Assets;
+using OneDay.Core.Modules.Audio;
 using OneDay.Core.Modules.Data;
+using OneDay.Core.Modules.Settings;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 using OneDay.Core.Modules.Update;
@@ -18,6 +20,8 @@ public class CastlePrototypApp : ABaseApp
     [SerializeField] private AssetManager assetManager;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private UpdateManager updateManager;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private SettingsManager settingsManager;
     
     protected override async UniTask RegisterServices()
     {
@@ -26,13 +30,17 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Register<IAssetManager>(assetManager);
         ServiceLocator.Register<IPlayerManager>(playerManager);
         ServiceLocator.Register<IUpdateManager>(updateManager);
-
+        ServiceLocator.Register<IAudioManager>(audioManager);
+        ServiceLocator.Register<ISettingsManager>(settingsManager);
         
         var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());
         await UniTask.WhenAll(initializeTasks);
         
         var postInitializeTasks = ServiceLocator.GetAll().Select(x => x.PostInitialize());
         await UniTask.WhenAll(postInitializeTasks);
+        
+        settingsManager.RegisterModule<IVolumeModule>(new VolumeModule());
+        ServiceLocator.Get<IAudioManager>().MusicVolume = 0.5f;
     }
 
     protected override async UniTask SetApplicationStateMachine()

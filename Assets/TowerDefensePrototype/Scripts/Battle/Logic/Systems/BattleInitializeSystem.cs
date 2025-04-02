@@ -3,6 +3,7 @@ using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
+using CastlePrototype.Battle.Visuals;
 using Cysharp.Threading.Tasks;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
@@ -25,7 +26,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             CreateBattleFieldComponent(ref state);
             CreateBattleProgression(ref state);
 
-            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 0);
+            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 1);
             
             var wallEntity = CreateWall(ref state);
             WorldManagers.Get<BattleEventsManager>(state.World)
@@ -34,6 +35,8 @@ namespace CastlePrototype.Battle.Logic.Systems
             var slot = WorldManagers.Get<SlotManager>(state.World).GetInitialSlot();
             WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "weapon");
             slot.IsOccupied = true;
+            
+            VisualManager.Default.SetBattleMusicPlaying(true);
             
             finished = true;
             

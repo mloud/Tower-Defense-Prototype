@@ -26,3 +26,8 @@ MonoBehaviour:
       EnemiesCount: 1
       EnemyId: boss
       SpawnInterval: 0.1
+  - Waves:
+    - Time: 0
+      EnemiesCount: 1
+      EnemyId: boss
+      SpawnInterval: 0

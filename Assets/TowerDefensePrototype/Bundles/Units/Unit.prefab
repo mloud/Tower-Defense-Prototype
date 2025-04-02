@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9064160745621147507}
   - component: {fileID: 3552641970345984660}
   - component: {fileID: 6840195826090332988}
+  - component: {fileID: 8689067181685091424}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -47,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162e9e6754ba46e9930b2572d4d56e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animation: {fileID: 6840195826090332988}
   id: hero_soldier_rifle
-  effects: []
-  defaultHeight: 0
+  animationModule: {fileID: 6840195826090332988}
+  effectModule: {fileID: 8689067181685091424}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 837677521864761747}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!114 &6840195826090332988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +68,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  settings: []
+--- !u!114 &8689067181685091424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6185592950279535699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddee671a3e5d44a5abed78ec48269251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: []
 --- !u!1 &9031571534414290280
 GameObject:
   m_ObjectHideFlags: 0

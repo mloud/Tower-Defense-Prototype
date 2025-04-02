@@ -32,7 +32,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                          RefRW<DestroyComponent>>().WithEntityAccess())
             {
                 destroyC.ValueRW.DestroyIn -= deltaTime;
-                if (!(destroyC.ValueRW.DestroyIn <= 0)) continue;
+                if (destroyC.ValueRW.DestroyIn > 0) continue;
                 
                 if (visualLookup.HasComponent(entity))
                 {
