@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2465346241895471538}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.8, y: 0.01, z: 0}
+  m_LocalPosition: {x: 2.8, y: 0.01, z: -1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,9 +101,10 @@ MonoBehaviour:
   id: slot_3
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!1 &3330747489228111414
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 3330747489228111414}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.8, y: 0.01, z: 0}
+  m_LocalPosition: {x: -2.8, y: 0.01, z: -1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -205,9 +206,10 @@ MonoBehaviour:
   id: slot_0
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!1 &6269122007930409860
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,9 +262,10 @@ MonoBehaviour:
   id: default_castle
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!1 &7437450840305446581
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 7437450840305446581}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.46, y: 0.01, z: 0}
+  m_LocalPosition: {x: -1.46, y: 0.01, z: -0.5}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -364,9 +367,10 @@ MonoBehaviour:
   id: slot_1
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!1 &8453541861262409225
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 8453541861262409225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.46, y: 0.01, z: 0}
+  m_LocalPosition: {x: 1.46, y: 0.01, z: -0.5}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -468,9 +472,10 @@ MonoBehaviour:
   id: slot_2
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
 --- !u!1 &8595847644019451270
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +577,7 @@ MonoBehaviour:
   id: weapon_slot
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
-  defaultHeight: 0
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  defaultHeight: 0
+  permanentHpBar: 0

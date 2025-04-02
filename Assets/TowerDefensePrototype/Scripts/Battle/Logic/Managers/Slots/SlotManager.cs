@@ -14,11 +14,11 @@ namespace CastlePrototype.Battle.Logic.Managers.Slots
         {
             Slots = new List<Slot>
             {
-                new(new Vector3(-3.0f, 0, -7)),
-                new(new Vector3(-1.5f, 0, -7)),
+                new(new Vector3(-3.0f, 0, -8f)),
+                new(new Vector3(-1.5f, 0, -7.5f)),
                 new(new Vector3( 0f, 0, -7)),
-                new(new Vector3(1.5f, 0, -7)),
-                new(new Vector3(3.0f, 0, -7)),
+                new(new Vector3(1.5f, 0, -7.5f)),
+                new(new Vector3(3.0f, 0, -8f)),
             };
         }
 
