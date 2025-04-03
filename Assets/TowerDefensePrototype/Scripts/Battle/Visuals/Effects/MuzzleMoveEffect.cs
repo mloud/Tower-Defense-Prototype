@@ -1,0 +1,18 @@
+using CastlePrototype.Battle.Visuals.Effects;
+using DG.Tweening;
+using UnityEngine;
+
+namespace TowerDefensePrototype.Scripts.Battle.Visuals.Effects
+{
+    public class MuzzleMoveEffect : BaseEffect
+    {
+        [SerializeField] private Transform targetTransform;
+        protected override void OnPlay(object data = null)
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(targetTransform.DOLocalMoveZ(-0.1f, 0.1f));
+            sequence.Append(targetTransform.DOLocalMoveZ(-0.2f, 0.1f));
+            sequence.Append(targetTransform.DOLocalMoveZ(-0.1f, 0.1f));
+        }
+    }
+}

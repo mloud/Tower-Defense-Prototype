@@ -16,6 +16,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             world.GetExistingSystemState<EnemySpawnerSystem>().Enabled = !isPaused;
             world.GetExistingSystemState<MovementSystem>().Enabled = !isPaused;
             world.GetExistingSystemState<TargetingSystem>().Enabled = !isPaused;
+            world.GetExistingSystemState<LookAtTargetSystem>().Enabled = !isPaused;
             world.GetExistingSystemState<VisualObjectSystem>().Enabled = !isPaused;
             if (!keepDestroySystem)
             {

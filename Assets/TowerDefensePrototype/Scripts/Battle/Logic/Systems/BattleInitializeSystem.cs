@@ -26,7 +26,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             CreateBattleFieldComponent(ref state);
             CreateBattleProgression(ref state);
 
-            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 1);
+            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 0);
             
             var wallEntity = CreateWall(ref state);
             WorldManagers.Get<BattleEventsManager>(state.World)
@@ -83,7 +83,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             state.EntityManager.AddComponentData(progressEntity, new BattleProgressionComponent
             {
                 BattlePoints = 0,
-                BattlePointsNeeded = 5,
+                BattlePointsNeeded = 3,
                 BattlePointsUpdated = true
             });
         }
@@ -93,7 +93,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             var fieldEntity = state.EntityManager.CreateEntity();
             state.EntityManager.AddComponentData(fieldEntity, new BattleFieldComponent()
             {
-                MinCorner = new float2(-8.7f/2, -15.54f/2),
+                MinCorner = new float2(-8.7f/2, -16.54f/2),
                 MaxCorner = new float2(8.7f/2, 15.54f/2),
             });
         }

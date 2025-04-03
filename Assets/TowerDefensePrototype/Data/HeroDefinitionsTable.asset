@@ -28,6 +28,7 @@ MonoBehaviour:
     Penetration: 0
     Fireagain: 0
     Knockback: 1
+    KnockbackResistent: 0
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
     Penetration: 0
     Fireagain: 1
     Knockback: 0
+    KnockbackResistent: 0
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -64,6 +66,7 @@ MonoBehaviour:
     Penetration: 1
     Fireagain: 0
     Knockback: 0
+    KnockbackResistent: 0
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -72,7 +75,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_dron
     AttackType: 1
     ProjectileSpeed: 8
-    Cooldown: 9
+    Cooldown: 10
     Damage: 350
     AttackDistance: 10
     TargetRange: 10
@@ -82,6 +85,7 @@ MonoBehaviour:
     Penetration: 0
     Fireagain: 0
     Knockback: 0
+    KnockbackResistent: 0
     AoeRadius: 2
-    AoeDamage: 100
+    AoeDamage: 240
     AoeOnly: 0

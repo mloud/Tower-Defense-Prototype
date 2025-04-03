@@ -17,7 +17,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Visuals
         }
 
       
-        public override void Play(object data)
+        protected override void OnPlay(object data = null)
         {
             label.text = ((float)data).ToString();
             transform.DOScale(Vector3.one, 0.2f);

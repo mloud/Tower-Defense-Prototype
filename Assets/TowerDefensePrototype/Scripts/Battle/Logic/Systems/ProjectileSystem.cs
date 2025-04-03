@@ -99,6 +99,24 @@ namespace CastlePrototype.Battle.Logic.Systems
                         }
                         else
                         {
+                            if (projectileC.ValueRO.AoeRadius > 0)
+                            {
+                                VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition,
+                                    "effect_hit_aoe");
+                                AttackUtils.ApplyAoeDamage(
+                                    ref state,
+                                    ref ecb,
+                                    ref aoeDamageEntityQuery,
+                                    transformC.ValueRO.Position,
+                                    new float3(1, 0, 1),
+                                    projectileC.ValueRO.AttackerTeam,
+                                    projectileC.ValueRO.AoeDamage,
+                                    projectileC.ValueRO.AoeRadius,
+                                    projectileC.ValueRO.KnockBack,
+                                    Entity.Null
+                                );
+                            }
+
                             ecb.AddComponent<DestroyComponent>(projectileEntity);
                         }
                     }

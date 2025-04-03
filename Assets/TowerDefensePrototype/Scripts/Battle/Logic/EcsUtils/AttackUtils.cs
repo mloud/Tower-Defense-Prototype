@@ -65,7 +65,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
 
             //rotate attacker towards target
             var targetDirection = Quaternion.LookRotation(direction);
-            attackerTransform.Rotation = targetDirection;
+            //attackerTransform.Rotation = targetDirection;
                             
             var projectile = ecb.CreateEntity();
             ecb.AddComponent(projectile, new ProjectileComponent

@@ -40,7 +40,7 @@ public class CastlePrototypApp : ABaseApp
         await UniTask.WhenAll(postInitializeTasks);
         
         settingsManager.RegisterModule<IVolumeModule>(new VolumeModule());
-        ServiceLocator.Get<IAudioManager>().MusicVolume = 0.5f;
+        ServiceLocator.Get<IAudioManager>().MusicVolume = -20f;
     }
 
     protected override async UniTask SetApplicationStateMachine()

@@ -15,17 +15,29 @@ MonoBehaviour:
   data:
   - Waves:
     - Time: 0
-      EnemiesCount: 6
+      EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 0.1
-    - Time: 30
-      EnemiesCount: 8
+    - Time: 20
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 0.1
     - Time: 40
+      EnemiesCount: 10
+      EnemyId: zombie
+      SpawnInterval: 0.1
+    - Time: 48
+      EnemiesCount: 5
+      EnemyId: zombie
+      SpawnInterval: 0.1
+    - Time: 50
       EnemiesCount: 1
       EnemyId: boss
       SpawnInterval: 0.1
+    - Time: 52
+      EnemiesCount: 10
+      EnemyId: zombie
+      SpawnInterval: 0.3
   - Waves:
     - Time: 0
       EnemiesCount: 1

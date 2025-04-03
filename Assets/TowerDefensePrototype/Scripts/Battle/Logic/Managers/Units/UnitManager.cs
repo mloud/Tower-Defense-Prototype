@@ -37,8 +37,11 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         {
             if (heroDefinitions.TryGetValue(heroId, out var definition))
             {
-                return CreateUnit(ref ecb, position, definition, Team.Player);
+                var entity = CreateUnit(ref ecb, position, definition, Team.Player);
+                ecb.AddComponent(entity, new LookAtTargetComponent());
+                return entity;
             }
+            
 
             Debug.Assert(false, $"No such hero definition with id {heroId} exists");
             return Entity.Null;

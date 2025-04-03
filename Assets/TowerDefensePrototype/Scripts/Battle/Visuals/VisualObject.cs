@@ -1,4 +1,5 @@
 using CastlePrototype.Battle.Visuals.Effects;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace CastlePrototype.Battle.Visuals
@@ -19,7 +20,8 @@ namespace CastlePrototype.Battle.Visuals
         [Header("Settings")]
         [SerializeField] private float defaultHeight;
         [SerializeField] private bool permanentHpBar;
-
+        [Tooltip("This transform's rotation will be rotated, by default root transform, but could be maze as well")]
+        [SerializeField] private Transform objectToRotate;
         
         public string Id => id;
         public float DefaultHeight => defaultHeight;
@@ -30,6 +32,10 @@ namespace CastlePrototype.Battle.Visuals
             Index = VisualManager.Default.TrackVisualObject(this);
             animationModule = GetComponent<AnimationModule>();
             effectModule = GetComponent<EffectModule>();
+            if (objectToRotate == null)
+            {
+                objectToRotate = transform;
+            }
         }
         
         public void Initialize()
@@ -43,6 +49,8 @@ namespace CastlePrototype.Battle.Visuals
                 cooldownProgressBar.PlaceToCanvas();
             }
         }
+        public void SetPosition(float3 position) => transform.position = position + new float3(0,defaultHeight,0);
+        public void SetRotation(quaternion rotation) => objectToRotate.rotation = rotation;
 
         public void SetMoveSpeed(float moveSpeed)
         {

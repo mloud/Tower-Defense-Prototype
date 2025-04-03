@@ -6,7 +6,7 @@ namespace CastlePrototype.Battle.Visuals.Effects
     {
         [SerializeField] private AudioClip clip;
         
-        public override void Play(object data = null)
+        protected override void OnPlay(object data = null)
         {
             AudioSource.PlayClipAtPoint(clip,Vector3.zero);
         }

@@ -14,6 +14,8 @@ namespace CastlePrototype.Battle.Logic.Systems
         private ComponentLookup<SettingComponent> settingLookup;
         private ComponentLookup<HpComponent> hpLookup;
         private ComponentLookup<TeamComponent> teamLookup;
+        private ComponentLookup<LookAtTargetComponent> lookAtTargetLookup;
+
 
         private EntityQuery aoeDamageEntityQuery;
         
@@ -24,6 +26,9 @@ namespace CastlePrototype.Battle.Logic.Systems
             settingLookup = state.GetComponentLookup<SettingComponent>(true);
             hpLookup = state.GetComponentLookup<HpComponent>(true);
             teamLookup = state.GetComponentLookup<TeamComponent>(true);
+            lookAtTargetLookup = state.GetComponentLookup<LookAtTargetComponent>();
+
+            
             aoeDamageEntityQuery = state.GetEntityQuery(
                 ComponentType.ReadWrite<HpComponent>(),
                 ComponentType.ReadOnly<LocalTransform>(),
@@ -37,17 +42,18 @@ namespace CastlePrototype.Battle.Logic.Systems
             settingLookup.Update(ref state);
             hpLookup.Update(ref state);
             teamLookup.Update(ref state);
+            lookAtTargetLookup.Update(ref state);
             
             var currentTime = SystemAPI.Time.ElapsedTime;
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
 
-            foreach (var (attackC, transformC, targetC, settingC, teamC) in
+            foreach (var (attackC, transformC, targetC, settingC, teamC, entity) in
                      SystemAPI.Query<
                          RefRW<AttackComponent>,
                          RefRW<LocalTransform>,
                          RefRW<TargetComponent>,
                          RefRW<SettingComponent>,
-                         RefRW<TeamComponent>>())
+                         RefRW<TeamComponent>>().WithEntityAccess())
             {
                 var targetPositionC = transformLookup.GetRefRO(targetC.ValueRO.Target);
                 var targetSettingsC = settingLookup.GetRefRO(targetC.ValueRO.Target);
@@ -72,6 +78,14 @@ namespace CastlePrototype.Battle.Logic.Systems
                             break;
                         }
                     }
+
+                    if (lookAtTargetLookup.HasComponent(entity))
+                    {
+                        const float timeBeforeLookAtTarget = 0.3f;
+                        // starts to rotate towards target
+                        lookAtTargetLookup.GetRefRW(entity).ValueRW.LookAtTarget = currentTime > attackTime - timeBeforeLookAtTarget;
+                    }
+
                     
                     if (currentTime > attackTime)
                     {

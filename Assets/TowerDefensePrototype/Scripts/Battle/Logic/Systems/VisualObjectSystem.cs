@@ -27,8 +27,8 @@ namespace CastlePrototype.Battle.Logic.Systems
             foreach (var (transform, visualComp) in SystemAPI.Query<RefRO<LocalTransform>, RefRO<VisualComponent>>())
             {
                 var visual = VisualManager.Default.GetVisualObject(visualComp.ValueRO.VisualIndex);
-                visual.transform.position = transform.ValueRO.Position + new float3(0, visual.DefaultHeight, 0);
-                visual.transform.rotation = transform.ValueRO.Rotation;
+                visual.SetPosition(transform.ValueRO.Position);
+                visual.SetRotation(transform.ValueRO.Rotation);
             }   
             
             // Sync  visuals' speed

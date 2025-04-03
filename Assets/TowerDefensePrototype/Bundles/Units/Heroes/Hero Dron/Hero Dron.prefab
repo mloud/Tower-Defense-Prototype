@@ -610,6 +610,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Dron
       objectReference: {fileID: 0}
+    - target: {fileID: 8689067181685091424, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689067181685091424, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      propertyPath: effects.Array.data[0]
+      value: 
+      objectReference: {fileID: 3247785655112970018}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,8 +677,34 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8641429213843776880}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3247785655112970018}
   m_SourcePrefab: {fileID: 100100000, guid: 443c685a1b0904e19b78d5166a517517, type: 3}
+--- !u!1 &3851609369960917995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
+    type: 3}
+  m_PrefabInstance: {fileID: 6963706674683336632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3247785655112970018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851609369960917995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c60cc1e2c7b45d0ab07f6ca196b698a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  isScreenSpace: 0
+  id: Attack
+  clip: {fileID: 8300000, guid: 709366fe8769b4b04b685b467ad3a4df, type: 3}
 --- !u!4 &6916126188992900868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4566380037895813308, guid: 443c685a1b0904e19b78d5166a517517,

@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-8541875539673439938
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 9cf2fadfaffe24b1494337c59e0f8a8e
+  m_EffectName: Normalize
+  m_MixLevel: 11489fcce6a9f48d58170baf2ce8db4c
+  m_Parameters:
+  - m_ParameterName: Fade in time
+    m_GUID: 57562d7cbfa8242daa826485ad3c0649
+  - m_ParameterName: Lowest volume
+    m_GUID: 6905815f1291f426d96f188987f55d92
+  - m_ParameterName: Maximum amp
+    m_GUID: 1721307d097464f1688b1f15e11b7818
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-4140828293741071597
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -31,7 +51,7 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   m_StartSnapshot: {fileID: 24500006}
-  m_SuspendThreshold: -80
+  m_SuspendThreshold: 0
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
@@ -89,7 +109,10 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: bf4eff5102a0e465a807557ed9cb36dc
-  m_FloatValues: {}
+  m_FloatValues:
+    3d04418b749aa403e93e69088d6db946: -5.9
+    b2736c3e750534d1f93602e6f7bf16d9: -25.647947
+    a0e1b7bf49d664eddb6e68ab70f48e08: -26.404226
   m_TransitionOverrides: {}
 --- !u!244 &4193639950926515330
 AudioMixerEffectController:

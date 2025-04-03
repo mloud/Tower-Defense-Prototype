@@ -7,7 +7,7 @@ namespace CastlePrototype.Battle.Visuals.Effects
         [SerializeField] private Animator animator;
         [SerializeField] private string trigger;
         
-        public override void Play(object data = null)
+        protected override void OnPlay(object data = null)
         {
             animator.SetTrigger(trigger);
         }

@@ -18,7 +18,7 @@ namespace CastlePrototype.Battle.Logic.Systems
 
         public void OnCreate(ref SystemState state)
         {
-            transformLookup = state.GetComponentLookup<LocalTransform>(true);
+            transformLookup = state.GetComponentLookup<LocalTransform>(false);
             settingLookup = state.GetComponentLookup<SettingComponent>(true);
             hpLookup = state.GetComponentLookup<HpComponent>(true);
             teamLookup = state.GetComponentLookup<TeamComponent>(true);
@@ -42,8 +42,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                          .WithAll<TeamComponent>()
                          .WithEntityAccess())
             {
-                FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
+                var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
                     attackC.ValueRO.TargetRange, settingC.ValueRO.DistanceAxes);
+                
+                AssignTarget(ref ecb, entity, targetEntity);
             }
             
             // Process entities with existing target
@@ -52,8 +54,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                          .WithAll<TeamComponent>()
                          .WithEntityAccess())
             {
-                FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
+                var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
                     attackC.ValueRO.TargetRange, settingC.ValueRO.DistanceAxes);
+                AssignTarget(ref ecb, entity, targetEntity);
                 //CheckExistingTarget(ref state, ref ecb, entity, transform.ValueRO.Position, attackC.ValueRO.TargetRange, 
                 //    targetC.ValueRO.Target, settingC.ValueRO.DistanceAxes);
             }
@@ -84,25 +87,20 @@ namespace CastlePrototype.Battle.Logic.Systems
             }
        }
         
-        private void FindAndAssignTarget(ref SystemState state, ref EntityCommandBuffer ecb, Entity myEntity, 
+        private Entity FindAndAssignTarget(ref SystemState state, ref EntityCommandBuffer ecb, Entity myEntity, 
             float3 myPosition, float myTargetRange, float3 myDistanceAxes)
         {
-            // Pre-square the target range to avoid repeated calculations
             float myTargetRangeSqr = myTargetRange * myTargetRange;
-    
-            // Use component lookups instead of EntityManager
             var myTeam = teamLookup.GetRefRO(myEntity).ValueRO.Team;
     
-            // Track the closest target directly without storing all potentials
             var closestDistance = float.MaxValue;
             var closestEntity = Entity.Null;
 
-            // Single pass to find the closest target
             foreach (var (otherTeamC, otherTrC, otherSettingC, otherHpC, otherEntity) in
                      SystemAPI.Query<RefRO<TeamComponent>, RefRO<LocalTransform>, RefRO<SettingComponent>, RefRO<HpComponent>>()
                          .WithEntityAccess())
             {
-                // Skip entities on the same team or with no health
+                // Skip entities on the same team or with zero health
                 if (otherTeamC.ValueRO.Team == myTeam || otherHpC.ValueRO.Hp <= 0)
                     continue;
 
@@ -123,21 +121,25 @@ namespace CastlePrototype.Battle.Logic.Systems
                 }
             }
 
-            if (closestEntity == Entity.Null)
+            return closestEntity;
+        }
+
+        public void AssignTarget(ref EntityCommandBuffer ecb, Entity entityLookingForTarget, Entity targetEntity)
+        {
+            if (targetEntity == Entity.Null)
             {
-                if (state.EntityManager.HasComponent<TargetComponent>(myEntity))
-                    ecb.RemoveComponent<TargetComponent>(myEntity);
+                if (targetLookup.HasComponent(entityLookingForTarget))
+                    ecb.RemoveComponent<TargetComponent>(entityLookingForTarget);
             }
             else
             {
-                if (state.EntityManager.HasComponent<TargetComponent>(myEntity))
+                if (targetLookup.HasComponent(entityLookingForTarget))
                 {
-                    ref var targetC = ref targetLookup.GetRefRW(myEntity).ValueRW;
-                    targetC.Target = closestEntity;
+                    targetLookup.GetRefRW(entityLookingForTarget).ValueRW.Target = targetEntity;
                 }
                 else
                 {
-                    ecb.AddComponent(myEntity, new TargetComponent { Target = closestEntity });
+                    ecb.AddComponent(entityLookingForTarget, new TargetComponent { Target = targetEntity });
                 }
             }
         }
