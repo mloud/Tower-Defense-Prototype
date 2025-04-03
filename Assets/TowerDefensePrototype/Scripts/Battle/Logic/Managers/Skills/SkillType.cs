@@ -5,7 +5,8 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         UnlockHero,
         IncreaseDamage,
         DecreaseAttackInterval,
-        IncreaseAttackDistance
-
+        IncreaseAttackDistance,
+        IncreaseBounceCount,
+        IncreaseFireAgainCounter
     }
 }

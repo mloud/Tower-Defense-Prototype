@@ -45,16 +45,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312324728870031626, guid: 2cc88be1781d04557ac60ed66567b6b1,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 303.7199
-      objectReference: {fileID: 0}
-    - target: {fileID: 3312324728870031626, guid: 2cc88be1781d04557ac60ed66567b6b1,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 548.6645
-      objectReference: {fileID: 0}
-    - target: {fileID: 3312324728870031626, guid: 2cc88be1781d04557ac60ed66567b6b1,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -113,10 +103,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5083667643430454850, guid: 2cc88be1781d04557ac60ed66567b6b1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c0e0521f447eb482c8b36d9290bbb2ba,
+        type: 3}
     - target: {fileID: 8778520509170188572, guid: 2cc88be1781d04557ac60ed66567b6b1,
         type: 3}
       propertyPath: m_Name
-      value: AbilityBattleSkillCardVariant
+      value: UpgradeBattleSkillCardVariant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
