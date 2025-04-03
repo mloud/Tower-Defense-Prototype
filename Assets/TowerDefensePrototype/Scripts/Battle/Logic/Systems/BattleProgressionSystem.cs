@@ -3,6 +3,7 @@ using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Logic.Managers.Skills;
 using Cysharp.Threading.Tasks;
 using Unity.Entities;
+using Unity.Mathematics;
 
 
 namespace CastlePrototype.Battle.Logic.Systems
@@ -21,7 +22,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             if (battleProgressionC.BattlePoints >= battleProgressionC.BattlePointsNeeded)
             {
                 battleProgressionC.BattlePoints -= battleProgressionC.BattlePointsNeeded;
-                battleProgressionC.BattlePointsNeeded += 1;
+                battleProgressionC.BattlePointsNeeded = (int)math.ceil(battleProgressionC.BattlePointsNeeded * 1.5f);
                 battleProgressionC.BattlePointsUpdated = true;
                 WorldManagers.Get<SkillManager>(state.World).RunSkillSelectionFlow(3).Forget();
             }
