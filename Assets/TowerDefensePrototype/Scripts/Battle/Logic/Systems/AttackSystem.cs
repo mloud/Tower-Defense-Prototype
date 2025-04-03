@@ -99,7 +99,7 @@ namespace CastlePrototype.Battle.Logic.Systems
 
                             for (int i = 0; i < attackC.ValueRO.FireAgain; i++)
                             {
-                                double secondaryAttackTimeDelay = 0.5f;
+                                double secondaryAttackTimeDelay = attackC.ValueRO.FireAgainInterval;
                                 attackC.ValueRW.SecondaryAttackTimes.Add(currentTime+(i+1) * secondaryAttackTimeDelay);
                             }
                         }

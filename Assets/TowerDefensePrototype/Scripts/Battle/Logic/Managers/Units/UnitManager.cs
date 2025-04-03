@@ -93,6 +93,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 AoeOnly = definition.AoeOnly,
                 ProjectileVisualId = definition.ProjectileVisualId,
                 ProjectileSpeed = definition.ProjectileSpeed,
+                FireAgainInterval =definition.FireAgainInterval
             });
 
             if (definition.KnockbackResistent)

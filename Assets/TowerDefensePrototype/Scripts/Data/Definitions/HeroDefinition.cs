@@ -15,8 +15,7 @@ namespace CastlePrototype.Data.Definitions
 
         [Header("Unit type stats")] 
         public AttackType AttackType;
-        public TargetingType TargetingType;
-
+      
         // BASIC STATS
         [Header("Basic stats")]
         public float ProjectileSpeed;
@@ -34,6 +33,7 @@ namespace CastlePrototype.Data.Definitions
         public int Fireagain;
         public bool Knockback;
         public bool KnockbackResistent;
+        public float FireAgainInterval = 0.5f;
     
         // AOE - either projectile or direct AOE      
         [Header("AOE stats")]

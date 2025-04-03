@@ -44,28 +44,6 @@ namespace CastlePrototype.Battle.Logic.Systems
             ecb.Dispose();
         }
 
-        // private void CreateEnemySpawner(ref SystemState state)
-        // {
-        //     var spawnerEntity = state.EntityManager.CreateEntity();
-        //     
-        //     var spawnerComponent = new EnemySpawnerComponent 
-        //     {
-        //         spawnPosition = new float3(0, 0, 7),
-        //         spawnBox = new float3(6,0,3),
-        //         currentWave = 0,
-        //         currentWaveChanged = true,
-        //     };
-        //
-        //     
-        //     spawnerComponent.waves = new FixedList4096Bytes<Wave>
-        //     {
-        //        new(0, 6, "zombie", 0.1f),
-        //        new(30, 8, "zombie", 0.1f),
-        //        new(30, 1, "boss", 0.1f)
-        //     };
-        //     
-        //     state.EntityManager.AddComponentData(spawnerEntity, spawnerComponent);
-        // }
         private Entity CreateWall(ref SystemState state)
         {
             var wallEntity = state.EntityManager.CreateEntity();

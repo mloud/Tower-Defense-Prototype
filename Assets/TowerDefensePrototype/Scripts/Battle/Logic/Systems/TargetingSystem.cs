@@ -16,8 +16,12 @@ namespace CastlePrototype.Battle.Logic.Systems
         private ComponentLookup<TargetComponent> targetLookup;
         private ComponentLookup<TargetedComponent> targetedLookup;
 
+        
+        private const float TargetingDelay = 0.5f;
+        private float delayTimer;
         public void OnCreate(ref SystemState state)
         {
+            delayTimer = TargetingDelay;
             transformLookup = state.GetComponentLookup<LocalTransform>();
             settingLookup = state.GetComponentLookup<SettingComponent>(true);
             hpLookup = state.GetComponentLookup<HpComponent>(true);
@@ -28,6 +32,11 @@ namespace CastlePrototype.Battle.Logic.Systems
         
         public void OnUpdate(ref SystemState state)
         {
+            if (delayTimer > 0)
+            {
+                delayTimer -= SystemAPI.Time.DeltaTime;
+                return;
+            }
             transformLookup.Update(ref state);
             settingLookup.Update(ref state);
             hpLookup.Update(ref state);

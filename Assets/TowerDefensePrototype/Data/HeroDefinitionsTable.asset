@@ -29,6 +29,7 @@ MonoBehaviour:
     Fireagain: 0
     Knockback: 1
     KnockbackResistent: 0
+    FireAgainInterval: 0.5
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -48,6 +49,7 @@ MonoBehaviour:
     Fireagain: 1
     Knockback: 0
     KnockbackResistent: 0
+    FireAgainInterval: 0.5
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -67,6 +69,7 @@ MonoBehaviour:
     Fireagain: 0
     Knockback: 0
     KnockbackResistent: 0
+    FireAgainInterval: 0.5
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -86,6 +89,27 @@ MonoBehaviour:
     Fireagain: 0
     Knockback: 0
     KnockbackResistent: 0
+    FireAgainInterval: 0.5
     AoeRadius: 2
     AoeDamage: 240
+    AoeOnly: 0
+  - UnitId: scorpion
+    VisualId: scorpion
+    ProjectileVisualId: projectile_scorpion
+    AttackType: 1
+    ProjectileSpeed: 10
+    Cooldown: 10
+    Damage: 10
+    AttackDistance: 10
+    TargetRange: 10
+    MoveSpeed: 0
+    Hp: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 30
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0.1
+    AoeRadius: 0
+    AoeDamage: 0
     AoeOnly: 0

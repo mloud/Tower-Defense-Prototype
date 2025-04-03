@@ -25,6 +25,7 @@ namespace CastlePrototype.Battle.Logic.Components
         public int FireAgain;
         public int Bounce;
         public bool KnockBack;
+        public float FireAgainInterval;
         
         // runtime data
         public double LastAttackTime;
