@@ -15,6 +15,8 @@ namespace CastlePrototype.Data.Definitions
 
         [Header("Unit type stats")] 
         public AttackType AttackType;
+        public TargetingType TargetingType;
+
         // BASIC STATS
         [Header("Basic stats")]
         public float ProjectileSpeed;

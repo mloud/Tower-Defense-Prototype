@@ -14,15 +14,16 @@ namespace CastlePrototype.Battle.Logic.Systems
         private ComponentLookup<HpComponent> hpLookup;
         private ComponentLookup<TeamComponent> teamLookup;
         private ComponentLookup<TargetComponent> targetLookup;
-
+        private ComponentLookup<TargetedComponent> targetedLookup;
 
         public void OnCreate(ref SystemState state)
         {
-            transformLookup = state.GetComponentLookup<LocalTransform>(false);
+            transformLookup = state.GetComponentLookup<LocalTransform>();
             settingLookup = state.GetComponentLookup<SettingComponent>(true);
             hpLookup = state.GetComponentLookup<HpComponent>(true);
             teamLookup = state.GetComponentLookup<TeamComponent>(true);
-            targetLookup = state.GetComponentLookup<TargetComponent>(false);
+            targetLookup = state.GetComponentLookup<TargetComponent>();
+            targetedLookup = state.GetComponentLookup<TargetedComponent>();
         }
         
         public void OnUpdate(ref SystemState state)
@@ -32,72 +33,60 @@ namespace CastlePrototype.Battle.Logic.Systems
             hpLookup.Update(ref state);
             teamLookup.Update(ref state);
             targetLookup.Update(ref state);
+            targetedLookup.Update(ref state);
+
             
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-                
-            // Process entities with no target
+
+            // Remove all not active targeters
+            foreach (var targetedC in SystemAPI.Query<RefRW<TargetedComponent>>())
+            {
+                for (int i = targetedC.ValueRO.Targeters.Length-1; i >= 0; i--)
+                {
+                    if (!state.EntityManager.Exists(targetedC.ValueRO.Targeters[i]))
+                    {
+                        targetedC.ValueRW.Targeters.RemoveAt(i);
+                    }
+                }
+            }
+   
+         
             foreach (var (transform, attackC, settingC, entity) in 
                      SystemAPI.Query<RefRO<LocalTransform>, RefRO<AttackComponent>, RefRO<SettingComponent>>()
-                         .WithNone<TargetComponent>()
                          .WithAll<TeamComponent>()
                          .WithEntityAccess())
             {
-                var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
-                    attackC.ValueRO.TargetRange, settingC.ValueRO.DistanceAxes);
                 
-                AssignTarget(ref ecb, entity, targetEntity);
-            }
-            
-            // Process entities with existing target
-            foreach (var (transform, attackC, targetC, settingC, entity) in 
-                     SystemAPI.Query<RefRO<LocalTransform>, RefRO<AttackComponent>, RefRO<TargetComponent>, RefRO<SettingComponent>>()
-                         .WithAll<TeamComponent>()
-                         .WithEntityAccess())
-            {
+                if (HasValidTarget(ref state, entity, attackC.ValueRO.TargetRange))
+                    continue; 
+                
                 var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
                     attackC.ValueRO.TargetRange, settingC.ValueRO.DistanceAxes);
-                AssignTarget(ref ecb, entity, targetEntity);
-                //CheckExistingTarget(ref state, ref ecb, entity, transform.ValueRO.Position, attackC.ValueRO.TargetRange, 
-                //    targetC.ValueRO.Target, settingC.ValueRO.DistanceAxes);
+                UpdateTarget(ref ecb, entity, targetEntity);
             }
             
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
         }
-
-
-        private void CheckExistingTarget(ref SystemState state, ref EntityCommandBuffer ecb, Entity entity,
-            float3 myPosition, float myTargetRange, Entity currentTarget, float3 myDistanceAxes)
-        {
-            if (!transformLookup.HasComponent(currentTarget) || 
-                !hpLookup.HasComponent(currentTarget) ||
-                hpLookup.GetRefRO(currentTarget).ValueRO.Hp <= 0)
-            {
-                ecb.RemoveComponent<TargetComponent>(entity);
-                return;
-            }
-           
-            var targetPosition = transformLookup.GetRefRO(currentTarget).ValueRO.Position;
-            var targetDistanceAxes = settingLookup.GetRefRO(currentTarget).ValueRO.DistanceAxes;
-            
-            var distance = Utils.DistanceSqr(myPosition, myDistanceAxes, targetPosition, targetDistanceAxes);
-            if (distance > myTargetRange * myTargetRange)
-            {
-                ecb.RemoveComponent<TargetComponent>(entity);
-            }
-       }
-        
+ 
         private Entity FindAndAssignTarget(ref SystemState state, ref EntityCommandBuffer ecb, Entity myEntity, 
             float3 myPosition, float myTargetRange, float3 myDistanceAxes)
         {
             float myTargetRangeSqr = myTargetRange * myTargetRange;
             var myTeam = teamLookup.GetRefRO(myEntity).ValueRO.Team;
-    
+
             var closestDistance = float.MaxValue;
             var closestEntity = Entity.Null;
-
-            foreach (var (otherTeamC, otherTrC, otherSettingC, otherHpC, otherEntity) in
-                     SystemAPI.Query<RefRO<TeamComponent>, RefRO<LocalTransform>, RefRO<SettingComponent>, RefRO<HpComponent>>()
+            var closestEntityWithNoTarget = Entity.Null;
+            var closestDistanceWithNoTarget = float.MaxValue;
+ 
+            
+            foreach (var (otherTeamC, otherTrC, otherSettingC, otherHpC, otherEntity) in 
+                     SystemAPI.Query<
+                             RefRO<TeamComponent>, 
+                             RefRO<LocalTransform>, 
+                             RefRO<SettingComponent>, 
+                             RefRO<HpComponent>>()
                          .WithEntityAccess())
             {
                 // Skip entities on the same team or with zero health
@@ -113,35 +102,102 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (distanceSqr > myTargetRangeSqr)
                     continue;
             
-                // Update closest target if this one is closer
+                // Update closest target
                 if (distanceSqr < closestDistance)
                 {
                     closestDistance = distanceSqr;
                     closestEntity = otherEntity;
                 }
+                // Update closest with no target
+                if (distanceSqr < closestDistanceWithNoTarget 
+                    && (!targetedLookup.HasComponent(otherEntity) || targetedLookup[otherEntity].Targeters.IsEmpty))
+                {
+                    closestDistanceWithNoTarget = distanceSqr;
+                    closestEntityWithNoTarget = otherEntity;
+                }
             }
-
-            return closestEntity;
+            return closestEntityWithNoTarget != Entity.Null ? closestEntityWithNoTarget : closestEntity;
         }
 
-        public void AssignTarget(ref EntityCommandBuffer ecb, Entity entityLookingForTarget, Entity targetEntity)
+
+        private void AssignTarget(ref EntityCommandBuffer ecb, Entity mainTargetEntity, Entity targetEntity)
         {
-            if (targetEntity == Entity.Null)
+            // SAME TARGET
+            if (targetLookup.HasComponent(mainTargetEntity) && targetLookup[mainTargetEntity].Target == targetEntity)
+                return;
+            
+            TryReleaseTarget(ref ecb, mainTargetEntity);
+            ecb.AddComponent(mainTargetEntity, new TargetComponent { Target = targetEntity });
+
+            if (targetedLookup.HasComponent(targetEntity))
             {
-                if (targetLookup.HasComponent(entityLookingForTarget))
-                    ecb.RemoveComponent<TargetComponent>(entityLookingForTarget);
+                targetedLookup[targetEntity].Targeters.Add(mainTargetEntity);
             }
             else
             {
-                if (targetLookup.HasComponent(entityLookingForTarget))
+                ecb.AddComponent(targetEntity, new TargetedComponent
                 {
-                    targetLookup.GetRefRW(entityLookingForTarget).ValueRW.Target = targetEntity;
-                }
-                else
+                    Targeters = new FixedList512Bytes<Entity>{mainTargetEntity}
+                });   
+            }
+        }
+        private void TryReleaseTarget(ref EntityCommandBuffer ecb, Entity mainTargetEntity)
+        {
+            if (!targetLookup.HasComponent(mainTargetEntity))
+                return;
+            
+            if (targetLookup[mainTargetEntity].Target != Entity.Null)
+            {
+                var targeters = targetedLookup[targetLookup[mainTargetEntity].Target].Targeters;
+                for (int i = 0; i < targeters.Length; i++)
                 {
-                    ecb.AddComponent(entityLookingForTarget, new TargetComponent { Target = targetEntity });
+                    if (targeters[i] == mainTargetEntity)
+                    {
+                        targeters.RemoveAt(i);
+                        break;
+                    }
                 }
             }
+            ecb.RemoveComponent<TargetComponent>(mainTargetEntity);
+        }
+        private void UpdateTarget(ref EntityCommandBuffer ecb, Entity entityLookingForTarget, Entity targetEntity)
+        {
+            //NO TARGET FOUND -> TRY RELEASE EXISTING TARGET
+            if (targetEntity == Entity.Null)
+            {
+                TryReleaseTarget(ref ecb, entityLookingForTarget);
+            }
+            else
+            {
+                AssignTarget(ref ecb, entityLookingForTarget, targetEntity);
+            }
+        }
+
+
+        private bool HasValidTarget(ref SystemState state, Entity entity, float targetDistance)
+        {
+            if (!targetLookup.HasComponent(entity))
+                return false;
+
+            if (targetLookup[entity].Target == Entity.Null)
+                return false;
+            
+            if (!state.EntityManager.Exists(targetLookup[entity].Target))
+                return false;
+
+            var target = targetLookup[entity].Target;
+            if (!hpLookup.HasComponent(target) || hpLookup[target].Hp <= 0)
+                return false;
+            
+            var distanceSqr = Utils.DistanceSqr(
+                transformLookup[entity].Position, settingLookup[entity].DistanceAxes,
+                transformLookup[target].Position, settingLookup[target].DistanceAxes);
+             
+          
+            if (distanceSqr > targetDistance * targetDistance)
+                return false;
+
+            return true;
         }
     }
 }
