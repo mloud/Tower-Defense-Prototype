@@ -26,7 +26,8 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
                 new UnlockHeroSkill("Unlock new hero", "soldier", "Add new hero to battle"),
                 new UnlockHeroSkill("Unlock new hero", "turret", "Add new hero to battle"),
                 new UnlockHeroSkill("Unlock new hero", "dron", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "scorpion", "Add new hero to battle")
+                new UnlockHeroSkill("Unlock new hero", "scorpion", "Add new hero to battle"),
+                new UnlockHeroSkill("Unlock new hero", "tank", "Add new hero to battle")
             };
         }
         

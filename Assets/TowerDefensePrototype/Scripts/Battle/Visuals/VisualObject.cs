@@ -81,11 +81,11 @@ namespace CastlePrototype.Battle.Visuals
         {
             if (hpProgressBar != null)
             {
-                hpProgressBar.enabled = false;
+                hpProgressBar.gameObject.SetActive(false);
             }
             if (cooldownProgressBar != null)
             {
-                cooldownProgressBar.enabled = false;
+                cooldownProgressBar.gameObject.SetActive(false);
             }
 
             if (immediate || animationModule == null)
@@ -124,12 +124,12 @@ namespace CastlePrototype.Battle.Visuals
             if (hpProgressBar != null)
             {
                 PlaceToCanvas(hpProgressBar.transform);
-                hpProgressBar.enabled = true;
+                hpProgressBar.gameObject.SetActive(true);
             }
             if (cooldownProgressBar != null)
             {
                 PlaceToCanvas(cooldownProgressBar.transform);
-                cooldownProgressBar.enabled = true;
+                cooldownProgressBar.gameObject.SetActive(true);
             }
             
             Index = VisualManager.Default.TrackVisualObject(this);

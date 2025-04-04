@@ -88,6 +88,7 @@ namespace CastlePrototype.States
             await poolManager.PreloadAsync("soldier", 1);
             await poolManager.PreloadAsync("turret", 1);
             await poolManager.PreloadAsync("weapon", 1);
+            await poolManager.PreloadAsync("tank", 1);
             await poolManager.PreloadAsync("zombie", 50);
             await poolManager.PreloadAsync("boss", 1);
             
@@ -96,6 +97,7 @@ namespace CastlePrototype.States
             await poolManager.PreloadAsync("projectile_soldier", 20);
             await poolManager.PreloadAsync("projectile_turret", 20);
             await poolManager.PreloadAsync("projectile_weapon", 20);
+            await poolManager.PreloadAsync("projectile_tank", 5);
         }
 
         private void ReleasePooledVisuals()
@@ -115,6 +117,7 @@ namespace CastlePrototype.States
             poolManager.ClearPool("projectile_soldier");
             poolManager.ClearPool("projectile_turret");
             poolManager.ClearPool("projectile_weapon");
+            poolManager.ClearPool("projectile_tank");
         }
 
         private async UniTask PoolEffects()

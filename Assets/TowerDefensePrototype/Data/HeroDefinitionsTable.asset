@@ -113,3 +113,23 @@ MonoBehaviour:
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
+  - UnitId: tank
+    VisualId: tank
+    ProjectileVisualId: projectile_tank
+    AttackType: 1
+    ProjectileSpeed: 8
+    Cooldown: 12
+    Damage: 0
+    AttackDistance: 13
+    TargetRange: 13
+    MoveSpeed: 0
+    Hp: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0
+    AoeRadius: 2
+    AoeDamage: 400
+    AoeOnly: 1
