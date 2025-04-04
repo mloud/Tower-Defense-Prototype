@@ -255,6 +255,11 @@ PrefabInstance:
       propertyPath: cooldownProgressBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      propertyPath: hpBarScreenOffset.y
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_Name

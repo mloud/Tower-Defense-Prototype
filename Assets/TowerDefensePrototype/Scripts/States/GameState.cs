@@ -61,13 +61,14 @@ namespace CastlePrototype.States
 
         public override UniTask ExitAsync()
         {
-            ReleasePooledEffects();
-            ReleasePooledVisuals();
-            
             battleController.Dispose();
             visualManager.Dispose();
             battleController = null;
             visualManager = null;
+            
+            ReleasePooledEffects();
+            ReleasePooledVisuals();
+            
             view.Hide(true);
             
             return UniTask.CompletedTask;
@@ -107,6 +108,7 @@ namespace CastlePrototype.States
             poolManager.ClearPool("weapon");
             poolManager.ClearPool("zombie");
             poolManager.ClearPool("boss");
+            poolManager.ClearPool("wall");
             
             poolManager.ClearPool("projectile_dron");
             poolManager.ClearPool("projectile_scorpion");

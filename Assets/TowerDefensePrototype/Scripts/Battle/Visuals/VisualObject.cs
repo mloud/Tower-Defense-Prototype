@@ -5,7 +5,6 @@ using OneDay.Core.Modules.Pooling;
 using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Mathematics;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CastlePrototype.Battle.Visuals
 {
@@ -23,10 +22,13 @@ namespace CastlePrototype.Battle.Visuals
         [Header("Progress bars")]
         [SerializeField] private ProgressBar hpProgressBar;
         [SerializeField] private ProgressBar cooldownProgressBar;
-       
+        [SerializeField] private Vector3 hpBarScreenOffset;
+        [SerializeField] private Vector3 cooldownScreenOffset;
+        
         [Header("Settings")]
         [SerializeField] private float defaultHeight;
         [SerializeField] private bool permanentHpBar;
+     
         [Tooltip("This transform's rotation will be rotated, by default root transform, but could be maze as well")]
         [SerializeField] private Transform objectToRotate;
         
@@ -34,9 +36,12 @@ namespace CastlePrototype.Battle.Visuals
         public float DefaultHeight => defaultHeight;
         public int Index { get; private set; }
 
+        private Camera mainCamera;
+
         private void Awake()
         {
             effectModule = GetComponent<EffectModule>();
+            mainCamera = Camera.main;
             if (objectToRotate == null)
             {
                 objectToRotate = transform;
@@ -76,12 +81,10 @@ namespace CastlePrototype.Battle.Visuals
         {
             if (hpProgressBar != null)
             {
-                hpProgressBar.ReturnFromCanvas();
                 hpProgressBar.enabled = false;
             }
             if (cooldownProgressBar != null)
             {
-                cooldownProgressBar.ReturnFromCanvas();
                 cooldownProgressBar.enabled = false;
             }
 
@@ -118,31 +121,30 @@ namespace CastlePrototype.Battle.Visuals
             if (VisualManager.Default == null)
                 return;
             
-            Index = VisualManager.Default.TrackVisualObject(this);
-            
             if (hpProgressBar != null)
             {
-                hpProgressBar.PlaceToCanvas(transform);
+                PlaceToCanvas(hpProgressBar.transform);
                 hpProgressBar.enabled = true;
             }
             if (cooldownProgressBar != null)
             {
-                cooldownProgressBar.PlaceToCanvas(transform);
+                PlaceToCanvas(cooldownProgressBar.transform);
                 cooldownProgressBar.enabled = true;
             }
+            
+            Index = VisualManager.Default.TrackVisualObject(this);
         }
 
         public void OnReturnToPool()
         {
             if (hpProgressBar != null)
             {
-                hpProgressBar.ReturnFromCanvas();
+                ReturnFromCanvas(hpProgressBar.transform);
             }
             if (cooldownProgressBar != null)
             {
-                cooldownProgressBar.ReturnFromCanvas();
+                ReturnFromCanvas(cooldownProgressBar.transform);
             }
-            
             
             if (VisualManager.Default == null)
                 return;
@@ -154,6 +156,33 @@ namespace CastlePrototype.Battle.Visuals
         {
             yield return new WaitForSeconds(delay);
             action();
+        }
+        
+        private void PlaceToCanvas(Transform otherTransform)
+        {
+            otherTransform.SetParent(VisualManager.Default.UiPanel);
+            otherTransform.localRotation = Quaternion.identity;
+            otherTransform.localScale = Vector3.one;
+        }
+
+        private void ReturnFromCanvas(Transform otherTransform)
+        {
+            otherTransform.SetParent(transform);
+        }
+        
+        private void LateUpdate()
+        {
+            var pos = mainCamera.WorldToScreenPoint(transform.position);
+            pos.z = 0;
+            if (hpProgressBar != null)
+            {
+                hpProgressBar.transform.position = pos + hpBarScreenOffset;
+            }
+
+            if (cooldownProgressBar != null)
+            {
+                cooldownProgressBar.transform.position = pos + cooldownScreenOffset;
+            }
         }
     }
 }

@@ -41,9 +41,10 @@ namespace CastlePrototype.Battle.Visuals
      
         public void Dispose()
         {
-            for (int i = 0; i< VisualObjectsByIndex.Values.Count; i++)
-                VisualObjectsByIndex[i].Die(true, ()=>VisualFactory.Release(VisualObjectsByIndex[i]));
-           // VisualObjectsByIndex.Values.ForEach(x => x.Die(true, ()=>VisualFactory.Release(x)));
+            foreach (var key in VisualObjectsByIndex.Keys.ToList())
+            {
+                VisualObjectsByIndex[key].Die( true, ()=>VisualFactory.Release(VisualObjectsByIndex[key]));
+            }
             VisualObjectsByIndex.Clear();
             VisualObjectsById.Clear();
             Default = null;

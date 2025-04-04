@@ -53,8 +53,11 @@ MonoBehaviour:
   effectModule: {fileID: 8689067181685091424}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 837677521864761747}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: -50, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
 --- !u!114 &6840195826090332988
 MonoBehaviour:
   m_ObjectHideFlags: 0
