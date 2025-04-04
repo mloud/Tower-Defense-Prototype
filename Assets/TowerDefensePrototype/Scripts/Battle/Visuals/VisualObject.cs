@@ -1,12 +1,18 @@
+using System;
+using System.Collections;
 using CastlePrototype.Battle.Visuals.Effects;
+using OneDay.Core.Modules.Pooling;
 using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Mathematics;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CastlePrototype.Battle.Visuals
 {
-    public class VisualObject : MonoBehaviour
+    public class VisualObject : MonoBehaviour, IPoolable
     {
+        public string Key { get; set; }
+        
         [Header("Id")]
         [SerializeField] private string id;
 
@@ -30,26 +36,13 @@ namespace CastlePrototype.Battle.Visuals
 
         private void Awake()
         {
-            Index = VisualManager.Default.TrackVisualObject(this);
-            animationModule = GetComponent<AnimationModule>();
             effectModule = GetComponent<EffectModule>();
             if (objectToRotate == null)
             {
                 objectToRotate = transform;
             }
         }
-        
-        public void Initialize()
-        {
-            if (hpProgressBar != null)
-            {
-                hpProgressBar.PlaceToCanvas();
-            }
-            if (cooldownProgressBar != null)
-            {
-                cooldownProgressBar.PlaceToCanvas();
-            }
-        }
+       
         public void SetPosition(float3 position) => transform.position = position + new float3(0,defaultHeight,0);
         public void SetRotation(quaternion rotation) => objectToRotate.rotation = rotation;
 
@@ -79,7 +72,7 @@ namespace CastlePrototype.Battle.Visuals
             VisualManager.Default.PlayEffect(EffectKeys.HpDamageText, transform.position, amount);
         }
         
-        public void Destroy(bool immediate)
+        public void Die(bool immediate, Action onFinished)
         {
             if (hpProgressBar != null)
             {
@@ -92,14 +85,14 @@ namespace CastlePrototype.Battle.Visuals
                 cooldownProgressBar.enabled = false;
             }
 
-            if (immediate)
+            if (immediate || animationModule == null)
             {
-                Object.Destroy(gameObject);
+                onFinished();
             }
             else
-            {
-                bool deathPlayed = animationModule != null && animationModule.PlayDeath();
-                Object.Destroy(gameObject, deathPlayed ? 2.0f : 0.0f);
+            { 
+                animationModule.PlayDeath();
+                StartCoroutine(RunIn(onFinished, 2.0f));
             }
         }
 
@@ -119,10 +112,48 @@ namespace CastlePrototype.Battle.Visuals
             hpProgressBar.gameObject.SetActive(permanentHpBar || progress01 < 1);
             hpProgressBar.SetProgress(progress01);
         }
-       
-        private void OnDestroy()
+
+        public void OnGetFromPool()
         {
-            VisualManager.Default?.UnTrackVisualObject(this);
+            if (VisualManager.Default == null)
+                return;
+            
+            Index = VisualManager.Default.TrackVisualObject(this);
+            
+            if (hpProgressBar != null)
+            {
+                hpProgressBar.PlaceToCanvas(transform);
+                hpProgressBar.enabled = true;
+            }
+            if (cooldownProgressBar != null)
+            {
+                cooldownProgressBar.PlaceToCanvas(transform);
+                cooldownProgressBar.enabled = true;
+            }
+        }
+
+        public void OnReturnToPool()
+        {
+            if (hpProgressBar != null)
+            {
+                hpProgressBar.ReturnFromCanvas();
+            }
+            if (cooldownProgressBar != null)
+            {
+                cooldownProgressBar.ReturnFromCanvas();
+            }
+            
+            
+            if (VisualManager.Default == null)
+                return;
+            
+            VisualManager.Default.UnTrackVisualObject(this);
+        }
+
+        private IEnumerator RunIn(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action();
         }
     }
 }

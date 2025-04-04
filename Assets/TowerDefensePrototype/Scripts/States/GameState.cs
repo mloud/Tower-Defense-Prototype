@@ -40,10 +40,13 @@ namespace CastlePrototype.States
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
-            await PoolEffects();    
+            await PoolEffects();
+            await PoolVisuals();
+
             var effectFactory = new PoolingEffectFactory(poolManager);
+            var visualFactory = new PoolingVisualFactory(poolManager);
             
-            visualManager = new VisualManager(view.VisualFactory, effectFactory, view.GameUiPanel);
+            visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel);
             battleController = new BattleController();
             
             visualManager.LoadEnvironment("environment_0");
@@ -59,18 +62,57 @@ namespace CastlePrototype.States
         public override UniTask ExitAsync()
         {
             ReleasePooledEffects();
+            ReleasePooledVisuals();
             
             battleController.Dispose();
-            battleController = null;
             visualManager.Dispose();
+            battleController = null;
             visualManager = null;
             view.Hide(true);
+            
             return UniTask.CompletedTask;
         }
 
         private void OnBackButton()
         {
             StateMachine.SetStateAsync<MenuState>().Forget();
+        }
+
+        private async UniTask PoolVisuals()
+        {
+            await poolManager.PreloadAsync("environment_0", 1);
+            await poolManager.PreloadAsync("wall", 1);
+            await poolManager.PreloadAsync("dron", 1);
+            await poolManager.PreloadAsync("scorpion", 1);
+            await poolManager.PreloadAsync("soldier", 1);
+            await poolManager.PreloadAsync("turret", 1);
+            await poolManager.PreloadAsync("weapon", 1);
+            await poolManager.PreloadAsync("zombie", 50);
+            await poolManager.PreloadAsync("boss", 1);
+            
+            await poolManager.PreloadAsync("projectile_dron", 20);
+            await poolManager.PreloadAsync("projectile_scorpion", 50);
+            await poolManager.PreloadAsync("projectile_soldier", 20);
+            await poolManager.PreloadAsync("projectile_turret", 20);
+            await poolManager.PreloadAsync("projectile_weapon", 20);
+        }
+
+        private void ReleasePooledVisuals()
+        {
+            poolManager.ClearPool("environment_0");
+            poolManager.ClearPool("dron");
+            poolManager.ClearPool("scorpion");
+            poolManager.ClearPool("soldier");
+            poolManager.ClearPool("turret");
+            poolManager.ClearPool("weapon");
+            poolManager.ClearPool("zombie");
+            poolManager.ClearPool("boss");
+            
+            poolManager.ClearPool("projectile_dron");
+            poolManager.ClearPool("projectile_scorpion");
+            poolManager.ClearPool("projectile_soldier");
+            poolManager.ClearPool("projectile_turret");
+            poolManager.ClearPool("projectile_weapon");
         }
 
         private async UniTask PoolEffects()

@@ -13,7 +13,6 @@ namespace CastlePrototype.Battle.Visuals
         private Camera mainCamera;
         private void Awake()
         {
-            originalParent = transform.parent;
             mainCamera = Camera.main;
         }
         
@@ -22,8 +21,9 @@ namespace CastlePrototype.Battle.Visuals
             image.fillAmount = progress01;
         }
 
-        public void PlaceToCanvas()
+        public void PlaceToCanvas(Transform originalParent)
         {
+            this.originalParent = originalParent;
             transform.SetParent(VisualManager.Default.UiPanel);
             transform.localRotation = Quaternion.identity;
             transform.localScale = Vector3.one;
@@ -36,6 +36,9 @@ namespace CastlePrototype.Battle.Visuals
 
         private void LateUpdate()
         {
+            if (originalParent == null)
+                return;
+            
             var pos = mainCamera.WorldToScreenPoint(originalParent.position) + screenOffset;
             pos.z = 0;
             transform.position = pos;

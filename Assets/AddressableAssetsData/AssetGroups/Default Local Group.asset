@@ -17,8 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: aef086f1607814b82bc592e5c0dddfc7
   m_SerializeEntries:
+  - m_GUID: 06e08fc2f22f447e98b778c45c77f636
+    m_Address: dron
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2436329aa0f224b7580a7261647269a2
     m_Address: EnemyDefinitionsTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2666ca1aa7b0d49ee9a0c832570e1dbf
+    m_Address: scorpion
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -27,8 +37,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e0213b82ca2d4063b76fbe7c1c3098c
+    m_Address: zombie
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e1e9506f5904a64b81744324fb7cd50
     m_Address: HitEffectAoeHuge
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34a8f928dc0794c84a4538c6933c9ad2
+    m_Address: projectile_soldier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c3165681f23645d19acdc528f4ccebe
+    m_Address: soldier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43e3ad64af19642668d269754336f277
+    m_Address: projectile_scorpion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49af027c457e6434cb2d6a1b2dc1bd5a
+    m_Address: environment_0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e399761c81964d3c8a0f8249369b017
+    m_Address: wall
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -42,13 +82,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72720cd3c05ae424482fa658f1c2b0ec
+    m_Address: projectile_turret
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81689c13632a64c0e95f76970ca5c8f6
+    m_Address: boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 83036083a4ebcd34f98131bd3cf6f4d2
     m_Address: hit_effect_small
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9492511e4e4844755b4130213f35eb5b
+    m_Address: Assets/TowerDefensePrototype/Bundles/Projectiles/Projectile Weapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95716f6c655e947109f0a269806e4064
+    m_Address: turret
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99bc28c0d45f51c4fbac01080b73edc7
     m_Address: hit_effect_aoe_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcdc151bb6daa6c4aae96c5e434c1e4b
+    m_Address: projectile_dron
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -59,6 +124,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d22b90142718c4a77a32e58140589b2a
     m_Address: WeaponDefinitionsTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f47b02471e86443f785bce0fd27cd161
+    m_Address: weapon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

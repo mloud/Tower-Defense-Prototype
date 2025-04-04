@@ -7,7 +7,6 @@ using OneDay.Core;
 using OneDay.Core.Extensions;
 using OneDay.Core.Modules.Audio;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 
 namespace CastlePrototype.Battle.Visuals
@@ -42,7 +41,9 @@ namespace CastlePrototype.Battle.Visuals
      
         public void Dispose()
         {
-            VisualObjectsByIndex.Values.ForEach(x => x.Destroy(true));
+            for (int i = 0; i< VisualObjectsByIndex.Values.Count; i++)
+                VisualObjectsByIndex[i].Die(true, ()=>VisualFactory.Release(VisualObjectsByIndex[i]));
+           // VisualObjectsByIndex.Values.ForEach(x => x.Die(true, ()=>VisualFactory.Release(x)));
             VisualObjectsByIndex.Clear();
             VisualObjectsById.Clear();
             Default = null;
@@ -78,7 +79,6 @@ namespace CastlePrototype.Battle.Visuals
         public VisualObject OnUnitCreated(string id)
         {
             var visualObject = VisualFactory.Create<VisualObject>(id);
-            visualObject.Initialize();
             return visualObject;
         }
 
@@ -94,7 +94,7 @@ namespace CastlePrototype.Battle.Visuals
         public void DestroyVisualObject(int index)
         {
             var visualObject = GetVisualObject(index);
-            visualObject.Destroy(false);
+            visualObject.Die(false,()=>VisualFactory.Release(visualObject));
         }
 
         public void PlayEffect(string effectId, Vector3 position, object data = null)
