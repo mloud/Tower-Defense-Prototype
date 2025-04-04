@@ -49,7 +49,7 @@ namespace CastlePrototype.States
             visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel);
             battleController = new BattleController();
             
-            visualManager.LoadEnvironment("environment_0");
+            visualManager.LoadEnvironment("environment_1");
 
             var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             await battleController.InitializeBattle();
@@ -81,7 +81,7 @@ namespace CastlePrototype.States
 
         private async UniTask PoolVisuals()
         {
-            await poolManager.PreloadAsync("environment_0", 1);
+            await poolManager.PreloadAsync("environment_1", 1);
             await poolManager.PreloadAsync("wall", 1);
             await poolManager.PreloadAsync("dron", 1);
             await poolManager.PreloadAsync("scorpion", 1);
@@ -102,7 +102,7 @@ namespace CastlePrototype.States
 
         private void ReleasePooledVisuals()
         {
-            poolManager.ClearPool("environment_0");
+            poolManager.ClearPool("environment_1");
             poolManager.ClearPool("dron");
             poolManager.ClearPool("scorpion");
             poolManager.ClearPool("soldier");
