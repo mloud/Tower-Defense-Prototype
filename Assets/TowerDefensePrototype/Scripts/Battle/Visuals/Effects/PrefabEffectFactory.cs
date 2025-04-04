@@ -3,11 +3,12 @@ using System.Linq;
 using CastlePrototype.Battle.Visuals.Effects;
 using UnityEngine;
 
-namespace CastlePrototype.Battle.Visuals
+namespace CastlePrototype.Battle.Visuals.Effects
 {
     public interface IEffectFactory
     {
         T Create<T>(string id) where T : BaseEffect;
+        void Release(BaseEffect effect);
     }
     public class PrefabEffectFactory : MonoBehaviour, IEffectFactory
     {
@@ -18,6 +19,11 @@ namespace CastlePrototype.Battle.Visuals
             var prefab = effectPrefabs.FirstOrDefault(x => x.Id == id);
             Debug.Assert(prefab != null, $"No such Effect prefab with id: {id} exists!!");
             return (T)Instantiate(prefab);
+        }
+        
+        public void Release(BaseEffect effect)
+        {
+            Destroy(effect.gameObject);
         }
     }
 }

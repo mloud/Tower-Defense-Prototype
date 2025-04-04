@@ -21,7 +21,14 @@ namespace TowerDefensePrototype.Scripts.Battle.Visuals
         {
             label.text = ((float)data).ToString();
             transform.DOScale(Vector3.one, 0.2f);
-            transform.DOMove(transform.position + new Vector3(0, 90, 0), 1.0f).onComplete += () => Destroy(gameObject);
+            transform.DOMove(transform.position + new Vector3(0, 90, 0), 1.0f).onComplete += () =>
+            {
+                OnFinishedAction?.Invoke();
+                if (destroyAfterFinished)
+                {
+                    Destroy(gameObject);
+                }
+            };
         }
     }
 }

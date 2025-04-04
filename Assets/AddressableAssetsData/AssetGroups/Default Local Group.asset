@@ -27,8 +27,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e1e9506f5904a64b81744324fb7cd50
+    m_Address: HitEffectAoeHuge
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6695b97db5f804bcdb90b2e4ad8cd943
+    m_Address: damage_hp_text_effect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69c73db73802d4eeaaa56a6d6a8089b5
     m_Address: StageDefinitionsTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83036083a4ebcd34f98131bd3cf6f4d2
+    m_Address: hit_effect_small
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99bc28c0d45f51c4fbac01080b73edc7
+    m_Address: hit_effect_aoe_normal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,5 +1,6 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
+using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
@@ -50,7 +51,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                     
                     if (distanceToInitialTargetPositionSqr < TargetTreshold * TargetTreshold)
                     {
-                        VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition, "effect_hit_aoe");
+                        VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition, EffectKeys.HitEffectAoeNormal);
                         
                         AttackUtils.ApplyAoeDamage(
                             ref state,
@@ -102,7 +103,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                             if (projectileC.ValueRO.AoeRadius > 0)
                             {
                                 VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition,
-                                    "effect_hit_aoe");
+                                    EffectKeys.HitEffectAoeNormal);
                                 AttackUtils.ApplyAoeDamage(
                                     ref state,
                                     ref ecb,
@@ -147,15 +148,14 @@ namespace CastlePrototype.Battle.Logic.Systems
                             if (otherEntityAlreadyHit)
                                 continue;
                             
-                            
                             // we hit enemy
-                            VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[otherEntity].Position, "effect_hit_small");
+                            VisualEffectUtils.PlayEffect(ref state, ref ecb, localTransformLookup[otherEntity].Position, EffectKeys.HitEffectSmall);
                             AttackUtils.ApplyMeleeDamage(ref state, ref ecb, otherEntity,  projectileC.ValueRO.Damage, projectileC.ValueRO.KnockBack);
 
                             if (projectileC.ValueRO.AoeRadius > 0)
                             {
                                 // make aoe damage on other units as well
-                                VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition, "effect_hit_aoe");
+                                VisualEffectUtils.PlayEffect(ref state, ref ecb, projectileC.ValueRO.TargetPosition, EffectKeys.HitEffectAoeNormal);
                         
                                 AttackUtils.ApplyAoeDamage(
                                     ref state,

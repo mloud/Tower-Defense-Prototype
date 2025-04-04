@@ -7,6 +7,8 @@ using OneDay.Core;
 using OneDay.Core.Modules.Assets;
 using OneDay.Core.Modules.Audio;
 using OneDay.Core.Modules.Data;
+using OneDay.Core.Modules.Performance;
+using OneDay.Core.Modules.Pooling;
 using OneDay.Core.Modules.Settings;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
@@ -22,7 +24,10 @@ public class CastlePrototypApp : ABaseApp
     [SerializeField] private UpdateManager updateManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private SettingsManager settingsManager;
-    
+    [SerializeField] private PerformanceManager performanceManager;
+    [SerializeField] private PoolManager poolManager;
+
+
     protected override async UniTask RegisterServices()
     {
         ServiceLocator.Register<IUiManager>(uiManager);
@@ -32,6 +37,10 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Register<IUpdateManager>(updateManager);
         ServiceLocator.Register<IAudioManager>(audioManager);
         ServiceLocator.Register<ISettingsManager>(settingsManager);
+        ServiceLocator.Register<IPerformanceManager>(performanceManager);
+        ServiceLocator.Register<IPoolManager>(poolManager);
+
+
         
         var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());
         await UniTask.WhenAll(initializeTasks);
@@ -41,6 +50,8 @@ public class CastlePrototypApp : ABaseApp
         
         settingsManager.RegisterModule<IVolumeModule>(new VolumeModule());
         ServiceLocator.Get<IAudioManager>().MusicVolume = -20f;
+        
+        ServiceLocator.Get<IPerformanceManager>().SwitchToHighPerformance();
     }
 
     protected override async UniTask SetApplicationStateMachine()

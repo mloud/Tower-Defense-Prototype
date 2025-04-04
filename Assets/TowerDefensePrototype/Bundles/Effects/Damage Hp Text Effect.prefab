@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5359889357480145077}
   - component: {fileID: 6530454564851918629}
   m_Layer: 0
-  m_Name: HpDamageEffect
+  m_Name: Damage Hp Text Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

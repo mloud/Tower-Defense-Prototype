@@ -1,4 +1,5 @@
 using CastlePrototype.Battle.Visuals.Effects;
+using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -75,7 +76,7 @@ namespace CastlePrototype.Battle.Visuals
 
         public void ShowDamage(float amount)
         {
-            VisualManager.Default.PlayEffect("TextDamage", transform.position, amount);
+            VisualManager.Default.PlayEffect(EffectKeys.HpDamageText, transform.position, amount);
         }
         
         public void Destroy(bool immediate)

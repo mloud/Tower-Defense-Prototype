@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Battle.Visuals.Effects;
+using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Extensions;
 using OneDay.Core.Modules.Audio;
@@ -19,8 +20,10 @@ namespace CastlePrototype.Battle.Visuals
         private Dictionary<string, List<VisualObject>> VisualObjectsById { get; }
         public Transform UiPanel { get; private set; }
         
-        private int visualCounter;
         public static VisualManager Default { get; private set; }
+        
+        private int visualCounter;
+        private Camera mainCamera;
         
         public VisualManager(IVisualFactory visualFactory, IEffectFactory effectFactory, Transform uiPanel)
         {
@@ -31,6 +34,7 @@ namespace CastlePrototype.Battle.Visuals
             VisualObjectsByIndex = new Dictionary<int, VisualObject>();
             VisualObjectsById = new Dictionary<string, List<VisualObject>>();
             UiPanel = uiPanel;
+            mainCamera = Camera.main;
         }
         
         public VisualObject LoadEnvironment(string environmentId) => 
@@ -100,7 +104,7 @@ namespace CastlePrototype.Battle.Visuals
             if (effect.IsScreenSpace)
             {
                 effect.transform.SetParent(Default.UiPanel);
-                var screenPosition = Camera.main.WorldToScreenPoint(position);
+                var screenPosition = mainCamera.WorldToScreenPoint(position);
                 screenPosition.z = 0;
                 effect.transform.position = screenPosition;
             }
@@ -109,7 +113,8 @@ namespace CastlePrototype.Battle.Visuals
                 effect.transform.position = position + new Vector3(0, 0.3f, 0);
             }
 
-            effect.Play(data);
+            effect.OnFinishedAction = ()=>EffectFactory.Release(effect);
+            effect.Play(data).Forget();
         }
 
         public void SetBattleMusicPlaying(bool isPlaying)
