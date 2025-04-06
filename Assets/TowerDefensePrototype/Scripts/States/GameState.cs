@@ -3,6 +3,7 @@ using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Battle.Visuals.Effects;
 using CastlePrototype.Managers;
 using CastlePrototype.Ui.Views;
+using Core.Modules.Ui.Loading;
 using Cysharp.Threading.Tasks;
 using Meditation.States;
 using OneDay.Core;
@@ -11,7 +12,6 @@ using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Pooling;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
-using TowerDefensePrototype.Battle.Visuals.Effects;
 
 
 namespace CastlePrototype.States
@@ -25,6 +25,7 @@ namespace CastlePrototype.States
         
         private VisualManager visualManager;
         private BattleController battleController;
+        private BattlePooler battlePooler;
       
         
         public override UniTask Initialize()
@@ -34,15 +35,16 @@ namespace CastlePrototype.States
             
             view = ServiceLocator.Get<IUiManager>().GetView<GameView>();
             view.BindAction(view.BackButton, OnBackButton);
-            
+            battlePooler = new BattlePooler();   
             return UniTask.CompletedTask;
         }
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
-            await PoolEffects();
-            await PoolVisuals();
-
+            var loading = ServiceLocator.Get<ILoading>();
+            loading.Show();
+            await battlePooler.Pool(loading);
+       
             var effectFactory = new PoolingEffectFactory(poolManager);
             var visualFactory = new PoolingVisualFactory(poolManager);
             
@@ -53,7 +55,7 @@ namespace CastlePrototype.States
 
             var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             await battleController.InitializeBattle();
-          
+            loading.Hide();
             view.Show(true);
         }
 
@@ -66,8 +68,7 @@ namespace CastlePrototype.States
             battleController = null;
             visualManager = null;
             
-            ReleasePooledEffects();
-            ReleasePooledVisuals();
+            battlePooler.Clear();
             
             view.Hide(true);
             
@@ -78,64 +79,6 @@ namespace CastlePrototype.States
         {
             StateMachine.SetStateAsync<MenuState>().Forget();
         }
-
-        private async UniTask PoolVisuals()
-        {
-            await poolManager.PreloadAsync("environment_1", 1);
-            await poolManager.PreloadAsync("wall", 1);
-            await poolManager.PreloadAsync("dron", 1);
-            await poolManager.PreloadAsync("scorpion", 1);
-            await poolManager.PreloadAsync("soldier", 1);
-            await poolManager.PreloadAsync("turret", 1);
-            await poolManager.PreloadAsync("weapon", 1);
-            await poolManager.PreloadAsync("tank", 1);
-            await poolManager.PreloadAsync("zombie", 50);
-            await poolManager.PreloadAsync("boss", 1);
-            
-            await poolManager.PreloadAsync("projectile_dron", 20);
-            await poolManager.PreloadAsync("projectile_scorpion", 50);
-            await poolManager.PreloadAsync("projectile_soldier", 20);
-            await poolManager.PreloadAsync("projectile_turret", 20);
-            await poolManager.PreloadAsync("projectile_weapon", 20);
-            await poolManager.PreloadAsync("projectile_tank", 5);
-        }
-
-        private void ReleasePooledVisuals()
-        {
-            poolManager.ClearPool("environment_1");
-            poolManager.ClearPool("dron");
-            poolManager.ClearPool("scorpion");
-            poolManager.ClearPool("soldier");
-            poolManager.ClearPool("turret");
-            poolManager.ClearPool("weapon");
-            poolManager.ClearPool("zombie");
-            poolManager.ClearPool("boss");
-            poolManager.ClearPool("wall");
-            
-            poolManager.ClearPool("projectile_dron");
-            poolManager.ClearPool("projectile_scorpion");
-            poolManager.ClearPool("projectile_soldier");
-            poolManager.ClearPool("projectile_turret");
-            poolManager.ClearPool("projectile_weapon");
-            poolManager.ClearPool("projectile_tank");
-        }
-
-        private async UniTask PoolEffects()
-        {
-            await poolManager.PreloadAsync(EffectKeys.HitEffectSmall, 50);
-            await poolManager.PreloadAsync(EffectKeys.HitEffectAoeNormal, 10);
-            await poolManager.PreloadAsync(EffectKeys.HpDamageText, 20);
-            await poolManager.PreloadAsync(EffectKeys.SpawnEffectHero, 5);
-            await poolManager.PreloadAsync(EffectKeys.SpawnEffectEnemy, 30);
-        }
-
-        private void ReleasePooledEffects()
-        {
-            poolManager.ClearPool(EffectKeys.HitEffectSmall);
-            poolManager.ClearPool(EffectKeys.HitEffectAoeNormal);
-            poolManager.ClearPool(EffectKeys.HpDamageText);
-            poolManager.ClearPool(EffectKeys.SpawnEffectHero);
-            poolManager.ClearPool(EffectKeys.SpawnEffectEnemy);
-        }
+       
     }
 }

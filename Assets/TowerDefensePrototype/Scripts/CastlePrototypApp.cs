@@ -2,6 +2,7 @@ using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
 using CastlePrototype.Managers;
 using CastlePrototype.States;
+using Core.Modules.Ui.Loading;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Assets;
@@ -26,6 +27,8 @@ public class CastlePrototypApp : ABaseApp
     [SerializeField] private SettingsManager settingsManager;
     [SerializeField] private PerformanceManager performanceManager;
     [SerializeField] private PoolManager poolManager;
+    [SerializeField] private LoadingLayer loadingLayer;
+
 
 
     protected override async UniTask RegisterServices()
@@ -39,8 +42,7 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Register<ISettingsManager>(settingsManager);
         ServiceLocator.Register<IPerformanceManager>(performanceManager);
         ServiceLocator.Register<IPoolManager>(poolManager);
-
-
+        ServiceLocator.Register<ILoading>(loadingLayer);
         
         var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());
         await UniTask.WhenAll(initializeTasks);
