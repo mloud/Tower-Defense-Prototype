@@ -1,6 +1,8 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers.Slots;
+using CastlePrototype.Battle.Visuals;
+using TowerDefensePrototype.Battle.Visuals.Effects;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
 using Unity.Entities;
@@ -25,6 +27,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             Debug.Assert(!slot.IsOccupied);
             slot.IsOccupied = true;
             WorldManagers.Get<UnitManager>(entityManager.World).CreateHeroUnit(ref ecb, slot.Position, DefinitionId);
+            VisualManager.Default.PlayEffect(EffectKeys.SpawnEffectHero,slot.Position);
             ecb.Playback(entityManager);
             ecb.Dispose();
         }

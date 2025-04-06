@@ -38,8 +38,8 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             
             var spawnerComponent = new EnemySpawnerComponent 
             {
-                spawnPosition = new float3(0, 0, 7),
-                spawnBox = new float3(6,0,3),
+                spawnPosition = new float3(0, 0, 6),
+                spawnBox = new float3(6,0,2),
                 currentWave = 0,
                 currentWaveChanged = true,
             };

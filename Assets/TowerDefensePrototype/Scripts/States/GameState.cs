@@ -125,6 +125,8 @@ namespace CastlePrototype.States
             await poolManager.PreloadAsync(EffectKeys.HitEffectSmall, 50);
             await poolManager.PreloadAsync(EffectKeys.HitEffectAoeNormal, 10);
             await poolManager.PreloadAsync(EffectKeys.HpDamageText, 20);
+            await poolManager.PreloadAsync(EffectKeys.SpawnEffectHero, 5);
+            await poolManager.PreloadAsync(EffectKeys.SpawnEffectEnemy, 30);
         }
 
         private void ReleasePooledEffects()
@@ -132,6 +134,8 @@ namespace CastlePrototype.States
             poolManager.ClearPool(EffectKeys.HitEffectSmall);
             poolManager.ClearPool(EffectKeys.HitEffectAoeNormal);
             poolManager.ClearPool(EffectKeys.HpDamageText);
+            poolManager.ClearPool(EffectKeys.SpawnEffectHero);
+            poolManager.ClearPool(EffectKeys.SpawnEffectEnemy);
         }
     }
 }

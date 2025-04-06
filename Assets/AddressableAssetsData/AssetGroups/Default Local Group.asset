@@ -117,6 +117,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e3db9bb14ae14b8b845ef004ac428cb
+    m_Address: spawn_effect_enemy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bcdc151bb6daa6c4aae96c5e434c1e4b
     m_Address: projectile_dron
     m_ReadOnly: 0
@@ -129,6 +134,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d22b90142718c4a77a32e58140589b2a
     m_Address: WeaponDefinitionsTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a54638091b34dee83b0ff485107b90
+    m_Address: spawn_effect_hero
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

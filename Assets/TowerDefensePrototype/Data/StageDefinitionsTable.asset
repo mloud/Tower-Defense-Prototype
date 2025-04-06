@@ -17,7 +17,7 @@ MonoBehaviour:
     - Time: 0
       EnemiesCount: 5
       EnemyId: zombie
-      SpawnInterval: 0.1
+      SpawnInterval: 1
     - Time: 20
       EnemiesCount: 7
       EnemyId: zombie

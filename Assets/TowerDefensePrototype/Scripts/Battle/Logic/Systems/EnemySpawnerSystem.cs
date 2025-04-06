@@ -1,5 +1,7 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Battle.Visuals;
+using TowerDefensePrototype.Battle.Visuals.Effects;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
 using Unity.Collections;
@@ -34,7 +36,11 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 if (spawner.spawnedThisWave < spawner.waves[spawner.currentWave].EnemiesCount)
                 {
-                    if (spawner.elapsedTime - spawner.lastSpawnTime >= spawner.waves[spawner.currentWave].SpawnInterval)
+                    float nextSpawnIntervalInWave = spawner.waves[spawner.currentWave].SpawnInterval;
+                    
+                    
+                    // spawn next enemy
+                    if (spawner.elapsedTime - spawner.lastSpawnTime >= nextSpawnIntervalInWave)
                     {
                         spawner.lastSpawnTime = spawner.elapsedTime;
                         SpawnEnemy(ref state, ref ecb,
@@ -64,6 +70,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         {
             var position = Utils.GetRandomPosition(spawnData.spawnPosition, spawnData.spawnBox);
             WorldManagers.Get<UnitManager>(state.World).CreateEnemyUnit(ref ecb, position, spawnData.enemyId.ToString());
+            VisualManager.Default.PlayEffect(EffectKeys.SpawnEffectEnemy, position);
         }
     }
     public struct EnemySpawnerData
