@@ -479,7 +479,6 @@ MonoBehaviour:
   showAnimation: {fileID: 0}
   backButton: {fileID: 8463575318078618864}
   visualFactory: {fileID: 7333563483739536668}
-  effectFactory: {fileID: 2567874152109016514}
   gameUiPanel: {fileID: 383834416201657558}
 --- !u!114 &7333563483739536668
 MonoBehaviour:
@@ -1966,7 +1965,7 @@ PrefabInstance:
     - target: {fileID: 5024661875544011057, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
       propertyPath: m_text
-      value: 00:23
+      value: 00:00
       objectReference: {fileID: 0}
     - target: {fileID: 5024661875544011057, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}

@@ -118,7 +118,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_tank
     AttackType: 1
     ProjectileSpeed: 8
-    Cooldown: 12
+    Cooldown: 14
     Damage: 0
     AttackDistance: 13
     TargetRange: 13
@@ -130,6 +130,6 @@ MonoBehaviour:
     Knockback: 0
     KnockbackResistent: 0
     FireAgainInterval: 0
-    AoeRadius: 2
+    AoeRadius: 1
     AoeDamage: 400
     AoeOnly: 1
