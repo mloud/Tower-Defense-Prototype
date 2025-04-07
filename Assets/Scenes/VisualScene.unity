@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Dron
       objectReference: {fileID: 0}
+    - target: {fileID: 3851609369960917995, guid: 06e08fc2f22f447e98b778c45c77f636,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -202,6 +207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636574071428617862, guid: 72720cd3c05ae424482fa658f1c2b0ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2220089120542139003, guid: 72720cd3c05ae424482fa658f1c2b0ec,
         type: 3}
@@ -321,6 +331,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 3851609369960917995, guid: f47b02471e86443f785bce0fd27cd161,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -388,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hero Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851609369960917995, guid: 95716f6c655e947109f0a269806e4064,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7931132137307904120, guid: 95716f6c655e947109f0a269806e4064,
         type: 3}
@@ -622,6 +642,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 894755413626879535, guid: 3c3165681f23645d19acdc528f4ccebe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2627627601363848463, guid: 3c3165681f23645d19acdc528f4ccebe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -820,6 +845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636574071428617862, guid: 9492511e4e4844755b4130213f35eb5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2220089120542139003, guid: 9492511e4e4844755b4130213f35eb5b,
         type: 3}
@@ -1024,6 +1054,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 1636574071428617862, guid: 34a8f928dc0794c84a4538c6933c9ad2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2220089120542139003, guid: 34a8f928dc0794c84a4538c6933c9ad2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1091,6 +1126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile Dron
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491198728686020517, guid: bcdc151bb6daa6c4aae96c5e434c1e4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6666876399348682143, guid: bcdc151bb6daa6c4aae96c5e434c1e4b,
         type: 3}
