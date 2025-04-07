@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
+using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Scripts.Ui.Popups;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
@@ -49,8 +50,10 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         private List<ASkill> GetRandomSkills(int count)
         {
             var skills = new List<ASkill>(AvailableSkills);
+            RemoveNotApplicableSkills(skills);
             int realCount = Math.Min(count, skills.Count);
 
+            
             int skillsToRemove = skills.Count - realCount;
             for (int i = 0; i < skillsToRemove; i++)
             { 
@@ -59,6 +62,14 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             return skills;
         }
 
+        private void RemoveNotApplicableSkills(List<ASkill> skills)
+        {
+            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetFirstAvailableSlot() == null)
+            {
+                skills.RemoveAll(x => x.SkillType == SkillType.UnlockHero);
+            }
+        }
+        
         private void ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)
         {
             for (int i = 0; i < skills.Count; i++)
