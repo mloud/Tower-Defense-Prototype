@@ -1,5 +1,6 @@
 using OneDay.Core.Modules.Pooling;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace CastlePrototype.Battle.Visuals
 {
@@ -18,7 +19,14 @@ namespace CastlePrototype.Battle.Visuals
 
         public void Release(VisualObject visualObject)
         {
-            poolManager.Return(visualObject.gameObject);
+            if (visualObject.Key == null)
+            {
+                Object.Destroy(visualObject.gameObject);
+            }
+            else
+            {
+                poolManager.Return(visualObject.gameObject);
+            }
         }
     }
 }
