@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9102965279837764515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae855221ff5a489c9e9e5ea24ff9fcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isScreenSpace: 1
+  delay: 0
   id: TextDamage
+  isScreenSpace: 1
+  destroyAfterFinished: 0
   label: {fileID: 5359889357480145077}

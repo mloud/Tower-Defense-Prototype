@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2220089120542139003
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +163,9 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0.5
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
+  trackOnEnable: 0

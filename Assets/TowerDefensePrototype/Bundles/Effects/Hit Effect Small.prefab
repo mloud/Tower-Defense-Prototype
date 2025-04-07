@@ -4919,7 +4919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1429954232896169630
 Transform:
   m_ObjectHideFlags: 0
@@ -9817,7 +9817,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d080c491f99449ba50333ce0ba4e454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
   id: effect_hit_small
+  isScreenSpace: 0
+  destroyAfterFinished: 0
   particleSystem: {fileID: 1429954232896169632}
 --- !u!1 &1429954232937552486
 GameObject:

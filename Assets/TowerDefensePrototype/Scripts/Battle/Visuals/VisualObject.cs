@@ -31,10 +31,12 @@ namespace CastlePrototype.Battle.Visuals
      
         [Tooltip("This transform's rotation will be rotated, by default root transform, but could be maze as well")]
         [SerializeField] private Transform objectToRotate;
+
+        [SerializeField] private bool trackOnEnable;
         
         public string Id => id;
         public float DefaultHeight => defaultHeight;
-        public int Index { get; private set; }
+        public int Index { get; private set; } = -1;
 
         private Camera mainCamera;
 
@@ -47,7 +49,23 @@ namespace CastlePrototype.Battle.Visuals
                 objectToRotate = transform;
             }
         }
-       
+
+        private void OnEnable()
+        {
+            if (trackOnEnable)
+            {
+                Index = VisualManager.Default.TrackVisualObject(this);
+            }
+        }
+        
+        private void OnDisable()
+        {
+            if (trackOnEnable)
+            {
+                VisualManager.Default.UnTrackVisualObject(this);
+            }
+        }
+
         public void SetPosition(float3 position) => transform.position = position + new float3(0,defaultHeight,0);
         public void SetRotation(quaternion rotation) => objectToRotate.rotation = rotation;
 
@@ -150,6 +168,7 @@ namespace CastlePrototype.Battle.Visuals
                 return;
             
             VisualManager.Default.UnTrackVisualObject(this);
+            Index = -1;
         }
 
         private IEnumerator RunIn(Action action, float delay)

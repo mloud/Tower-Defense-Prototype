@@ -265,6 +265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Default
       objectReference: {fileID: 0}
+    - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6840195826090332988, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: settings.Array.size

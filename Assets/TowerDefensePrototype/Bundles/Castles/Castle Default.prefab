@@ -103,8 +103,12 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1
 --- !u!1 &3330747489228111414
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,8 +212,12 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1
 --- !u!1 &6269122007930409860
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,8 +272,12 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 0
 --- !u!1 &7437450840305446581
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,8 +381,12 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1
 --- !u!1 &8453541861262409225
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,8 +490,12 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1
 --- !u!1 &8595847644019451270
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,5 +599,9 @@ MonoBehaviour:
   effectModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
   defaultHeight: 0
   permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1

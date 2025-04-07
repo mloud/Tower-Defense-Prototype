@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CastlePrototype.Battle.Visuals;
 using OneDay.Core.Extensions;
 using Unity.Entities;
 using UnityEngine;
@@ -14,11 +15,11 @@ namespace CastlePrototype.Battle.Logic.Managers.Slots
         {
             Slots = new List<Slot>
             {
-                new(new Vector3(-3.0f, 0, -8f)),
-                new(new Vector3(-1.5f, 0, -7.5f)),
-                new(new Vector3( 0f, 0, -7)),
-                new(new Vector3(1.5f, 0, -7.5f)),
-                new(new Vector3(3.0f, 0, -8f)),
+                new(VisualManager.Default.GetObjectPosition("slot_0")),
+                new(VisualManager.Default.GetObjectPosition("slot_1")),
+                new(VisualManager.Default.GetObjectPosition("weapon_slot")),
+                new(VisualManager.Default.GetObjectPosition("slot_2")),
+                new(VisualManager.Default.GetObjectPosition("slot_3")),
             };
         }
 

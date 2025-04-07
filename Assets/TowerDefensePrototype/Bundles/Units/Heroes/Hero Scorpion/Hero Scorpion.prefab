@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Scorpion
       objectReference: {fileID: 0}
+    - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8689067181685091424, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: effects.Array.size
@@ -135,8 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  isScreenSpace: 0
   id: Attack
+  isScreenSpace: 0
+  destroyAfterFinished: 0
   clip: {fileID: 8300000, guid: 1b877bb8e90844595824630d6f70cd4a, type: 3}
 --- !u!4 &6916126188992900868 stripped
 Transform:
