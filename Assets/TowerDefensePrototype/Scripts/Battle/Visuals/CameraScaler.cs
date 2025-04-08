@@ -7,18 +7,21 @@ namespace CastlePrototype.Battle.Visuals
         [SerializeField] private float minScreenWidth;
         [SerializeField] private float defaultOrthoSize = 8;
 
+        private Camera mainCamera;
+        
         private void Awake()
         {
+            mainCamera = Camera.main;
             float aspect = (float)Screen.width / Screen.height;
-            float screenSizeInWorldUnits = aspect * 2 * Camera.main.orthographicSize;
+            float screenSizeInWorldUnits = aspect * 2 * mainCamera.orthographicSize;
 
             if (screenSizeInWorldUnits < minScreenWidth)
             {
-                Camera.main.orthographicSize = minScreenWidth / (2 * aspect);
+                mainCamera.orthographicSize = minScreenWidth / (2 * aspect);
             }
             else
             {
-                Camera.main.orthographicSize = defaultOrthoSize;
+                mainCamera.orthographicSize = defaultOrthoSize;
             }
         }
     }
