@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6840195826090332988}
   - component: {fileID: 8689067181685091424}
   - component: {fileID: 4575440465234567066}
+  - component: {fileID: 1534078794542962743}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -59,6 +60,7 @@ MonoBehaviour:
   defaultHeight: 0
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
+  trackOnEnable: 0
 --- !u!114 &6840195826090332988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddee671a3e5d44a5abed78ec48269251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects: []
+  effects:
+  - {fileID: 1534078794542962743}
 --- !u!114 &4575440465234567066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +105,25 @@ MonoBehaviour:
   id: 
   isScreenSpace: 0
   destroyAfterFinished: 0
+  playOnEnable: 1
   modelTransform: {fileID: 4566380037895813308}
+--- !u!114 &1534078794542962743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6185592950279535699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffb96259ddc4f818b15ba898ba142d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1.5
+  id: Die
+  isScreenSpace: 0
+  destroyAfterFinished: 0
+  playOnEnable: 0
 --- !u!1 &9031571534414290280
 GameObject:
   m_ObjectHideFlags: 0

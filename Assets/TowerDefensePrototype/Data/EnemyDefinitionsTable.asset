@@ -29,6 +29,7 @@ MonoBehaviour:
     Fireagain: 0
     Knockback: 0
     KnockbackResistent: 0
+    FireAgainInterval: 0.5
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0
@@ -48,6 +49,27 @@ MonoBehaviour:
     Fireagain: 0
     Knockback: 0
     KnockbackResistent: 1
+    FireAgainInterval: 0.5
+    AoeRadius: 0
+    AoeDamage: 0
+    AoeOnly: 0
+  - UnitId: dragon
+    VisualId: dragon
+    ProjectileVisualId: 
+    AttackType: 0
+    ProjectileSpeed: 0
+    Cooldown: 2
+    Damage: 2
+    AttackDistance: 1.5
+    TargetRange: 20
+    MoveSpeed: 0.4
+    Hp: 300
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0.5
     AoeRadius: 0
     AoeDamage: 0
     AoeOnly: 0

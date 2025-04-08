@@ -20,7 +20,7 @@ MonoBehaviour:
       SpawnInterval: 1
     - Time: 20
       EnemiesCount: 7
-      EnemyId: zombie
+      EnemyId: dragon
       SpawnInterval: 0.1
     - Time: 45
       EnemiesCount: 10

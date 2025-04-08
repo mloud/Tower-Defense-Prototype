@@ -137,6 +137,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6773ce3603034bde8c42fa8b3df1af6
+    m_Address: dragon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8a54638091b34dee83b0ff485107b90
     m_Address: spawn_effect_hero
     m_ReadOnly: 0

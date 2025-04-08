@@ -15,11 +15,23 @@ namespace CastlePrototype.Battle.Visuals.Effects
         [SerializeField] private string id;
         [SerializeField] private bool isScreenSpace;
         [SerializeField] protected bool destroyAfterFinished;
+        [SerializeField] private bool playOnEnable;
 
-        
+        private void OnEnable()
+        {
+            if (playOnEnable)
+            {
+                Play().Forget();
+            }
+        }
+
         public async UniTask Play(object data = null)
         {
-            await UniTask.WaitForSeconds(delay);
+            if (delay > 0)
+            {
+                await UniTask.WaitForSeconds(delay);
+            }
+
             OnPlay(data);
         }
         

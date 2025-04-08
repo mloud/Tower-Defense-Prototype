@@ -113,6 +113,7 @@ namespace CastlePrototype.Battle.Visuals
             else
             { 
                 animationModule.PlayDeath();
+                effectModule.PlayEffect("Die");
                 StartCoroutine(RunIn(onFinished, 2.0f));
             }
         }

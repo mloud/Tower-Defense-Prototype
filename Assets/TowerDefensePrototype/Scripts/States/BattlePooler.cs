@@ -38,6 +38,7 @@ namespace CastlePrototype.States
                 {"weapon", 1},
                 {"tank", 1},
                 {"zombie", 50},
+                {"dragon", 50},
                 {"boss", 1},
             } );
             
@@ -61,6 +62,7 @@ namespace CastlePrototype.States
             
             poolManager.ClearPool("environment_1");
             poolManager.ClearPool("dron");
+            poolManager.ClearPool("dragon");
             poolManager.ClearPool("scorpion");
             poolManager.ClearPool("soldier");
             poolManager.ClearPool("turret");
