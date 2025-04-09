@@ -22,7 +22,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             if (battleProgressionC.BattlePoints >= battleProgressionC.BattlePointsNeeded)
             {
                 battleProgressionC.BattlePoints -= battleProgressionC.BattlePointsNeeded;
-                battleProgressionC.BattlePointsNeeded = (int)math.ceil(battleProgressionC.BattlePointsNeeded * 1.5f);
+                battleProgressionC.BattlePointsNeeded = (int)math.ceil(battleProgressionC.BattlePointsNeeded * 1.2f);
                 battleProgressionC.BattlePointsUpdated = true;
                 WorldManagers.Get<SkillManager>(state.World).RunSkillSelectionFlow(3).Forget();
             }

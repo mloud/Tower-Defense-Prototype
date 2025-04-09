@@ -19,9 +19,9 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         {
             AvailableSkills = new List<ASkill>
             {
-                new IncreaseDamageSkill("Increase damage", 10, "Increases damage by {VALUE}%"),
-                new DecreaseAttackInterval("Decrease attack interval", 10, "Decrease attack interval by {VALUE}%"),
-                new IncreaseAttackDistance("Increase attack distance", 10, "Increase attack distance by {VALUE}%"),
+                new IncreaseDamageSkill("Increase damage", 25, "Increases damage by {VALUE}%"),
+                new DecreaseAttackInterval("Decrease attack interval", 25, "Decrease attack interval by {VALUE}%"),
+                new IncreaseAttackDistance("Increase attack distance", 25, "Increase attack distance by {VALUE}%"),
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}%"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}%"),
                 new UnlockHeroSkill("Unlock new hero", "soldier", "Add new hero to battle"),

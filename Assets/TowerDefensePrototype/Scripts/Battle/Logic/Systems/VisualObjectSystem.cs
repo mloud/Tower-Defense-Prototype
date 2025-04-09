@@ -1,9 +1,8 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Visuals;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
+
 
 namespace CastlePrototype.Battle.Logic.Systems
 {
@@ -11,7 +10,6 @@ namespace CastlePrototype.Battle.Logic.Systems
     [UpdateInGroup(typeof(VisualGroup))]
     public partial struct VisualObjectSystem : ISystem 
     {
-      
         public void OnUpdate(ref SystemState state)
         {
             foreach (var visualC in SystemAPI.Query<RefRW<VisualComponent>>())
@@ -59,7 +57,6 @@ namespace CastlePrototype.Battle.Logic.Systems
                 {
                     visual.Attack();
                     attackC.ValueRW.PlayAttack = false;
-                    Debug.Log("XXX PlayingAttack");
                 }
             }  
         }
