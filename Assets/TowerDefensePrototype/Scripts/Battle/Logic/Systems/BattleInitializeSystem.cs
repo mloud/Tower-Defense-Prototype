@@ -48,7 +48,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         {
             var wallEntity = state.EntityManager.CreateEntity();
             state.EntityManager.AddComponentData(wallEntity, new HpComponent { Hp = 50, MaxHp = 50 });
-            state.EntityManager.AddComponentData(wallEntity, new LocalTransform { Position = new float3(0, 0, -6) });
+            state.EntityManager.AddComponentData(wallEntity, new LocalTransform { Position = VisualManager.Default.GetObjectPosition("VirtualBarricade")});
             state.EntityManager.AddComponentData(wallEntity, new TeamComponent { Team = Team.Player });
             state.EntityManager.AddComponentData(wallEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
             state.EntityManager.AddComponentData(wallEntity, new VisualComponent { VisualId = "wall" });

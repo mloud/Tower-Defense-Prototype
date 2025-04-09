@@ -10998,7 +10998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &139903812565561115
 Transform:
   m_ObjectHideFlags: 0
@@ -11014,6 +11014,7 @@ Transform:
   m_Children:
   - {fileID: 95043051575820357}
   - {fileID: 884501475583751251}
+  - {fileID: 9115489977449402735}
   - {fileID: 9124178647538157153}
   - {fileID: 2494519809881399696}
   - {fileID: 5878391930609605424}
@@ -11259,6 +11260,97 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7367319086900150627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9115489977449402735}
+  - component: {fileID: 166903029094806852}
+  - component: {fileID: 7701888493646599647}
+  - component: {fileID: 897765321965069963}
+  m_Layer: 0
+  m_Name: VirtualBarricade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9115489977449402735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367319086900150627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 139903812565561115}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &166903029094806852
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367319086900150627}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.46, y: 1, z: 0.43}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7701888493646599647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367319086900150627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551ee89079c44f2999d0637074204b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &897765321965069963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367319086900150627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162e9e6754ba46e9930b2572d4d56e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: VirtualBarricade
+  animationModule: {fileID: 0}
+  effectModule: {fileID: 0}
+  hpProgressBar: {fileID: 0}
+  cooldownProgressBar: {fileID: 0}
+  hpBarScreenOffset: {x: 0, y: 0, z: 0}
+  cooldownScreenOffset: {x: 0, y: 0, z: 0}
+  defaultHeight: 0
+  permanentHpBar: 0
+  objectToRotate: {fileID: 0}
+  trackOnEnable: 1
 --- !u!1 &7404299692114661188
 GameObject:
   m_ObjectHideFlags: 0
