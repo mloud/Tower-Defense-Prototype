@@ -92,7 +92,6 @@ namespace CastlePrototype.Battle.Logic.Systems
                     attackC.ValueRW.PlayAttackCooldown -= SystemAPI.Time.DeltaTime;
                     if (timeToAttack < attackC.ValueRO.AttackAnimDelay && attackC.ValueRO.PlayAttackCooldown <= 0)
                     {
-                        Debug.Log($"XXX Planning Attack anim timeToAttack: {timeToAttack} playcooldown:{attackC.ValueRO.PlayAttackCooldown}");
                         attackC.ValueRW.PlayAttack = true;
                         attackC.ValueRW.PlayAttackCooldown = attackC.ValueRO.Cooldown;
                     }
