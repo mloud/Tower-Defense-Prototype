@@ -16,6 +16,7 @@ MonoBehaviour:
   - UnitId: weapon
     VisualId: weapon
     ProjectileVisualId: projectile_weapon
+    AttackDelay: 0.1
     AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 4
@@ -36,6 +37,7 @@ MonoBehaviour:
   - UnitId: soldier
     VisualId: soldier
     ProjectileVisualId: projectile_soldier
+    AttackDelay: 0.1
     AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 4
@@ -56,6 +58,7 @@ MonoBehaviour:
   - UnitId: turret
     VisualId: turret
     ProjectileVisualId: projectile_turret
+    AttackDelay: 0.1
     AttackType: 1
     ProjectileSpeed: 10
     Cooldown: 8
@@ -76,6 +79,7 @@ MonoBehaviour:
   - UnitId: dron
     VisualId: dron
     ProjectileVisualId: projectile_dron
+    AttackDelay: 0
     AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 10
@@ -96,6 +100,7 @@ MonoBehaviour:
   - UnitId: scorpion
     VisualId: scorpion
     ProjectileVisualId: projectile_scorpion
+    AttackDelay: 0
     AttackType: 1
     ProjectileSpeed: 10
     Cooldown: 10
@@ -116,6 +121,7 @@ MonoBehaviour:
   - UnitId: tank
     VisualId: tank
     ProjectileVisualId: projectile_tank
+    AttackDelay: 0
     AttackType: 1
     ProjectileSpeed: 8
     Cooldown: 14

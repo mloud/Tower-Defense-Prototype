@@ -2,6 +2,7 @@ using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Data;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -43,8 +44,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             hpLookup.Update(ref state);
             teamLookup.Update(ref state);
             lookAtTargetLookup.Update(ref state);
-            
-            var currentTime = SystemAPI.Time.ElapsedTime;
+          
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
 
             foreach (var (attackC, transformC, targetC, settingC, teamC, entity) in
@@ -66,41 +66,51 @@ namespace CastlePrototype.Battle.Logic.Systems
                 {
                     attackC.ValueRW.IsInAttackDistance = true;
 
-                    double attackTime = attackC.ValueRO.NextMainAttackTime;
+                    // update attack remaining times
+                    double timeToAttack = float.MaxValue;
                     bool isMainAttack = true;
-                    //resolve attack time (secondary or main)
                     for (int i = 0; i < attackC.ValueRO.SecondaryAttackTimes.Length; i++)
                     {
-                        if (currentTime > attackC.ValueRO.SecondaryAttackTimes[i])
-                        {
-                            attackTime = attackC.ValueRO.SecondaryAttackTimes[i];
+                        attackC.ValueRW.SecondaryAttackTimes[i] -= SystemAPI.Time.DeltaTime;
+                        timeToAttack = math.min(timeToAttack, attackC.ValueRW.SecondaryAttackTimes[i]);
+                        if (timeToAttack <= 0)
                             isMainAttack = false;
-                            break;
-                        }
                     }
-
+                    attackC.ValueRW.NextMainAttackTime -= SystemAPI.Time.DeltaTime;
+                    timeToAttack = math.min(timeToAttack, attackC.ValueRW.NextMainAttackTime);
+                  
+                    
+                    // end of updating attack times
+               
                     if (lookAtTargetLookup.HasComponent(entity))
                     {
                         const float timeBeforeLookAtTarget = 0.3f;
                         // starts to rotate towards target
-                        lookAtTargetLookup.GetRefRW(entity).ValueRW.LookAtTarget = currentTime > attackTime - timeBeforeLookAtTarget;
+                        lookAtTargetLookup.GetRefRW(entity).ValueRW.LookAtTarget = timeToAttack < timeBeforeLookAtTarget;
                     }
 
-                    
-                    if (currentTime > attackTime)
+                    attackC.ValueRW.PlayAttackCooldown -= SystemAPI.Time.DeltaTime;
+                    if (timeToAttack < attackC.ValueRO.AttackAnimDelay && attackC.ValueRO.PlayAttackCooldown <= 0)
                     {
+                        Debug.Log($"XXX Planning Attack anim timeToAttack: {timeToAttack} playcooldown:{attackC.ValueRO.PlayAttackCooldown}");
                         attackC.ValueRW.PlayAttack = true;
+                        attackC.ValueRW.PlayAttackCooldown = attackC.ValueRO.Cooldown;
+                    }
+                 
+                    
+                    
+                    if (timeToAttack < 0)
+                    {
                         // prepare next attack(s)
                         if (isMainAttack)
-                        {     
-                            attackC.ValueRW.LastAttackTime = currentTime;
-                            attackC.ValueRW.NextMainAttackTime = currentTime + attackC.ValueRO.Cooldown;
+                        {
+                            attackC.ValueRW.NextMainAttackTime = attackC.ValueRO.Cooldown;
                             Debug.Assert(attackC.ValueRO.SecondaryAttackTimes.Length == 0, "There are unprocessed secondary attacks");
 
                             for (int i = 0; i < attackC.ValueRO.FireAgain; i++)
                             {
                                 double secondaryAttackTimeDelay = attackC.ValueRO.FireAgainInterval;
-                                attackC.ValueRW.SecondaryAttackTimes.Add(currentTime+(i+1) * secondaryAttackTimeDelay);
+                                attackC.ValueRW.SecondaryAttackTimes.Add((i+1) * secondaryAttackTimeDelay);
                             }
                         }
                         

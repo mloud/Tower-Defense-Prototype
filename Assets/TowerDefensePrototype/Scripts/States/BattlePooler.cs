@@ -39,6 +39,7 @@ namespace CastlePrototype.States
                 {"tank", 1},
                 {"zombie", 50},
                 {"dragon", 50},
+                {"archer", 30},
                 {"boss", 1},
             } );
             
@@ -49,7 +50,8 @@ namespace CastlePrototype.States
                 {"projectile_soldier", 20},
                 {"projectile_turret", 20},
                 {"projectile_weapon", 20},
-                {"projectile_tank", 5}
+                {"projectile_tank", 5},
+                {"projectile_archer", 10}
             } );
 
 
@@ -69,6 +71,7 @@ namespace CastlePrototype.States
             poolManager.ClearPool("weapon");
             poolManager.ClearPool("zombie");
             poolManager.ClearPool("boss");
+            poolManager.ClearPool("archer");
             poolManager.ClearPool("wall");
             
             poolManager.ClearPool("projectile_dron");
@@ -77,6 +80,7 @@ namespace CastlePrototype.States
             poolManager.ClearPool("projectile_turret");
             poolManager.ClearPool("projectile_weapon");
             poolManager.ClearPool("projectile_tank");
+            poolManager.ClearPool("projectile_archer");
             
             // effects
             poolManager.ClearPool(EffectKeys.HitEffectSmall);

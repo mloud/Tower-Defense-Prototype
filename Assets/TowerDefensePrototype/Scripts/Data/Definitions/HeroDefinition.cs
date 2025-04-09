@@ -12,6 +12,7 @@ namespace CastlePrototype.Data.Definitions
         public string UnitId;
         public string VisualId;
         public string ProjectileVisualId;
+        public float AttackDelay;
 
         [Header("Unit type stats")] 
         public AttackType AttackType;

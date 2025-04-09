@@ -18,7 +18,10 @@ namespace CastlePrototype.Battle.Logic.Components
         public float AoeRadius;
         public float AoeDamage;
         public float ProjectileSpeed;
+        public float AttackAnimDelay;
         public bool AoeOnly;
+        // time before next attack anim ca be played
+      
         
         // specific
         public int Penetration;
@@ -28,12 +31,12 @@ namespace CastlePrototype.Battle.Logic.Components
         public float FireAgainInterval;
         
         // runtime data
-        public double LastAttackTime;
         public double NextMainAttackTime;
 
         public FixedList512Bytes<double> SecondaryAttackTimes;
         public bool IsInAttackDistance;
         // for visual
         public bool PlayAttack;
+        public double PlayAttackCooldown;
     }
 }

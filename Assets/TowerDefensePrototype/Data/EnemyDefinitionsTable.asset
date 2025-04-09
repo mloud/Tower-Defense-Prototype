@@ -16,6 +16,7 @@ MonoBehaviour:
   - UnitId: zombie
     VisualId: zombie
     ProjectileVisualId: 
+    AttackDelay: 0.3
     AttackType: 0
     ProjectileSpeed: 0
     Cooldown: 2
@@ -36,6 +37,7 @@ MonoBehaviour:
   - UnitId: boss
     VisualId: boss
     ProjectileVisualId: 
+    AttackDelay: 0.3
     AttackType: 0
     ProjectileSpeed: 0
     Cooldown: 4
@@ -56,6 +58,7 @@ MonoBehaviour:
   - UnitId: dragon
     VisualId: dragon
     ProjectileVisualId: 
+    AttackDelay: 0.3
     AttackType: 0
     ProjectileSpeed: 0
     Cooldown: 2
@@ -63,6 +66,27 @@ MonoBehaviour:
     AttackDistance: 1.5
     TargetRange: 20
     MoveSpeed: 0.4
+    Hp: 300
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0.5
+    AoeRadius: 0
+    AoeDamage: 0
+    AoeOnly: 0
+  - UnitId: archer
+    VisualId: archer
+    ProjectileVisualId: projectile_archer
+    AttackDelay: 0.5
+    AttackType: 1
+    ProjectileSpeed: 5
+    Cooldown: 4
+    Damage: 2
+    AttackDistance: 8
+    TargetRange: 20
+    MoveSpeed: 0.2
     Hp: 300
     Bounce: 0
     Penetration: 0

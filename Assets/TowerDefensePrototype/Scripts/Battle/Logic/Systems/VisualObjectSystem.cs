@@ -3,6 +3,7 @@ using CastlePrototype.Battle.Visuals;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace CastlePrototype.Battle.Logic.Systems
 {
@@ -52,12 +53,13 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
 
-                visual.SetAttackCooldown((float)(SystemAPI.Time.ElapsedTime - attackC.ValueRO.LastAttackTime) / attackC.ValueRO.Cooldown);
+                visual.SetAttackCooldown(1-(float)attackC.ValueRO.NextMainAttackTime / attackC.ValueRO.Cooldown);
               
                 if (attackC.ValueRW.PlayAttack)
                 {
                     visual.Attack();
                     attackC.ValueRW.PlayAttack = false;
+                    Debug.Log("XXX PlayingAttack");
                 }
             }  
         }
