@@ -79,10 +79,10 @@ MonoBehaviour:
   - UnitId: archer
     VisualId: archer
     ProjectileVisualId: projectile_archer
-    AttackDelay: 0.5
+    AttackDelay: 0.66
     AttackType: 1
     ProjectileSpeed: 5
-    Cooldown: 4
+    Cooldown: 8
     Damage: 2
     AttackDistance: 8
     TargetRange: 20
