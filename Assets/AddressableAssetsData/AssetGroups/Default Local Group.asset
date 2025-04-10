@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1088d27e0d79d435dbdb42abde1f38a9
+    m_Address: dron
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2436329aa0f224b7580a7261647269a2
     m_Address: EnemyDefinitionsTable
     m_ReadOnly: 0
@@ -67,6 +72,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d71c4fdb83d94e3eae4f4f32360a9ef
+    m_Address: weapon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e399761c81964d3c8a0f8249369b017
     m_Address: wall
     m_ReadOnly: 0
@@ -77,6 +87,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6868c80403c1447fea9de5bcb526b407
+    m_Address: soldier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69c73db73802d4eeaaa56a6d6a8089b5
     m_Address: StageDefinitionsTable
     m_ReadOnly: 0
@@ -84,6 +99,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 72720cd3c05ae424482fa658f1c2b0ec
     m_Address: projectile_turret
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d6e1c85b54964eea8ee12b409986681
+    m_Address: scorpion
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -117,6 +137,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9aa3924a530c9480cb139262ab1c792b
+    m_Address: turret
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b51540c8bd9f48cf96e4666783121df
     m_Address: tank
     m_ReadOnly: 0
@@ -124,6 +149,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9e3db9bb14ae14b8b845ef004ac428cb
     m_Address: spawn_effect_enemy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5f2ff5dc6a804234a4430c8df18b5cd
+    m_Address: zombie
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8a8edf587c0a4288bbba22a27debd42
+    m_Address: tank
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers.Slots;
+using CastlePrototype.Data.Definitions;
 using CastlePrototype.Scripts.Ui.Popups;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
+using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Ui;
 using Unity.Entities;
 
@@ -36,7 +39,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         {
             PauseUtils.SetLogicPaused(true);
             var skills = GetRandomSkills(skillsToShow);
-            ConnectSkillsToEntities(skills);
+            await ConnectSkillsToEntities(skills);
             var selectedSkill = await OpenSkillPopup(skills);
             selectedSkill.Apply(AttachedToWorld.EntityManager);
             if (selectedSkill.SkillType == SkillType.UnlockHero)
@@ -70,8 +73,10 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             }
         }
         
-        private void ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)
+        private async UniTask ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)
         {
+            var heroDefs = await ServiceLocator.Get<IDataManager>().GetAll<HeroDefinition>();
+      
             for (int i = 0; i < skills.Count; i++)
             {
                 skills[i].RelatedEntity = skills[i].NeedsUnit
@@ -82,6 +87,11 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
                 {
                     skills[i].DefinitionId = AttachedToWorld.EntityManager
                         .GetComponentData<UnitComponent>(skills[i].RelatedEntity).DefinitionId.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(skills[i].DefinitionId))
+                {
+                    skills[i].Definition = heroDefs.First(x => x.UnitId == skills[i].DefinitionId);
                 }
             }
         }

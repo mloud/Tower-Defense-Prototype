@@ -129,7 +129,7 @@ PrefabInstance:
     - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8689067181685091424, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
@@ -232,6 +232,7 @@ MonoBehaviour:
   id: Attack
   isScreenSpace: 0
   destroyAfterFinished: 0
+  playOnEnable: 0
   clip: {fileID: 8300000, guid: 709366fe8769b4b04b685b467ad3a4df, type: 3}
 --- !u!4 &6916126188992900868 stripped
 Transform:
