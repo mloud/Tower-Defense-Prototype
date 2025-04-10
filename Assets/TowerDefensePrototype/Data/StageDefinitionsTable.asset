@@ -18,30 +18,46 @@ MonoBehaviour:
       EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 1
-    - Time: 20
+    - Time: 15
       EnemiesCount: 7
       EnemyId: dragon
       SpawnInterval: 0.1
-    - Time: 45
+    - Time: 30
       EnemiesCount: 10
       EnemyId: zombie
       SpawnInterval: 0.1
-    - Time: 50
+    - Time: 45
       EnemiesCount: 20
       EnemyId: zombie
       SpawnInterval: 0.1
-    - Time: 70
+    - Time: 60
       EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 0.1
-    - Time: 72
+    - Time: 63
+      EnemiesCount: 1
+      EnemyId: archer
+      SpawnInterval: 1
+    - Time: 60
       EnemiesCount: 1
       EnemyId: boss
       SpawnInterval: 0.1
-    - Time: 84
-      EnemiesCount: 10
+    - Time: 60
+      EnemiesCount: 6
       EnemyId: zombie
       SpawnInterval: 0.3
+    - Time: 80
+      EnemiesCount: 20
+      EnemyId: zombie
+      SpawnInterval: 0.3
+    - Time: 95
+      EnemiesCount: 10
+      EnemyId: dragon
+      SpawnInterval: 1
+    - Time: 105
+      EnemiesCount: 30
+      EnemyId: zombie
+      SpawnInterval: 0.1
   - Waves:
     - Time: 0
       EnemiesCount: 1

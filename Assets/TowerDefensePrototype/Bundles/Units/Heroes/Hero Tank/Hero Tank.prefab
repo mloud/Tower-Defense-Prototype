@@ -124,12 +124,12 @@ PrefabInstance:
     - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_Name
-      value: tank
+      value: Hero Tank
       objectReference: {fileID: 0}
     - target: {fileID: 6185592950279535699, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8689067181685091424, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
