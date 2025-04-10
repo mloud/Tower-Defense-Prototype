@@ -139,3 +139,24 @@ MonoBehaviour:
     AoeRadius: 1
     AoeDamage: 400
     AoeOnly: 1
+  - UnitId: barricade
+    VisualId: barricade
+    ProjectileVisualId: 
+    AttackDelay: 0
+    AttackType: 3
+    ProjectileSpeed: 0
+    Cooldown: 0
+    Damage: 0
+    AttackDistance: 0
+    TargetRange: 0
+    MoveSpeed: 0
+    Hp: 100
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    AoeOnly: 0

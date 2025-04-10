@@ -27,8 +27,10 @@ namespace CastlePrototype.Battle.Logic.Systems
             CreateBattleProgression(ref state);
 
             WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 0);
-            
-            var wallEntity = CreateWall(ref state);
+
+
+            var barricadePosition = VisualManager.Default.GetObjectPosition("barricade");
+            var wallEntity = WorldManagers.Get<UnitManager>(state.World).CreateBarricade(ref state, barricadePosition, "barricade");
             WorldManagers.Get<BattleEventsManager>(state.World)
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
             
@@ -43,17 +45,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
         }
-
-        private Entity CreateWall(ref SystemState state)
-        {
-            var wallEntity = state.EntityManager.CreateEntity();
-            state.EntityManager.AddComponentData(wallEntity, new HpComponent { Hp = 100, MaxHp = 100 });
-            state.EntityManager.AddComponentData(wallEntity, new LocalTransform { Position = VisualManager.Default.GetObjectPosition("VirtualBarricade")});
-            state.EntityManager.AddComponentData(wallEntity, new TeamComponent { Team = Team.Player });
-            state.EntityManager.AddComponentData(wallEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
-            state.EntityManager.AddComponentData(wallEntity, new VisualComponent { VisualId = "wall" });
-            return wallEntity;
-        }
+        
 
         private void CreateBattleProgression(ref SystemState state)
         {

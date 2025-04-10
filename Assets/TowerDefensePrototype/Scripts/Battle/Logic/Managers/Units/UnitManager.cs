@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Data.Definitions;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
@@ -32,6 +33,28 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             enemyDefinitions = enemies.ToDictionary(x => x.UnitId, x => x);
         }
 
+        public Entity CreateBarricade(ref SystemState state, float3 position, string definitionId)
+        {
+            if (!heroDefinitions.TryGetValue(definitionId, out var definition))
+            {
+                Debug.Assert(false, $"No such barricade definition with id {definitionId} exists");
+                return Entity.Null;
+            }
+
+            var barricadeEntity = state.EntityManager.CreateEntity();
+            state.EntityManager.AddComponentData(barricadeEntity, new HpComponent { Hp = definition.Hp, MaxHp = definition.Hp });
+            state.EntityManager.AddComponentData(barricadeEntity, new LocalTransform { Position = VisualManager.Default.GetObjectPosition("barricade")});
+            state.EntityManager.AddComponentData(barricadeEntity, new TeamComponent { Team = Team.Player });
+            state.EntityManager.AddComponentData(barricadeEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
+            // mark this entity that it has already visual..Visual is part of the environment
+            state.EntityManager.AddComponentData(barricadeEntity, new VisualComponent { HasVisual = true});
+            state.EntityManager.AddComponentData(barricadeEntity, new BarricadeComponent());
+            state.EntityManager.AddComponentData(barricadeEntity, new UnitComponent {DefinitionId = definitionId, UnitType = UnitType.Barricade});
+
+
+            return barricadeEntity;
+        }
+        
 
         public Entity CreateHeroUnit(ref EntityCommandBuffer ecb, float3 position, string heroId)
         {

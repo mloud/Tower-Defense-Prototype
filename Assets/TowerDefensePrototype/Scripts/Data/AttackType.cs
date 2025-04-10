@@ -4,6 +4,7 @@ namespace CastlePrototype.Data
     {
         Melee,
         Range,
-        Aoe
+        Aoe,
+        None
     }
 }

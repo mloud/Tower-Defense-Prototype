@@ -24,14 +24,16 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             {
                 new IncreaseDamageSkill("Increase damage", 25, "Increases damage by {VALUE}%"),
                 new DecreaseAttackInterval("Decrease attack interval", 25, "Decrease attack interval by {VALUE}%"),
-                new IncreaseAttackDistance("Increase attack distance", 25, "Increase attack distance by {VALUE}"),
+                new IncreaseAttackDistance("Increase attack distance", 25, "Increase attack distance by {VALUE}%"),
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
+                new RestoreHpSkill("Restore HP", 10, "Increase HP by {VALUE}"),
                 new UnlockHeroSkill("Unlock new hero", "soldier", "Add new hero to battle"),
                 new UnlockHeroSkill("Unlock new hero", "turret", "Add new hero to battle"),
                 new UnlockHeroSkill("Unlock new hero", "dron", "Add new hero to battle"),
                 new UnlockHeroSkill("Unlock new hero", "scorpion", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "tank", "Add new hero to battle")
+                new UnlockHeroSkill("Unlock new hero", "tank", "Add new hero to battle"),
+                
             };
         }
         
@@ -80,7 +82,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             for (int i = 0; i < skills.Count; i++)
             {
                 skills[i].RelatedEntity = skills[i].NeedsUnit
-                    ? QueryUtils.GetRandomPlayerUnit(AttachedToWorld.EntityManager)
+                    ? QueryUtils.GetEntityForSkill(AttachedToWorld.EntityManager, skills[i].SkillType)
                     : Entity.Null;
 
                 if (skills[i].RelatedEntity != Entity.Null)

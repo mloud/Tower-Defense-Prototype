@@ -197,6 +197,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e36fb103806f94c10a548f4e13ee8526
+    m_Address: barricade
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f47b02471e86443f785bce0fd27cd161
     m_Address: weapon
     m_ReadOnly: 0
