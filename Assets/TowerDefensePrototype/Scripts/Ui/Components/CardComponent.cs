@@ -1,25 +1,62 @@
+using System;
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Managers;
+using Cysharp.Threading.Tasks;
+using OneDay.Core;
 using OneDay.Core.Modules.Ui.Components;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CastlePrototype.Ui.Components
 {
     public class CardComponent : MonoBehaviour
     {
+        public Action<CardComponent> OnLevelUp;
+            
         [SerializeField] private CImage icon;
         [SerializeField] private TextMeshProUGUI cardName;
         [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private TextMeshProUGUI counter;
+        [SerializeField] private GameObject progressBar;
         [SerializeField] private Image progressFill;
+        [SerializeField] private Button levelUpButton;
 
-        public CardComponent Set(HeroProgress heroProgress, HeroDefinition heroDefinition)
+        public string Id { get; private set; }
+        
+        private void Awake()
         {
+            levelUpButton.onClick.AddListener(()=>OnLevelUp(this));
+        }
+
+        public async UniTask<CardComponent> Set(HeroProgress heroProgress, HeroDefinition heroDefinition)
+        {
+            Id = heroDefinition.UnitId;
             icon.SetImage(heroDefinition.VisualId);
             cardName.text = heroDefinition.UnitId;
             level.text = heroProgress.Level.ToString();
+
+            int cardsCounter = heroProgress.CardsCount;
+            int cardsNeeded = heroDefinition.GetCardsNeededToLevelUp(heroProgress.Level);
+
+
+            if (heroDefinition.IsMaxLevel(heroProgress.Level))
+            {
+                counter.text = "Maxed";
+                progressBar.SetActive(true);
+                levelUpButton.gameObject.SetActive(false);
+                progressFill.fillAmount = 1.0f;
+            }
+            else
+            {
+                counter.text = $"{cardsCounter}/{cardsNeeded}";
+                progressFill.fillAmount = (float)cardsCounter / cardsNeeded;
+                progressBar.SetActive(cardsCounter < cardsNeeded);
+                levelUpButton.gameObject.SetActive(cardsCounter >= cardsNeeded);
+            }
+
             return this;
         }
     }

@@ -54,8 +54,10 @@ MonoBehaviour:
   icon: {fileID: 6107489640938588306}
   cardName: {fileID: 3266758901158614868}
   level: {fileID: 4426453885442877823}
-  counter: {fileID: 0}
-  progressFill: {fileID: 0}
+  counter: {fileID: 3258930108559995005}
+  progressBar: {fileID: 2904904593082188975}
+  progressFill: {fileID: 1818349436482912610}
+  levelUpButton: {fileID: 8927462021209694294}
 --- !u!1 &2904904593082188975
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +681,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2194301077058333119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8927462021209694294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7320335510628403689, guid: 823b1011f7f054ac49b19f1496e13988,
+    type: 3}
+  m_PrefabInstance: {fileID: 2194301077058333119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2293530080027619637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -976,6 +990,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21453f88af31147d898fb9cb659d7083, type: 3}
+--- !u!114 &3258930108559995005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5024661875544011057, guid: 21453f88af31147d898fb9cb659d7083,
+    type: 3}
+  m_PrefabInstance: {fileID: 7530340666974699852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5248107728104861287 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2329525236084027179, guid: 21453f88af31147d898fb9cb659d7083,

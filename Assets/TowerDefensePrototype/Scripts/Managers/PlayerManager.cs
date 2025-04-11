@@ -19,6 +19,7 @@ namespace CastlePrototype.Managers
         public UniTask<IPlayerProgress> GetProgression();
         public UniTask<HeroDeck> GetHeroDeck();
         public UniTask<RuntimeStageReward> AddRewardForBattle(int stage, float progression01);
+        public UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId);
     }
     
     public class PlayerManager : MonoBehaviour, IPlayerManager, IService
@@ -38,10 +39,44 @@ namespace CastlePrototype.Managers
 
         public async UniTask<HeroDeck> GetHeroDeck() =>
             (await dataManager.GetAll<HeroDeck>()).FirstOrDefault();
+        
+        public async UniTask<HeroDefinition> GetHeroDefinition(string heroId) =>
+            (await dataManager.GetAll<HeroDefinition>()).FirstOrDefault(x=>x.UnitId == heroId);
 
+        public async UniTask SaveHeroDeck(HeroDeck heroDeck) =>
+            await dataManager.Actualize<HeroDeck>(heroDeck);
+
+        
         public async UniTask<StageDefinition> GetStateDefinition(int stage) =>
             (await dataManager.GetAll<StageDefinition>()).ElementAt(stage);
-        
+
+
+        public async UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId)
+        {
+            var heroDeck = await GetHeroDeck();
+            var heroProgress = heroDeck.Heroes[heroId];
+            var heroDefinition = await GetHeroDefinition(heroId);
+
+            int cardsNeeded = heroDefinition.GetCardsNeededToLevelUp(heroProgress.Level);
+
+            if (cardsNeeded > heroProgress.CardsCount)
+            {
+                Debug.Assert(false, "Not enough cards to level up");
+                return (false,heroProgress, heroDefinition);
+            }
+
+            if (heroDefinition.IsMaxLevel(heroProgress.Level))
+            {
+                Debug.Assert(false, "Already maxed");
+                return (false,heroProgress, heroDefinition);
+            }
+
+            heroProgress.Level++;
+            heroProgress.CardsCount -= cardsNeeded;
+
+            await SaveHeroDeck(heroDeck);
+            return (true, heroProgress, heroDefinition);
+        }
         public async UniTask<RuntimeStageReward> AddRewardForBattle(int stage, float progression01)
         {
             var runtimeStageReward = new RuntimeStageReward();
@@ -79,6 +114,15 @@ namespace CastlePrototype.Managers
             }
             Debug.Assert(totalCardsToDistribute==0, "Not all cards we distributed");
             Debug.Log($"Cards were distributed:{JsonConvert.SerializeObject(runtimeStageReward.Cards)}");
+
+
+            foreach (var reward in runtimeStageReward.Cards)
+            {
+                heroDeck.Heroes[reward.Key].CardsCount += reward.Value;
+            }
+
+            await SaveHeroDeck(heroDeck);
+            
             return runtimeStageReward;
         }
         

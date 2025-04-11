@@ -54,6 +54,16 @@ namespace CastlePrototype.Data.Definitions
             return GetBaseHeroStat(upgradeType) + GetUpgradedStat(upgradeType, level);
         }
 
+        public int GetCardsNeededToLevelUp(int currentLevel)
+        {
+            if (UpgradePath.StatsUpgrades.Count >= currentLevel)
+                return UpgradePath.StatsUpgrades[currentLevel - 1].CardsRequired;
+
+            return -1;
+        }
+
+        public bool IsMaxLevel(int currentLevel) => currentLevel > UpgradePath.StatsUpgrades.Count;
+        
         private float GetUpgradedStat(StatUpgradeType upgradeType, int level)
         {
             if (level < 2)

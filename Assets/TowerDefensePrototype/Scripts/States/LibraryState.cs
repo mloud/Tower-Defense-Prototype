@@ -19,6 +19,7 @@ namespace CastlePrototype.States
         public override UniTask Initialize()
         {
             view = ServiceLocator.Get<IUiManager>().GetView<LibraryView>();
+            view.OnLevelUp = heroId => LevelUpHero(heroId).Forget();
             return UniTask.CompletedTask;
         }
         
@@ -27,7 +28,7 @@ namespace CastlePrototype.States
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
             var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             var heroDefinitions = (await ServiceLocator.Get<IDataManager>().GetAll<HeroDefinition>()).ToList();
-            view.Refresh(heroDeck, heroDefinitions);
+            await view.Initialize(heroDeck, heroDefinitions);
             
             view.Show(true);
         }
@@ -38,6 +39,15 @@ namespace CastlePrototype.States
         {
             view.Hide(true);
             return UniTask.CompletedTask;
+        }
+
+        private async UniTask LevelUpHero(string heroId)
+        {
+            var result = await ServiceLocator.Get<IPlayerManager>().LevelUpHero(heroId);
+            if (result.Item1)
+            {
+                await view.RefreshCard(result.Item2, result.Item3);
+            }
         }
     }
 }
