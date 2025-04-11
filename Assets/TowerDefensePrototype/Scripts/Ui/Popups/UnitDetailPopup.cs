@@ -15,6 +15,7 @@ namespace CastlePrototype.Ui.Popups
         [SerializeField] private TextMeshProUGUI name;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TextMeshProUGUI counter;
+        [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Image progressFill;
         
         private string heroId;
@@ -37,10 +38,9 @@ namespace CastlePrototype.Ui.Popups
 
             icon.SetImage(unlockedHero.definition.VisualId);
             icon.name = unlockedHero.definition.UnitId;
-
-            bool canLevelUp = await playerManager.CanLevelUpHero(heroId);
+            level.text = unlockedHero.progress.Level.ToString();
+          
             upgradeButton.interactable = await playerManager.CanLevelUpHero(heroId);
-
 
             bool isMaxed = unlockedHero.definition.IsMaxLevel(unlockedHero.progress.Level);
             

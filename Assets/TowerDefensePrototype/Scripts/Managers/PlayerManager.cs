@@ -15,6 +15,8 @@ namespace CastlePrototype.Managers
 {
     public interface IPlayerManager
     {
+        public Action<(HeroProgress progress, HeroDefinition definition)> OnHeroLeveledUp { get; set; }
+        
         public UniTask InitializePlayer();
         public UniTask<IPlayerProgress> GetProgression();
         public UniTask<HeroDeck> GetHeroDeck();
@@ -27,6 +29,8 @@ namespace CastlePrototype.Managers
 
     public class PlayerManager : MonoBehaviour, IPlayerManager, IService
     {
+        public Action<(HeroProgress progress, HeroDefinition definition)> OnHeroLeveledUp { get; set; }
+        
         private IDataManager dataManager;
 
         public UniTask Initialize()
@@ -97,6 +101,9 @@ namespace CastlePrototype.Managers
             heroProgress.CardsCount -= cardsNeeded;
 
             await SaveHeroDeck(heroDeck);
+
+            OnHeroLeveledUp?.Invoke((heroProgress, heroDefinition));
+            
             return (true, heroProgress, heroDefinition);
         }
         public async UniTask<RuntimeStageReward> AddRewardForBattle(int stage, float progression01)
@@ -147,7 +154,7 @@ namespace CastlePrototype.Managers
             
             return runtimeStageReward;
         }
-        
+
         public async UniTask InitializePlayer()
         {
             await CreateProgressIfNeeded(()=>new Player
