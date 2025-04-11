@@ -52,8 +52,6 @@ public class CastlePrototypApp : ABaseApp
         
         settingsManager.RegisterModule<IVolumeModule>(new VolumeModule());
         ServiceLocator.Get<IAudioManager>().MusicVolume = -20f;
-        
-        ServiceLocator.Get<IPerformanceManager>().SwitchToHighPerformance();
     }
 
     protected override async UniTask SetApplicationStateMachine()
