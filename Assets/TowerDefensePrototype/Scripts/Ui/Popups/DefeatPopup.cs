@@ -1,13 +1,11 @@
 using CastlePrototype.States;
-using OneDay.Core;
 using OneDay.Core.Modules.Sm;
-using OneDay.Core.Modules.Ui;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace CastlePrototype.Scripts.Ui.Popups
 {
-    public class DefeatPopup : UiPopup
+    public class DefeatPopup : AfterBattlePopup
     {
         [SerializeField] private Button continueButton;
 

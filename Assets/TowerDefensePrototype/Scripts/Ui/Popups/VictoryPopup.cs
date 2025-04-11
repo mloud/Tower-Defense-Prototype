@@ -1,12 +1,11 @@
 using CastlePrototype.States;
 using OneDay.Core.Modules.Sm;
-using OneDay.Core.Modules.Ui;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace CastlePrototype.Scripts.Ui.Popups
 {
-    public class VictoryPopup : UiPopup
+    public class VictoryPopup : AfterBattlePopup
     {
         public Button ClaimButton => claimButton;
         [SerializeField] private Button claimButton;

@@ -43,11 +43,11 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
 
             if (killedEnemies == totalEnemies)
             {
-                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup();
+                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup(runtimeStageReward);
             }
             else
             {
-                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenDefeatPopup();
+                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenDefeatPopup(runtimeStageReward);
             }
         }
        

@@ -20,6 +20,7 @@ namespace CastlePrototype.Managers
         public UniTask<HeroDeck> GetHeroDeck();
         public UniTask<RuntimeStageReward> AddRewardForBattle(int stage, float progression01);
         public UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId);
+        public UniTask<HeroDefinition> GetHeroDefinition(string heroId);
     }
     
     public class PlayerManager : MonoBehaviour, IPlayerManager, IService

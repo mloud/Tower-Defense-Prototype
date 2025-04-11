@@ -3,6 +3,7 @@ using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
 using CastlePrototype.Scripts.Ui.Popups;
 using Cysharp.Threading.Tasks;
@@ -27,16 +28,16 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui
         { }
 
 
-        public async UniTask OpenDefeatPopup()
+        public async UniTask OpenDefeatPopup(RuntimeStageReward runtimeStageReward)
         {
             await UniTask.WaitForSeconds(2.0f);
-            ServiceLocator.Get<IUiManager>().OpenPopup<DefeatPopup>(null);
+            ServiceLocator.Get<IUiManager>().OpenPopup<DefeatPopup>(UiParameter.Create(runtimeStageReward));
         }
         
-        public async UniTask OpenVictoryPopup()
+        public async UniTask OpenVictoryPopup(RuntimeStageReward runtimeStageReward)
         {
             await UniTask.WaitForSeconds(2.0f);
-            ServiceLocator.Get<IUiManager>().OpenPopup<VictoryPopup>(null);
+            ServiceLocator.Get<IUiManager>().OpenPopup<VictoryPopup>(UiParameter.Create(runtimeStageReward));
         }
      
         protected override void OnRelease()
