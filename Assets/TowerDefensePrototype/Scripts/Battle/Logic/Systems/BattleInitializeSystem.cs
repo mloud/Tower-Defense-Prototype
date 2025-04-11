@@ -17,16 +17,17 @@ namespace CastlePrototype.Battle.Logic.Systems
     public partial struct BattleInitializeSystem : ISystem
     {
         private bool finished;
-  
+        private const int stage = 0;
         public void OnUpdate(ref SystemState state)
         {
             if (finished) return;
          
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             CreateBattleFieldComponent(ref state);
-            CreateBattleProgression(ref state);
+            CreateBattleProgression(ref state, stage);
 
-            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, 0);
+            WorldManagers.Get<StageManager>(state.World).CreateWaveSpawner(ref ecb, stage);
+            WorldManagers.Get<StageManager>(state.World).CreateBattleStatisticEntity(ref ecb, stage);
 
 
             var barricadePosition = VisualManager.Default.GetObjectPosition("barricade");
@@ -47,17 +48,18 @@ namespace CastlePrototype.Battle.Logic.Systems
         }
         
 
-        private void CreateBattleProgression(ref SystemState state)
+        private void CreateBattleProgression(ref SystemState state, int stage)
         {
             var progressEntity = state.EntityManager.CreateEntity();
             state.EntityManager.AddComponentData(progressEntity, new BattleProgressionComponent
             {
                 BattlePoints = 0,
                 BattlePointsNeeded = 3,
-                BattlePointsUpdated = true
+                BattlePointsUpdated = true,
+                Stage = stage
             });
         }
-
+       
         private void CreateBattleFieldComponent(ref SystemState state)
         {
             var fieldEntity = state.EntityManager.CreateEntity();

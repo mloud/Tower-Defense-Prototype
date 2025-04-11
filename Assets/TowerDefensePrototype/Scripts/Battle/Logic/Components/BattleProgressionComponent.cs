@@ -9,5 +9,6 @@ namespace CastlePrototype.Battle.Logic.Components
         public float Timer;
         public bool BattlePointsUpdated;
         public bool BattleTimeUpdated;
+        public int Stage;
     }
 }

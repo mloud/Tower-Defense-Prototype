@@ -58,8 +58,12 @@ MonoBehaviour:
       EnemiesCount: 30
       EnemyId: zombie
       SpawnInterval: 0.1
+    Reward:
+      Cards: 45
   - Waves:
     - Time: 0
       EnemiesCount: 1
       EnemyId: boss
       SpawnInterval: 0
+    Reward:
+      Cards: 0

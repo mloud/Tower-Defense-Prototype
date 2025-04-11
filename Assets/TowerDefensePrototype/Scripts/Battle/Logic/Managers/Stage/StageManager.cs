@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
+using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers;
+using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Managers;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
+using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -28,9 +32,37 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         {
             stageDefinitions = (await dataManager.GetAll<StageDefinition>()).ToList();
         }
-        
 
-        public Entity CreateWaveSpawner(ref EntityCommandBuffer ecb, int stage)
+        public async UniTask RunStageFinishedFlow(int killedEnemies, int totalEnemies, int stage)
+        {
+            PauseUtils.SetLogicPaused(true, true);
+            VisualManager.Default.SetBattleMusicPlaying(false);
+
+            var battleProgress01 = (float)killedEnemies / totalEnemies;
+            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().AddRewardForBattle(stage, battleProgress01);
+
+            if (killedEnemies == totalEnemies)
+            {
+                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup();
+            }
+            else
+            {
+                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenDefeatPopup();
+            }
+        }
+       
+        public void CreateBattleStatisticEntity(ref EntityCommandBuffer ecb, int stage)
+        {
+            var statisticEntity = ecb.CreateEntity();
+            ecb.AddComponent(statisticEntity, new BattleStatisticComponent
+            {
+                EnemiesKilled = 0,
+                TotalEnemies = stageDefinitions[stage].Waves.Sum(x=>x.EnemiesCount)
+            });
+        }
+        
+        
+        public void CreateWaveSpawner(ref EntityCommandBuffer ecb, int stage)
         {
             Debug.Assert(stage >= 0 && stage < stageDefinitions.Count, $"Stage {stage} is out of range");
            
@@ -44,7 +76,6 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 currentWaveChanged = true,
             };
 
-
             spawnerComponent.waves = new FixedList4096Bytes<Wave>();
             foreach (var wave in stageDefinitions[stage].Waves)
             {
@@ -56,10 +87,9 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                     Time = wave.Time
                 });
             }
-            
             ecb.AddComponent(spawnerEntity, spawnerComponent);
-            return spawnerEntity;
         }
+
         protected override void OnRelease()
         { }
     }

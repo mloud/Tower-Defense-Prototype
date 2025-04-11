@@ -12,6 +12,7 @@ namespace CastlePrototype.Battle.Logic.Systems
    
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<BattleStatisticComponent>();
             state.RequireForUpdate<BattleProgressionComponent>();
             visualLookup = state.GetComponentLookup<VisualComponent>(true);
             teamLoopkup = state.GetComponentLookup<TeamComponent>(true);
@@ -42,6 +43,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (teamLoopkup.HasComponent(entity) && teamLoopkup[entity].Team == Team.Enemy)
                 {
                     battlePoints += 1;
+                    var battleStatisticComponent = SystemAPI.GetSingleton<BattleStatisticComponent>();
+                    battleStatisticComponent.EnemiesKilled++;
+                    SystemAPI.SetSingleton(battleStatisticComponent);
                 }
 
                 ecb.DestroyEntity(entity);

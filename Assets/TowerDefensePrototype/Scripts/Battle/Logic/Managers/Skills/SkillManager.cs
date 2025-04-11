@@ -5,6 +5,7 @@ using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Managers;
 using CastlePrototype.Scripts.Ui.Popups;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
@@ -16,9 +17,12 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
 {
     public class SkillManager : WorldManager
     { 
-        private List<ASkill> AvailableSkills { get; }
-      
+        private List<ASkill> AvailableSkills { get; set; }
+
         public SkillManager(World world) : base(world)
+        { }
+
+        protected override async UniTask OnInitialize()
         {
             AvailableSkills = new List<ASkill>
             {
@@ -28,13 +32,13 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
                 new RestoreHpSkill("Restore HP", 10, "Increase HP by {VALUE}"),
-                new UnlockHeroSkill("Unlock new hero", "soldier", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "turret", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "dron", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "scorpion", "Add new hero to battle"),
-                new UnlockHeroSkill("Unlock new hero", "tank", "Add new hero to battle"),
-                
             };
+
+            var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            foreach (var (unitId, _) in deck.Heroes)
+            {
+                AvailableSkills.Add(new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"));
+            }
         }
         
         public async UniTask RunSkillSelectionFlow(int skillsToShow)

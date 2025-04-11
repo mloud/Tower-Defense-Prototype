@@ -94,8 +94,6 @@ namespace CastlePrototype.Battle.Logic.Systems
                         attackC.ValueRW.PlayAttackBlockedToNextAttack = true;
                         attackC.ValueRW.PlayAttack = true;
                     }
-                 
-                    
                     
                     if (timeToAttack < 0)
                     {
