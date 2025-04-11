@@ -62,6 +62,7 @@ public class CastlePrototypApp : ABaseApp
         await StateMachineEnvironment.Default.RegisterState<BootState>();
         await StateMachineEnvironment.Default.RegisterState<MenuState>();
         await StateMachineEnvironment.Default.RegisterState<GameState>();
+        await StateMachineEnvironment.Default.RegisterState<LibraryState>();
         await StateMachineEnvironment.Default.SetStateAsync<BootState>();
     }
 
