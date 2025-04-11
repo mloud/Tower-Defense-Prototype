@@ -1,4 +1,5 @@
 using CastlePrototype.Managers;
+using CastlePrototype.Ui.Components;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Ui;
@@ -17,7 +18,7 @@ namespace CastlePrototype.Ui.Popups
         [SerializeField] private TextMeshProUGUI counter;
         [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Image progressFill;
-        
+        [SerializeField] private StatsPanel statsPanel;
         private string heroId;
 
         protected void Awake()
@@ -57,6 +58,8 @@ namespace CastlePrototype.Ui.Popups
                 progressFill.fillAmount = (float)unlockedHero.progress.CardsCount /
                                           unlockedHero.definition.GetCardsNeededToLevelUp(unlockedHero.progress.Level);
             }
+
+            await statsPanel.Initialize(unlockedHero.progress, unlockedHero.definition);
         }
 
         protected override UniTask OnCloseFinished()
