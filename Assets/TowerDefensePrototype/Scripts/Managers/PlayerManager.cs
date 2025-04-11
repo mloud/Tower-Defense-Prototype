@@ -20,9 +20,11 @@ namespace CastlePrototype.Managers
         public UniTask<HeroDeck> GetHeroDeck();
         public UniTask<RuntimeStageReward> AddRewardForBattle(int stage, float progression01);
         public UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId);
+        public UniTask<bool> CanLevelUpHero(string heroId);
         public UniTask<HeroDefinition> GetHeroDefinition(string heroId);
+        public UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId);
     }
-    
+
     public class PlayerManager : MonoBehaviour, IPlayerManager, IService
     {
         private IDataManager dataManager;
@@ -34,24 +36,43 @@ namespace CastlePrototype.Managers
         }
 
         public UniTask PostInitialize() => UniTask.CompletedTask;
-        
+
         public async UniTask<IPlayerProgress> GetProgression()
             => (await dataManager.GetAll<PlayerProgress>()).FirstOrDefault();
 
         public async UniTask<HeroDeck> GetHeroDeck() =>
             (await dataManager.GetAll<HeroDeck>()).FirstOrDefault();
-        
+
         public async UniTask<HeroDefinition> GetHeroDefinition(string heroId) =>
-            (await dataManager.GetAll<HeroDefinition>()).FirstOrDefault(x=>x.UnitId == heroId);
+            (await dataManager.GetAll<HeroDefinition>()).FirstOrDefault(x => x.UnitId == heroId);
 
         public async UniTask SaveHeroDeck(HeroDeck heroDeck) =>
             await dataManager.Actualize<HeroDeck>(heroDeck);
 
-        
+
         public async UniTask<StageDefinition> GetStateDefinition(int stage) =>
             (await dataManager.GetAll<StageDefinition>()).ElementAt(stage);
 
 
+        public async UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId)
+        {
+            var heroDefinition = await GetHeroDefinition(heroId);
+            var heroProgress = (await GetHeroDeck()).Heroes[heroId];
+            return (heroProgress, heroDefinition);
+        }
+
+        public async UniTask<bool> CanLevelUpHero(string heroId)
+        {
+            var heroDeck = await GetHeroDeck();
+            var heroProgress = heroDeck.Heroes[heroId];
+            var heroDefinition = await GetHeroDefinition(heroId);
+            int cardsNeeded = heroDefinition.GetCardsNeededToLevelUp(heroProgress.Level);
+            if (cardsNeeded > heroProgress.CardsCount)
+                return false;
+            if (heroDefinition.IsMaxLevel(heroProgress.Level))
+                return false;
+            return true;
+        }
         public async UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId)
         {
             var heroDeck = await GetHeroDeck();

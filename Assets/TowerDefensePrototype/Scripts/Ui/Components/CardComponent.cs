@@ -1,13 +1,13 @@
 using System;
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
-using CastlePrototype.Managers;
+using CastlePrototype.Ui.Popups;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
+using OneDay.Core.Modules.Ui;
 using OneDay.Core.Modules.Ui.Components;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CastlePrototype.Ui.Components
@@ -23,12 +23,14 @@ namespace CastlePrototype.Ui.Components
         [SerializeField] private GameObject progressBar;
         [SerializeField] private Image progressFill;
         [SerializeField] private Button levelUpButton;
-
+        [SerializeField] private Button detailButton;
+        
         public string Id { get; private set; }
         
         private void Awake()
         {
             levelUpButton.onClick.AddListener(()=>OnLevelUp(this));
+            detailButton.onClick.AddListener(OnDetailClicked);
         }
 
         public async UniTask<CardComponent> Set(HeroProgress heroProgress, HeroDefinition heroDefinition)
@@ -58,6 +60,11 @@ namespace CastlePrototype.Ui.Components
             }
 
             return this;
+        }
+        
+        private void OnDetailClicked()
+        {
+            ServiceLocator.Get<IUiManager>().OpenPopup<UnitDetailPopup>(UiParameter.Create(Id));
         }
     }
 }
