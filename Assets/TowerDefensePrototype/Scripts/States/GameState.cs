@@ -2,6 +2,7 @@ using CastlePrototype.Battle.Logic;
 using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Battle.Visuals.Effects;
 using CastlePrototype.Managers;
+using CastlePrototype.Ui.Panels;
 using CastlePrototype.Ui.Views;
 using Core.Modules.Ui.Loading;
 using Cysharp.Threading.Tasks;
@@ -41,6 +42,9 @@ namespace CastlePrototype.States
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
+            
+            ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
+
             var loading = ServiceLocator.Get<ILoading>();
             loading.Show();
             await battlePooler.Pool(loading);

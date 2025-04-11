@@ -3,7 +3,9 @@ using System.Linq;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Visuals;
+using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Managers;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
@@ -19,6 +21,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         private IDataManager dataManager;
         protected Dictionary<string, HeroDefinition> heroDefinitions;
         protected Dictionary<string, EnemyDefinition> enemyDefinitions;
+        protected HeroDeck heroDeck;
 
         public UnitManager(World world) : base(world)
         {
@@ -31,18 +34,25 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             heroDefinitions = heroes.ToDictionary(x => x.UnitId, x => x);
             var enemies = await dataManager.GetAll<EnemyDefinition>();
             enemyDefinitions = enemies.ToDictionary(x => x.UnitId, x => x);
+
+            heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
         }
 
-        public Entity CreateBarricade(ref SystemState state, float3 position, string definitionId)
+        public Entity CreateBarricade(ref SystemState state, float3 position)
         {
+            string definitionId = "barricade";
+            
+            
             if (!heroDefinitions.TryGetValue(definitionId, out var definition))
             {
                 Debug.Assert(false, $"No such barricade definition with id {definitionId} exists");
                 return Entity.Null;
             }
 
+            var level = heroDeck.Heroes[definitionId].Level;
+            
             var barricadeEntity = state.EntityManager.CreateEntity();
-            state.EntityManager.AddComponentData(barricadeEntity, new HpComponent { Hp = definition.Hp, MaxHp = definition.Hp });
+            state.EntityManager.AddComponentData(barricadeEntity, CreateHpComponent(definition, level));
             state.EntityManager.AddComponentData(barricadeEntity, new LocalTransform { Position = VisualManager.Default.GetObjectPosition("barricade")});
             state.EntityManager.AddComponentData(barricadeEntity, new TeamComponent { Team = Team.Player });
             state.EntityManager.AddComponentData(barricadeEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
@@ -55,7 +65,6 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             return barricadeEntity;
         }
         
-
         public Entity CreateHeroUnit(ref EntityCommandBuffer ecb, float3 position, string heroId)
         {
             if (heroDefinitions.TryGetValue(heroId, out var definition))
@@ -89,9 +98,17 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 ecb.AddComponent(entity, new MovementComponent { Speed = definition.MoveSpeed, MaxSpeed = definition.MoveSpeed});
             }
 
-            if (definition.Hp > 0)
+            int level = 1;
+            if (team == Team.Player)
             {
-                ecb.AddComponent(entity, new HpComponent { Hp = definition.Hp, MaxHp = definition.Hp});
+                level = heroDeck.Heroes[definition.UnitId].Level;
+            }
+            
+            var hp = definition.GetLeveledHeroStat(StatUpgradeType.Hp, level);
+            
+            if (hp > 0)
+            {
+                ecb.AddComponent(entity, CreateHpComponent(definition, level));
             }
             
             ecb.AddComponent(entity, new UnitComponent { DefinitionId = definition.UnitId });
@@ -103,16 +120,16 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             {
                 // HEROES ARE ALWAYS RANGED
                 AttackType = definition.AttackType,
-                AttackDamage = definition.Damage,
-                AttackDistance = definition.AttackDistance < 0 ? 999:definition.AttackDistance,
-                Cooldown = definition.Cooldown,
-                TargetRange = definition.TargetRange < 0 ? 999:definition.TargetRange,
-                AoeRadius = definition.AoeRadius,
-                AoeDamage = definition.AoeDamage,
-                Bounce = definition.Bounce,
-                FireAgain = definition.Fireagain,
+                AttackDamage = definition.GetLeveledHeroStat(StatUpgradeType.Damage, level),
+                AttackDistance = definition.GetLeveledHeroStat(StatUpgradeType.AttackDistance, level) < 0 ? 999:definition.GetLeveledHeroStat(StatUpgradeType.AttackDistance, level),
+                Cooldown = definition.GetLeveledHeroStat(StatUpgradeType.Cooldown, level),
+                TargetRange = definition.GetLeveledHeroStat(StatUpgradeType.TargetRange, level) < 0 ? 999:definition.GetLeveledHeroStat(StatUpgradeType.TargetRange, level),
+                AoeRadius = definition.GetLeveledHeroStat(StatUpgradeType.AoeRadius, level),
+                AoeDamage = definition.GetLeveledHeroStat(StatUpgradeType.AoeDamage, level),
+                Bounce = (int)definition.GetLeveledHeroStat(StatUpgradeType.Bounce, level),
+                FireAgain = (int)definition.GetLeveledHeroStat(StatUpgradeType.FireAgain, level),
                 KnockBack = definition.Knockback,
-                Penetration = definition.Penetration,
+                Penetration =(int)definition.GetLeveledHeroStat(StatUpgradeType.Penetration, level),
                 AoeOnly = definition.AoeOnly,
                 ProjectileVisualId = definition.ProjectileVisualId,
                 ProjectileSpeed = definition.ProjectileSpeed,
@@ -129,5 +146,13 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
 
         protected override void OnRelease()
         { }
+
+        
+        private HpComponent CreateHpComponent(HeroDefinition definition, int level) =>
+            new()
+            {
+                Hp = definition.GetLeveledHeroStat(StatUpgradeType.Hp, level), 
+                MaxHp = definition.GetLeveledHeroStat(StatUpgradeType.Hp, level)
+            };
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using CastlePrototype.Ui.Panels;
 using CastlePrototype.Ui.Views;
 using Cysharp.Threading.Tasks;
 using Meditation.States;
@@ -26,6 +27,7 @@ namespace CastlePrototype.States
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
+            ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
             view.Show(true);
         }
 

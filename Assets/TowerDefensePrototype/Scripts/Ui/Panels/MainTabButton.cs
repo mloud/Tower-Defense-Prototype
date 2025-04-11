@@ -37,7 +37,7 @@ namespace CastlePrototype.Ui.Panels
         {
             icon.transform.DOScale(selected 
                 ? new Vector3(scaleFactor, scaleFactor, scaleFactor) 
-                : Vector3.one, 0.2f);
+                : Vector3.one, 0.4f);
         }
         protected abstract void OnSelectAction();
     }

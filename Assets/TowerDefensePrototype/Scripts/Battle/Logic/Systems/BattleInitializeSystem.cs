@@ -31,7 +31,7 @@ namespace CastlePrototype.Battle.Logic.Systems
 
 
             var barricadePosition = VisualManager.Default.GetObjectPosition("barricade");
-            var wallEntity = WorldManagers.Get<UnitManager>(state.World).CreateBarricade(ref state, barricadePosition, "barricade");
+            var wallEntity = WorldManagers.Get<UnitManager>(state.World).CreateBarricade(ref state, barricadePosition);
             WorldManagers.Get<BattleEventsManager>(state.World)
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
             

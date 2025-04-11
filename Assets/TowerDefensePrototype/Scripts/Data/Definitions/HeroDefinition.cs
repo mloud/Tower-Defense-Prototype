@@ -20,26 +20,77 @@ namespace CastlePrototype.Data.Definitions
         // BASIC STATS
         [Header("Basic stats")]
         public float ProjectileSpeed;
-        public float Cooldown;
-        public float Damage;
-        public float AttackDistance;
-        public float TargetRange;
         public float MoveSpeed;
-        public float Hp;
+
+        [SerializeField] float Cooldown;
+        [SerializeField] float Damage;
+        [SerializeField] float AttackDistance;
+        [SerializeField] float TargetRange;
+        [SerializeField] float Hp;
      
         // SPECIFIC
         [Header("Specific stats")]
-        public int Bounce;
-        public int Penetration;
-        public int Fireagain;
         public bool Knockback;
         public bool KnockbackResistent;
         public float FireAgainInterval = 0.5f;
-    
+
+        [SerializeField] int Bounce;
+        [SerializeField] int Penetration;
+        [SerializeField] int Fireagain;
+       
         // AOE - either projectile or direct AOE      
         [Header("AOE stats")]
-        public float AoeRadius;
-        public float AoeDamage;
         public bool AoeOnly;
+        [SerializeField] float AoeRadius;
+        [SerializeField] float AoeDamage;
+      
+        [Header("Level upgrades")] 
+        public HeroLevelUpgradePath UpgradePath;
+
+        public float GetLeveledHeroStat(StatUpgradeType upgradeType, int level)
+        {
+            if (level == 1)
+                return GetBaseHeroStat(upgradeType);
+            return GetBaseHeroStat(upgradeType) + GetUpgradedStat(upgradeType, level);
+        }
+
+        private float GetUpgradedStat(StatUpgradeType upgradeType, int level)
+        {
+            if (level < 2)
+                throw new ArgumentException("Level is expected to start at 2");
+
+            int upgradeIndex = level - 2;
+            if (upgradeIndex >= UpgradePath.StatsUpgrades.Count)
+                throw new ArgumentException($"Level exceeded number of upgrade levels {level}");
+            float upgradedValueSum = 0;
+            for (int i = 0; i < upgradeIndex; i++)
+            {
+                if (UpgradePath.StatsUpgrades[i].StatUpgradeType == upgradeType)
+                {
+                    upgradedValueSum += UpgradePath.StatsUpgrades[i].Value;
+                }
+            }
+
+            return upgradedValueSum;
+        }
+        
+        private float GetBaseHeroStat(StatUpgradeType upgradeType)
+        {
+            return upgradeType switch
+            {
+                StatUpgradeType.Bounce => Bounce,
+                StatUpgradeType.Cooldown => Cooldown,
+                StatUpgradeType.Damage => Damage,
+                StatUpgradeType.Hp => Hp,
+                StatUpgradeType.FireAgain => Fireagain,
+                StatUpgradeType.AoeRadius => AoeRadius,
+                StatUpgradeType.Penetration => Penetration,
+                StatUpgradeType.AoeDamage => AoeDamage,
+                StatUpgradeType.TargetRange => TargetRange,
+                StatUpgradeType.AttackDistance => AttackDistance,
+
+                _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
+            };
+        }
     }
 }
