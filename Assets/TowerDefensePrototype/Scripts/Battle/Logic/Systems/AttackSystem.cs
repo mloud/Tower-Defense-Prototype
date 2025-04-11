@@ -89,17 +89,17 @@ namespace CastlePrototype.Battle.Logic.Systems
                         lookAtTargetLookup.GetRefRW(entity).ValueRW.LookAtTarget = timeToAttack < timeBeforeLookAtTarget;
                     }
 
-                    attackC.ValueRW.PlayAttackCooldown -= SystemAPI.Time.DeltaTime;
-                    if (timeToAttack < attackC.ValueRO.AttackAnimDelay && attackC.ValueRO.PlayAttackCooldown <= 0)
+                    if (timeToAttack < attackC.ValueRO.AttackAnimDelay && !attackC.ValueRO.PlayAttackBlockedToNextAttack)
                     {
+                        attackC.ValueRW.PlayAttackBlockedToNextAttack = true;
                         attackC.ValueRW.PlayAttack = true;
-                        attackC.ValueRW.PlayAttackCooldown = attackC.ValueRO.Cooldown;
                     }
                  
                     
                     
                     if (timeToAttack < 0)
                     {
+                        attackC.ValueRW.PlayAttackBlockedToNextAttack = false;
                         // prepare next attack(s)
                         if (isMainAttack)
                         {

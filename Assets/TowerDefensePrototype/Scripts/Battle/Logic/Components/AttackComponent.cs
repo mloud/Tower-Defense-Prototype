@@ -37,6 +37,6 @@ namespace CastlePrototype.Battle.Logic.Components
         public bool IsInAttackDistance;
         // for visual
         public bool PlayAttack;
-        public double PlayAttackCooldown;
+        public bool PlayAttackBlockedToNextAttack;
     }
 }
