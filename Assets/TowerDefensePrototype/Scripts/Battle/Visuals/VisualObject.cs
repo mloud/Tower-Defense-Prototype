@@ -5,6 +5,7 @@ using OneDay.Core.Modules.Pooling;
 using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CastlePrototype.Battle.Visuals
 {
@@ -36,10 +37,15 @@ namespace CastlePrototype.Battle.Visuals
         
         public string Id => id;
         public float DefaultHeight => defaultHeight;
+        
+        [NonSerialized]
+        public bool TriggerAttackDistanceShow;
+        
+        
         public int Index { get; private set; } = -1;
 
         private Camera mainCamera;
-
+        private bool isShowingAttackDistance;
         private void Awake()
         {
             effectModule = GetComponent<EffectModule>();
@@ -203,6 +209,21 @@ namespace CastlePrototype.Battle.Visuals
             {
                 cooldownProgressBar.transform.position = pos + cooldownScreenOffset;
             }
+        }
+
+        public void ShowAttackDistance(float distance)
+        {
+            isShowingAttackDistance= true;
+            TriggerAttackDistanceShow = false;
+            var effect = VisualManager.Default.PlayEffect(EffectKeys.AttackDistance, transform.position, distance);
+            effect.OnFinishedAction += () => isShowingAttackDistance = false;
+        }
+    
+        private void OnMouseDown()
+        {
+            if (isShowingAttackDistance)
+                return;
+            TriggerAttackDistanceShow = true;
         }
     }
 }

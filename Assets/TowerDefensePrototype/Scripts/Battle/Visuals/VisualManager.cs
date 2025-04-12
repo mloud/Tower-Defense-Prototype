@@ -98,7 +98,7 @@ namespace CastlePrototype.Battle.Visuals
             visualObject.Die(false,()=>VisualFactory.Release(visualObject));
         }
 
-        public void PlayEffect(string effectId, Vector3 position, object data = null)
+        public BaseEffect PlayEffect(string effectId, Vector3 position, object data = null)
         {
             var effect = EffectFactory.Create<BaseEffect>(effectId);
 
@@ -116,6 +116,7 @@ namespace CastlePrototype.Battle.Visuals
 
             effect.OnFinishedAction = ()=>EffectFactory.Release(effect);
             effect.Play(data).Forget();
+            return effect;
         }
 
         public void SetBattleMusicPlaying(bool isPlaying)

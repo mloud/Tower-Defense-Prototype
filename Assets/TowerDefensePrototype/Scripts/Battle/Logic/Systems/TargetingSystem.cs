@@ -66,11 +66,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                          .WithEntityAccess())
             {
                 
-                if (HasValidTarget(ref state, entity, attackC.ValueRO.TargetRange))
+                if (HasValidTarget(ref state, entity, attackC.ValueRO.AttackDistance))
                     continue; 
                 
                 var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
-                    attackC.ValueRO.TargetRange, settingC.ValueRO.DistanceAxes);
+                    attackC.ValueRO.AttackDistance, settingC.ValueRO.DistanceAxes);
                 UpdateTarget(ref ecb, entity, targetEntity);
             }
             

@@ -8,5 +8,7 @@ namespace TowerDefensePrototype.Battle.Visuals.Effects
         public const string HitEffectSmall = "hit_effect_small";
         public const string SpawnEffectHero = "spawn_effect_hero";
         public const string SpawnEffectEnemy = "spawn_effect_enemy";
+        public const string AttackDistance = "attack_distance";
+
     }
 }

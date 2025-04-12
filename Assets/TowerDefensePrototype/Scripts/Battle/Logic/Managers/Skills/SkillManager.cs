@@ -28,7 +28,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             {
                 new IncreaseDamageSkill("Increase damage", 25, "Increases damage by {VALUE}%"),
                 new DecreaseAttackInterval("Decrease attack interval", 25, "Decrease attack interval by {VALUE}%"),
-                new IncreaseAttackDistance("Increase attack distance", 25, "Increase attack distance by {VALUE}%"),
+                new IncreaseAttackDistance("Increase attack distance", 15, "Increase attack distance by {VALUE}%"),
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
                 new RestoreHpSkill("Restore HP", 10, "Increase HP by {VALUE}"),

@@ -82,6 +82,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a873abac14e14727b1fa90d583466bf
+    m_Address: attack_distance
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6695b97db5f804bcdb90b2e4ad8cd943
     m_Address: damage_hp_text_effect
     m_ReadOnly: 0

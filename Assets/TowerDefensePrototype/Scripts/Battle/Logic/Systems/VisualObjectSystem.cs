@@ -1,7 +1,9 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Visuals;
+using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Entities;
 using Unity.Transforms;
+using Unity.VisualScripting;
 
 
 namespace CastlePrototype.Battle.Logic.Systems
@@ -47,7 +49,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             
             
             // Sync attack
-            foreach (var (attackC, visualC) in SystemAPI.Query<RefRW<AttackComponent>, RefRO<VisualComponent>>())
+            foreach (var (attackC, visualC, localC) in SystemAPI.Query<RefRW<AttackComponent>, RefRO<VisualComponent>,  RefRO<LocalTransform>>())
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
 
@@ -57,6 +59,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                 {
                     visual.Attack();
                     attackC.ValueRW.PlayAttack = false;
+                }
+
+                if (visual.TriggerAttackDistanceShow)
+                {
+                    visual.ShowAttackDistance(attackC.ValueRO.AttackDistance);
                 }
             }  
         }
