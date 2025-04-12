@@ -37,6 +37,8 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             foreach (var (unitId, _) in deck.Heroes)
             {
+                if (unitId == "barricade" || unitId == "weapon")
+                    continue;
                 AvailableSkills.Add(new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"));
             }
         }

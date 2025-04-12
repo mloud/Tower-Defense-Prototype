@@ -73,7 +73,7 @@ namespace CastlePrototype.Data.Definitions
             if (upgradeIndex >= UpgradePath.StatsUpgrades.Count)
                 throw new ArgumentException($"Level exceeded number of upgrade levels {level}");
             float upgradedValueSum = 0;
-            for (int i = 0; i < upgradeIndex; i++)
+            for (int i = 0; i <= upgradeIndex; i++)
             {
                 if (UpgradePath.StatsUpgrades[i].StatUpgradeType == upgradeType)
                 {

@@ -38,7 +38,7 @@ MonoBehaviour:
       StatsUpgrades:
       - CardsRequired: 50
         StatUpgradeType: 0
-        Value: -0.3
+        Value: -1
       - CardsRequired: 50
         StatUpgradeType: 1
         Value: 10
@@ -102,13 +102,13 @@ MonoBehaviour:
       StatsUpgrades:
       - CardsRequired: 54
         StatUpgradeType: 0
-        Value: 0.5
+        Value: -1
       - CardsRequired: 45
-        StatUpgradeType: 2
+        StatUpgradeType: 4
         Value: 1
       - CardsRequired: 45
-        StatUpgradeType: 2
-        Value: 1
+        StatUpgradeType: 1
+        Value: 20
   - UnitId: dron
     VisualId: dron
     ProjectileVisualId: projectile_dron
@@ -137,7 +137,7 @@ MonoBehaviour:
         Value: 0.2
       - CardsRequired: 45
         StatUpgradeType: 0
-        Value: 0.5
+        Value: -1
       - CardsRequired: 57
         StatUpgradeType: 1
         Value: 20
@@ -172,7 +172,7 @@ MonoBehaviour:
         Value: 3
       - CardsRequired: 65
         StatUpgradeType: 0
-        Value: 0.5
+        Value: -1
   - UnitId: tank
     VisualId: tank
     ProjectileVisualId: projectile_tank
@@ -198,13 +198,13 @@ MonoBehaviour:
       StatsUpgrades:
       - CardsRequired: 45
         StatUpgradeType: 0
-        Value: 1
+        Value: -1
       - CardsRequired: 45
         StatUpgradeType: 6
         Value: 50
       - CardsRequired: 45
         StatUpgradeType: 0
-        Value: 1
+        Value: -1
   - UnitId: barricade
     VisualId: barricade
     ProjectileVisualId: 

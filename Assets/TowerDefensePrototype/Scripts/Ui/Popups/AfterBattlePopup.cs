@@ -22,6 +22,8 @@ namespace CastlePrototype.Scripts.Ui.Popups
             int index = 0;
             foreach (var (heroId, counter) in stageReward.Cards)
             {
+                if (counter == 0)
+                    continue;
                 var heroDefinition = await playerManager.GetHeroDefinition(heroId);
                 cardRewardPanel.Get(index++).Set(heroDefinition, counter);
             }
