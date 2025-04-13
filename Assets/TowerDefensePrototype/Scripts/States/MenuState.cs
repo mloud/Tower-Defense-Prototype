@@ -14,11 +14,9 @@ namespace CastlePrototype.States
     public class MenuState : AState
     {
         private MenuView view;
-        private IDataManager dataManager;
         
         public override UniTask Initialize()
         {
-            dataManager = ServiceLocator.Get<IDataManager>();
             view = ServiceLocator.Get<IUiManager>().GetView<MenuView>();
             view.BindAction(view.PlayButton, OnPlayClicked);
             
@@ -28,6 +26,7 @@ namespace CastlePrototype.States
         public override async UniTask EnterAsync(StateData stateData = null)
         {
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
+            await view.StageContainer.Refresh();
             view.Show(true);
         }
 

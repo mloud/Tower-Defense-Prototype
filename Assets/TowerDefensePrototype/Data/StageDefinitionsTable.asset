@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: StageDefinitionsTable
   m_EditorClassIdentifier: 
   data:
-  - Waves:
+  - StageName: Beginning
+    Waves:
     - Time: 0
       EnemiesCount: 5
       EnemyId: zombie
@@ -60,7 +61,8 @@ MonoBehaviour:
       SpawnInterval: 0.1
     Reward:
       Cards: 120
-  - Waves:
+  - StageName: Test
+    Waves:
     - Time: 0
       EnemiesCount: 1
       EnemyId: boss

@@ -11406,7 +11406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &139903812565561115
 Transform:
   m_ObjectHideFlags: 0
@@ -15726,6 +15726,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 768656245743871150, guid: dc911c74ec70c4777928fd5b02815b6f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2538382266070383079, guid: dc911c74ec70c4777928fd5b02815b6f,
         type: 3}
       propertyPath: m_Sprite
@@ -15745,6 +15750,11 @@ PrefabInstance:
     - target: {fileID: 2538382266070383079, guid: dc911c74ec70c4777928fd5b02815b6f,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538382266070383079, guid: dc911c74ec70c4777928fd5b02815b6f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2990737624792592761, guid: dc911c74ec70c4777928fd5b02815b6f,
@@ -15818,6 +15828,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3220065941867834543, guid: dc911c74ec70c4777928fd5b02815b6f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3455550431353628622, guid: dc911c74ec70c4777928fd5b02815b6f,
         type: 3}
       propertyPath: m_Sprite
@@ -15837,6 +15852,11 @@ PrefabInstance:
     - target: {fileID: 3455550431353628622, guid: dc911c74ec70c4777928fd5b02815b6f,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455550431353628622, guid: dc911c74ec70c4777928fd5b02815b6f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4086965203111173698, guid: dc911c74ec70c4777928fd5b02815b6f,
@@ -15953,6 +15973,11 @@ PrefabInstance:
     - target: {fileID: 7745698780272500564, guid: dc911c74ec70c4777928fd5b02815b6f,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745698780272500564, guid: dc911c74ec70c4777928fd5b02815b6f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

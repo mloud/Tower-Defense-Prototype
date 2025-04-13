@@ -12,9 +12,9 @@ using UnityEngine.UI;
 
 namespace CastlePrototype.Ui.Components
 {
-    public class CardComponent : MonoBehaviour
+    public class CardWidget : MonoBehaviour
     {
-        public Action<CardComponent> OnLevelUp;
+        public Action<CardWidget> OnLevelUp;
             
         [SerializeField] private CImage icon;
         [SerializeField] private TextMeshProUGUI cardName;
@@ -33,7 +33,7 @@ namespace CastlePrototype.Ui.Components
             detailButton.onClick.AddListener(OnDetailClicked);
         }
 
-        public async UniTask<CardComponent> Set(HeroProgress heroProgress, HeroDefinition heroDefinition)
+        public async UniTask<CardWidget> Set(HeroProgress heroProgress, HeroDefinition heroDefinition)
         {
             Id = heroDefinition.UnitId;
             icon.SetImage(heroDefinition.VisualId);

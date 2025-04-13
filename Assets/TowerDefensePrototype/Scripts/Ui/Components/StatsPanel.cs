@@ -6,7 +6,7 @@ using OneDay.Core.Modules.Ui.Components;
 
 namespace CastlePrototype.Ui.Components
 {
-    public class StatsPanel : ContentPanel<StatItem>
+    public class StatsPanel : ContentPanel<StatWidget>
     {
         public async UniTask Initialize(HeroProgress heroProgress, HeroDefinition heroDefinition)
         {

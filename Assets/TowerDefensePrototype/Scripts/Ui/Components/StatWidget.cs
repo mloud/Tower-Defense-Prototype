@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CastlePrototype.Ui.Components
 {
-    public class StatItem : MonoBehaviour
+    public class StatWidget : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI nameLabel;
         [SerializeField] private TextMeshProUGUI currentLabel;

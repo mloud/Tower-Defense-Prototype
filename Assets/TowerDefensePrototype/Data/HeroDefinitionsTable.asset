@@ -54,8 +54,8 @@ MonoBehaviour:
     MoveSpeed: 0
     Cooldown: 4
     Damage: 80
-    AttackDistance: -1
-    TargetRange: -1
+    AttackDistance: 14.5
+    TargetRange: 14.5
     Hp: 0
     Knockback: 0
     KnockbackResistent: 0
@@ -86,8 +86,8 @@ MonoBehaviour:
     MoveSpeed: 0
     Cooldown: 8
     Damage: 180
-    AttackDistance: -1
-    TargetRange: -1
+    AttackDistance: 15.95
+    TargetRange: 15.95
     Hp: 0
     Knockback: 0
     KnockbackResistent: 0
@@ -118,8 +118,8 @@ MonoBehaviour:
     MoveSpeed: 0
     Cooldown: 10
     Damage: 350
-    AttackDistance: 10
-    TargetRange: 10
+    AttackDistance: 13.05
+    TargetRange: 13.05
     Hp: 0
     Knockback: 0
     KnockbackResistent: 0
@@ -150,8 +150,8 @@ MonoBehaviour:
     MoveSpeed: 0
     Cooldown: 10
     Damage: 15
-    AttackDistance: 10
-    TargetRange: 10
+    AttackDistance: 15.95
+    TargetRange: 15.95
     Hp: 0
     Knockback: 0
     KnockbackResistent: 0
@@ -182,8 +182,8 @@ MonoBehaviour:
     MoveSpeed: 0
     Cooldown: 14
     Damage: 0
-    AttackDistance: 13
-    TargetRange: 13
+    AttackDistance: 14.5
+    TargetRange: 14.5
     Hp: 0
     Knockback: 0
     KnockbackResistent: 0

@@ -7,6 +7,7 @@ namespace CastlePrototype.Data.Definitions
     [Serializable]
     public class StageDefinition:  BaseDataObject
     {
+        public string StageName;
         public List<WaveDefinition> Waves;
         public StageReward Reward;
     }

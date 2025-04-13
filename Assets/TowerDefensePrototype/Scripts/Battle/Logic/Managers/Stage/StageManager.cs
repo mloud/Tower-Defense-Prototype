@@ -13,7 +13,6 @@ using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Transforms;
 using UnityEngine;
 
 namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
@@ -37,9 +36,9 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         {
             PauseUtils.SetLogicPaused(true, true);
             VisualManager.Default.SetBattleMusicPlaying(false);
-
+        
             var battleProgress01 = (float)killedEnemies / totalEnemies;
-            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().AddRewardForBattle(stage, battleProgress01);
+            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().FinishBattle(stage, battleProgress01);
 
             if (killedEnemies == totalEnemies)
             {
