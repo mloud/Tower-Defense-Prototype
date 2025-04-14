@@ -41,13 +41,13 @@ public class SnapScrollRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             // Smoothly lerp to the target position
             float newX = Mathf.Lerp(contentPanel.anchoredPosition.x, targetPosition, Time.deltaTime * snapSpeed);
             contentPanel.anchoredPosition = new Vector2(newX, contentPanel.anchoredPosition.y);
-            
+
             // Check if we've reached the target position
-            if (Mathf.Abs(contentPanel.anchoredPosition.x - targetPosition) < 1.0f)
+            if (Mathf.Abs(contentPanel.anchoredPosition.x - targetPosition) < 5.0f)
             {
                 contentPanel.anchoredPosition = new Vector2(targetPosition, contentPanel.anchoredPosition.y);
                 isSnapping = false;
-                
+                scrollRect.velocity = Vector2.zero;
                 // Invoke the callback with the centered object
                 NotifyCenteredItem();
             }
