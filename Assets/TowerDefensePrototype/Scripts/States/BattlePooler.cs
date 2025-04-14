@@ -43,6 +43,8 @@ namespace CastlePrototype.States
                 {"dragon", 50},
                 {"archer", 30},
                 {"boss", 1},
+                {"golem", 1},
+
             } );
             
             loadingTracker.RegisterPreloadGroup(poolManager, "Projectiles", new Dictionary<string, int>
@@ -75,6 +77,8 @@ namespace CastlePrototype.States
             poolManager.ClearPool("boss");
             poolManager.ClearPool("archer");
             poolManager.ClearPool("wall");
+            poolManager.ClearPool("golem");
+
             
             poolManager.ClearPool("projectile_dron");
             poolManager.ClearPool("projectile_scorpion");

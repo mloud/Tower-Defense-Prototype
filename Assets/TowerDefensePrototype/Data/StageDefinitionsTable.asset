@@ -69,3 +69,11 @@ MonoBehaviour:
       SpawnInterval: 0
     Reward:
       Cards: 0
+  - StageName: Golem Test
+    Waves:
+    - Time: 0
+      EnemiesCount: 1
+      EnemyId: golem
+      SpawnInterval: 0
+    Reward:
+      Cards: 0

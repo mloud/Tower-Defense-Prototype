@@ -42,6 +42,8 @@ namespace CastlePrototype.States
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
+            int stageIndex = stateData.GetValue<int>("stage");
+            
             
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
 
@@ -54,11 +56,9 @@ namespace CastlePrototype.States
             
             visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel);
             battleController = new BattleController();
-            
             visualManager.LoadEnvironment("environment_1");
 
-            var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
-            await battleController.InitializeBattle();
+            await battleController.InitializeBattle(stageIndex);
             loading.Hide();
             view.Show(true);
         }

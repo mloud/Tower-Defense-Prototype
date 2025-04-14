@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
 using CastlePrototype.Ui.Panels;
 using CastlePrototype.Ui.Views;
 using Cysharp.Threading.Tasks;
 using Meditation.States;
 using OneDay.Core;
-using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 
@@ -40,7 +37,8 @@ namespace CastlePrototype.States
         
         private void OnPlayClicked()
         {
-            StateMachine.SetStateAsync<GameState>().Forget();
+            int stage = view.StageContainer.SelectedStageIndex;
+            StateMachine.SetStateAsync<GameState>(StateData.Create(("stage", stage))).Forget();
         }
     }
 }

@@ -1,15 +1,11 @@
 using CastlePrototype.Battle.Logic.Components;
-using CastlePrototype.Battle.Logic.EcsUtils;
 using CastlePrototype.Battle.Logic.Managers;
-using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Battle.Visuals;
-using Cysharp.Threading.Tasks;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Transforms;
 
 namespace CastlePrototype.Battle.Logic.Systems
 {
@@ -17,7 +13,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     public partial struct BattleInitializeSystem : ISystem
     {
         private bool finished;
-        private const int stage = 0;
+        public static int stage = 0;
         public void OnUpdate(ref SystemState state)
         {
             if (finished) return;

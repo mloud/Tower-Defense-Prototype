@@ -17,12 +17,13 @@ namespace CastlePrototype.Battle.Logic
     {
         private List<SystemHandle> systemHandles;
 
-        public async UniTask InitializeBattle()
+        public async UniTask InitializeBattle(int stageIndex)
         {
             systemHandles = new List<SystemHandle>();
             var world = World.DefaultGameObjectInjectionWorld;
             var rootSystemGroup = world.GetExistingSystemManaged<SimulationSystemGroup>();
-            
+
+            BattleInitializeSystem.stage = stageIndex;
             WorldManagers.Register(world, new SkillManager(world));
             WorldManagers.Register(world, new SlotManager(world));
             WorldManagers.Register(world, new BattleEventsManager(world));

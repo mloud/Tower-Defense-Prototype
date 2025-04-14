@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CastlePrototype.Data;
@@ -47,7 +48,7 @@ namespace CastlePrototype.Ui.Components
             var stageWidget = gameObject.GetComponent<StageWidget>();
             SelectedStageIndex = stageWidget.StageIndex;
             // playButton.interactable = SelectedStageIndex <= playerProgress.UnlockedStage;
-            playButton.gameObject.SetActive(SelectedStageIndex <= playerProgress.UnlockedStage);
+            playButton.gameObject.SetActive(SelectedStageIndex <= playerProgress.UnlockedStage || stageDefinitions[itemIndex].StageName.Contains("test", StringComparison.InvariantCultureIgnoreCase));
 
         }
     }
