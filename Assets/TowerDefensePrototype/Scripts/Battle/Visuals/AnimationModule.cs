@@ -50,7 +50,13 @@ namespace CastlePrototype.Battle.Visuals
             return true;
         }
 
-  
-    public void SetFloat(int id, float value) => animator.SetFloat(id, value);
+
+        public void SetFloat(int id, float value)
+        {
+            if (animator == null)
+                return;
+            
+            animator.SetFloat(id, value);
+        }
     }
 }

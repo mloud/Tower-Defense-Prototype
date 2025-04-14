@@ -32,15 +32,16 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             stageDefinitions = (await dataManager.GetAll<StageDefinition>()).ToList();
         }
 
-        public async UniTask RunStageFinishedFlow(int killedEnemies, int totalEnemies, int stage)
+        public async UniTask RunStageFinishedFlow(int killedEnemies, int totalEnemies, int stage, bool playerWon)
         {
             PauseUtils.SetLogicPaused(true, true);
+            VisualManager.Default.PauseVisualObjects();
             VisualManager.Default.SetBattleMusicPlaying(false);
         
             var battleProgress01 = (float)killedEnemies / totalEnemies;
-            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().FinishBattle(stage, battleProgress01, killedEnemies == totalEnemies);
+            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().FinishBattle(stage, battleProgress01, playerWon);
 
-            if (killedEnemies == totalEnemies)
+            if (playerWon)
             {
                 await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup(runtimeStageReward);
             }

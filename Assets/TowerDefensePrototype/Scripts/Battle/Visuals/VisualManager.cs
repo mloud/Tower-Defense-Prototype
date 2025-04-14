@@ -119,6 +119,15 @@ namespace CastlePrototype.Battle.Visuals
             return effect;
         }
 
+
+        public void PauseVisualObjects()
+        {
+            
+            foreach (var visualObject in VisualObjectsByIndex.Values.ToList())
+            {
+                visualObject.SetMoveSpeed(0);
+            }
+        }
         public void SetBattleMusicPlaying(bool isPlaying)
         {
             if (isPlaying)

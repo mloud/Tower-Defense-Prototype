@@ -65,13 +65,13 @@ namespace CastlePrototype.Battle.Logic.Systems
                 case > 0 when playerTotalHp <= 0:
 
                     WorldManagers.Get<StageManager>(state.World)
-                        .RunStageFinishedFlow(killedEnemies, totalEnemies,battleProgressionC.Stage)
+                        .RunStageFinishedFlow(killedEnemies, totalEnemies,battleProgressionC.Stage, false)
                         .Forget();
                     battleFinishResolveInProgress = true;
                     break;
                 case 0 when isLastWave:
-                    WorldManagers.Get<StageManager>(state.World).RunStageFinishedFlow
-                            (killedEnemies, totalEnemies, battleProgressionC.Stage)
+                    WorldManagers.Get<StageManager>(state.World)
+                        .RunStageFinishedFlow(killedEnemies, totalEnemies, battleProgressionC.Stage, true)
                         .Forget();
                     battleFinishResolveInProgress = true;
                     break;

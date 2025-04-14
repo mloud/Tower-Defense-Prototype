@@ -10,7 +10,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     {
         private ComponentLookup<VisualComponent> visualLookup;
         private ComponentLookup<TeamComponent> teamLoopkup;
-        private ComponentLookup<ProjectileComponent> projectileLookup;
+        private ComponentLookup<UnitComponent> unitLookup;
 
    
         public void OnCreate(ref SystemState state)
@@ -19,13 +19,14 @@ namespace CastlePrototype.Battle.Logic.Systems
             state.RequireForUpdate<BattleProgressionComponent>();
             visualLookup = state.GetComponentLookup<VisualComponent>(true);
             teamLoopkup = state.GetComponentLookup<TeamComponent>(true);
-            projectileLookup = state.GetComponentLookup<ProjectileComponent>(true);
+            unitLookup = state.GetComponentLookup<UnitComponent>(true);
         }
         
         public void OnUpdate(ref SystemState state)
         {
             visualLookup.Update(ref state);
             teamLoopkup.Update(ref state);
+            unitLookup.Update(ref state);
             
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             var deltaTime = SystemAPI.Time.DeltaTime;
@@ -44,7 +45,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                     VisualManager.Default.DestroyVisualObject(visualLookup.GetRefRO(entity).ValueRO.VisualIndex);
                 }
 
-                if (teamLoopkup.HasComponent(entity) && teamLoopkup[entity].Team == Team.Enemy && !projectileLookup.EntityExists(entity))
+                if (teamLoopkup.HasComponent(entity) && teamLoopkup[entity].Team == Team.Enemy && unitLookup.EntityExists(entity))
                 {
                     battlePoints += 1;
                     var battleStatisticComponent = SystemAPI.GetSingleton<BattleStatisticComponent>();
