@@ -11,7 +11,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     [DisableAutoCreation]
     public partial struct ProjectileSystem : ISystem
     {
-        private const float TargetTreshold = 0.2f;
+        private const float TargetTreshold = 0.4f;
         private ComponentLookup<LocalTransform> localTransformLookup;
         private EntityQuery aoeDamageEntityQuery;
         
