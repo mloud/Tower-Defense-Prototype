@@ -13,6 +13,8 @@ using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Pooling;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace CastlePrototype.States
@@ -44,6 +46,7 @@ namespace CastlePrototype.States
         {
             int stageIndex = stateData.GetValue<int>("stage");
             
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
             ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Hide(true);
@@ -76,7 +79,8 @@ namespace CastlePrototype.States
             battlePooler.Clear();
             
             view.Hide(true);
-            
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
+
             return UniTask.CompletedTask;
         }
 
