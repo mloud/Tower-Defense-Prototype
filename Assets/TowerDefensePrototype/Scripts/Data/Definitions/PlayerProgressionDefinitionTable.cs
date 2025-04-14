@@ -16,5 +16,6 @@ namespace CastlePrototype.Data.Definitions
     public class PlayerProgressionDefinition : BaseDataObject
     {
         public List<int> XpNeededToNextLevel;
+        public List<string> HeroesUnlocks;
     }
 }

@@ -19,7 +19,7 @@ namespace CastlePrototype.Managers
         UniTask InitializePlayer();
         UniTask<PlayerProgress> GetProgression();
         UniTask<HeroDeck> GetHeroDeck();
-        UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01);
+        UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won);
         UniTask<(bool, HeroProgress, HeroDefinition)> LevelUpHero(string heroId);
         UniTask<bool> CanLevelUpHero(string heroId);
         UniTask<HeroDefinition> GetHeroDefinition(string heroId);
@@ -118,11 +118,6 @@ namespace CastlePrototype.Managers
                         Level = 1
                     }},
                     {"dron", new HeroProgress
-                    {
-                        CardsCount = 0,
-                        Level = 1
-                    }},
-                    {"scorpion", new HeroProgress
                     {
                         CardsCount = 0,
                         Level = 1

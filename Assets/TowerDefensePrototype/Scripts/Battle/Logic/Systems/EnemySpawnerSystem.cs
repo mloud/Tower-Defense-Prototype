@@ -8,7 +8,6 @@ using Unity.Entities;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
 
 
 namespace CastlePrototype.Battle.Logic.Systems

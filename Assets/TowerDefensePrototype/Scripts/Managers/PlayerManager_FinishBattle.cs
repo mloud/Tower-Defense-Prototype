@@ -10,7 +10,7 @@ namespace CastlePrototype.Managers
 {
     public partial class PlayerManager
     {
-        public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01)
+        public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won)
         {
             var runtimeStageReward = new RuntimeStageReward();
             
@@ -57,7 +57,7 @@ namespace CastlePrototype.Managers
 
 
             // stage is finished
-            if (progression01 == 1)
+            if (won)
             {
                 var progression = await GetProgression();
                 var stagesDefinitions = await GetAllStageDefinitions();
@@ -76,6 +76,20 @@ namespace CastlePrototype.Managers
                 {
                     progression.Xp -= xpNeededForNextLevel;
                     progression.Level++;
+                    if (progression.Level < playerProgressionDefinition.HeroesUnlocks.Count)
+                    {
+                        var heroToUnlock = playerProgressionDefinition.HeroesUnlocks[progression.Level];
+
+                        if (!string.IsNullOrEmpty(heroToUnlock))
+                        {
+                           heroDeck.Heroes.Add(heroToUnlock, new HeroProgress
+                           {
+                               Level = 1,
+                               CardsCount = 0
+                           });
+                           await SaveHeroDeck(heroDeck);
+                        }
+                    }
                 }
 
                 int xpForNextLevel = progression.Level < playerProgressionDefinition.XpNeededToNextLevel.Count

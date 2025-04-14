@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - XpNeededToNextLevel: 00000000320000003c0000004b000000
+    HeroesUnlocks:
+    - 
+    - 
+    - scorpion
+    - 
