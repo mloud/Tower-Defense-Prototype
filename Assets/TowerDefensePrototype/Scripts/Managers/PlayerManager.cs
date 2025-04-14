@@ -4,10 +4,8 @@ using System.Linq;
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
 using OneDay.Core;
 using OneDay.Core.Debugging;
-using OneDay.Core.Extensions;
 using OneDay.Core.Modules.Data;
 using UnityEngine;
 
@@ -15,7 +13,9 @@ namespace CastlePrototype.Managers
 {
     public interface IPlayerManager
     {
-        Action<(HeroProgress progress, HeroDefinition definition)> OnHeroLeveledUp { get; set; }
+        Action<(HeroProgress progress, HeroDefinition definition)> OnHeroLeveledUp { get; set; } 
+        Action<(int newXp, int nextXpNeeded, int prevLevel, int currentLevel)> OnXpChanged { get; set; }
+        
         UniTask InitializePlayer();
         UniTask<PlayerProgress> GetProgression();
         UniTask<HeroDeck> GetHeroDeck();
@@ -26,6 +26,8 @@ namespace CastlePrototype.Managers
         UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId);
         UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions();
         UniTask<StageDefinition> GetStageDefinition(int index);
+        UniTask<PlayerProgressionDefinition> GetPlayerProgressionDefinition();
+        UniTask<(int xp, int xpNextLevel, int level)> GetProgressionInfo();
     }
 
     public partial class PlayerManager : MonoBehaviour, IPlayerManager, IService
@@ -42,35 +44,13 @@ namespace CastlePrototype.Managers
 
         public UniTask PostInitialize() => UniTask.CompletedTask;
 
-        public async UniTask<PlayerProgress> GetProgression()
-            => (await dataManager.GetAll<PlayerProgress>()).FirstOrDefault();
 
         public async UniTask SaveProgression(PlayerProgress progress) => 
             await dataManager.Actualize<PlayerProgress>(progress);
 
-
-        public async UniTask<HeroDeck> GetHeroDeck() =>
-            (await dataManager.GetAll<HeroDeck>()).FirstOrDefault();
-
-        public async UniTask<HeroDefinition> GetHeroDefinition(string heroId) =>
-            (await dataManager.GetAll<HeroDefinition>()).FirstOrDefault(x => x.UnitId == heroId);
-
         public async UniTask SaveHeroDeck(HeroDeck heroDeck) =>
             await dataManager.Actualize<HeroDeck>(heroDeck);
 
-
-        public async UniTask<StageDefinition> GetStageDefinition(int stage) =>
-            (await dataManager.GetAll<StageDefinition>()).ElementAt(stage);
-
-        public async UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions() =>
-            await dataManager.GetAll<StageDefinition>();
-   
-        public async UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId)
-        {
-            var heroDefinition = await GetHeroDefinition(heroId);
-            var heroProgress = (await GetHeroDeck()).Heroes[heroId];
-            return (heroProgress, heroDefinition);
-        }
 
         public async UniTask<bool> CanLevelUpHero(string heroId)
         {

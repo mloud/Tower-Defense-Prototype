@@ -61,6 +61,7 @@ MonoBehaviour:
       SpawnInterval: 0.1
     Reward:
       Cards: 120
+      Xp: 50
   - StageName: Test
     Waves:
     - Time: 0
@@ -69,6 +70,7 @@ MonoBehaviour:
       SpawnInterval: 0
     Reward:
       Cards: 0
+      Xp: 0
   - StageName: Golem Test
     Waves:
     - Time: 0
@@ -77,3 +79,4 @@ MonoBehaviour:
       SpawnInterval: 0
     Reward:
       Cards: 0
+      Xp: 0

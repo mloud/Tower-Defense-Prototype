@@ -4,5 +4,6 @@ namespace CastlePrototype.Data.Definitions
     public class StageReward
     {
         public int Cards;
+        public int Xp;
     }
 }

@@ -66,7 +66,23 @@ namespace CastlePrototype.Managers
                     progression.UnlockedStage++;
                 }
 
+                var playerProgressionDefinition = await GetPlayerProgressionDefinition();
+                var xpNeededForNextLevel = playerProgressionDefinition.XpNeededToNextLevel[progression.Level];
+
+                int prevLevel = progression.Level;
+                
+                progression.Xp += stageDefinition.Reward.Xp;
+                if (progression.Xp >= xpNeededForNextLevel)
+                {
+                    progression.Xp -= xpNeededForNextLevel;
+                    progression.Level++;
+                }
+
+                int xpForNextLevel = progression.Level < playerProgressionDefinition.XpNeededToNextLevel.Count
+                    ? playerProgressionDefinition.XpNeededToNextLevel[progression.Level]
+                    : 0;
                 await SaveProgression(progression);
+                OnXpChanged?.Invoke((progression.Xp,xpForNextLevel, prevLevel, progression.Level));
             }
             
             return runtimeStageReward;

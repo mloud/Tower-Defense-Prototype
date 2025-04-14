@@ -46,6 +46,9 @@ public class CastlePrototypApp : ABaseApp
         
         var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());
         await UniTask.WhenAll(initializeTasks);
+
+        await InitializeStorages();
+        await ServiceLocator.Get<IPlayerManager>().InitializePlayer();
         
         var postInitializeTasks = ServiceLocator.GetAll().Select(x => x.PostInitialize());
         await UniTask.WhenAll(postInitializeTasks);
@@ -66,7 +69,7 @@ public class CastlePrototypApp : ABaseApp
         await StateMachineEnvironment.Default.SetStateAsync<BootState>();
     }
 
-    protected override async UniTask OnBoot()
+    private async UniTask InitializeStorages()
     {
         // storages
         ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgress>(new LocalStorage());
@@ -77,7 +80,7 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
-        ServiceLocator.Get<IDataManager>().RegisterStorage<WeaponDefinition>(new AddressableScriptableObjectStorage());
+        ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgressionDefinition>(new AddressableScriptableObjectStorage());
 
         // storage bindings   
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgress>(TypeToDataKeyBinding.PlayerProgress);
@@ -88,8 +91,10 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<StageDefinition>(TypeToDataKeyBinding.StageDefinitionsTable);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<EnemyDefinition>(TypeToDataKeyBinding.EnemyDefinitionsTable);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDefinition>(TypeToDataKeyBinding.HeroDefinitionsTable);
-        ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<WeaponDefinition>(TypeToDataKeyBinding.WeaponDefinitionsTable);
-      
-        await ServiceLocator.Get<IPlayerManager>().InitializePlayer();
+        ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgressionDefinition>(TypeToDataKeyBinding.PlayerProgressionDefinitionTable);
+    }
+    protected override async UniTask OnBoot()
+    {
+        
     }
 }

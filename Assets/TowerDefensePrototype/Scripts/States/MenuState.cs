@@ -23,6 +23,8 @@ namespace CastlePrototype.States
         public override async UniTask EnterAsync(StateData stateData = null)
         {
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
+            ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Show(true);
+            
             await view.StageContainer.Refresh();
             view.Show(true);
         }

@@ -46,7 +46,8 @@ namespace CastlePrototype.States
             
             
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
-
+            ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Hide(true);
+            
             var loading = ServiceLocator.Get<ILoading>();
             loading.Show();
             await battlePooler.Pool(loading);

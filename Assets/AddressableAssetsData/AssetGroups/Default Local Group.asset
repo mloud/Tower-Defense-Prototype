@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c968b4b53bac4dbda060d3c4e54d7e7
+    m_Address: PlayerProgressionDefinitionTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2436329aa0f224b7580a7261647269a2
     m_Address: EnemyDefinitionsTable
     m_ReadOnly: 0
