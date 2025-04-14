@@ -16,19 +16,19 @@ MonoBehaviour:
   - StageName: Beginning
     Waves:
     - Time: 0
-      EnemiesCount: 5
+      EnemiesCount: 4
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 15
-      EnemiesCount: 7
+      EnemiesCount: 5
       EnemyId: dragon
       SpawnInterval: 3
     - Time: 30
-      EnemiesCount: 10
+      EnemiesCount: 6
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 45
-      EnemiesCount: 20
+      EnemiesCount: 12
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 60
@@ -48,17 +48,17 @@ MonoBehaviour:
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 80
-      EnemiesCount: 20
+      EnemiesCount: 14
       EnemyId: zombie
       SpawnInterval: 2
     - Time: 95
-      EnemiesCount: 10
+      EnemiesCount: 8
       EnemyId: dragon
       SpawnInterval: 2
     - Time: 105
-      EnemiesCount: 30
+      EnemiesCount: 12
       EnemyId: zombie
-      SpawnInterval: 0.1
+      SpawnInterval: 3
     Reward:
       Cards: 120
       Xp: 50
