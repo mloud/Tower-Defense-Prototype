@@ -16,7 +16,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     [DisableAutoCreation]
     public partial struct EnemySpawnerSystem : ISystem
     {
-        private const int SpawnSquaresCount = 20;
+        private const int SpawnSquaresCount = 10;
 
         private const int MinEnemiesInMicroWave = 2;
         private const int MaxEnemiesInMicroWave = 5;
@@ -55,7 +55,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                     float nextSpawnIntervalInWave = spawner.waves[spawner.currentWave].SpawnInterval;
 
                     int remainingEnemies = spawner.waves[spawner.currentWave].EnemiesCount - spawner.spawnedThisWave;
-                    int spawnedEnemiesInTheSpawn = math.min(remainingEnemies, UnityEngine.Random.Range(MinEnemiesInMicroWave, MinEnemiesInMicroWave+1));
+                    int spawnedEnemiesInTheSpawn = math.min(remainingEnemies, UnityEngine.Random.Range(MinEnemiesInMicroWave, MaxEnemiesInMicroWave+1));
                     
                     // spawn next enemy line
                     if (spawner.elapsedTime - spawner.lastSpawnTime >= nextSpawnIntervalInWave)
