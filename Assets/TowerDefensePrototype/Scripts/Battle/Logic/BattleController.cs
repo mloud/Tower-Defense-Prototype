@@ -5,7 +5,9 @@ using CastlePrototype.Battle.Logic.Managers.Skills;
 using CastlePrototype.Battle.Logic.Managers.Slots;
 using CastlePrototype.Battle.Logic.Systems;
 using CastlePrototype.Battle.Visuals;
+using CastlePrototype.Managers;
 using Cysharp.Threading.Tasks;
+using OneDay.Core;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
@@ -24,6 +26,7 @@ namespace CastlePrototype.Battle.Logic
             var rootSystemGroup = world.GetExistingSystemManaged<SimulationSystemGroup>();
 
             BattleInitializeSystem.stage = stageIndex;
+            BattleInitializeSystem.stageName = (await ServiceLocator.Get<IPlayerManager>().GetStageDefinition(stageIndex)).StageName;
             WorldManagers.Register(world, new SkillManager(world));
             WorldManagers.Register(world, new SlotManager(world));
             WorldManagers.Register(world, new BattleEventsManager(world));

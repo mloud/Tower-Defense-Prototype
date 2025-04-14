@@ -9,15 +9,9 @@ namespace CastlePrototype.Ui.Battle
     {
         [SerializeField] private Image fillImage;
         [SerializeField] private TextMeshProUGUI label;
-        private void OnEnable()
-        {
-            BattlePointsChanged.Event.Subscribe(OnBattlePointsChanged);
-        }
+        private void OnEnable() => BattlePointsChanged.Event.Subscribe(OnBattlePointsChanged);
 
-        private void OnDisable()
-        {
-            BattlePointsChanged.Event.UnSubscribe(OnBattlePointsChanged);
-        }
+        private void OnDisable() => BattlePointsChanged.Event.UnSubscribe(OnBattlePointsChanged);
 
         private void OnBattlePointsChanged(int current, int total)
         {

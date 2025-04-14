@@ -14,6 +14,8 @@ namespace CastlePrototype.Battle.Logic.Systems
     {
         private bool finished;
         public static int stage = 0;
+        public static string stageName;
+        
         public void OnUpdate(ref SystemState state)
         {
             if (finished) return;
@@ -30,6 +32,10 @@ namespace CastlePrototype.Battle.Logic.Systems
             var wallEntity = WorldManagers.Get<UnitManager>(state.World).CreateBarricade(ref state, barricadePosition);
             WorldManagers.Get<BattleEventsManager>(state.World)
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));
+            
+            WorldManagers.Get<BattleEventsManager>(state.World)
+                .UpdateStage(stageName, stage);
+
             
             var slot = WorldManagers.Get<SlotManager>(state.World).GetInitialSlot();
             WorldManagers.Get<UnitManager>(state.World).CreateHeroUnit(ref ecb, slot.Position, "weapon");

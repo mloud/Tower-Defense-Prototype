@@ -25,6 +25,7 @@ namespace CastlePrototype.Managers
         UniTask<HeroDefinition> GetHeroDefinition(string heroId);
         UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId);
         UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions();
+        UniTask<StageDefinition> GetStageDefinition(int index);
     }
 
     public partial class PlayerManager : MonoBehaviour, IPlayerManager, IService
@@ -63,8 +64,7 @@ namespace CastlePrototype.Managers
 
         public async UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions() =>
             await dataManager.GetAll<StageDefinition>();
-
-
+   
         public async UniTask<(HeroProgress progress, HeroDefinition definition)> GetUnlockedHero(string heroId)
         {
             var heroDefinition = await GetHeroDefinition(heroId);

@@ -19,4 +19,9 @@ namespace CastlePrototype.Battle.Events
     {
         public static BattleEvent<float, float> Event = new();
     }
+    
+    public static class StageChanged
+    {
+        public static BattleEvent<string, int> Event = new();
+    }
 }

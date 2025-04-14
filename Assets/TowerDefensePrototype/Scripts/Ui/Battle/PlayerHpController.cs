@@ -9,15 +9,9 @@ namespace CastlePrototype.Ui.Battle
     {
         [SerializeField] private Image fillImage;
         [SerializeField] private TextMeshProUGUI label;
-        private void OnEnable()
-        {
-            PlayerHpChanged.Event.Subscribe(OnPlayerHPChanged);
-        }
+        private void OnEnable() => PlayerHpChanged.Event.Subscribe(OnPlayerHPChanged);
 
-        private void OnDisable()
-        {
-            PlayerHpChanged.Event.UnSubscribe(OnPlayerHPChanged);
-        }
+        private void OnDisable() => PlayerHpChanged.Event.UnSubscribe(OnPlayerHPChanged);
 
         private void OnPlayerHPChanged(float current, float total)
         {

@@ -9,15 +9,9 @@ namespace CastlePrototype.Ui.Battle
         [SerializeField] private TextMeshProUGUI currentWave;
         [SerializeField] private TextMeshProUGUI totalWaves;
         
-        private void OnEnable()
-        {
-            WaveCounterChanged.Event.Subscribe(OnWaveChanged);
-        }
+        private void OnEnable() => WaveCounterChanged.Event.Subscribe(OnWaveChanged);
 
-        private void OnDisable()
-        {
-            WaveCounterChanged.Event.UnSubscribe(OnWaveChanged);
-        }
+        private void OnDisable() => WaveCounterChanged.Event.UnSubscribe(OnWaveChanged);
 
         private void OnWaveChanged(int current, int total)
         {
