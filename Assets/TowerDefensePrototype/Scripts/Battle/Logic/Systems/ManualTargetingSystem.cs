@@ -1,0 +1,51 @@
+using CastlePrototype.Battle.Logic.Components;
+using CastlePrototype.Battle.Visuals;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine;
+
+namespace CastlePrototype.Battle.Logic.Systems
+{ 
+    [DisableAutoCreation]
+    public partial struct ManualTargetingSystem : ISystem
+    {
+        private ComponentLookup<LocalTransform> transformLookup;
+        
+        public void OnCreate(ref SystemState state)
+        {
+            transformLookup = state.GetComponentLookup<LocalTransform>();
+            state.RequireForUpdate<WeaponComponent>();
+        }
+        
+        public void OnUpdate(ref SystemState state)
+        {
+            transformLookup.Update(ref state);
+            var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
+            
+            if (Input.GetMouseButton(0))
+            {
+                var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
+                var weaponScreenPos = VisualManager.Default.MainCamera.WorldToScreenPoint(transformLookup[weaponEntity].Position);
+                var mousePos = Input.mousePosition;
+                var screenDir = (mousePos - weaponScreenPos).normalized;
+                var direction = new float3(screenDir.x, 0f, screenDir.y);
+                var rotation = quaternion.LookRotationSafe(direction, math.up());
+
+                
+                if (!state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
+                    ecb.AddComponent<ManualTargetingComponent>(weaponEntity);
+
+                transformLookup.GetRefRW(weaponEntity).ValueRW.Rotation = rotation;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
+                if (state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
+                    ecb.RemoveComponent<ManualTargetingComponent>(weaponEntity);
+            }
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+        }
+    }
+}

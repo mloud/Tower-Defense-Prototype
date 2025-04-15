@@ -28,6 +28,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             hpLookup = state.GetComponentLookup<HpComponent>(true);
             teamLookup = state.GetComponentLookup<TeamComponent>(true);
             lookAtTargetLookup = state.GetComponentLookup<LookAtTargetComponent>();
+            
 
             
             aoeDamageEntityQuery = state.GetEntityQuery(
@@ -55,14 +56,32 @@ namespace CastlePrototype.Battle.Logic.Systems
                          RefRW<SettingComponent>,
                          RefRW<TeamComponent>>().WithEntityAccess())
             {
-                var targetPositionC = transformLookup.GetRefRO(targetC.ValueRO.Target);
-                var targetSettingsC = settingLookup.GetRefRO(targetC.ValueRO.Target);
-               
-                var sqrDistance = Utils.DistanceSqr(
-                    transformC.ValueRO.Position, settingC.ValueRO.DistanceAxes,
-                    targetPositionC.ValueRO.Position, targetSettingsC.ValueRO.DistanceAxes);
-                
-                if (sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance)
+
+                bool isInAttackRange = false;
+                bool isManualTargetingActive = state.EntityManager.HasComponent<ManualTargetingComponent>(entity);
+                Entity targetEntity;
+                float3 targetPosition;
+                if (isManualTargetingActive)
+                {
+                    targetEntity = Entity.Null;
+                    targetPosition = transformC.ValueRO.Position + math.forward(transformC.ValueRO.Rotation);
+                    isInAttackRange = true;
+                }
+                else
+                {
+                    targetEntity = targetC.ValueRO.Target;
+                    var targetPositionC = transformLookup.GetRefRO(targetEntity);
+                    var targetSettingsC = settingLookup.GetRefRO(targetEntity);
+                    targetPosition = targetPositionC.ValueRO.Position;
+                    
+                    var sqrDistance = Utils.DistanceSqr(
+                        transformC.ValueRO.Position, settingC.ValueRO.DistanceAxes,
+                        targetPositionC.ValueRO.Position, targetSettingsC.ValueRO.DistanceAxes);
+                    isInAttackRange = sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance;
+                    
+                }
+
+                if (isInAttackRange)
                 {
                     attackC.ValueRW.IsInAttackDistance = true;
 
@@ -78,11 +97,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                     }
                     attackC.ValueRW.NextMainAttackTime -= SystemAPI.Time.DeltaTime;
                     timeToAttack = math.min(timeToAttack, attackC.ValueRW.NextMainAttackTime);
-                  
-                    
                     // end of updating attack times
                
-                    if (lookAtTargetLookup.HasComponent(entity))
+                    
+                    if (!isManualTargetingActive && lookAtTargetLookup.HasComponent(entity))
                     {
                         const float timeBeforeLookAtTarget = 0.3f;
                         // starts to rotate towards target
@@ -131,10 +149,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref state, 
                                     ref ecb, 
                                     ref transformC.ValueRW, 
-                                    targetC.ValueRO.Target, 
+                                    targetEntity, 
                                     transformC.ValueRO.Position,
                                     teamC.ValueRO.Team,
-                                    targetPositionC.ValueRO.Position,
+                                    targetPosition,
                                     battleFieldComponent.MinCorner,
                                     battleFieldComponent.MaxCorner,
                                     attackC.ValueRO.AttackDamage,

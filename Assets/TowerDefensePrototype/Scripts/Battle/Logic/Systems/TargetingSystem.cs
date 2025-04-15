@@ -15,6 +15,8 @@ namespace CastlePrototype.Battle.Logic.Systems
         private ComponentLookup<TeamComponent> teamLookup;
         private ComponentLookup<TargetComponent> targetLookup;
         private ComponentLookup<TargetedComponent> targetedLookup;
+        private ComponentLookup<ManualTargetingComponent> manualTargetingLookup;
+
 
         
         private const float TargetingDelay = 0.5f;
@@ -28,6 +30,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             teamLookup = state.GetComponentLookup<TeamComponent>(true);
             targetLookup = state.GetComponentLookup<TargetComponent>();
             targetedLookup = state.GetComponentLookup<TargetedComponent>();
+            manualTargetingLookup = state.GetComponentLookup<ManualTargetingComponent>(true);
         }
         
         public void OnUpdate(ref SystemState state)
@@ -43,6 +46,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             teamLookup.Update(ref state);
             targetLookup.Update(ref state);
             targetedLookup.Update(ref state);
+            manualTargetingLookup.Update(ref state);
 
             
             var ecb = new EntityCommandBuffer(Allocator.Temp);
@@ -59,12 +63,15 @@ namespace CastlePrototype.Battle.Logic.Systems
                 }
             }
    
-         
             foreach (var (transform, attackC, settingC, entity) in 
                      SystemAPI.Query<RefRO<LocalTransform>, RefRO<AttackComponent>, RefRO<SettingComponent>>()
                          .WithAll<TeamComponent>()
                          .WithEntityAccess())
             {
+                
+                // skip entities with manual targeting
+                if (manualTargetingLookup.HasComponent(entity))
+                    continue;
                 
                 if (HasValidTarget(ref state, entity, attackC.ValueRO.AttackDistance))
                     continue; 

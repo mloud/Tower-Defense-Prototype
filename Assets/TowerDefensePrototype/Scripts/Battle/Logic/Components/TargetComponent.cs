@@ -1,4 +1,3 @@
-using CastlePrototype.Data;
 using Unity.Entities;
 
 namespace CastlePrototype.Battle.Logic.Components
@@ -7,5 +6,8 @@ namespace CastlePrototype.Battle.Logic.Components
     {
       //  public TargetingType TargetingType;
         public Entity Target;
+
+        // this is flag for player weapon that could be controlled by player
+        public bool ManualTargetingActive;
     }
 }

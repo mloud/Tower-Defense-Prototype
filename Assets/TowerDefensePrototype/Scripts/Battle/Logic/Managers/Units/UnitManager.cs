@@ -73,6 +73,10 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 
                 var entity = CreateUnit(ref ecb, position, definition, Team.Player, level);
                 ecb.AddComponent(entity, new LookAtTargetComponent());
+                if (heroId == "weapon")
+                {
+                    ecb.AddComponent<WeaponComponent>(entity);
+                }
                 return entity;
             }
             

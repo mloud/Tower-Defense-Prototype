@@ -43,6 +43,7 @@ namespace CastlePrototype.Battle.Logic
             systemHandles.Add(world.GetOrCreateSystem<BattleInitializeSystem>());
             systemHandles.Add(world.GetOrCreateSystem<EnemySpawnerSystem>());
             systemHandles.Add(world.GetOrCreateSystem<MovementSystem>());
+            systemHandles.Add(world.GetOrCreateSystem<ManualTargetingSystem>());
             systemHandles.Add(world.GetOrCreateSystem<TargetingSystem>());
             systemHandles.Add(world.GetOrCreateSystem<LookAtTargetSystem>());
             systemHandles.Add(world.GetOrCreateSystem<AttackSystem>());

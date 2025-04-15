@@ -13,6 +13,8 @@ namespace CastlePrototype.Battle.Visuals
 {
     public class VisualManager : IDisposable
     {
+        public Camera MainCamera;
+        
         private IVisualFactory VisualFactory { get; }
         private IEffectFactory EffectFactory { get; }
         private Dictionary<int, VisualObject> VisualObjectsByIndex { get; }
@@ -26,6 +28,7 @@ namespace CastlePrototype.Battle.Visuals
         
         public VisualManager(IVisualFactory visualFactory, IEffectFactory effectFactory, Transform uiPanel)
         {
+            MainCamera = Camera.main;
             visualCounter = -1;
             Default = this;
             VisualFactory = visualFactory;
