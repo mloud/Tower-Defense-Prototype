@@ -22,6 +22,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                 var visual = VisualManager.Default.OnUnitCreated(visualC.ValueRO.VisualId.ToString());
                 visualC.ValueRW.VisualIndex = visual.Index;
                 visualC.ValueRW.HasVisual = true;
+
+                if (visualC.ValueRO.Level > 0)
+                {
+                    visual.SetLevel(visualC.ValueRO.Level);
+                }
             }
 
             // Sync visuals' position and rotation

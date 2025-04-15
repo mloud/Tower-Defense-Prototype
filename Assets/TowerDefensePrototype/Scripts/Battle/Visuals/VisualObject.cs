@@ -124,6 +124,12 @@ namespace CastlePrototype.Battle.Visuals
             }
         }
 
+        public void SetLevel(int level)
+        {
+            if (cooldownProgressBar == null)
+                return;
+            cooldownProgressBar.SetValue(level);
+        }
         public void SetAttackCooldown(float progress01)
         {
             if (cooldownProgressBar == null)

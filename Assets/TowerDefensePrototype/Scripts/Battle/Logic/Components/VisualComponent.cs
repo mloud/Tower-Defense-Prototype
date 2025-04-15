@@ -9,6 +9,8 @@ namespace CastlePrototype.Battle.Logic.Components
         public FixedString64Bytes VisualId;
         // assigned VisualManager after creation
         public int VisualIndex;
+
+        public int Level;
         public bool HasVisual;
     }
 }

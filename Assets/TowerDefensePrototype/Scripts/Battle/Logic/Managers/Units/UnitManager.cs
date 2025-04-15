@@ -69,7 +69,9 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         {
             if (heroDefinitions.TryGetValue(heroId, out var definition))
             {
-                var entity = CreateUnit(ref ecb, position, definition, Team.Player);
+                int level = heroDeck.Heroes[heroId].Level;
+                
+                var entity = CreateUnit(ref ecb, position, definition, Team.Player, level);
                 ecb.AddComponent(entity, new LookAtTargetComponent());
                 return entity;
             }
@@ -81,16 +83,17 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
         
         public Entity CreateEnemyUnit(ref EntityCommandBuffer ecb, float3 position, string heroId)
         {
+            int level = 1;
             if (enemyDefinitions.TryGetValue(heroId, out var definition))
             {
-                return CreateUnit(ref ecb, position, definition, Team.Enemy);
+                return CreateUnit(ref ecb, position, definition, Team.Enemy, level);
             }
 
             Debug.Assert(false, $"No such enemy definition with id {heroId} exists");
             return Entity.Null;
         }
 
-        private Entity CreateUnit(ref EntityCommandBuffer ecb, float3 position, HeroDefinition definition, Team team)
+        private Entity CreateUnit(ref EntityCommandBuffer ecb, float3 position, HeroDefinition definition, Team team, int level)
         {
             var entity = ecb.CreateEntity();
             if (definition.MoveSpeed > 0)
@@ -98,7 +101,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 ecb.AddComponent(entity, new MovementComponent { Speed = definition.MoveSpeed, MaxSpeed = definition.MoveSpeed});
             }
 
-            int level = 1;
+           
             if (team == Team.Player)
             {
                 level = heroDeck.Heroes[definition.UnitId].Level;
@@ -114,7 +117,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             ecb.AddComponent(entity, new UnitComponent { DefinitionId = definition.UnitId });
             ecb.AddComponent(entity, new LocalTransform { Position = position });
             ecb.AddComponent(entity, new TeamComponent { Team = team });
-            ecb.AddComponent(entity, new VisualComponent { VisualId = definition.VisualId });
+            ecb.AddComponent(entity, new VisualComponent { VisualId = definition.VisualId,Level = level});
             ecb.AddComponent(entity, new SettingComponent { DistanceAxes = new float3(1, 0, 1) });
             ecb.AddComponent(entity, new AttackComponent
             {
