@@ -24,15 +24,15 @@ MonoBehaviour:
       EnemyId: dragon
       SpawnInterval: 3
     - Time: 30
-      EnemiesCount: 6
+      EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 45
-      EnemiesCount: 12
+      EnemiesCount: 10
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 60
-      EnemiesCount: 5
+      EnemiesCount: 4
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 63
@@ -44,39 +44,82 @@ MonoBehaviour:
       EnemyId: boss
       SpawnInterval: 3
     - Time: 60
-      EnemiesCount: 6
+      EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 80
-      EnemiesCount: 14
+      EnemiesCount: 10
       EnemyId: zombie
       SpawnInterval: 2
     - Time: 95
-      EnemiesCount: 8
+      EnemiesCount: 6
       EnemyId: dragon
       SpawnInterval: 2
     - Time: 105
-      EnemiesCount: 12
+      EnemiesCount: 10
       EnemyId: zombie
       SpawnInterval: 3
     Reward:
       Cards: 120
       Xp: 50
-  - StageName: Test
+  - StageName: Meet the Dragon
     Waves:
     - Time: 0
+      EnemiesCount: 5
+      EnemyId: dragon
+      SpawnInterval: 3
+    - Time: 15
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 3
+    - Time: 30
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 3
+    - Time: 45
+      EnemiesCount: 10
+      EnemyId: zombie
+      SpawnInterval: 3
+    - Time: 60
+      EnemiesCount: 4
+      EnemyId: zombie
+      SpawnInterval: 3
+    - Time: 63
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 3
+    - Time: 60
       EnemiesCount: 1
       EnemyId: boss
-      SpawnInterval: 0
-    Reward:
-      Cards: 0
-      Xp: 0
-  - StageName: Golem Test
-    Waves:
-    - Time: 0
+      SpawnInterval: 3
+    - Time: 60
+      EnemiesCount: 5
+      EnemyId: zombie
+      SpawnInterval: 3
+    - Time: 80
+      EnemiesCount: 10
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 95
+      EnemiesCount: 6
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 105
+      EnemiesCount: 5
+      EnemyId: dragon
+      SpawnInterval: 3
+    - Time: 110
+      EnemiesCount: 12
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 115
       EnemiesCount: 1
       EnemyId: golem
       SpawnInterval: 0
+    - Time: 120
+      EnemiesCount: 5
+      EnemyId: dragon
+      SpawnInterval: 0
     Reward:
-      Cards: 0
-      Xp: 0
+      Cards: 120
+      Xp: 50
