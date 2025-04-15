@@ -12,16 +12,18 @@ namespace CastlePrototype.Battle.Logic.Systems
     public partial struct DamageSystem : ISystem
     {
         private ComponentLookup<VisualComponent> visualLookup;
-
+        private ComponentLookup<DestroyComponent> destroyLookup;
         public void OnCreate(ref SystemState state)
         {
             visualLookup = state.GetComponentLookup<VisualComponent>();
+            destroyLookup = state.GetComponentLookup<DestroyComponent>();
         }
         
         public void OnUpdate(ref SystemState state)
         {
             visualLookup.Update(ref state);
-
+            destroyLookup.Update(ref state);
+            
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             
             foreach (var (damageC, hpC, teamC, localTrC, entity) in 
@@ -49,7 +51,14 @@ namespace CastlePrototype.Battle.Logic.Systems
                 // death
                 if (hpC.ValueRO.Hp <= 0)
                 {
-                    ecb.AddComponent<DestroyComponent>(entity);
+                    if (!destroyLookup.HasComponent(entity))
+                    {
+                        ecb.AddComponent<DestroyComponent>(entity);
+                    }
+                    else
+                    {
+                        Debug.Assert(false, "already has destroy component");
+                    }
                 }
                 else
                 {
