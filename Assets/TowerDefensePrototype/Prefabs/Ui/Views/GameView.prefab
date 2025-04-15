@@ -438,8 +438,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -242.02643, y: -99.140015}
-  m_SizeDelta: {x: 271.6755, y: 154.04004}
+  m_AnchoredPosition: {x: -234, y: -99.143}
+  m_SizeDelta: {x: 305.4954, y: 154.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7819978724409267565
 MonoBehaviour:
@@ -1994,7 +1994,7 @@ PrefabInstance:
     - target: {fileID: 2329525236084027179, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 277.84
+      value: 309.2079
       objectReference: {fileID: 0}
     - target: {fileID: 2329525236084027179, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
@@ -2039,7 +2039,7 @@ PrefabInstance:
     - target: {fileID: 2329525236084027179, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0000054836
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2329525236084027179, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
@@ -2069,7 +2069,7 @@ PrefabInstance:
     - target: {fileID: 5024661875544011057, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
       propertyPath: m_text
-      value: Beginning
+      value: Meet the Dragon
       objectReference: {fileID: 0}
     - target: {fileID: 5024661875544011057, guid: 21453f88af31147d898fb9cb659d7083,
         type: 3}
