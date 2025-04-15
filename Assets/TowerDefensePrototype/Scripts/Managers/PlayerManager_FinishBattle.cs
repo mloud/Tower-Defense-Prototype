@@ -61,7 +61,14 @@ namespace CastlePrototype.Managers
             {
                 var progression = await GetProgression();
                 var stagesDefinitions = await GetAllStageDefinitions();
-                if (stage == progression.UnlockedStage && stage + 1 < stagesDefinitions.Count())
+
+                // we won again prev stage - dont do anything for now
+                if (stage < progression.UnlockedStage)
+                {
+                    return runtimeStageReward;
+                }
+             
+                if (stage + 1 < stagesDefinitions.Count())
                 {
                     progression.UnlockedStage++;
                 }
