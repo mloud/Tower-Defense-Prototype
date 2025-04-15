@@ -20,7 +20,7 @@ namespace CastlePrototype.Ui.Components
                     ? null : heroDefinition.GetLeveledHeroStat((StatUpgradeType)i, heroProgress.Level + 1);
 
                 var statItem = Get(i);
-                if (currentStat == 0 && nextStat == null || nextStat.Value == 0)
+                if (currentStat == 0 || nextStat == null || nextStat.Value == 0)
                 {
                     statItem.gameObject.SetActive(false);
                 }
