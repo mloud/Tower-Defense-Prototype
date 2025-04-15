@@ -27,6 +27,8 @@ namespace CastlePrototype.Battle.Logic.Systems
             // Sync visuals' position and rotation
             foreach (var (transform, visualComp) in SystemAPI.Query<RefRO<LocalTransform>, RefRO<VisualComponent>>())
             {
+                if (!visualComp.ValueRO.HasVisual) continue;
+
                 var visual = VisualManager.Default.GetVisualObject(visualComp.ValueRO.VisualIndex);
                 visual.SetPosition(transform.ValueRO.Position);
                 visual.SetRotation(transform.ValueRO.Rotation);
