@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using CastlePrototype.Battle.Visuals.Effects;
 using OneDay.Core.Modules.Pooling;
 using TowerDefensePrototype.Battle.Visuals.Effects;
@@ -32,8 +33,11 @@ namespace CastlePrototype.Battle.Visuals
      
         [Tooltip("This transform's rotation will be rotated, by default root transform, but could be maze as well")]
         [SerializeField] private Transform objectToRotate;
-
         [SerializeField] private bool trackOnEnable;
+
+        [SerializeField] private List<GameObject> goList;
+        
+        private Dictionary<string, GameObject> goCache;
         
         public string Id => id;
         public float DefaultHeight => defaultHeight;
@@ -48,6 +52,12 @@ namespace CastlePrototype.Battle.Visuals
         private bool isShowingAttackDistance;
         private void Awake()
         {
+            goCache = new Dictionary<string, GameObject>();
+            foreach (var t in goList)
+            {
+                goCache.Add(t.name, t);
+            }
+            
             effectModule = GetComponent<EffectModule>();
             mainCamera = Camera.main;
             if (objectToRotate == null)
@@ -95,6 +105,19 @@ namespace CastlePrototype.Battle.Visuals
             }
         }
 
+        public void SetGameObjectActive(string goName,  bool isActive)
+        {
+            goCache.TryGetValue(goName, out var go);
+
+            if (go == null)
+            {
+                Debug.LogError($"No game object with name {goName}, found inside {gameObject.name}", gameObject);
+            }
+            else
+            {
+                go.SetActive(isActive);
+            }
+        }
 
         public void ShowDamage(float amount)
         {

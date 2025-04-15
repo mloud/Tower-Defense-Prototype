@@ -11,16 +11,19 @@ namespace CastlePrototype.Battle.Logic.Systems
     public partial struct ManualTargetingSystem : ISystem
     {
         private ComponentLookup<LocalTransform> transformLookup;
-        
+        private ComponentLookup<VisualComponent> visualLookup;
         public void OnCreate(ref SystemState state)
         {
             transformLookup = state.GetComponentLookup<LocalTransform>();
+            visualLookup = state.GetComponentLookup<VisualComponent>();
             state.RequireForUpdate<WeaponComponent>();
         }
         
         public void OnUpdate(ref SystemState state)
         {
             transformLookup.Update(ref state);
+            visualLookup.Update(ref state);
+
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             
             if (Input.GetMouseButton(0))
@@ -37,10 +40,15 @@ namespace CastlePrototype.Battle.Logic.Systems
                     ecb.AddComponent<ManualTargetingComponent>(weaponEntity);
 
                 transformLookup.GetRefRW(weaponEntity).ValueRW.Rotation = rotation;
+                
+                VisualManager.Default.GetVisualObject(visualLookup[weaponEntity].VisualIndex).SetGameObjectActive("TargetingLine", true);
+                
             }
             else if (Input.GetMouseButtonUp(0))
             {
+                
                 var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
+                VisualManager.Default.GetVisualObject(visualLookup[weaponEntity].VisualIndex).SetGameObjectActive("TargetingLine", false);
                 if (state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
                     ecb.RemoveComponent<ManualTargetingComponent>(weaponEntity);
             }
