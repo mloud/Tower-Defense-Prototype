@@ -3,6 +3,7 @@ using System.Linq;
 using CastlePrototype.Data;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using OneDay.Core;
 using OneDay.Core.Extensions;
 using UnityEngine;
 
@@ -10,6 +11,18 @@ namespace CastlePrototype.Managers
 {
     public partial class PlayerManager
     {
+        public class NewLevelBufferedEvent : BufferedEvent
+        {
+            public string HeroId { get; }
+            public int Level { get; }
+            public NewLevelBufferedEvent(int level, string heroId)
+            {
+                Type = (int)BufferedEventsIds.NewLevel;
+                Level = level;
+                HeroId = heroId;
+            }
+        }
+        
         public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won)
         {
             var runtimeStageReward = new RuntimeStageReward();
@@ -103,6 +116,7 @@ namespace CastlePrototype.Managers
                                CardsCount = 0
                            });
                            await SaveHeroDeck(heroDeck);
+                           ServiceLocator.Get<IBufferedEventsManager>().Push(new NewLevelBufferedEvent( progression.Level, heroToUnlock));
                         }
                     }
                 }

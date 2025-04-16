@@ -1,3 +1,5 @@
+using CastlePrototype.Managers;
+using CastlePrototype.Scripts.Ui.Popups;
 using CastlePrototype.Ui.Panels;
 using CastlePrototype.Ui.Views;
 using Cysharp.Threading.Tasks;
@@ -5,6 +7,7 @@ using Meditation.States;
 using OneDay.Core;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
+using UnityEngine;
 
 namespace CastlePrototype.States
 {
@@ -27,6 +30,20 @@ namespace CastlePrototype.States
             
             await view.StageContainer.Refresh();
             view.Show(true);
+
+            var bufferedEvents = ServiceLocator.Get<IBufferedEventsManager>()
+                .PopAll<PlayerManager.NewLevelBufferedEvent>((int)BufferedEventsIds.NewLevel);
+            
+            Debug.Assert(bufferedEvents == null || bufferedEvents.Count <= 1, "Only zero or one hero unlocked allowed for now");
+
+            if (bufferedEvents != null && bufferedEvents.Count == 1)
+            {
+                UniTask.Create(async () =>
+                {
+                    await UniTask.WaitForSeconds(1.0f);
+                    ServiceLocator.Get<IUiManager>().OpenPopup<NewLevelPopup>(UiParameter.Create(bufferedEvents[0]));
+                }).Forget();
+            }
         }
 
         public override UniTask ExecuteAsync() => UniTask.CompletedTask;

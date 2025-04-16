@@ -27,6 +27,7 @@ public class CastlePrototypApp : ABaseApp
     [SerializeField] private SettingsManager settingsManager;
     [SerializeField] private PerformanceManager performanceManager;
     [SerializeField] private PoolManager poolManager;
+    [SerializeField] private BufferedEventsManager bufferedEventsManager;
     [SerializeField] private LoadingLayer loadingLayer;
 
 
@@ -42,6 +43,7 @@ public class CastlePrototypApp : ABaseApp
         ServiceLocator.Register<ISettingsManager>(settingsManager);
         ServiceLocator.Register<IPerformanceManager>(performanceManager);
         ServiceLocator.Register<IPoolManager>(poolManager);
+        ServiceLocator.Register<IBufferedEventsManager>(bufferedEventsManager);
         ServiceLocator.Register<ILoading>(loadingLayer);
         
         var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());

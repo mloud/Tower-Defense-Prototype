@@ -15,7 +15,7 @@ namespace CastlePrototype.Ui.Components
         {
             icon.SetImage(heroDefinition.VisualId);
             name.text = heroDefinition.UnitId;
-            counter.text = $"{count}x";
+            counter.text = count > 0 ? $"{count}x" : "New";
         }
     }
 }
