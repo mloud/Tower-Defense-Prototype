@@ -12,10 +12,13 @@ namespace CastlePrototype.Battle.Logic.Systems
     {
         private ComponentLookup<LocalTransform> transformLookup;
         private ComponentLookup<VisualComponent> visualLookup;
+        private ComponentLookup<TargetComponent> targetLookup;
+      
         public void OnCreate(ref SystemState state)
         {
             transformLookup = state.GetComponentLookup<LocalTransform>();
             visualLookup = state.GetComponentLookup<VisualComponent>();
+            targetLookup = state.GetComponentLookup<TargetComponent>();
             state.RequireForUpdate<WeaponComponent>();
         }
         
@@ -23,6 +26,7 @@ namespace CastlePrototype.Battle.Logic.Systems
         {
             transformLookup.Update(ref state);
             visualLookup.Update(ref state);
+            targetLookup.Update(ref state);
 
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             
@@ -35,9 +39,13 @@ namespace CastlePrototype.Battle.Logic.Systems
                 var direction = new float3(screenDir.x, 0f, screenDir.y);
                 var rotation = quaternion.LookRotationSafe(direction, math.up());
 
-                
+
                 if (!state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
+                {
                     ecb.AddComponent<ManualTargetingComponent>(weaponEntity);
+                    if (targetLookup.HasComponent(weaponEntity))
+                        targetLookup.GetRefRW(weaponEntity).ValueRW.Target = Entity.Null;
+                }
 
                 transformLookup.GetRefRW(weaponEntity).ValueRW.Rotation = rotation;
                 

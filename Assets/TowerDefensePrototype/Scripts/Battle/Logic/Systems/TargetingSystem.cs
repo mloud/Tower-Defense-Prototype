@@ -56,7 +56,9 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 for (int i = targetedC.ValueRO.Targeters.Length-1; i >= 0; i--)
                 {
-                    if (!state.EntityManager.Exists(targetedC.ValueRO.Targeters[i]))
+                    // targeter does not exists, or targeter has manual targeting 
+                    if (!state.EntityManager.Exists(targetedC.ValueRO.Targeters[i]) || 
+                        manualTargetingLookup.HasComponent(targetedC.ValueRO.Targeters[i]))
                     {
                         targetedC.ValueRW.Targeters.RemoveAt(i);
                     }
@@ -71,8 +73,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                 
                 // skip entities with manual targeting
                 if (manualTargetingLookup.HasComponent(entity))
+                {
                     continue;
-                
+                }
+
                 if (HasValidTarget(ref state, entity, attackC.ValueRO.AttackDistance))
                     continue; 
                 
@@ -164,7 +168,8 @@ namespace CastlePrototype.Battle.Logic.Systems
             
             if (targetLookup[mainTargetEntity].Target != Entity.Null)
             {
-                var targeters = targetedLookup[targetLookup[mainTargetEntity].Target].Targeters;
+                var target = targetLookup[mainTargetEntity].Target;
+                var targeters = targetedLookup[target].Targeters;
                 for (int i = 0; i < targeters.Length; i++)
                 {
                     if (targeters[i] == mainTargetEntity)
