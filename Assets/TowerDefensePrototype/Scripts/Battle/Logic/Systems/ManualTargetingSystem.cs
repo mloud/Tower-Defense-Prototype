@@ -43,6 +43,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (!state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
                 {
                     ecb.AddComponent<ManualTargetingComponent>(weaponEntity);
+                    
+                    if (!targetLookup.HasComponent(weaponEntity))
+                        ecb.AddComponent<TargetComponent>(weaponEntity);
+                    
                     if (targetLookup.HasComponent(weaponEntity))
                         targetLookup.GetRefRW(weaponEntity).ValueRW.Target = Entity.Null;
                 }
