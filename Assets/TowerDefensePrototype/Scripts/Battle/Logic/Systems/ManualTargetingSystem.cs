@@ -13,12 +13,14 @@ namespace CastlePrototype.Battle.Logic.Systems
         private ComponentLookup<LocalTransform> transformLookup;
         private ComponentLookup<VisualComponent> visualLookup;
         private ComponentLookup<TargetComponent> targetLookup;
+        private ComponentLookup<TargetedComponent> targetedLookup;
       
         public void OnCreate(ref SystemState state)
         {
             transformLookup = state.GetComponentLookup<LocalTransform>();
             visualLookup = state.GetComponentLookup<VisualComponent>();
             targetLookup = state.GetComponentLookup<TargetComponent>();
+            targetedLookup = state.GetComponentLookup<TargetedComponent>();
             state.RequireForUpdate<WeaponComponent>();
         }
         
@@ -46,9 +48,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                     
                     if (!targetLookup.HasComponent(weaponEntity))
                         ecb.AddComponent<TargetComponent>(weaponEntity);
-                    
+
                     if (targetLookup.HasComponent(weaponEntity))
+                    {
                         targetLookup.GetRefRW(weaponEntity).ValueRW.Target = Entity.Null;
+                    }
                 }
 
                 transformLookup.GetRefRW(weaponEntity).ValueRW.Rotation = rotation;

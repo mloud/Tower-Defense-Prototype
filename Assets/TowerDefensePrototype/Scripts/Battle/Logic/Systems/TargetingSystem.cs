@@ -74,6 +74,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 // skip entities with manual targeting
                 if (manualTargetingLookup.HasComponent(entity))
                 {
+                    TryReleaseTarget(ref ecb, entity);
                     continue;
                 }
 
