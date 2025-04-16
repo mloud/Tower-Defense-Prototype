@@ -67,12 +67,20 @@ namespace CastlePrototype.Managers
                 {
                     return runtimeStageReward;
                 }
-             
+
+                // last stage played again
+                if (stage == progression.LastFinishedStage)
+                    return runtimeStageReward;
+
+                if (stage > progression.LastFinishedStage)
+                    progression.LastFinishedStage = stage;
+                
                 if (stage + 1 < stagesDefinitions.Count())
                 {
                     progression.UnlockedStage++;
                 }
-
+     
+           
                 var playerProgressionDefinition = await GetPlayerProgressionDefinition();
                 var xpNeededForNextLevel = playerProgressionDefinition.XpNeededToNextLevel[progression.Level];
 

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using CastlePrototype.Ui.Components;
+using Cysharp.Threading.Tasks;
 using OneDay.Core.Modules.Ui;
 using UnityEngine;
 
@@ -10,8 +12,21 @@ namespace CastlePrototype.Ui.Panels
     {
         [SerializeField] private Transform buttonContainer;
         [SerializeField] private List<MainTabButton> buttons;
-
         [SerializeField] private MainTabButton defaultTabButton;
+        [SerializeField] private CanLevelUpAnyHeroFlag canLevelUpAnyHeroFlag;
+
+        public override async UniTask Initialize()
+        {
+            canLevelUpAnyHeroFlag.Initialize();
+            await canLevelUpAnyHeroFlag.Refresh();
+        }
+
+        public override async UniTask Show(bool useSmooth, float speedMultiplier = 1.0f)
+        {
+            await base.Show(useSmooth, speedMultiplier);
+            await canLevelUpAnyHeroFlag.Refresh();
+        }
+        
         private void Awake()
         {
             buttons = buttonContainer.GetComponentsInChildren<MainTabButton>(true).ToList();

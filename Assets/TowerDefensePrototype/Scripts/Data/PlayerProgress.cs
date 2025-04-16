@@ -14,5 +14,6 @@ namespace CastlePrototype.Data
         public int Xp { get; set; }
         public int Level { get; set; }
         public int UnlockedStage { get; set; }
+        public int LastFinishedStage { get; set; } = -1;
     }
 }

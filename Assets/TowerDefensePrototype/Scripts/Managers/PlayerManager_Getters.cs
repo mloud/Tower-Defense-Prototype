@@ -39,6 +39,5 @@ namespace CastlePrototype.Managers
             var heroProgress = (await GetHeroDeck()).Heroes[heroId];
             return (heroProgress, heroDefinition);
         }
-
     }
 }
