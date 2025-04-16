@@ -79,6 +79,12 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             {
                 skills.RemoveAll(x => x.SkillType == SkillType.UnlockHero);
             }
+
+            // only weapon
+            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetOccupiedSlotsCount() == 1)
+            {
+                skills.RemoveAll(x => x.SkillType == SkillType.IncreaseAttackDistance);
+            }
         }
         
         private async UniTask ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)

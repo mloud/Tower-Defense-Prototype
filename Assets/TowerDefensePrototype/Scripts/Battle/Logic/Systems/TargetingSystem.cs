@@ -170,7 +170,7 @@ namespace CastlePrototype.Battle.Logic.Systems
             if (targetLookup[mainTargetEntity].Target != Entity.Null)
             {
                 var target = targetLookup[mainTargetEntity].Target;
-                var targeters = targetedLookup[target].Targeters;
+                var targeters = targetedLookup.GetRefRW(target).ValueRW.Targeters;
                 for (int i = 0; i < targeters.Length; i++)
                 {
                     if (targeters[i] == mainTargetEntity)
@@ -179,8 +179,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                         break;
                     }
                 }
+                targetLookup.GetRefRW(mainTargetEntity).ValueRW.Target = Entity.Null;
             }
-            ecb.RemoveComponent<TargetComponent>(mainTargetEntity);
+            //ecb.RemoveComponent<TargetComponent>(mainTargetEntity);
         }
         private void UpdateTarget(ref EntityCommandBuffer ecb, Entity entityLookingForTarget, Entity targetEntity)
         {

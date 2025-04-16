@@ -22,7 +22,7 @@ namespace CastlePrototype.States
                 {EffectKeys.SpawnEffectHero, 5},
                 {EffectKeys.SpawnEffectEnemy, 30},
                 {EffectKeys.AttackDistance, 10},
-
+                {EffectKeys.BossIncoming, 1},
             } );
             
             loadingTracker.RegisterPreloadGroup(poolManager, "Environment", new Dictionary<string, int>
@@ -95,6 +95,7 @@ namespace CastlePrototype.States
             poolManager.ClearPool(EffectKeys.SpawnEffectHero);
             poolManager.ClearPool(EffectKeys.SpawnEffectEnemy);
             poolManager.ClearPool(EffectKeys.AttackDistance);
+            poolManager.ClearPool(EffectKeys.BossIncoming);
         }
     }
 }

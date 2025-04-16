@@ -36,6 +36,16 @@ namespace CastlePrototype.Battle.Logic.Managers.Slots
             return null;
         }
 
+        public int GetOccupiedSlotsCount()
+        {
+            int count = 0;
+            for (int i = 0; i < Slots.Count; i++)
+            {
+                if (Slots[i].IsOccupied)
+                    count++;
+            }
+            return count;
+        }
         public Slot GetRandomAvailableSlot()
         {
             var free = Slots.Where(x => !x.IsOccupied).ToArray();

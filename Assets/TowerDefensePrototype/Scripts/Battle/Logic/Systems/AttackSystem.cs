@@ -60,7 +60,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 bool isInAttackRange = false;
                 bool isManualTargetingActive = state.EntityManager.HasComponent<ManualTargetingComponent>(entity);
                 Entity targetEntity;
-                float3 targetPosition;
+                float3 targetPosition = float3.zero;
                 if (isManualTargetingActive)
                 {
                     targetEntity = Entity.Null;
@@ -70,19 +70,26 @@ namespace CastlePrototype.Battle.Logic.Systems
                 else
                 {
                     targetEntity = targetC.ValueRO.Target;
-                    var targetPositionC = transformLookup.GetRefRO(targetEntity);
-                    var targetSettingsC = settingLookup.GetRefRO(targetEntity);
-                    targetPosition = targetPositionC.ValueRO.Position;
-                    
-                    var sqrDistance = Utils.DistanceSqr(
-                        transformC.ValueRO.Position, settingC.ValueRO.DistanceAxes,
-                        targetPositionC.ValueRO.Position, targetSettingsC.ValueRO.DistanceAxes);
-                    isInAttackRange = sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance;
-                    
+                    if (targetEntity != Entity.Null)
+                    {
+                        var targetPositionC = transformLookup.GetRefRO(targetEntity);
+                        var targetSettingsC = settingLookup.GetRefRO(targetEntity);
+                        targetPosition = targetPositionC.ValueRO.Position;
+
+                        var sqrDistance = Utils.DistanceSqr(
+                            transformC.ValueRO.Position, settingC.ValueRO.DistanceAxes,
+                            targetPositionC.ValueRO.Position, targetSettingsC.ValueRO.DistanceAxes);
+                        isInAttackRange = sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance;
+                    }
+                    else
+                    {
+                        isInAttackRange = false;
+                    }
                 }
 
                 if (isInAttackRange)
                 {
+                  
                     attackC.ValueRW.IsInAttackDistance = true;
 
                     // update attack remaining times

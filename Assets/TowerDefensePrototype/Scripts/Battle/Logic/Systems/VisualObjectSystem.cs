@@ -1,9 +1,8 @@
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Visuals;
-using TowerDefensePrototype.Battle.Visuals.Effects;
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.VisualScripting;
+using UnityEngine;
 
 
 namespace CastlePrototype.Battle.Logic.Systems
@@ -33,24 +32,33 @@ namespace CastlePrototype.Battle.Logic.Systems
             foreach (var (transform, visualComp) in SystemAPI.Query<RefRO<LocalTransform>, RefRO<VisualComponent>>())
             {
                 if (!visualComp.ValueRO.HasVisual) continue;
-
                 var visual = VisualManager.Default.GetVisualObject(visualComp.ValueRO.VisualIndex);
-                visual.SetPosition(transform.ValueRO.Position);
-                visual.SetRotation(transform.ValueRO.Rotation);
+                if (visual != null)
+                {
+                    visual.SetPosition(transform.ValueRO.Position);
+                    visual.SetRotation(transform.ValueRO.Rotation);
+                }
+                else
+                {
+                    Debug.LogError($"Could not find Visual object with visual index {visualComp.ValueRO.VisualIndex}");
+                }
             }   
             
             // Sync  visuals' speed
             foreach (var (moveC, visualC) in SystemAPI.Query<RefRO<MovementComponent>, RefRO<VisualComponent>>())
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
-                
+                if (visual == null)
+                    continue;
                 visual.SetMoveSpeed(moveC.ValueRO.Speed / moveC.ValueRO.MaxSpeed);
-            }   
-            
+            }
+
             // Sync  visuals' hp
             foreach (var (hpC, visualC) in SystemAPI.Query<RefRO<HpComponent>, RefRO<VisualComponent>>())
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
+                if (visual == null)
+                    continue;
                 visual.SetHp(hpC.ValueRO.Hp / hpC.ValueRO.MaxHp);
             } 
             
@@ -60,6 +68,9 @@ namespace CastlePrototype.Battle.Logic.Systems
             {
                 var visual = VisualManager.Default.GetVisualObject(visualC.ValueRO.VisualIndex);
 
+                if (visual == null)
+                    continue;
+                
                 visual.SetAttackCooldown(1-(float)attackC.ValueRO.NextMainAttackTime / attackC.ValueRO.Cooldown);
               
                 if (attackC.ValueRW.PlayAttack)

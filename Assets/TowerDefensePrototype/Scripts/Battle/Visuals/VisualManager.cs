@@ -93,7 +93,11 @@ namespace CastlePrototype.Battle.Visuals
             return visualObject.transform.position;
         }
 
-        public VisualObject GetVisualObject(int index) => VisualObjectsByIndex[index];
+        public VisualObject GetVisualObject(int index)
+        {
+            VisualObjectsByIndex.TryGetValue(index, out var visualObject);
+            return visualObject;
+        }
 
         public void DestroyVisualObject(int index)
         {

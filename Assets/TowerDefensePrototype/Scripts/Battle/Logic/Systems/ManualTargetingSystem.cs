@@ -45,6 +45,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (!state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
                 {
                     ecb.AddComponent<ManualTargetingComponent>(weaponEntity);
+                    Debug.Log("XXXX adding ManualTargetingComponent");
                     
                     if (!targetLookup.HasComponent(weaponEntity))
                         ecb.AddComponent<TargetComponent>(weaponEntity);
@@ -66,7 +67,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                 var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
                 VisualManager.Default.GetVisualObject(visualLookup[weaponEntity].VisualIndex).SetGameObjectActive("TargetingLine", false);
                 if (state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
+                {
                     ecb.RemoveComponent<ManualTargetingComponent>(weaponEntity);
+                    Debug.Log("XXXX removing ManualTargetingComponent");
+                }
             }
             ecb.Playback(state.EntityManager);
             ecb.Dispose();

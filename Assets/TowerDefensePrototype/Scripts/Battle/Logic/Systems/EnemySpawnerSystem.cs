@@ -85,16 +85,14 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     break;
                                 }
                             }
-                            WorldManagers.Get<UnitManager>(state.World).CreateEnemyUnit(ref ecb, spawnPosition, spawner.waves[spawner.currentWave].EnemyId.ToString());
+
+                            var enemyId = spawner.waves[spawner.currentWave].EnemyId;
+                            WorldManagers.Get<UnitManager>(state.World).CreateEnemyUnit(ref ecb, spawnPosition, enemyId.ToString());
                             VisualManager.Default.PlayEffect(EffectKeys.SpawnEffectEnemy, spawnPosition);
-                            //
-                            // SpawnEnemy(ref state, ref ecb,
-                            //     new EnemySpawnerData
-                            //     {
-                            //         enemyId = spawner.waves[spawner.currentWave].EnemyId,
-                            //         spawnPosition = spawner.spawnPosition,
-                            //         spawnBox = spawner.spawnBox
-                            //     });
+                            if (enemyId == "golem")
+                            {
+                                VisualManager.Default.PlayEffect(EffectKeys.BossIncoming, Vector3.zero);
+                            }
                             spawner.spawnedThisWave++;
                         }
                     }

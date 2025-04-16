@@ -20,6 +20,18 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
                 _ => GetRandomPlayerUnit(entityManager, false)
             };
 
+        public static Entity GetHeroesCount(EntityManager entityManager)
+        {
+            var query = entityManager.CreateEntityQuery(
+                ComponentType.ReadOnly<BarricadeComponent>(),
+                ComponentType.ReadOnly<HpComponent>()
+            );
+            
+            using var entities = query.ToEntityArray(Allocator.Temp);
+            Debug.Assert(entities.Length == 1, "There should exactly one barricade");
+            return entities[0];
+        }
+        
         public static Entity GetPlayerBarricade(EntityManager entityManager)
         {
             var query = entityManager.CreateEntityQuery(
