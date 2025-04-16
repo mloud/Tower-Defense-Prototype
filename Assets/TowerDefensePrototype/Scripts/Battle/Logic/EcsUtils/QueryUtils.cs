@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using CastlePrototype.Battle.Logic.Components;
 using CastlePrototype.Battle.Logic.Managers.Skills;
 using Unity.Collections;
@@ -14,7 +16,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             {
                 SkillType.UnlockHero => Entity.Null,
                 SkillType.IncreaseHp => GetPlayerBarricade(entityManager),
-                _ => GetRandomPlayerUnit(entityManager)
+                SkillType.IncreaseAttackDistance => GetRandomPlayerUnit(entityManager, true),
+                _ => GetRandomPlayerUnit(entityManager, false)
             };
 
         public static Entity GetPlayerBarricade(EntityManager entityManager)
@@ -29,15 +32,30 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             return entities[0];
         }
         
-        public static Entity GetRandomPlayerUnit(EntityManager entityManager)
+        public static Entity GetRandomPlayerUnit(EntityManager entityManager, bool excludeWeapon)
         {
-            var query = entityManager.CreateEntityQuery(
+            // var query = entityManager.CreateEntityQuery(
+            //     ComponentType.ReadOnly<TeamComponent>(),
+            //     ComponentType.ReadOnly<UnitComponent>(),
+            //     ComponentType.ReadOnly<AttackComponent>()
+            // );
+            var requiredComponents = new List<ComponentType>
+            {
                 ComponentType.ReadOnly<TeamComponent>(),
                 ComponentType.ReadOnly<UnitComponent>(),
                 ComponentType.ReadOnly<AttackComponent>()
+            };
 
-            );
+            var queryDesc = new EntityQueryDesc
+            {
+                All = requiredComponents.ToArray(),
+                None = excludeWeapon 
+                    ? new[] { ComponentType.ReadOnly<WeaponComponent>() }
+                    : Array.Empty<ComponentType>()
+            };
 
+            var query = entityManager.CreateEntityQuery(queryDesc);
+          
             // Create a list to store player entities
             var playerEntities = new NativeList<Entity>(Allocator.Temp);
 
