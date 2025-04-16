@@ -36,13 +36,16 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 50
+      - CardsRequired: 45
         StatUpgradeType: 0
         Value: -1
       - CardsRequired: 50
+        StatUpgradeType: 3
+        Value: 1
+      - CardsRequired: 55
         StatUpgradeType: 1
         Value: 10
-      - CardsRequired: 50
+      - CardsRequired: 60
         StatUpgradeType: 1
         Value: 10
   - UnitId: soldier
@@ -77,6 +80,9 @@ MonoBehaviour:
       - CardsRequired: 50
         StatUpgradeType: 4
         Value: 1
+      - CardsRequired: 55
+        StatUpgradeType: 4
+        Value: 1
   - UnitId: turret
     VisualId: turret
     ProjectileVisualId: projectile_turret
@@ -107,6 +113,9 @@ MonoBehaviour:
         StatUpgradeType: 4
         Value: 1
       - CardsRequired: 45
+        StatUpgradeType: 1
+        Value: 20
+      - CardsRequired: 50
         StatUpgradeType: 1
         Value: 20
   - UnitId: dron
@@ -141,6 +150,9 @@ MonoBehaviour:
       - CardsRequired: 57
         StatUpgradeType: 1
         Value: 20
+      - CardsRequired: 65
+        StatUpgradeType: 5
+        Value: 0.2
   - UnitId: scorpion
     VisualId: scorpion
     ProjectileVisualId: projectile_scorpion
@@ -171,6 +183,9 @@ MonoBehaviour:
         StatUpgradeType: 1
         Value: 3
       - CardsRequired: 65
+        StatUpgradeType: 0
+        Value: -1
+      - CardsRequired: 70
         StatUpgradeType: 0
         Value: -1
   - UnitId: tank
@@ -205,6 +220,9 @@ MonoBehaviour:
       - CardsRequired: 45
         StatUpgradeType: 0
         Value: -1
+      - CardsRequired: 45
+        StatUpgradeType: 3
+        Value: 1
   - UnitId: barricade
     VisualId: barricade
     ProjectileVisualId: 
@@ -237,3 +255,6 @@ MonoBehaviour:
       - CardsRequired: 56
         StatUpgradeType: 7
         Value: 15
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 20
