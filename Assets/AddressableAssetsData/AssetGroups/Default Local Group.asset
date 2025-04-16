@@ -187,6 +187,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d379478757d9645ab9ef1bb42d9eccf6
+    m_Address: boss_incoming
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d6773ce3603034bde8c42fa8b3df1af6
     m_Address: dragon
     m_ReadOnly: 0
