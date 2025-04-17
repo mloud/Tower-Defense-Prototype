@@ -45,6 +45,7 @@ namespace CastlePrototype.States
         public override async UniTask EnterAsync(StateData stateData = null)
         {
             int stageIndex = stateData.GetValue<int>("stage");
+            var stageDefinition = await ServiceLocator.Get<IPlayerManager>().GetStageDefinition(stageIndex);
             
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             
@@ -53,7 +54,7 @@ namespace CastlePrototype.States
             
             var loading = ServiceLocator.Get<ILoading>();
             loading.Show();
-            await battlePooler.Pool(loading);
+            await battlePooler.Pool(loading, stageDefinition);
        
             var effectFactory = new PoolingEffectFactory(poolManager);
             var visualFactory = new PoolingVisualFactory(poolManager);

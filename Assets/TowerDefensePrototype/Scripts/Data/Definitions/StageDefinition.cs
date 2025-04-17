@@ -8,6 +8,8 @@ namespace CastlePrototype.Data.Definitions
     public class StageDefinition:  BaseDataObject
     {
         public string StageName;
+        public string StageVisualKey;
+        
         public List<WaveDefinition> Waves;
         public StageReward Reward;
     }

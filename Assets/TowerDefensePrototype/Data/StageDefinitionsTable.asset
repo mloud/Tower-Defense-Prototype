@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - StageName: Beginning
+    StageVisualKey: environment_1
     Waves:
     - Time: 0
       EnemiesCount: 4
@@ -63,6 +64,7 @@ MonoBehaviour:
       Cards: 120
       Xp: 50
   - StageName: Meet the Dragon
+    StageVisualKey: environment_1
     Waves:
     - Time: 0
       EnemiesCount: 5
