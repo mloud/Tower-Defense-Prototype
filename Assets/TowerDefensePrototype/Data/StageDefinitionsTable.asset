@@ -64,7 +64,7 @@ MonoBehaviour:
       Cards: 120
       Xp: 50
   - StageName: Meet the Dragon
-    StageVisualKey: environment_1
+    StageVisualKey: environment_2
     Waves:
     - Time: 0
       EnemiesCount: 5
@@ -125,3 +125,17 @@ MonoBehaviour:
     Reward:
       Cards: 120
       Xp: 50
+  - StageName: 
+    StageVisualKey: 
+    Waves:
+    - Time: 0
+      EnemiesCount: 0
+      EnemyId: 
+      SpawnInterval: 0
+    - Time: 0
+      EnemiesCount: 0
+      EnemyId: 
+      SpawnInterval: 0
+    Reward:
+      Cards: 0
+      Xp: 0

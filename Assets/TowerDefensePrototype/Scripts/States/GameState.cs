@@ -61,7 +61,7 @@ namespace CastlePrototype.States
             
             visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel);
             battleController = new BattleController();
-            visualManager.LoadEnvironment("environment_1");
+            visualManager.LoadEnvironment(stageDefinition.StageVisualKey);
 
             await battleController.InitializeBattle(stageIndex);
             loading.Hide();

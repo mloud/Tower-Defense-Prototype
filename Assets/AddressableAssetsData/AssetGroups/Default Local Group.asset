@@ -72,11 +72,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 49af027c457e6434cb2d6a1b2dc1bd5a
-    m_Address: environment_0
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4d71c4fdb83d94e3eae4f4f32360a9ef
     m_Address: weapon
     m_ReadOnly: 0
@@ -169,6 +164,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8a8edf587c0a4288bbba22a27debd42
     m_Address: tank
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4a8adb0c5a5641b5b0d688edfe186a6
+    m_Address: environment_2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
