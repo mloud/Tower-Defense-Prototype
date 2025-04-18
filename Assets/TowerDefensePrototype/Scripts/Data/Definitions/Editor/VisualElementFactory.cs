@@ -10,13 +10,21 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
         {
             var visualElement = new VisualElement();
             visualElement.style.flexDirection = horizontal ? FlexDirection.Row : FlexDirection.Column;
-           // visualElement.style.alignItems = Align.FlexStart;
-           // visualElement.style.justifyContent = Justify.FlexStart;
-            visualElement.style.width = maxWidth;     // absolute width
-            visualElement.style.maxWidth = maxWidth;      // maximum width (still responsive)
-            visualElement.style.minWidth = maxWidth;
+
+            visualElement.style.alignSelf = Align.FlexStart;    // Prevents stretching in parent container
+            visualElement.style.flexShrink = 1;
+            visualElement.style.flexGrow = 0;
+            visualElement.style.flexBasis = StyleKeyword.Auto;
+            visualElement.style.minWidth = 0;
             
-            visualElement.style.flexGrow = 1;
+            
+            // visualElement.style.alignItems = Align.FlexStart;
+           // visualElement.style.justifyContent = Justify.FlexStart;
+           // visualElement.style.width = maxWidth;     // absolute width
+           // visualElement.style.maxWidth = maxWidth;      // maximum width (still responsive)
+           // visualElement.style.minWidth = maxWidth;
+            
+      
             return visualElement;
         }
 
@@ -44,10 +52,58 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
                     borderBottomWidth = 1,
                     marginTop = 6,
                     marginBottom = 6,
+                    flexBasis = StyleKeyword.Auto,
+                    
                 }
             };
             return scrollView;
         }
+
+        public static TextField CreateTextField(string title, string value)
+        {
+            var textField = new TextField(title)
+            {
+                style =
+                {
+                    flexGrow = 1,      // Allow it to grow and take up space
+                    flexShrink = 1,    // Shrink it when space is limited
+                    flexBasis = StyleKeyword.Auto,  // Size based on content
+                },
+                value = value
+            };
+            return textField;
+        }
         
+        public static IntegerField CreateIntegerField(string title, int value)
+        {
+            var field = new IntegerField(title)
+            {
+                style =
+                {
+                    flexGrow = 1,      // Allow it to grow and take up space
+                    flexShrink = 1,    // Shrink it when space is limited
+                    flexBasis = StyleKeyword.Auto,  // Size based on content
+                    minWidth = 20
+                },
+                value = value
+            };
+            return field;
+        }
+        
+        public static FloatField CreateFloatField(string title, float value)
+        {
+            var field = new FloatField(title)
+            {
+                style =
+                {
+                    flexGrow = 1,      // Allow it to grow and take up space
+                    flexShrink = 1,    // Shrink it when space is limited
+                    flexBasis = StyleKeyword.Auto,  // Size based on content
+                    minWidth = 20
+                },
+                value = value
+            };
+            return field;
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace CastlePrototype.Ui.Components
             for (int i = 0; i < stageDefinitions.Count; i++)
             {
                 var stageItem = Get(i);
-                stageItem.Set(stageDefinitions[i], i, i > playerProgress.UnlockedStage);
+                stageItem.Set(stageDefinitions[i], i, !stageDefinitions[i].IsUnlocked && i > playerProgress.UnlockedStage);
             }
 
             snapScrollRect.SnapToIndex(playerProgress.UnlockedStage);

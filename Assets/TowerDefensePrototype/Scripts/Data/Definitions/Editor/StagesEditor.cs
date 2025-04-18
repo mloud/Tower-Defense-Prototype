@@ -117,7 +117,7 @@ public class HeroDeckEditorWindow : EditorWindow
         {
             var stage = stageDefinition.Data[i];
             var rootStageElement = new GroupElement().Create();
-            rootStageElement.VisualElement.style.width = 300;
+            rootStageElement.VisualElement.style.maxWidth = 300;
             
             rootStageElement.VisualElement.Add(new Label( "Stage:" + (i+1)));
             rootStageElement.VisualElement.Add( new Button(() => SaveStageDefinition(stageDefinition, rootStageElement)) { text = "Save" });
@@ -125,7 +125,7 @@ public class HeroDeckEditorWindow : EditorWindow
             
             rootStageElement.AddChild(new StageElement(stage).Create());
             rootStageElement.AddChild(new RewardElement(stage.Reward).Create());
-            rootStageElement.AddChild(new WaveElement(stage.Waves).Create( VisualElementFactory.CreateScrollView(false)));
+            rootStageElement.AddChild(new WaveElement(stage.Waves).Create());
             
             scrollView.Add(rootStageElement.VisualElement);
         }

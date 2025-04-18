@@ -17,7 +17,8 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
 
         protected override VisualElement CreateVisualElement()
         {
-            var visualElement = new VisualElement();
+            var visualElement = VisualElementFactory.CreateScrollView(false);
+            visualElement.style.width = 300;
             return visualElement;
         }
         
@@ -28,28 +29,38 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
             EnemiesIds = new List<TextField>();
             SpawnIntervals = new List<FloatField>();
 
-            const int maxWidth = 150;
+           // const int maxWidth = 150;
             
             for (int i = 0; i < Waves.Count; i++)
             {
                 var wave = Waves[i];
                 VisualElement.Add(new Label($"Wave:{i+1}"));
-                Times.Add(new FloatField("Time") { value = Waves[i].Time });
-                EnemiesCount.Add(new IntegerField("Count") { value = Waves[i].EnemiesCount });
-                EnemiesIds.Add(new TextField("Enemy") { value = Waves[i].EnemyId });
-                SpawnIntervals.Add(new FloatField("Spawn Interval") { value = Waves[i].SpawnInterval });
-                VisualElement.Add(Times[^1]);
-                VisualElement.Add(EnemiesCount[^1]);
-                VisualElement.Add(EnemiesIds[^1]);
-                VisualElement.Add(SpawnIntervals[^1]);
+                Times.Add(VisualElementFactory.CreateFloatField("Time", Waves[i].Time ));
+                EnemiesCount.Add(VisualElementFactory.CreateIntegerField("Count", Waves[i].EnemiesCount ));
+                EnemiesIds.Add(VisualElementFactory.CreateTextField("Id", Waves[i].EnemyId ));
+                SpawnIntervals.Add(VisualElementFactory.CreateFloatField("Interval", Waves[i].SpawnInterval ));
+                
+
+                var panel = new VisualElement();
+                panel.style.flexDirection = FlexDirection.Column;
+                panel.style.alignSelf = Align.FlexStart;    // Prevents stretching in parent container
+                panel.style.flexBasis = StyleKeyword.Auto;
+                panel.style.maxWidth = 300;
+            
+
+                panel.Add(Times[^1]);
+                panel.Add(EnemiesCount[^1]);
+                panel.Add(EnemiesIds[^1]);
+                panel.Add(SpawnIntervals[^1]);
+   
+                
+                VisualElement.Add(panel);
+                
                 VisualElement.Add(new Button(()=>RemoveWave(wave)) { text = "-" }); 
                 VisualElement.Add(VisualElementFactory.CreateSeparator(2));  
-                Times[^1].style.width = maxWidth;     // absolute width
-                EnemiesCount[^1].style.maxWidth = maxWidth;      // maximum width (still responsive)
-                EnemiesIds[^1].style.minWidth = maxWidth;
-                SpawnIntervals[^1].style.flexGrow = 1;
+       
             }
-            VisualElement.Add(new Button(AddNewWave) { text = "Add" });  
+            VisualElement.Add(new Button(AddNewWave) { text = "Add wave" });  
         }
 
         protected override void OnSave()

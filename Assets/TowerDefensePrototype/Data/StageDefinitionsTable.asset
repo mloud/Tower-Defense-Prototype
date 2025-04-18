@@ -15,6 +15,7 @@ MonoBehaviour:
   data:
   - StageName: Beginning
     StageVisualKey: environment_1
+    IsUnlocked: 0
     Waves:
     - Time: 0
       EnemiesCount: 4
@@ -30,10 +31,6 @@ MonoBehaviour:
       SpawnInterval: 3
     - Time: 45
       EnemiesCount: 10
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 60
-      EnemiesCount: 4
       EnemyId: zombie
       SpawnInterval: 3
     - Time: 63
@@ -65,6 +62,7 @@ MonoBehaviour:
       Xp: 50
   - StageName: Meet the Dragon
     StageVisualKey: environment_2
+    IsUnlocked: 0
     Waves:
     - Time: 0
       EnemiesCount: 5
@@ -125,17 +123,14 @@ MonoBehaviour:
     Reward:
       Cards: 120
       Xp: 50
-  - StageName: 
-    StageVisualKey: 
+  - StageName: Test Stage
+    StageVisualKey: environment_2
+    IsUnlocked: 1
     Waves:
     - Time: 0
-      EnemiesCount: 0
-      EnemyId: 
-      SpawnInterval: 0
-    - Time: 0
-      EnemiesCount: 0
-      EnemyId: 
-      SpawnInterval: 0
+      EnemiesCount: 10
+      EnemyId: zombie
+      SpawnInterval: 5
     Reward:
       Cards: 0
       Xp: 0

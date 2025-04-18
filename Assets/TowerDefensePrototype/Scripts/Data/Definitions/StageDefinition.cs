@@ -9,7 +9,7 @@ namespace CastlePrototype.Data.Definitions
     {
         public string StageName;
         public string StageVisualKey;
-        
+        public bool IsUnlocked;
         public List<WaveDefinition> Waves;
         public StageReward Reward;
     }
