@@ -41,7 +41,6 @@ namespace CastlePrototype.Managers
 
         public UniTask PostInitialize() => UniTask.CompletedTask;
 
-
         public async UniTask SaveProgression(PlayerProgress progress) => 
             await dataManager.Actualize<PlayerProgress>(progress);
 

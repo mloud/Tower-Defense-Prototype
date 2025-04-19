@@ -82,6 +82,29 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades: []
+  - UnitId: boss_dragon
+    VisualId: boss_dragon
+    ProjectileVisualId: projectile_fireball
+    AttackDelay: 0.5
+    AttackType: 1
+    ProjectileSpeed: 4
+    MoveSpeed: 0.25
+    Cooldown: 4
+    Damage: 6
+    AttackDistance: 6
+    TargetRange: 6
+    Hp: 12000
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades: []
   - UnitId: dragon
     VisualId: dragon
     ProjectileVisualId: 

@@ -120,6 +120,8 @@ public class HeroDeckEditorWindow : EditorWindow
             rootStageElement.VisualElement.style.maxWidth = 300;
             
             rootStageElement.VisualElement.Add(new Label( "Stage:" + (i+1)));
+            
+            rootStageElement.AddChild(new StageDifficultyElement(StageDifficultyCalculator.Calculate(stage)).Create());
             rootStageElement.VisualElement.Add( new Button(() => SaveStageDefinition(stageDefinition, rootStageElement)) { text = "Save" });
             
             

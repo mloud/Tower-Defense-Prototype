@@ -17,8 +17,8 @@ namespace CastlePrototype.Battle.Logic.Systems
     {
         private const int SpawnSquaresCount = 10;
 
-        private const int MinEnemiesInMicroWave = 2;
-        private const int MaxEnemiesInMicroWave = 5;
+        public const int MinEnemiesInMicroWave = 2;
+        public const int MaxEnemiesInMicroWave = 5;
 
         // keep track where enemies were spawned to avoid their overlapping
         private FixedList128Bytes<bool> spawnSquares;

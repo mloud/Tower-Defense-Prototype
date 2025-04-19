@@ -62,6 +62,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 371a76e121e204cc59f144469b244bc5
+    m_Address: boss_dragon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3c3165681f23645d19acdc528f4ccebe
     m_Address: soldier
     m_ReadOnly: 0
@@ -179,6 +184,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c64428810eb5a4402a14dbe3f7a93c57
     m_Address: HeroDefinitionsTable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdb21943026fb4ac992cd1aac2bb9767
+    m_Address: projectile_fireball
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

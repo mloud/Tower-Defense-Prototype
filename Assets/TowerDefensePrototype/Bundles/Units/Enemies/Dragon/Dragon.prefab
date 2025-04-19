@@ -1756,7 +1756,7 @@ PrefabInstance:
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: id
-      value: dragon
+      value: boss_dragon
       objectReference: {fileID: 0}
     - target: {fileID: 3552641970345984660, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
@@ -1826,12 +1826,12 @@ PrefabInstance:
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
@@ -1841,7 +1841,7 @@ PrefabInstance:
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
@@ -1856,7 +1856,7 @@ PrefabInstance:
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 9064160745621147507, guid: 443c685a1b0904e19b78d5166a517517,
         type: 3}
