@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using CastlePrototype.Battle.Visuals.Effects;
 using OneDay.Core.Modules.Pooling;
 using TowerDefensePrototype.Battle.Visuals.Effects;
+using TowerDefensePrototype.Scripts.Battle.Visuals.Effects;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CastlePrototype.Battle.Visuals
 {
@@ -20,7 +20,9 @@ namespace CastlePrototype.Battle.Visuals
         [Header("Modules")]
         [SerializeField] private AnimationModule animationModule;
         [SerializeField] private EffectModule effectModule;
-
+        [SerializeField] private PoiModule poiModule;
+        
+        
         [Header("Progress bars")]
         [SerializeField] private ProgressBar hpProgressBar;
         [SerializeField] private ProgressBar cooldownProgressBar;
@@ -82,7 +84,20 @@ namespace CastlePrototype.Battle.Visuals
             }
         }
 
-        public void SetPosition(float3 position) => transform.position = position + new float3(0,defaultHeight,0);
+        public Vector3 GetPoiPosition(string poiName)
+        {
+            Debug.Assert(poiModule != null);
+            var position = poiModule.GetPoiPosition(poiName);
+            Debug.Assert(position != null, $"No poiName {poiName} found on {gameObject.name}", gameObject);
+            return position.Value;
+        }
+
+        public void SetPosition(float3 position)
+        {
+            float height = Mathf.Max(position.y, defaultHeight);
+            transform.position = position + new float3(0, height, 0);
+        }
+
         public void SetRotation(quaternion rotation) => objectToRotate.rotation = rotation;
 
         public void SetMoveSpeed(float moveSpeed)

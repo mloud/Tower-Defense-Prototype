@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4109529021324718723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 696687250475684345}
+  m_Layer: 0
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &696687250475684345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109529021324718723}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 854095795880641783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5952810222148548256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854095795880641783}
+  m_Layer: 0
+  m_Name: Pois
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &854095795880641783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952810222148548256}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1614259738570037242}
+  - {fileID: 696687250475684345}
+  m_Father: {fileID: 9064160745621147507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6185592950279535699
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +76,7 @@ GameObject:
   - component: {fileID: 3552641970345984660}
   - component: {fileID: 6840195826090332988}
   - component: {fileID: 8689067181685091424}
+  - component: {fileID: 580638294980071856}
   - component: {fileID: 4575440465234567066}
   - component: {fileID: 1534078794542962743}
   m_Layer: 0
@@ -36,6 +101,7 @@ Transform:
   m_Children:
   - {fileID: 4566380037895813308}
   - {fileID: 3831291429153546487}
+  - {fileID: 854095795880641783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3552641970345984660
@@ -53,6 +119,7 @@ MonoBehaviour:
   id: hero_soldier_rifle
   animationModule: {fileID: 6840195826090332988}
   effectModule: {fileID: 8689067181685091424}
+  poiModule: {fileID: 580638294980071856}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 837677521864761747}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -61,6 +128,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 0
+  goList: []
 --- !u!114 &6840195826090332988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +157,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 1534078794542962743}
+--- !u!114 &580638294980071856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6185592950279535699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020dbb24ed4143adb0bf742097267ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registeredPois:
+  - {fileID: 1614259738570037242}
+  - {fileID: 696687250475684345}
 --- !u!114 &4575440465234567066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +207,37 @@ MonoBehaviour:
   isScreenSpace: 0
   destroyAfterFinished: 0
   playOnEnable: 0
+--- !u!1 &6327710688469576385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614259738570037242}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614259738570037242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327710688469576385}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 854095795880641783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9031571534414290280
 GameObject:
   m_ObjectHideFlags: 0

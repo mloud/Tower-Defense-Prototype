@@ -48,7 +48,7 @@ namespace CastlePrototype.Battle.Logic.Systems
           
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
 
-            foreach (var (attackC, transformC, targetC, settingC, teamC, entity) in
+            foreach (var (attackC, transformC, targetC, settingC, teamC, attackerEntity) in
                      SystemAPI.Query<
                          RefRW<AttackComponent>,
                          RefRW<LocalTransform>,
@@ -56,9 +56,8 @@ namespace CastlePrototype.Battle.Logic.Systems
                          RefRW<SettingComponent>,
                          RefRW<TeamComponent>>().WithEntityAccess())
             {
-
                 bool isInAttackRange = false;
-                bool isManualTargetingActive = state.EntityManager.HasComponent<ManualTargetingComponent>(entity);
+                bool isManualTargetingActive = state.EntityManager.HasComponent<ManualTargetingComponent>(attackerEntity);
                 Entity targetEntity;
                 float3 targetPosition = float3.zero;
                 if (isManualTargetingActive)
@@ -107,11 +106,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                     // end of updating attack times
                
                     
-                    if (!isManualTargetingActive && lookAtTargetLookup.HasComponent(entity))
+                    if (!isManualTargetingActive && lookAtTargetLookup.HasComponent(attackerEntity))
                     {
                         const float timeBeforeLookAtTarget = 0.3f;
                         // starts to rotate towards target
-                        lookAtTargetLookup.GetRefRW(entity).ValueRW.LookAtTarget = timeToAttack < timeBeforeLookAtTarget;
+                        lookAtTargetLookup.GetRefRW(attackerEntity).ValueRW.LookAtTarget = timeToAttack < timeBeforeLookAtTarget;
                     }
 
                     if (timeToAttack < attackC.ValueRO.AttackAnimDelay && !attackC.ValueRO.PlayAttackBlockedToNextAttack)
@@ -153,25 +152,16 @@ namespace CastlePrototype.Battle.Logic.Systems
                                 var battleFieldComponent = SystemAPI.GetSingleton<BattleFieldComponent>();
                                 
                                 AttackUtils.ShootProjectile(
-                                    ref state, 
+                                    ref state,
                                     ref ecb, 
-                                    ref transformC.ValueRW, 
+                                    ref attackC.ValueRW,
+                                    attackerEntity,
                                     targetEntity, 
                                     transformC.ValueRO.Position,
                                     teamC.ValueRO.Team,
                                     targetPosition,
                                     battleFieldComponent.MinCorner,
-                                    battleFieldComponent.MaxCorner,
-                                    attackC.ValueRO.AttackDamage,
-                                    attackC.ValueRO.AoeDamage,
-                                    attackC.ValueRO.AoeRadius,
-                                    attackC.ValueRO.ProjectileSpeed,
-                                    attackC.ValueRO.KnockBack,
-                                    attackC.ValueRO.AoeOnly,
-                                    attackC.ValueRO.Penetration,
-                                    attackC.ValueRO.Bounce,
-                                    attackC.ValueRO.ProjectileVisualId
-                                    );
+                                    battleFieldComponent.MaxCorner);
                                 break;
                             case AttackType.Aoe:
                                 Debug.Assert(attackC.ValueRO.AttackDamage == 0, "Aoe attack should not have direct damage set");

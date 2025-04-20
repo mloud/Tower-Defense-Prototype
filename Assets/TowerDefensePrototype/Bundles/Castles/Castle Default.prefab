@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2465346241895471538}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.8, y: 0.01, z: -1}
+  m_LocalPosition: {x: 2.8, y: 0, z: -1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6651112733474314229
@@ -101,6 +101,7 @@ MonoBehaviour:
   id: slot_3
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -109,6 +110,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 1
+  goList: []
 --- !u!1 &3330747489228111414
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 3330747489228111414}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.8, y: 0.01, z: -1}
+  m_LocalPosition: {x: -2.8, y: 0, z: -1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,7 +194,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8984672661581676058
@@ -210,6 +212,7 @@ MonoBehaviour:
   id: slot_0
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -218,6 +221,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 1
+  goList: []
 --- !u!1 &6269122007930409860
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +274,7 @@ MonoBehaviour:
   id: default_castle
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -278,6 +283,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 0
+  goList: []
 --- !u!1 &7437450840305446581
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +367,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6116870350242649467
@@ -379,6 +385,7 @@ MonoBehaviour:
   id: slot_1
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -387,6 +394,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 1
+  goList: []
 --- !u!1 &8453541861262409225
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +478,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6100178272434813594
@@ -488,6 +496,7 @@ MonoBehaviour:
   id: slot_2
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -496,6 +505,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 1
+  goList: []
 --- !u!1 &8595847644019451270
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +589,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5376413750393692941
@@ -597,6 +607,7 @@ MonoBehaviour:
   id: weapon_slot
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -605,3 +616,4 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 1
+  goList: []

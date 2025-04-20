@@ -162,6 +162,7 @@ MonoBehaviour:
   id: projectile_weapon
   animationModule: {fileID: 0}
   effectModule: {fileID: 0}
+  poiModule: {fileID: 0}
   hpProgressBar: {fileID: 0}
   cooldownProgressBar: {fileID: 0}
   hpBarScreenOffset: {x: 0, y: 0, z: 0}
@@ -170,6 +171,7 @@ MonoBehaviour:
   permanentHpBar: 0
   objectToRotate: {fileID: 0}
   trackOnEnable: 0
+  goList: []
 --- !u!1 &2813917184434894885
 GameObject:
   m_ObjectHideFlags: 0

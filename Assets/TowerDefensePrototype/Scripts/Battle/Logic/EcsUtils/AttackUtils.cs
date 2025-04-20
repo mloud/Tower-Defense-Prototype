@@ -24,32 +24,25 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
         }
         
         public static void ShootProjectile(
-            ref SystemState state, 
+            ref SystemState state,
             ref EntityCommandBuffer ecb, 
-            ref LocalTransform attackerTransform,
+            ref AttackComponent attackComponent, 
+            Entity attackerEntity,
             Entity targetEntity,
             float3 attackerPosition, 
             Team attackerTeam,
             float3 targetPosition,
             float2 minFieldCoordinate,
-            float2 maxFieldCoordinate,
-            float damage,
-            float aoeDamage,
-            float aoeRadius, 
-            float projectileSpeed,
-            bool knockBack,
-            bool aoeOnly,
-            int penetrations,
-            int bounces,
-            FixedString64Bytes visualId)
+            float2 maxFieldCoordinate)
         {
             var direction = targetPosition - attackerPosition;
             var edgeNormal = float2.zero;
             float3 projectileDestination3D = targetPosition;
+   
             
             bool targetPositionOnEdge = false;
             // NOT AOE projectiles flies to the edge of playground
-            if (aoeRadius <= 0)
+            if (attackComponent.AoeRadius <= 0)
             {
                 var intersectionResult = Utils.CalculateIntersectionFromRectangleInside(
                     minFieldCoordinate,
@@ -66,23 +59,22 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             //rotate attacker towards target
             var targetDirection = Quaternion.LookRotation(direction);
             //attackerTransform.Rotation = targetDirection;
-                            
             var projectile = ecb.CreateEntity();
             ecb.AddComponent(projectile, new ProjectileComponent
             {  
                 Target = targetEntity,
                 TargetPosition = projectileDestination3D,
                 Direction = math.normalize(direction),
-                Speed = projectileSpeed,
-                Damage = damage,
-                AoeDamage = aoeDamage,
-                AoeOnly = aoeOnly,
+                Speed = attackComponent.ProjectileSpeed,
+                Damage = attackComponent.AttackDamage,
+                AoeDamage = attackComponent.AoeDamage,
+                AoeOnly = attackComponent.AoeOnly,
                 AttackerTeam = attackerTeam,
-                AoeRadius = aoeRadius,
-                KnockBack = knockBack,
-                PenetrationCounter = penetrations,
-                BounceCounter = targetPositionOnEdge ? bounces : -1,
-                EdgeNormal = Utils.To3D(edgeNormal)
+                AoeRadius = attackComponent.AoeRadius,
+                KnockBack = attackComponent.KnockBack,
+                PenetrationCounter = attackComponent.Penetration,
+                BounceCounter = targetPositionOnEdge ? attackComponent.Bounce : -1,
+                EdgeNormal = Utils.To3D(edgeNormal),
             });
 
             ecb.AddComponent(projectile, new LocalTransform
@@ -92,8 +84,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
                 Scale = 1f
             });
 
-            ecb.AddComponent(projectile, new VisualComponent { VisualId = visualId });
-            
+            ecb.AddComponent(projectile, new VisualComponent { VisualId = attackComponent.ProjectileVisualId });
             ecb.AddComponent(projectile, new TeamComponent {Team =attackerTeam });
         }
         

@@ -40,12 +40,10 @@ namespace CastlePrototype.Battle.Logic
             return new float2(position.x, position.z);
         }
         
-        public static float3 To3D(float2 position)
-        {
-            return new float3(position.x, 0, position.y);
-        }
+        public static float3 To3D(float2 position) => new(position.x, 0, position.y);
 
-        
+        public static float3 ToDirection(float3 start, float3 end) => new(end.x - start.x, end.y - start.y, end.z - start.z);
+
         public static float3 Direction2D(float3 from, float3 to)
         {
             float3 dir = to - from;
