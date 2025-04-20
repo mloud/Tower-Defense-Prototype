@@ -123,7 +123,7 @@ MonoBehaviour:
     Reward:
       Cards: 120
       Xp: 50
-  - StageName: Zombies Rise
+  - StageName: Dragon's army
     StageVisualKey: environment_2
     IsUnlocked: 1
     Waves:
@@ -181,7 +181,7 @@ MonoBehaviour:
       SpawnInterval: 0
     - Time: 160
       EnemiesCount: 1
-      EnemyId: golem
+      EnemyId: boss_dragon
       SpawnInterval: 0
     Reward:
       Cards: 130
