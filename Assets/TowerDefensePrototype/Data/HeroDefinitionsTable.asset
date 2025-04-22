@@ -83,6 +83,41 @@ MonoBehaviour:
       - CardsRequired: 55
         StatUpgradeType: 4
         Value: 1
+  - UnitId: sniper
+    VisualId: sniper
+    ProjectileVisualId: projectile_sniper
+    AttackDelay: 0.1
+    AttackType: 1
+    ProjectileSpeed: 13
+    MoveSpeed: 0
+    Cooldown: 9
+    Damage: 200
+    AttackDistance: 18
+    TargetRange: 18
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 2
+    Bounce: 0
+    Penetration: 1
+    Fireagain: 1
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 40
+        StatUpgradeType: 1
+        Value: 10
+      - CardsRequired: 100
+        StatUpgradeType: 0
+        Value: -1
+      - CardsRequired: 100
+        StatUpgradeType: 4
+        Value: 1
+      - CardsRequired: 55
+        StatUpgradeType: 0
+        Value: 1
   - UnitId: turret
     VisualId: turret
     ProjectileVisualId: projectile_turret

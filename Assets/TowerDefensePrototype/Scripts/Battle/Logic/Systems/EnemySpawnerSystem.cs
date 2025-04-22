@@ -15,7 +15,7 @@ namespace CastlePrototype.Battle.Logic.Systems
     [DisableAutoCreation]
     public partial struct EnemySpawnerSystem : ISystem
     {
-        private const int SpawnSquaresCount = 10;
+        private const int SpawnSquaresCount = 6;
 
         public const int MinEnemiesInMicroWave = 2;
         public const int MaxEnemiesInMicroWave = 5;

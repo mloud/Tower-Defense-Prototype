@@ -11,7 +11,7 @@ namespace CastlePrototype.Battle.Visuals.Effects
         {
             for (int i = 0; i < effects.Count; i++)
             {
-                effects[i].Play().Forget();
+                StartCoroutine(effects[i].Play());
             }
         }
     }

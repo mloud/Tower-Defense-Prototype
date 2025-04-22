@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13346b846a02b47fa92e8ae0dc3438a3
+    m_Address: ellite_dragon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1c968b4b53bac4dbda060d3c4e54d7e7
     m_Address: PlayerProgressionDefinitionTable
     m_ReadOnly: 0
@@ -132,6 +137,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85a1229d20d5d45008ce832202918b75
+    m_Address: sniper
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9492511e4e4844755b4130213f35eb5b
     m_Address: projectile_weapon
     m_ReadOnly: 0
@@ -227,8 +237,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f12e2717d5b4f49b2b926daac68d5b76
+    m_Address: sniper
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f47b02471e86443f785bce0fd27cd161
     m_Address: weapon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fadbf93d780ba42798d363a5bee848cd
+    m_Address: projectile_sniper
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -238,7 +258,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fcd7a27c8265b4bd5848c4f453a344d1
-    m_Address: golem
+    m_Address: boss_golem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

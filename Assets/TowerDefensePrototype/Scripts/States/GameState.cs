@@ -59,7 +59,7 @@ namespace CastlePrototype.States
             var effectFactory = new PoolingEffectFactory(poolManager);
             var visualFactory = new PoolingVisualFactory(poolManager);
             
-            visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel);
+            visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel, view);
             battleController = new BattleController();
             visualManager.LoadEnvironment(stageDefinition.StageVisualKey);
 

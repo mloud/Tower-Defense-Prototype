@@ -14,7 +14,7 @@ namespace CastlePrototype.Battle.Visuals.Effects
             {
                 if (effects[i].Id == effectId)
                 {
-                    effects[i].Play();
+                    StartCoroutine(effects[i].Play());
                     found = true;
                 }
             }

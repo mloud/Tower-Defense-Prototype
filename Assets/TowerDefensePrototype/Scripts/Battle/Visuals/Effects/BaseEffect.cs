@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CastlePrototype.Battle.Visuals.Effects
@@ -21,17 +23,17 @@ namespace CastlePrototype.Battle.Visuals.Effects
         {
             if (playOnEnable)
             {
-                Play().Forget();
+                StartCoroutine(Play());
             }
         }
 
-        public async UniTask Play(object data = null)
+        public IEnumerator Play(object data = null)
         {
             if (delay > 0)
             {
-                await UniTask.WaitForSeconds(delay);
+                yield return new WaitForSeconds(delay);
             }
-
+         
             OnPlay(data);
         }
         

@@ -59,8 +59,8 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades: []
-  - UnitId: golem
-    VisualId: golem
+  - UnitId: boss_golem
+    VisualId: boss_golem
     ProjectileVisualId: 
     AttackDelay: 0.3
     AttackType: 0
@@ -97,6 +97,29 @@ MonoBehaviour:
     Knockback: 0
     KnockbackResistent: 1
     FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades: []
+  - UnitId: ellite_dragon
+    VisualId: ellite_dragon
+    ProjectileVisualId: 
+    AttackDelay: 0.5
+    AttackType: 0
+    ProjectileSpeed: 0
+    MoveSpeed: 0.4
+    Cooldown: 4
+    Damage: 2
+    AttackDistance: 1.5
+    TargetRange: 1.5
+    Hp: 2000
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0
     Bounce: 0
     Penetration: 0
     Fireagain: 0

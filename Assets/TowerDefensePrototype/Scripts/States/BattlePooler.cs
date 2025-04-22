@@ -49,8 +49,12 @@ namespace CastlePrototype.States
                 {"dragon", 50},
                 {"archer", 30},
                 {"boss", 1},
-                {"golem", 1},
+                {"boss_golem", 1},
                 {"boss_dragon", 1},
+                {"ellite_dragon", 5},
+                {"sniper", 1},
+
+
             });
 
             preloadedGroups.Add("Projectiles", new Dictionary<string, int>()
@@ -62,8 +66,8 @@ namespace CastlePrototype.States
                 { "projectile_weapon", 20 },
                 { "projectile_tank", 5 },
                 { "projectile_archer", 10 },
-                { "projectile_fireball", 4 }
-
+                { "projectile_fireball", 4 },
+                { "projectile_sniper", 4 }
             });
           
             foreach (var (group, keyCountPair) in preloadedGroups)

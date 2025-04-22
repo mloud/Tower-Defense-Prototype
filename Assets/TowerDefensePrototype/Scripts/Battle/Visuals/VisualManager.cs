@@ -25,8 +25,9 @@ namespace CastlePrototype.Battle.Visuals
         
         private int visualCounter;
         private Camera mainCamera;
+        private MonoBehaviour coroutineOwner;
         
-        public VisualManager(IVisualFactory visualFactory, IEffectFactory effectFactory, Transform uiPanel)
+        public VisualManager(IVisualFactory visualFactory, IEffectFactory effectFactory, Transform uiPanel, MonoBehaviour coroutineOwner)
         {
             MainCamera = Camera.main;
             visualCounter = -1;
@@ -37,6 +38,7 @@ namespace CastlePrototype.Battle.Visuals
             VisualObjectsById = new Dictionary<string, List<VisualObject>>();
             UiPanel = uiPanel;
             mainCamera = Camera.main;
+            this.coroutineOwner = coroutineOwner;
         }
         
         public VisualObject LoadEnvironment(string environmentId) => 
@@ -122,7 +124,7 @@ namespace CastlePrototype.Battle.Visuals
             }
 
             effect.OnFinishedAction = ()=>EffectFactory.Release(effect);
-            effect.Play(data).Forget();
+            coroutineOwner.StartCoroutine(effect.Play(data));
             return effect;
         }
 
