@@ -5,6 +5,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
 {
     public abstract class ASkill
     {
+        public World AttachedWorld { get; set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public string DefinitionId { get; set; }

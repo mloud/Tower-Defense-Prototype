@@ -33,8 +33,11 @@ namespace CastlePrototype.Battle.Logic.Systems
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
             var deltaTime = SystemAPI.Time.DeltaTime;
 
-            foreach (var (projectileC, transformC, teamC, projectileEntity) in 
-                     SystemAPI.Query<RefRW<ProjectileComponent>, RefRW<LocalTransform>, RefRO<TeamComponent>>().WithEntityAccess())
+            foreach (var (projectileC, transformC, teamC, settingsC, projectileEntity) in SystemAPI.Query<RefRW<ProjectileComponent>, 
+                         RefRW<LocalTransform>, 
+                         RefRO<TeamComponent>, 
+                         RefRO<SettingComponent>>()
+                            .WithEntityAccess())
             {
                 var directionNorm = math.normalize(projectileC.ValueRO.TargetPosition - transformC.ValueRO.Position);
                 var step = projectileC.ValueRO.Speed * deltaTime;
@@ -58,7 +61,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                             ref ecb,
                             ref aoeDamageEntityQuery,
                             transformC.ValueRO.Position,
-                            new float3(1, 0, 1),
+                            settingsC.ValueRO,
                             projectileC.ValueRO.AttackerTeam,
                             projectileC.ValueRO.AoeDamage,
                             projectileC.ValueRO.AoeRadius,
@@ -109,7 +112,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref ecb,
                                     ref aoeDamageEntityQuery,
                                     transformC.ValueRO.Position,
-                                    new float3(1, 0, 1),
+                                    settingsC.ValueRO,
                                     projectileC.ValueRO.AttackerTeam,
                                     projectileC.ValueRO.AoeDamage,
                                     projectileC.ValueRO.AoeRadius,
@@ -162,7 +165,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref ecb,
                                     ref aoeDamageEntityQuery,
                                     transformC.ValueRO.Position,
-                                    new float3(1, 0, 1),
+                                    settingsC.ValueRO,
                                     projectileC.ValueRO.AttackerTeam,
                                     projectileC.ValueRO.AoeDamage,
                                     projectileC.ValueRO.AoeRadius,

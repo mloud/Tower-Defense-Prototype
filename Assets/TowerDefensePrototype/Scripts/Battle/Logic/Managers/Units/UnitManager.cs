@@ -150,6 +150,40 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             }
             return entity;
         }
+        
+        public Entity CreateTrap(ref EntityCommandBuffer ecb, float3 position, string trapId, Team team)
+        {
+            if (!heroDefinitions.TryGetValue(trapId, out var definition))
+            {
+                Debug.Assert(false, $"No trap definition found {trapId}");
+                return Entity.Null;
+            }
+
+            var entity = ecb.CreateEntity();
+            Debug.Assert(definition.MoveSpeed == 0, "definition.MoveSpeed == 0");
+            Debug.Assert(definition.AttackType == AttackType.None);
+            Debug.Assert(team == Team.Player);
+
+            var level = heroDeck.Heroes[definition.UnitId].Level;
+            var hp = definition.GetLeveledHeroStat(StatUpgradeType.Hp, level);
+            
+            if (hp > 0)
+            {
+                ecb.AddComponent(entity, CreateHpComponent(definition, level));
+            }
+            
+            ecb.AddComponent(entity, new UnitComponent { DefinitionId = definition.UnitId });
+            ecb.AddComponent(entity, new LocalTransform { Position = position });
+            ecb.AddComponent(entity, new TeamComponent { Team = team });
+            ecb.AddComponent(entity, new VisualComponent { VisualId = definition.VisualId,Level = level});
+            ecb.AddComponent(entity, new SettingComponent { DistanceAxes = new float3(1, 0, 1), Width = 1.12f, Radius = 0.2f,NeedsTouchToGetTargeted = true});
+            ecb.AddComponent(entity, new TrapComponent());
+            if (definition.KnockbackResistent)
+            {
+                ecb.AddComponent(entity, new KnockBackResistent());
+            }
+            return entity;
+        }
 
         protected override void OnRelease()
         { }

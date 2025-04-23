@@ -32,13 +32,21 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
                 new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}"),
+                new PlaceTrapSkill("Place palisade", 4, "Place {VALUE} palisades", "palisade")
             };
+
+            AvailableSkills.ForEach(x=>x.AttachedWorld = AttachedToWorld);
 
             var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             foreach (var (unitId, _) in deck.Heroes)
             {
                 if (unitId == "barricade" || unitId == "weapon")
                     continue;
+                var definition = await ServiceLocator.Get<IPlayerManager>().GetHeroDefinition(unitId);
+                // these units are created by skills only
+                if (definition.CreatedBySkill)
+                    continue;
+                
                 AvailableSkills.Add(new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"));
             }
         }
@@ -50,7 +58,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
             await ConnectSkillsToEntities(skills);
             var selectedSkill = await OpenSkillPopup(skills);
             selectedSkill.Apply(AttachedToWorld.EntityManager);
-            if (selectedSkill.SkillType == SkillType.UnlockHero)
+            if (selectedSkill.SkillType == SkillType.UnlockHero || selectedSkill.SkillType == SkillType.PlaceTrap)
             {
                 AvailableSkills.Remove(selectedSkill);
             }

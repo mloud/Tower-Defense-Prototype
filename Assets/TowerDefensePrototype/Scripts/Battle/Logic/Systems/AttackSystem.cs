@@ -75,9 +75,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                         var targetSettingsC = settingLookup.GetRefRO(targetEntity);
                         targetPosition = targetPositionC.ValueRO.Position;
 
-                        var sqrDistance = Utils.DistanceSqr(
-                            transformC.ValueRO.Position, settingC.ValueRO.DistanceAxes,
-                            targetPositionC.ValueRO.Position, targetSettingsC.ValueRO.DistanceAxes);
+                        var sqrDistance = Utils.VolumeDistanceSqr(
+                            transformC.ValueRO.Position, 
+                            settingC.ValueRO,
+                            targetPositionC.ValueRO.Position, 
+                            targetSettingsC.ValueRO);
                         isInAttackRange = sqrDistance < attackC.ValueRO.AttackDistance * attackC.ValueRO.AttackDistance;
                     }
                     else
@@ -154,10 +156,11 @@ namespace CastlePrototype.Battle.Logic.Systems
                                 AttackUtils.ShootProjectile(
                                     ref state,
                                     ref ecb, 
-                                    ref attackC.ValueRW,
+                                    attackC.ValueRO,
                                     attackerEntity,
                                     targetEntity, 
                                     transformC.ValueRO.Position,
+                                    settingC.ValueRO,
                                     teamC.ValueRO.Team,
                                     targetPosition,
                                     battleFieldComponent.MinCorner,
@@ -170,7 +173,7 @@ namespace CastlePrototype.Battle.Logic.Systems
                                     ref ecb,
                                     ref aoeDamageEntityQuery,
                                     transformC.ValueRO.Position, 
-                                    settingC.ValueRO.DistanceAxes, 
+                                    settingC.ValueRO, 
                                     teamC.ValueRO.Team,
                                     attackC.ValueRO.AoeDamage, 
                                     attackC.ValueRO.AoeRadius,

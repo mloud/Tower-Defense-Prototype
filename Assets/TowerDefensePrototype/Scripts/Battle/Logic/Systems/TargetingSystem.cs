@@ -3,6 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace CastlePrototype.Battle.Logic.Systems
 {
@@ -66,7 +67,10 @@ namespace CastlePrototype.Battle.Logic.Systems
             }
    
             foreach (var (transform, attackC, settingC, entity) in 
-                     SystemAPI.Query<RefRO<LocalTransform>, RefRO<AttackComponent>, RefRO<SettingComponent>>()
+                     SystemAPI.Query<
+                             RefRO<LocalTransform>, 
+                             RefRO<AttackComponent>, 
+                             RefRO<SettingComponent>>()
                          .WithAll<TeamComponent>()
                          .WithEntityAccess())
             {
@@ -81,8 +85,9 @@ namespace CastlePrototype.Battle.Logic.Systems
                 if (HasValidTarget(ref state, entity, attackC.ValueRO.AttackDistance))
                     continue; 
                 
-                var targetEntity = FindAndAssignTarget(ref state, ref ecb, entity, transform.ValueRO.Position, 
-                    attackC.ValueRO.AttackDistance, settingC.ValueRO.DistanceAxes);
+                var targetEntity = FindAndAssignTarget(
+                    ref state, ref ecb, entity, transform.ValueRO.Position, 
+                    attackC.ValueRO.AttackDistance, settingC.ValueRO);
                 UpdateTarget(ref ecb, entity, targetEntity);
             }
             
@@ -90,8 +95,9 @@ namespace CastlePrototype.Battle.Logic.Systems
             ecb.Dispose();
         }
  
-        private Entity FindAndAssignTarget(ref SystemState state, ref EntityCommandBuffer ecb, Entity myEntity, 
-            float3 myPosition, float myTargetRange, float3 myDistanceAxes)
+        private Entity FindAndAssignTarget(
+            ref SystemState state, ref EntityCommandBuffer ecb, Entity myEntity, 
+            float3 myPosition, float myTargetRange, in SettingComponent mySettingsC)
         {
             float myTargetRangeSqr = myTargetRange * myTargetRange;
             var myTeam = teamLookup.GetRefRO(myEntity).ValueRO.Team;
@@ -115,12 +121,19 @@ namespace CastlePrototype.Battle.Logic.Systems
                     continue;
 
                 // Calculate distance
-                var distanceSqr = Utils.DistanceSqr(
-                    myPosition, myDistanceAxes, 
-                    otherTrC.ValueRO.Position, otherSettingC.ValueRO.DistanceAxes);
+                var distanceSqr = Utils.VolumeDistanceSqr(
+                    myPosition, 
+                    mySettingsC, 
+                    otherTrC.ValueRO.Position,
+                    otherSettingC.ValueRO);
           
                 // Skip entities out of range
                 if (distanceSqr > myTargetRangeSqr)
+                    continue;
+                
+                Debug.Assert(!otherSettingC.ValueRO.NeedsTouchToGetTargeted || otherSettingC.ValueRO.Radius > 0 ||otherSettingC.ValueRO.Width > 0 , 
+                    "Touching targeting requires non zero radius or non zero width");
+                if (otherSettingC.ValueRO.NeedsTouchToGetTargeted && distanceSqr > 0 )
                     continue;
             
                 // Update closest target
@@ -212,10 +225,9 @@ namespace CastlePrototype.Battle.Logic.Systems
             if (!hpLookup.HasComponent(target) || hpLookup[target].Hp <= 0)
                 return false;
             
-            var distanceSqr = Utils.DistanceSqr(
-                transformLookup[entity].Position, settingLookup[entity].DistanceAxes,
-                transformLookup[target].Position, settingLookup[target].DistanceAxes);
-             
+            var distanceSqr = Utils.VolumeDistanceSqr(
+                transformLookup[entity].Position, settingLookup[entity],
+                transformLookup[target].Position, settingLookup[target]);
           
             if (distanceSqr > targetDistance * targetDistance)
                 return false;

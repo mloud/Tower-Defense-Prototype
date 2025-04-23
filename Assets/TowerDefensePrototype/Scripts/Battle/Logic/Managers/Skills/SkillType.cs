@@ -8,6 +8,7 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
         IncreaseAttackDistance,
         IncreaseBounceCount,
         IncreaseFireAgainCounter,
-        IncreaseHp
+        IncreaseHp,
+        PlaceTrap
     }
 }

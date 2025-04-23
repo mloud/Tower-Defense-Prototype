@@ -12,8 +12,11 @@ namespace CastlePrototype.Battle.Logic.Systems
     public partial struct BattleResolveSystem : ISystem
     {
         private bool battleFinishResolveInProgress;
+        private ComponentLookup<HpComponent> hpLookup;
         public void OnCreate(ref SystemState state)
         {
+            hpLookup = state.GetComponentLookup<HpComponent>();
+            state.RequireForUpdate<BarricadeComponent>();
             state.RequireForUpdate<BattleStatisticComponent>();
             state.RequireForUpdate<EnemySpawnerComponent>();
             state.RequireForUpdate<BattleProgressionComponent>();
@@ -23,17 +26,15 @@ namespace CastlePrototype.Battle.Logic.Systems
         {
             if (battleFinishResolveInProgress)
                 return;
-            
-            // Player lost
-            float playerTotalHp = 0;
+            hpLookup.Update(ref state);
+       
+            var barricadeEntity= SystemAPI.GetSingletonEntity<BarricadeComponent>();
+            float playerTotalHp = hpLookup[barricadeEntity].Hp;
             int aliveEnemies = 0;
+            
             foreach (var (hpC, teamC) in SystemAPI.Query<RefRO<HpComponent>,RefRO<TeamComponent> >())
             {
-                if (teamC.ValueRO.Team == Team.Player)
-                {
-                    playerTotalHp += hpC.ValueRO.Hp;
-                }
-                else if (teamC.ValueRO.Team == Team.Enemy && hpC.ValueRO.Hp > 0)
+                if (teamC.ValueRO.Team == Team.Enemy && hpC.ValueRO.Hp > 0)
                 {
                     aliveEnemies++;
                 }
@@ -75,22 +76,6 @@ namespace CastlePrototype.Battle.Logic.Systems
                     .Forget();
                 battleFinishResolveInProgress = true;
             }
-            // switch (aliveEnemies)
-            // {
-            //     case > 0 when playerTotalHp <= 0:
-            //
-            //         WorldManagers.Get<StageManager>(state.World)
-            //             .RunStageFinishedFlow(killedEnemies, totalEnemies,battleProgressionC.Stage, false)
-            //             .Forget();
-            //         battleFinishResolveInProgress = true;
-            //         break;
-            //     case 0 when isLastWave:
-            //         WorldManagers.Get<StageManager>(state.World)
-            //             .RunStageFinishedFlow(killedEnemies, totalEnemies, battleProgressionC.Stage, true)
-            //             .Forget();
-            //         battleFinishResolveInProgress = true;
-            //         break;
-            // }
         }
     }
 }

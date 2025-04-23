@@ -16,6 +16,7 @@ namespace CastlePrototype.Data.Definitions
 
         [Header("Unit type stats")] 
         public AttackType AttackType;
+        public bool CreatedBySkill;
       
         // BASIC STATS
         [Header("Basic stats")]

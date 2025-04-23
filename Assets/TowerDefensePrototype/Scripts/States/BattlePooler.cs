@@ -53,7 +53,7 @@ namespace CastlePrototype.States
                 {"boss_dragon", 1},
                 {"ellite_dragon", 5},
                 {"sniper", 1},
-
+                {"palisade", 10},
 
             });
 

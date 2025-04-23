@@ -71,7 +71,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             var spawnerComponent = new EnemySpawnerComponent 
             {
                 spawnPosition = new float3(0, 0, 6),
-                spawnBox = new float3(6,0,1),
+                spawnBox = new float3(6,0,0.5f),
                 currentWave = 0,
                 currentWaveChanged = true,
             };

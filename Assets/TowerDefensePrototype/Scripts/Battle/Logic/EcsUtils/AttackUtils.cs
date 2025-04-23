@@ -26,10 +26,11 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
         public static void ShootProjectile(
             ref SystemState state,
             ref EntityCommandBuffer ecb, 
-            ref AttackComponent attackComponent, 
+            in AttackComponent attackComponent, 
             Entity attackerEntity,
             Entity targetEntity,
             float3 attackerPosition, 
+            in SettingComponent attackerSettingsC,
             Team attackerTeam,
             float3 targetPosition,
             float2 minFieldCoordinate,
@@ -86,6 +87,8 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
 
             ecb.AddComponent(projectile, new VisualComponent { VisualId = attackComponent.ProjectileVisualId });
             ecb.AddComponent(projectile, new TeamComponent {Team =attackerTeam });
+            ecb.AddComponent(projectile, new SettingComponent { DistanceAxes = new float3(1,0,1), Radius = 0});
+
         }
         
         
@@ -94,7 +97,7 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
             ref EntityCommandBuffer ecb,
             ref EntityQuery aoeDamageEntityQuery,
             float3 attackerPosition,
-            float3 attackerDistanceAxes,
+            in SettingComponent attackerSettings,
             Team attackerTeam,
             float damage,
             float radius,
@@ -126,9 +129,11 @@ namespace CastlePrototype.Battle.Logic.EcsUtils
                     continue;
 
                 // Check distance
-                var sqrDistance = Utils.DistanceSqr(
-                    attackerPosition, attackerDistanceAxes,
-                    transformArray[i].Position, settingArray[i].DistanceAxes);
+                var sqrDistance = Utils.VolumeDistanceSqr(
+                    attackerPosition, 
+                    attackerSettings,
+                    transformArray[i].Position, 
+                    settingArray[i]);
 
                 if (sqrDistance < aoeRadiusSqr)
                 {

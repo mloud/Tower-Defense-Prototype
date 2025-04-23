@@ -1,4 +1,5 @@
 using System;
+using CastlePrototype.Battle.Logic.Components;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,6 +8,9 @@ namespace CastlePrototype.Battle.Logic
 {
     public static class Utils
     {
+        public static float3 GetCenter(float3 min, float3 max) => (min + max) * 0.5f;
+        public static float2 GetCenter(float2 min, float2 max) => (min + max) * 0.5f;
+        
         public static float3 GetRandomPosition(float3 center, float3 size) =>
             new(
                 center + new float3(
@@ -14,6 +18,60 @@ namespace CastlePrototype.Battle.Logic
                     Random.Range(-size.y / 2.0f, size.y / 2.0f),
                     Random.Range(-size.z / 2.0f, size.z / 2.0f)));
 
+        public static float VolumeDistanceSqr(
+            float3 entity1Position, 
+            in SettingComponent entity1Settings, 
+            float3 entity2Position,
+            in SettingComponent entity2Settings)
+        {
+
+            Debug.Assert(entity1Settings.Width == 0 || entity2Settings.Width == 0, "Two segments are not supported now");
+            
+            if (entity1Settings.Width > 0 || entity2Settings.Width > 0)
+            {
+                var centerOfWidth = entity1Settings.Width > 0 ? entity1Position : entity2Position;
+                var width = entity1Settings.Width > 0 ? entity1Settings.Width : entity2Settings.Width;
+
+                var leftPoint = centerOfWidth - width / 2.0f;
+                var rightPoint = centerOfWidth + width / 2.0f;
+                var otherPoint = entity1Settings.Width > 0 ? entity2Position : entity1Position;
+                var combinedRadius = entity1Settings.Radius + entity2Settings.Radius;
+                if (otherPoint.x > rightPoint.x)
+                {
+                    var delta = new float3(rightPoint.x - otherPoint.x, 0, rightPoint.y - otherPoint.y);
+                    var distanceSqr = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z -
+                                      combinedRadius * combinedRadius;
+                    return math.max(0, distanceSqr);
+                }
+
+                if (otherPoint.x < leftPoint.x)
+                {
+                    var delta = new float3(leftPoint.x - otherPoint.x, 0, leftPoint.y - otherPoint.y);
+                    var distanceSqr = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z -
+                                      combinedRadius * combinedRadius;
+                    return math.max(0, distanceSqr);
+                }
+
+                var zDistanceSqr = (otherPoint.z - centerOfWidth.z) * (otherPoint.z - centerOfWidth.z) -
+                                  combinedRadius * combinedRadius;
+                return math.max(0, zDistanceSqr);
+            
+            }
+            else
+            {
+                var delta = entity1Position - entity2Position;
+                var weights = entity1Settings.DistanceAxes * entity2Settings.DistanceAxes;
+
+                var distanceSqr =
+                    delta.x * delta.x * weights.x +
+                    delta.y * delta.y * weights.y +
+                    delta.z * delta.z * weights.z;
+                var combinedRadius = entity1Settings.Radius + entity2Settings.Radius;
+
+                return math.max(0, distanceSqr - combinedRadius * combinedRadius);
+            }
+        }
+        
 
         public static float Distance2DSqr(float3 entity1Position, float3 entity2Position)
         {
@@ -24,15 +82,15 @@ namespace CastlePrototype.Battle.Logic
             return x * x * combinedDistanceAxes.x + y * y * combinedDistanceAxes.y + z * z * combinedDistanceAxes.z;
         }
 
-        public static float DistanceSqr(float3 entity1Position, float3 entity1DistanceAxes, float3 entity2Position,
-            float3 entity2DistanceAxes)
-        {
-            float3 combinedDistanceAxes = entity1DistanceAxes * entity2DistanceAxes;
-            var x = entity1Position.x - entity2Position.x;
-            var y = entity1Position.y - entity2Position.y;
-            var z = entity1Position.z - entity2Position.z;
-            return x * x * combinedDistanceAxes.x + y * y * combinedDistanceAxes.y + z * z * combinedDistanceAxes.z;
-        }
+        // public static float DistanceSqr(float3 entity1Position, float3 entity1DistanceAxes, float3 entity2Position,
+        //     float3 entity2DistanceAxes)
+        // {
+        //     float3 combinedDistanceAxes = entity1DistanceAxes * entity2DistanceAxes;
+        //     var x = entity1Position.x - entity2Position.x;
+        //     var y = entity1Position.y - entity2Position.y;
+        //     var z = entity1Position.z - entity2Position.z;
+        //     return x * x * combinedDistanceAxes.x + y * y * combinedDistanceAxes.y + z * z * combinedDistanceAxes.z;
+        // }
 
         public static float2 To2D(float3 position)
         {

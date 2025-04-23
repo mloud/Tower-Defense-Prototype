@@ -31,11 +31,12 @@ namespace CastlePrototype.Battle.Logic.Systems
                          RefRW<DamageComponent>, 
                          RefRW<HpComponent>,
                          RefRO<TeamComponent>,
-                         RefRW<LocalTransform>>().WithEntityAccess())
+                         RefRW<LocalTransform>>()
+                         .WithEntityAccess())
             {
                 hpC.ValueRW.Hp = Mathf.Max(0, hpC.ValueRO.Hp - damageC.ValueRO.Damage);
 
-                if (teamC.ValueRO.Team == Team.Player)
+                if (teamC.ValueRO.Team == Team.Player && state.EntityManager.HasComponent<BarricadeComponent>(entity))
                 {
                     WorldManagers.Get<BattleEventsManager>(state.World).UpdatePlayerHp(hpC.ValueRO);
                 }
