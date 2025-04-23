@@ -18,6 +18,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_weapon
     AttackDelay: 0.1
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 8
     MoveSpeed: 0
     Cooldown: 4
@@ -53,6 +54,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_soldier
     AttackDelay: 0.1
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 8
     MoveSpeed: 0
     Cooldown: 4
@@ -88,6 +90,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_sniper
     AttackDelay: 0.1
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 13
     MoveSpeed: 0
     Cooldown: 9
@@ -123,6 +126,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_turret
     AttackDelay: 0.1
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 10
     MoveSpeed: 0
     Cooldown: 8
@@ -158,6 +162,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_dron
     AttackDelay: 0
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 8
     MoveSpeed: 0
     Cooldown: 10
@@ -193,6 +198,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_scorpion
     AttackDelay: 0
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 10
     MoveSpeed: 0
     Cooldown: 10
@@ -228,6 +234,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_tank
     AttackDelay: 0
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 8
     MoveSpeed: 0
     Cooldown: 14
@@ -263,6 +270,7 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0
     AttackType: 3
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0
     Cooldown: 0
@@ -270,6 +278,42 @@ MonoBehaviour:
     AttackDistance: 0
     TargetRange: 0
     Hp: 100
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 56
+        StatUpgradeType: 7
+        Value: 10
+      - CardsRequired: 60
+        StatUpgradeType: 7
+        Value: 15
+      - CardsRequired: 56
+        StatUpgradeType: 7
+        Value: 15
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 20
+  - UnitId: palisade
+    VisualId: palisade
+    ProjectileVisualId: 
+    AttackDelay: 0
+    AttackType: 3
+    CreatedBySkill: 1
+    ProjectileSpeed: 0
+    MoveSpeed: 0
+    Cooldown: 0
+    Damage: 0
+    AttackDistance: 0
+    TargetRange: 0
+    Hp: 5
     Knockback: 0
     KnockbackResistent: 0
     FireAgainInterval: 0
