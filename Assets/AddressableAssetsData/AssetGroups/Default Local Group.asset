@@ -52,11 +52,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2a3981ea5abc5478687fbed3af792a76
-    m_Address: palisade
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2c1d09ef68c8344f1a37f0779b72edb7
     m_Address: BattleMusic
     m_ReadOnly: 0
@@ -129,6 +124,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d6e1c85b54964eea8ee12b409986681
     m_Address: scorpion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f195a354b8294e9484a6463e8995f88
+    m_Address: palisade
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
