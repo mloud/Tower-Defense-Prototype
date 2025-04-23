@@ -135,13 +135,14 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
                 AoeDamage = definition.GetLeveledHeroStat(StatUpgradeType.AoeDamage, level),
                 Bounce = (int)definition.GetLeveledHeroStat(StatUpgradeType.Bounce, level),
                 FireAgain = (int)definition.GetLeveledHeroStat(StatUpgradeType.FireAgain, level),
+                FireAgainSpread = (int)definition.GetLeveledHeroStat(StatUpgradeType.FireAgainSpread, level),
                 KnockBack = definition.Knockback,
                 Penetration =(int)definition.GetLeveledHeroStat(StatUpgradeType.Penetration, level),
                 AoeOnly = definition.AoeOnly,
                 ProjectileVisualId = definition.ProjectileVisualId,
                 ProjectileSpeed = definition.ProjectileSpeed,
                 FireAgainInterval =definition.FireAgainInterval,
-                AttackAnimDelay =  definition.AttackDelay
+                AttackAnimDelay =  definition.AttackDelay,
             });
 
             if (definition.KnockbackResistent)

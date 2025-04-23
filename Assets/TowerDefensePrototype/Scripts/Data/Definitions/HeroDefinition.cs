@@ -38,6 +38,8 @@ namespace CastlePrototype.Data.Definitions
         [SerializeField] int Bounce;
         [SerializeField] int Penetration;
         [SerializeField] int Fireagain;
+        [SerializeField] int FireAgainSpread;
+
        
         // AOE - either projectile or direct AOE      
         [Header("AOE stats")]
@@ -99,6 +101,7 @@ namespace CastlePrototype.Data.Definitions
                 StatUpgradeType.AoeDamage => AoeDamage,
                 StatUpgradeType.TargetRange => TargetRange,
                 StatUpgradeType.AttackDistance => AttackDistance,
+                StatUpgradeType.FireAgainSpread => FireAgainSpread,
 
                 _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
             };

@@ -54,7 +54,7 @@ namespace CastlePrototype.States
                 {"ellite_dragon", 5},
                 {"sniper", 1},
                 {"palisade", 10},
-
+                {"raptor", 1},
             });
 
             preloadedGroups.Add("Projectiles", new Dictionary<string, int>()

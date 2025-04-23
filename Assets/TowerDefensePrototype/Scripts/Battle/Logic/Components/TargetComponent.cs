@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace CastlePrototype.Battle.Logic.Components
 {
@@ -9,5 +10,6 @@ namespace CastlePrototype.Battle.Logic.Components
 
         // this is flag for player weapon that could be controlled by player
         public bool ManualTargetingActive;
+        public float3 TargetPosition;
     }
 }

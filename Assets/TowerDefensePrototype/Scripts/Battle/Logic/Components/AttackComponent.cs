@@ -29,11 +29,14 @@ namespace CastlePrototype.Battle.Logic.Components
         public int Bounce;
         public bool KnockBack;
         public float FireAgainInterval;
+        public int FireAgainSpread;
         
         // runtime data
         public double NextMainAttackTime;
 
-        public FixedList512Bytes<double> SecondaryAttackTimes;
+        public FixedList512Bytes<float> SecondaryAttackTimes;
+        public FixedList512Bytes<float> SecondaryAttackAngles;
+
         public bool IsInAttackDistance;
         // for visual
         public bool PlayAttack;

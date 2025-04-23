@@ -23,13 +23,14 @@ namespace CastlePrototype.Battle.Logic.Systems
             foreach (var (transformC,targetC, lookAtC) in 
                      SystemAPI.Query<RefRW<LocalTransform>, RefRO<TargetComponent>, RefRO<LookAtTargetComponent>>())
             {
-                if (targetC.ValueRO.Target == Entity.Null)
-                    continue;
+                //if (targetC.ValueRO.Target == Entity.Null)
+                //    continue;
                 if (!lookAtC.ValueRO.LookAtTarget)
                     continue;
                 
                 //look at target
-                var direction = transformLookup[targetC.ValueRO.Target].Position - transformC.ValueRO.Position;
+                var targetPosition = targetC.ValueRO.TargetPosition;
+                var direction = targetPosition - transformC.ValueRO.Position;
                 var targetRotation = quaternion.LookRotation(direction, new float3(0,1,0));
 
                 

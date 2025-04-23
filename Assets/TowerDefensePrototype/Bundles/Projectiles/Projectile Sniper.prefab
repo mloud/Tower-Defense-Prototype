@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2220089120542139003}
   - component: {fileID: 4879338131508977915}
   - component: {fileID: 1605859257531162493}
+  - component: {fileID: 487589147505408674}
   m_Layer: 0
   m_Name: Projectile Sniper
   m_TagString: Untagged
@@ -172,6 +173,19 @@ MonoBehaviour:
   objectToRotate: {fileID: 0}
   trackOnEnable: 0
   goList: []
+--- !u!114 &487589147505408674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636574071428617862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9314bbf30ff437ba17153a3dcce1713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailRenderer: {fileID: 4879338131508977915}
 --- !u!1 &9083105718073428839
 GameObject:
   m_ObjectHideFlags: 0

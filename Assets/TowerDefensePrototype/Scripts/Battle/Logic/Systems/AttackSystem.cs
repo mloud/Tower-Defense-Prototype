@@ -69,7 +69,18 @@ namespace CastlePrototype.Battle.Logic.Systems
                 else
                 {
                     targetEntity = targetC.ValueRO.Target;
-                    if (targetEntity != Entity.Null)
+                    // spread attack does not need target
+                    if (attackC.ValueRO.SecondaryAttackAngles.Length > 0)
+                    {
+                        isInAttackRange = true;
+                        float angleDeg = attackC.ValueRO.SecondaryAttackAngles[0];
+                        float angleRad = math.radians(angleDeg);
+
+                        float3 forward = math.forward(quaternion.Euler(0, angleRad, 0));
+                        targetPosition = transformC.ValueRO.Position + forward;
+                    }
+                    // some entity is targeted
+                    else if (targetEntity != Entity.Null)
                     {
                         var targetPositionC = transformLookup.GetRefRO(targetEntity);
                         var targetSettingsC = settingLookup.GetRefRO(targetEntity);
@@ -90,7 +101,7 @@ namespace CastlePrototype.Battle.Logic.Systems
 
                 if (isInAttackRange)
                 {
-                  
+                    targetC.ValueRW.TargetPosition = targetPosition;
                     attackC.ValueRW.IsInAttackDistance = true;
 
                     // update attack remaining times
@@ -129,11 +140,38 @@ namespace CastlePrototype.Battle.Logic.Systems
                         {
                             attackC.ValueRW.NextMainAttackTime = attackC.ValueRO.Cooldown;
                             Debug.Assert(attackC.ValueRO.SecondaryAttackTimes.Length == 0, "There are unprocessed secondary attacks");
+                            Debug.Assert(attackC.ValueRO.SecondaryAttackAngles.Length == 0, "There are unprocessed secondary attacks angles");
 
                             for (int i = 0; i < attackC.ValueRO.FireAgain; i++)
                             {
-                                double secondaryAttackTimeDelay = attackC.ValueRO.FireAgainInterval;
+                                float secondaryAttackTimeDelay = attackC.ValueRO.FireAgainInterval;
                                 attackC.ValueRW.SecondaryAttackTimes.Add((i+1) * secondaryAttackTimeDelay);
+                            }
+
+                            if (attackC.ValueRO.FireAgainSpread > 0)
+                            {
+                                var currentPosition = transformC.ValueRO.Position;
+                                var currentDirection = targetPosition - currentPosition;
+                                
+                                float3 direction = math.normalize(currentDirection);
+                                float yaw = math.atan2(direction.x, direction.z);
+                                float yawDegrees = math.degrees(yaw);
+
+                                float angleStep = yawDegrees;
+                                if (attackC.ValueRO.FireAgain > 1)
+                                {
+                                    angleStep = (float)attackC.ValueRO.FireAgainSpread /
+                                                (attackC.ValueRO.FireAgain - 1);
+                                }
+
+                                var startRotation = yawDegrees;
+                                if (yawDegrees > 0)
+                                    angleStep *= -1;
+                                for (int i = 0; i < attackC.ValueRO.FireAgain; i++)
+                                {
+                                    var yRot = startRotation + i * angleStep;
+                                    attackC.ValueRW.SecondaryAttackAngles.Add(yRot);
+                                }
                             }
                         }
                         
@@ -188,6 +226,10 @@ namespace CastlePrototype.Battle.Logic.Systems
                         if (!isMainAttack)
                         {
                             attackC.ValueRW.SecondaryAttackTimes.RemoveAt(0);
+                            if (attackC.ValueRO.SecondaryAttackAngles.Length > 0)
+                            {
+                                attackC.ValueRW.SecondaryAttackAngles.RemoveAt(0);
+                            }
                         }
                     }
                 }

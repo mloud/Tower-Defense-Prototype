@@ -14,7 +14,8 @@ namespace CastlePrototype.Data.Definitions
         AoeDamage,
         Hp,
         TargetRange,
-        AttackDistance
+        AttackDistance,
+        FireAgainSpread
     }
 
     [Serializable]
