@@ -1,0 +1,143 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
+using OneDay.Core;
+using OneDay.Core.Modules.Data;
+using OneDay.Core.Modules.Ui;
+using TowerDefense.Battle.Logic.Components;
+using TowerDefense.Battle.Logic.EcsUtils;
+using TowerDefense.Battle.Logic.Managers.Slots;
+using TowerDefense.Data.Definitions;
+using TowerDefense.Managers;
+using TowerDefense.Scripts.Ui.Popups;
+using Unity.Entities;
+
+namespace TowerDefense.Battle.Logic.Managers.Skills
+{
+    public class SkillManager : WorldManager
+    { 
+        private List<ASkill> AvailableSkills { get; set; }
+
+        public SkillManager(World world) : base(world)
+        { }
+
+        protected override async UniTask OnInitialize()
+        {
+            var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            
+            AvailableSkills = new List<ASkill>
+            {
+                new IncreaseDamageSkill("Increase damage", 30, "Increases damage by {VALUE}%"),
+                new DecreaseAttackInterval("Decrease attack interval", 30, "Decrease attack interval by {VALUE}%"),
+                new IncreaseAttackDistance("Increase attack distance", 15, "Increase attack distance by {VALUE}%"),
+                new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
+                new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
+                new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}")
+            };
+
+            if (deck.Heroes.ContainsKey("palisade"))
+            {
+                AvailableSkills.Add(new PlaceTrapSkill("Place palisade", 4, "Place {VALUE} palisades", "palisade"));
+            }
+
+            AvailableSkills.ForEach(x=>x.AttachedWorld = AttachedToWorld);
+
+       
+            foreach (var (unitId, _) in deck.Heroes)
+            {
+                if (unitId == "barricade" || unitId == "weapon")
+                    continue;
+                var definition = await ServiceLocator.Get<IPlayerManager>().GetHeroDefinition(unitId);
+                // these units are created by skills only
+                if (definition.CreatedBySkill)
+                    continue;
+                
+                AvailableSkills.Add(new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"));
+            }
+        }
+        
+        public async UniTask RunSkillSelectionFlow(int skillsToShow)
+        {
+            PauseUtils.SetLogicPaused(true);
+            var skills = GetRandomSkills(skillsToShow);
+            await ConnectSkillsToEntities(skills);
+            var selectedSkill = await OpenSkillPopup(skills);
+            selectedSkill.Apply(AttachedToWorld.EntityManager);
+            if (selectedSkill.SkillType == SkillType.UnlockHero || selectedSkill.SkillType == SkillType.PlaceTrap)
+            {
+                AvailableSkills.Remove(selectedSkill);
+            }
+
+            PauseUtils.SetLogicPaused(false);
+        }
+
+        private List<ASkill> GetRandomSkills(int count)
+        {
+            var skills = new List<ASkill>(AvailableSkills);
+            RemoveNotApplicableSkills(skills);
+            int realCount = Math.Min(count, skills.Count);
+
+            
+            int skillsToRemove = skills.Count - realCount;
+            for (int i = 0; i < skillsToRemove; i++)
+            { 
+                skills.RemoveAt(UnityEngine.Random.Range(0,skills.Count));
+            }
+            return skills;
+        }
+
+        private void RemoveNotApplicableSkills(List<ASkill> skills)
+        {
+            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetFirstAvailableSlot() == null)
+            {
+                skills.RemoveAll(x => x.SkillType == SkillType.UnlockHero);
+            }
+
+            // only weapon
+            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetOccupiedSlotsCount() == 1)
+            {
+                skills.RemoveAll(x => x.SkillType == SkillType.IncreaseAttackDistance);
+            }
+        }
+        
+        private async UniTask ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)
+        {
+            var heroDefs = await ServiceLocator.Get<IDataManager>().GetAll<HeroDefinition>();
+      
+            for (int i = 0; i < skills.Count; i++)
+            {
+                skills[i].RelatedEntity = skills[i].NeedsUnit
+                    ? QueryUtils.GetEntityForSkill(AttachedToWorld.EntityManager, skills[i].SkillType)
+                    : Entity.Null;
+
+                if (skills[i].RelatedEntity != Entity.Null)
+                {
+                    skills[i].DefinitionId = AttachedToWorld.EntityManager
+                        .GetComponentData<UnitComponent>(skills[i].RelatedEntity).DefinitionId.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(skills[i].DefinitionId))
+                {
+                    skills[i].Definition = heroDefs.First(x => x.UnitId == skills[i].DefinitionId);
+                }
+            }
+        }
+ 
+        private async UniTask<ASkill> OpenSkillPopup(List<ASkill> proposedSkills)
+        {
+            int selectedIndex = -1;
+            var popupRequest = ServiceLocator.Get<IUiManager>()
+                .OpenPopup<SkillPopup>(
+                    UiParameter
+                        .Create(proposedSkills)
+                        .Add("OnClick", (Action<int>)(s => selectedIndex = s)));
+            await popupRequest.OpenTask;
+            await popupRequest.WaitForCloseFinished();
+
+            return proposedSkills[selectedIndex];
+        }
+        
+        protected override void OnRelease() => AvailableSkills.Clear();
+    }
+}
