@@ -30,8 +30,8 @@ namespace TowerDefense.Ui.Components
         public async UniTask Refresh()
         {
             var playerManager = ServiceLocator.Get<IPlayerManager>();
-            stageDefinitions = (await playerManager.GetAllStageDefinitions()).ToList();
-            playerProgress = await playerManager.GetProgression();
+            stageDefinitions = (await playerManager.StageGetter.GetAllStageDefinitions()).ToList();
+            playerProgress = await playerManager.ProgressionGetter.GetProgression();
             Prepare(stageDefinitions.Count);
 
             for (int i = 0; i < stageDefinitions.Count; i++)

@@ -45,8 +45,8 @@ namespace TowerDefense.States
         public override async UniTask EnterAsync(StateData stateData = null)
         {
             int stageIndex = stateData.GetValue<int>("stage");
-            var stageDefinition = await ServiceLocator.Get<IPlayerManager>().GetStageDefinition(stageIndex);
-            var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            var stageDefinition = await ServiceLocator.Get<IPlayerManager>().StageGetter.GetStageDefinition(stageIndex);
+            var heroDeck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);

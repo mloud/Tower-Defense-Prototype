@@ -36,7 +36,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             var enemies = await dataManager.GetAll<EnemyDefinition>();
             enemyDefinitions = enemies.ToDictionary(x => x.UnitId, x => x);
 
-            heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            heroDeck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
         }
 
         public Entity CreateBarricade(ref SystemState state, float3 position)

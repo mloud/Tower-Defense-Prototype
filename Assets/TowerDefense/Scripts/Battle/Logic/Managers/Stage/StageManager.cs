@@ -39,7 +39,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             VisualManager.Default.SetBattleMusicPlaying(false);
         
             var battleProgress01 = (float)killedEnemies / totalEnemies;
-            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().FinishBattle(stage, battleProgress01, playerWon);
+            var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().StageGetter.FinishBattle(stage, battleProgress01, playerWon);
 
             if (playerWon)
             {

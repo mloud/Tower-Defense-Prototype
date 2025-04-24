@@ -1,38 +1,61 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using OneDay.Core;
 using OneDay.Core.Extensions;
+using OneDay.Core.Modules.Data;
 using TowerDefense.Data;
+using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Progress;
+using TowerDefense.Managers;
 using TowerDefense.Managers.Vallet;
-using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
-namespace TowerDefense.Managers
+namespace TowerDefense.Scripts.Managers
 {
-    public partial class PlayerManager
+    public interface IStageGetter
     {
-        public class NewLevelBufferedEvent : BufferedEvent
-        {
-            public string HeroId { get; }
-            public int Level { get; }
-            public NewLevelBufferedEvent(int level, string heroId)
-            {
-                Type = (int)BufferedEventsIds.NewLevel;
-                Level = level;
-                HeroId = heroId;
-            }
-        }
+        UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions();
+        UniTask<StageDefinition> GetStageDefinition(int index);
+        UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won);
+    }
+    
+    public interface IStageSetter
+    { }
 
+    public interface IStagePlugin: IStageSetter, IStageGetter
+    {}
+
+    public class StagePlugin : IStagePlugin, IPlugin
+    {
+        private IDataManager dataManager;
+        private IValetSetter valePlugin;
+        private IDeckPlugin deckPlugin;
+        private IProgressionPlugin progressionPlugin;
         
-        public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won)
+        public StagePlugin(IDataManager dataManager, IValetPlugin valePlugin, IDeckPlugin deckPlugin, IProgressionPlugin progressionPlugin)
+        {
+            this.dataManager = dataManager;
+            this.valePlugin = valePlugin;
+            this.deckPlugin = deckPlugin;
+            this.progressionPlugin = progressionPlugin;
+        } 
+        
+        public async UniTask<StageDefinition> GetStageDefinition(int stage) =>
+            (await dataManager.GetAll<StageDefinition>()).ElementAt(stage);
+        
+        public async UniTask<IEnumerable<StageDefinition>> GetAllStageDefinitions() =>
+            await dataManager.GetAll<StageDefinition>();
+        
+        
+          public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won)
         {
             var runtimeStageReward = new RuntimeStageReward();
             
             var stageDefinition = await GetStageDefinition(stage);
-            var heroDeck = await GetHeroDeck();
+            var heroDeck = await deckPlugin.GetHeroDeck();
             int totalCardsToDistribute = (int)(stageDefinition.Reward.Cards * progression01);
             Debug.Log($"Cards to distribute {totalCardsToDistribute}");
 
@@ -71,16 +94,14 @@ namespace TowerDefense.Managers
                 heroDeck.Heroes[reward.Key].CardsCount += reward.Value;
             }
 
-            await SaveHeroDeck(heroDeck);
-            await ValetSetter.AddCurrency(Currency.Coins, runtimeStageReward.Coins);
-            
-            
-
+            await deckPlugin.SaveHeroDeck(heroDeck);
+            await valePlugin.AddCurrency(Currency.Coins, runtimeStageReward.Coins);
+         
 
             // stage is finished
             if (won)
             {
-                var progression = await GetProgression();
+                var progression = await progressionPlugin.GetProgression();
                 var stagesDefinitions = await GetAllStageDefinitions();
 
                 // we won again prev stage - dont do anything for now
@@ -102,7 +123,7 @@ namespace TowerDefense.Managers
                 }
      
            
-                var playerProgressionDefinition = await GetPlayerProgressionDefinition();
+                var playerProgressionDefinition = await progressionPlugin.GetPlayerProgressionDefinition();
                 var xpNeededForNextLevel = playerProgressionDefinition.XpNeededToNextLevel[progression.Level];
 
                 int prevLevel = progression.Level;
@@ -123,7 +144,7 @@ namespace TowerDefense.Managers
                                Level = 1,
                                CardsCount = 0
                            });
-                           await SaveHeroDeck(heroDeck);
+                           await deckPlugin.SaveHeroDeck(heroDeck);
                            ServiceLocator.Get<IBufferedEventsManager>().Push(new NewLevelBufferedEvent( progression.Level, heroToUnlock));
                         }
                     }
@@ -132,8 +153,9 @@ namespace TowerDefense.Managers
                 int xpForNextLevel = progression.Level < playerProgressionDefinition.XpNeededToNextLevel.Count
                     ? playerProgressionDefinition.XpNeededToNextLevel[progression.Level]
                     : 0;
-                await SaveProgression(progression);
-                OnXpChanged?.Invoke((progression.Xp,xpForNextLevel, prevLevel, progression.Level));
+                await progressionPlugin.SaveProgression(progression);
+                
+                progressionPlugin.XpChanged?.Invoke(progression.Xp,xpForNextLevel, prevLevel, progression.Level);
             }
             
             return runtimeStageReward;

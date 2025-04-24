@@ -27,32 +27,32 @@ namespace TowerDefense.States
         public override async UniTask EnterAsync(StateData stateData = null)
         {
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
-            ServiceLocator.Get<IPlayerManager>().OnHeroLeveledUp += OnHeroLeveledUp;
+            ServiceLocator.Get<IPlayerManager>().DeckGetter.OnHeroLeveledUp += OnHeroLeveledUp;
             
-            var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            var heroDeck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
             var heroDefinitions = (await ServiceLocator.Get<IDataManager>().GetAll<HeroDefinition>()).ToList();
             await view.Initialize(heroDeck, heroDefinitions);
             
             view.Show(true);
         }
 
-        private void OnHeroLeveledUp((HeroProgress progress, HeroDefinition definition) evt)
+        private void OnHeroLeveledUp(HeroProgress progress, HeroDefinition definition)
         {
-            view.RefreshCard(evt.progress, evt.definition).Forget();
+            view.RefreshCard(progress, definition).Forget();
         }
 
         public override UniTask ExecuteAsync() => UniTask.CompletedTask;
 
         public override UniTask ExitAsync()
         {
-            ServiceLocator.Get<IPlayerManager>().OnHeroLeveledUp -= OnHeroLeveledUp;
+            ServiceLocator.Get<IPlayerManager>().DeckGetter.OnHeroLeveledUp -= OnHeroLeveledUp;
             view.Hide(true);
             return UniTask.CompletedTask;
         }
 
         private async UniTask LevelUpHero(string heroId)
         {
-            var result = await ServiceLocator.Get<IPlayerManager>().LevelUpHero(heroId);
+            var result = await ServiceLocator.Get<IPlayerManager>().DeckGetter.LevelUpHero(heroId);
             // if (result.Item1)
             // {
             //     await view.RefreshCard(result.Item2, result.Item3);

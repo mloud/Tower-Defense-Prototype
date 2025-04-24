@@ -26,7 +26,7 @@ namespace TowerDefense.Battle.Logic
             var rootSystemGroup = world.GetExistingSystemManaged<SimulationSystemGroup>();
 
             BattleInitializeSystem.stage = stageIndex;
-            BattleInitializeSystem.stageName = (await ServiceLocator.Get<IPlayerManager>().GetStageDefinition(stageIndex)).StageName;
+            BattleInitializeSystem.stageName = (await ServiceLocator.Get<IPlayerManager>().StageGetter.GetStageDefinition(stageIndex)).StageName;
             WorldManagers.Register(world, new SkillManager(world));
             WorldManagers.Register(world, new SlotManager(world));
             WorldManagers.Register(world, new BattleEventsManager(world));

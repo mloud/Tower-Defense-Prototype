@@ -22,13 +22,17 @@ namespace TowerDefense.Managers.Vallet
         UniTask AddCurrency(Currency currency, int value);
         UniTask SpendCurrency(Currency currency, int value);
     }
-    
+
+    public interface IValetPlugin : IValetSetter, IValetGetter
+    {
+    }
+
     public enum Currency
     {
         Coins
     }
     
-    public class ValetGetter : IValetGetter, IValetSetter, IPlugin
+    public class ValetGetter : IValetPlugin, IPlugin
     {
         public CurrencyChangedDelegate CurrencyChanged { get; set; }
         private IDataManager dataManager;

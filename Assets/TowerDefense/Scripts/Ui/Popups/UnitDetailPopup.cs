@@ -35,13 +35,13 @@ namespace TowerDefense.Ui.Popups
         private async UniTask Set()
         {
             var playerManager = ServiceLocator.Get<IPlayerManager>();
-            var unlockedHero = await playerManager.GetUnlockedHero(heroId);
+            var unlockedHero = await playerManager.DeckGetter.GetUnlockedHero(heroId);
 
             icon.SetImage(unlockedHero.definition.VisualId);
             icon.name = unlockedHero.definition.UnitId;
             level.text = unlockedHero.progress.Level.ToString();
           
-            upgradeButton.interactable = await playerManager.CanLevelUpHero(heroId);
+            upgradeButton.interactable = await playerManager.DeckGetter.CanLevelUpHero(heroId);
 
             bool isMaxed = unlockedHero.definition.IsMaxLevel(unlockedHero.progress.Level);
             
@@ -69,7 +69,7 @@ namespace TowerDefense.Ui.Popups
 
         private async UniTask OnUpgrade()
         {
-            await ServiceLocator.Get<IPlayerManager>().LevelUpHero(heroId);
+            await ServiceLocator.Get<IPlayerManager>().DeckGetter.LevelUpHero(heroId);
             await Set();
         }
     }

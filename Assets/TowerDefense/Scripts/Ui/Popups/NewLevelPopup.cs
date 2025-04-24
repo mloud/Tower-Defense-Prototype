@@ -3,6 +3,7 @@ using OneDay.Core;
 using OneDay.Core.Modules.Ui;
 using TMPro;
 using TowerDefense.Managers;
+using TowerDefense.Scripts.Managers;
 using TowerDefense.Ui.Components;
 using UnityEngine;
 
@@ -16,12 +17,12 @@ namespace TowerDefense.Scripts.Ui.Popups
 
         protected override async UniTask OnOpenStarted(IUiParameter parameter)
         {
-            var levelUpEvent = parameter.GetFirst<PlayerManager.NewLevelBufferedEvent>();
+            var levelUpEvent = parameter.GetFirst<NewLevelBufferedEvent>();
             cardRewardPanel.Prepare(1);
             levelLabel.text = levelUpEvent.Level.ToString();
 
             var playerManager = ServiceLocator.Get<IPlayerManager>();
-            var heroDefinition = await playerManager.GetHeroDefinition(levelUpEvent.HeroId);
+            var heroDefinition = await playerManager.DeckGetter.GetHeroDefinition(levelUpEvent.HeroId);
             cardRewardPanel.Get(0).Set(heroDefinition, 0);
         }
     }

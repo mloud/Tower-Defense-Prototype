@@ -28,7 +28,7 @@ namespace TowerDefense.Scripts.Ui.Popups
                     continue;
                 }
 
-                var heroDefinition = await playerManager.GetHeroDefinition(heroId);
+                var heroDefinition = await playerManager.DeckGetter.GetHeroDefinition(heroId);
                 cardRewardPanel.Get(index++).Set(heroDefinition, counter);
             }
 

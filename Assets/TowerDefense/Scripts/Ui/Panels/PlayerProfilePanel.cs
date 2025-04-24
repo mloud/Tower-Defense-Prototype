@@ -20,16 +20,16 @@ namespace TowerDefense.Ui.Panels
         public override async UniTask Initialize()
         {
             var playerManager = ServiceLocator.Get<IPlayerManager>();
-            var progressionInfo = await playerManager.GetProgressionInfo();
+            var progressionInfo = await playerManager.ProgressionGetter.GetProgressionInfo();
             
             Set(progressionInfo.xp, progressionInfo.level, progressionInfo.xpNextLevel);
             
-            playerManager.OnXpChanged += OnXpChanged;
+            playerManager.ProgressionGetter.XpChanged += OnXpChanged;
         }
 
-        private void OnXpChanged((int newXp, int nextXp, int prevLevel, int currentLevel) evt)
+        private void OnXpChanged(int newXp, int nextXp, int prevLevel, int currentLevel)
         {
-           Set(evt.newXp, evt.currentLevel, evt.nextXp);
+           Set(newXp, currentLevel, nextXp);
         }
 
         private void Set(int xp, int level, int xpToNextLevel)

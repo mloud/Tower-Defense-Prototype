@@ -4,6 +4,7 @@ using OneDay.Core;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 using TowerDefense.Managers;
+using TowerDefense.Scripts.Managers;
 using TowerDefense.Scripts.Ui.Popups;
 using TowerDefense.Ui.Panels;
 using TowerDefense.Ui.Views;
@@ -32,7 +33,7 @@ namespace TowerDefense.States
             view.Show(true);
 
             var bufferedEvents = ServiceLocator.Get<IBufferedEventsManager>()
-                .PopAll<PlayerManager.NewLevelBufferedEvent>((int)BufferedEventsIds.NewLevel);
+                .PopAll<NewLevelBufferedEvent>((int)BufferedEventsIds.NewLevel);
             
             Debug.Assert(bufferedEvents == null || bufferedEvents.Count <= 1, "Only zero or one hero unlocked allowed for now");
 

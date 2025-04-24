@@ -24,7 +24,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
 
         protected override async UniTask OnInitialize()
         {
-            var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            var deck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
             
             AvailableSkills = new List<ASkill>
             {
@@ -48,7 +48,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             {
                 if (unitId == "barricade" || unitId == "weapon")
                     continue;
-                var definition = await ServiceLocator.Get<IPlayerManager>().GetHeroDefinition(unitId);
+                var definition = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDefinition(unitId);
                 // these units are created by skills only
                 if (definition.CreatedBySkill)
                     continue;

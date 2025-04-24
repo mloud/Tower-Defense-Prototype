@@ -11,13 +11,13 @@ namespace TowerDefense.Ui.Components
     {
         [SerializeField] private GameObject flagGo;
 
-        public void Initialize() => ServiceLocator.Get<IPlayerManager>().OnHeroLeveledUp += OnHeroLeveledUp;
+        public void Initialize() => ServiceLocator.Get<IPlayerManager>().DeckGetter.OnHeroLeveledUp += OnHeroLeveledUp;
 
-        private void OnHeroLeveledUp((HeroProgress progress, HeroDefinition definition) evt) => Refresh().Forget();
+        private void OnHeroLeveledUp(HeroProgress progress, HeroDefinition definition) => Refresh().Forget();
 
         public async UniTask Refresh()
         {
-           bool canLevelUp = await  ServiceLocator.Get<IPlayerManager>().CanLevelUpAnyHero();
+           bool canLevelUp = await  ServiceLocator.Get<IPlayerManager>().DeckGetter.CanLevelUpAnyHero();
            flagGo.SetActive(canLevelUp);
         }
     }
