@@ -72,11 +72,6 @@ namespace CastlePrototype.Managers
                     {
                         CardsCount = 0,
                         Level = 1
-                    }}, 
-                    {"sniper", new HeroProgress
-                    {
-                        CardsCount = 0,
-                        Level = 1
                     }}
                 }
             });
