@@ -80,30 +80,22 @@ namespace TowerDefense
             // storages
             ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgress>(new LocalStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDeck>(new LocalStorage());
-
-            ServiceLocator.Get<IDataManager>()
-                .RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
-            ServiceLocator.Get<IDataManager>()
-                .RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
-            ServiceLocator.Get<IDataManager>()
-                .RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
-            ServiceLocator.Get<IDataManager>()
-                .RegisterStorage<PlayerProgressionDefinition>(new AddressableScriptableObjectStorage());
+            ServiceLocator.Get<IDataManager>().RegisterStorage<Valet>(new LocalStorage());
+            
+            ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
+            ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
+            ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
+            ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgressionDefinition>(new AddressableScriptableObjectStorage());
 
             // storage bindings   
-            ServiceLocator.Get<IDataManager>()
-                .RegisterTypeToKeyBinding<PlayerProgress>(TypeToDataKeyBinding.PlayerProgress);
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgress>(TypeToDataKeyBinding.PlayerProgress);
             ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDeck>(TypeToDataKeyBinding.HeroDeck);
-
-            ServiceLocator.Get<IDataManager>()
-                .RegisterTypeToKeyBinding<StageDefinition>(TypeToDataKeyBinding.StageDefinitionsTable);
-            ServiceLocator.Get<IDataManager>()
-                .RegisterTypeToKeyBinding<EnemyDefinition>(TypeToDataKeyBinding.EnemyDefinitionsTable);
-            ServiceLocator.Get<IDataManager>()
-                .RegisterTypeToKeyBinding<HeroDefinition>(TypeToDataKeyBinding.HeroDefinitionsTable);
-            ServiceLocator.Get<IDataManager>()
-                .RegisterTypeToKeyBinding<PlayerProgressionDefinition>(TypeToDataKeyBinding
-                    .PlayerProgressionDefinitionTable);
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<Valet>(TypeToDataKeyBinding.Valet);
+            
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<StageDefinition>(TypeToDataKeyBinding.StageDefinitionsTable);
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<EnemyDefinition>(TypeToDataKeyBinding.EnemyDefinitionsTable);
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDefinition>(TypeToDataKeyBinding.HeroDefinitionsTable);
+            ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgressionDefinition>(TypeToDataKeyBinding.PlayerProgressionDefinitionTable);
         }
 
         protected override async UniTask OnBoot() { }

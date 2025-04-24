@@ -60,6 +60,7 @@ MonoBehaviour:
     Reward:
       Cards: 120
       Xp: 50
+      Coins: 100
   - StageName: Meet the Golem
     StageVisualKey: environment_1
     IsUnlocked: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
     Reward:
       Cards: 120
       Xp: 50
+      Coins: 0
   - StageName: Dragon's Ellite
     StageVisualKey: environment_1
     IsUnlocked: 1
@@ -194,6 +196,7 @@ MonoBehaviour:
     Reward:
       Cards: 130
       Xp: 50
+      Coins: 0
   - StageName: Boss Dragon
     StageVisualKey: environment_2
     IsUnlocked: 1
@@ -205,6 +208,7 @@ MonoBehaviour:
     Reward:
       Cards: 0
       Xp: 0
+      Coins: 0
   - StageName: 
     StageVisualKey: 
     IsUnlocked: 0
@@ -212,3 +216,4 @@ MonoBehaviour:
     Reward:
       Cards: 0
       Xp: 0
+      Coins: 0

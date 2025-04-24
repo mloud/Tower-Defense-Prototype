@@ -6,6 +6,8 @@ using OneDay.Core.Modules.Data;
 using TowerDefense.Data;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Progress;
+using TowerDefense.Managers.Vallet;
+using TowerDefense.Scripts.Managers;
 using UnityEngine;
 
 namespace TowerDefense.Managers
@@ -14,6 +16,9 @@ namespace TowerDefense.Managers
     {
         Action<(HeroProgress progress, HeroDefinition definition)> OnHeroLeveledUp { get; set; } 
         Action<(int newXp, int nextXpNeeded, int prevLevel, int currentLevel)> OnXpChanged { get; set; }
+        
+        IValetGetter ValetGetter { get; }
+        
         
         UniTask InitializePlayer();
         UniTask<PlayerProgress> GetProgression();
@@ -32,11 +37,20 @@ namespace TowerDefense.Managers
 
     public partial class PlayerManager : MonoBehaviour, IPlayerManager, IService
     {
+        public IValetGetter ValetGetter { get; set; }
+        private IValetSetter ValetSetter { get; set; }
+        
+        private Dictionary<Type, IPlugin> plugins;
+        
         private IDataManager dataManager;
 
         public UniTask Initialize()
         {
             dataManager = ServiceLocator.Get<IDataManager>();
+            var valet = new ValetGetter(dataManager);
+            ValetGetter = valet;
+            ValetSetter = valet;
+            
             return UniTask.CompletedTask;
         }
 

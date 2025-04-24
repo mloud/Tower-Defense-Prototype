@@ -5,5 +5,6 @@ namespace TowerDefense.Data.Definitions
     {
         public int Cards;
         public int Xp;
+        public int Coins;
     }
 }

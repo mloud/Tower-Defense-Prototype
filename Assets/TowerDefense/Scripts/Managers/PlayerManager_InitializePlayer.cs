@@ -18,6 +18,11 @@ namespace TowerDefense.Managers
                 Xp = 0,
                 Level = 1
             });
+
+            await CreateProgressIfNeeded(() => new Valet
+            {
+                Coins = 0
+            });
  
             await CreateProgressIfNeeded(() => new HeroDeck
             {

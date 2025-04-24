@@ -3346,7 +3346,7 @@ PrefabInstance:
     - target: {fileID: 2655428145657215241, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_Name
-      value: PlayerProfilePanel
+      value: TopHudPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
@@ -3361,7 +3361,7 @@ PrefabInstance:
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
@@ -3381,12 +3381,12 @@ PrefabInstance:
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 517.0155
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 234.75623
+      value: 209.6084
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
@@ -3426,12 +3426,12 @@ PrefabInstance:
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 292
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -132
+      value: -104.80426
       objectReference: {fileID: 0}
     - target: {fileID: 5310921525259847530, guid: 513e46d366856404db5243f0e0f187f2,
         type: 3}

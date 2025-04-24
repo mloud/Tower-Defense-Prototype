@@ -6,6 +6,8 @@ using OneDay.Core;
 using OneDay.Core.Extensions;
 using TowerDefense.Data;
 using TowerDefense.Data.Progress;
+using TowerDefense.Managers.Vallet;
+using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
 namespace TowerDefense.Managers
@@ -23,6 +25,7 @@ namespace TowerDefense.Managers
                 HeroId = heroId;
             }
         }
+
         
         public async UniTask<RuntimeStageReward> FinishBattle(int stage, float progression01, bool won)
         {
@@ -61,13 +64,17 @@ namespace TowerDefense.Managers
             Debug.Assert(totalCardsToDistribute==0, "Not all cards we distributed");
             Debug.Log($"Cards were distributed:{JsonConvert.SerializeObject(runtimeStageReward.Cards)}");
 
-
+            runtimeStageReward.AddCoins((int)Math.Round(stageDefinition.Reward.Coins * progression01));
+            
             foreach (var reward in runtimeStageReward.Cards)
             {
                 heroDeck.Heroes[reward.Key].CardsCount += reward.Value;
             }
 
             await SaveHeroDeck(heroDeck);
+            await ValetSetter.AddCurrency(Currency.Coins, runtimeStageReward.Coins);
+            
+            
 
 
             // stage is finished

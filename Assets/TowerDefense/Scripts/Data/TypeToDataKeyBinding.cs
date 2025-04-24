@@ -5,6 +5,7 @@ namespace TowerDefense.Data
         
         public const string PlayerProgress = "PlayerProgression";
         public const string HeroDeck = "HeroDeck";
+        public const string Valet = "Valet";
         
         // definitions
         public const string StageDefinitionsTable = "StageDefinitionsTable";
