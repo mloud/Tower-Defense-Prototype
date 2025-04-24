@@ -11,7 +11,7 @@ namespace TowerDefense.Scripts.Ui.Popups
     public class AfterBattlePopup : UiPopup
     {
         [SerializeField] private BattleCardRewardPanel cardRewardPanel;
-
+        [SerializeField] private ResourceWidget coinsResourceWidget;
         protected override async UniTask OnOpenStarted(IUiParameter parameter)
         {
             var stageReward = parameter.GetFirst<RuntimeStageReward>();
@@ -30,6 +30,16 @@ namespace TowerDefense.Scripts.Ui.Popups
 
                 var heroDefinition = await playerManager.GetHeroDefinition(heroId);
                 cardRewardPanel.Get(index++).Set(heroDefinition, counter);
+            }
+
+            if (stageReward.Coins > 0)
+            {
+                coinsResourceWidget.gameObject.SetActive(true);
+                coinsResourceWidget.Set(stageReward.Coins);
+            }
+            else
+            {
+                coinsResourceWidget.gameObject.SetActive(false);
             }
         }
     }
