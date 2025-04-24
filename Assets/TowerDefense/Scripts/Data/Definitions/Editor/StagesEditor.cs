@@ -43,7 +43,7 @@ public class HeroDeckEditorWindow : EditorWindow
 
         // Change path to match your project structure
         string[] guids =
-            AssetDatabase.FindAssets("t:StageDefinitionsTable", new[] { "Assets/TowerDefensePrototype/Data/" });
+            AssetDatabase.FindAssets("t:StageDefinitionsTable", new[] { "Assets/TowerDefense/Data/" });
 
         foreach (var guid in guids)
         {
