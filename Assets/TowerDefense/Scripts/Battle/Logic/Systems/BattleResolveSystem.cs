@@ -66,8 +66,6 @@ namespace TowerDefense.Battle.Logic.Systems
                 playerTotalHp = 0;
             }
 #endif
-            Debug.Log($"AAA PlayerTotalHP {playerTotalHp}");
-
             if (playerTotalHp <= 0)
             {
                 WorldManagers.Get<StageManager>(state.World)
