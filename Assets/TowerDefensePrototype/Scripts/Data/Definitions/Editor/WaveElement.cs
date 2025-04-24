@@ -82,6 +82,7 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
         
         private void AddNewWave()
         {
+            OnSave();
             Waves.Add(new WaveDefinition());
             Refresh();
         }
