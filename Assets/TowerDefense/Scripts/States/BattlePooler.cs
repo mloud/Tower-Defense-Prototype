@@ -5,7 +5,9 @@ using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Pooling;
 using TowerDefense.Data.Definitions;
+using TowerDefense.Data.Progress;
 using TowerDefensePrototype.Battle.Visuals.Effects;
+using Unity.VisualScripting;
 
 namespace TowerDefense.States
 {
@@ -13,7 +15,7 @@ namespace TowerDefense.States
     {
         private Dictionary<string, Dictionary<string, int>> preloadedGroups = new();
         
-        public async UniTask Pool(ILoading loading, StageDefinition definition)
+        public async UniTask Pool(ILoading loading, StageDefinition definition, HeroDeck heroDeck)
         {  
             var poolManager = ServiceLocator.Get<IPoolManager>();
             var loadingTracker = new LoadingTracker(loading);
@@ -35,27 +37,37 @@ namespace TowerDefense.States
             {
                 {definition.StageVisualKey, 1}
             });
+
+            // hero deck
+            var heroUnits = heroDeck.Heroes.ToDictionary(pair => pair.Key, hero => 1);
+            if (heroUnits.ContainsKey("palisade"))
+                heroUnits["palisade"] = 10;
+            // part of environment
+            heroUnits.Remove("barricade");
+            preloadedGroups.Add("Hero Units", heroUnits);
+           
+            // enemy units
+            var enemies = definition.Waves
+                .Select(wave=>wave.EnemyId)
+                .Distinct()
+                .ToDictionary(
+                    enemyId => enemyId, 
+                    enemyId => enemyId.Contains("boss") ? 1 : enemyId.Contains("ellite") ? 8: 30);
+          
+            preloadedGroups.Add("Enemy units", enemies);
             
-            preloadedGroups.Add("Units", new Dictionary<string, int>
-            {
-                {"wall", 1},
-                {"dron", 1},
-                {"scorpion", 11},
-                {"soldier", 1},
-                {"turret", 1},
-                {"weapon", 1},
-                {"tank", 1},
-                {"zombie", 50},
-                {"dragon", 50},
-                {"archer", 30},
-                {"boss", 1},
-                {"boss_golem", 1},
-                {"boss_dragon", 1},
-                {"ellite_dragon", 5},
-                {"sniper", 1},
-                {"palisade", 10},
-                {"raptor", 1},
-            });
+            
+            // preloadedGroups.Add("Units", new Dictionary<string, int>
+            // {
+            //     {"wall", 1},
+            //     {"zombie", 50},
+            //     {"dragon", 50},
+            //     {"archer", 30},
+            //     {"boss", 1},
+            //     {"boss_golem", 1},
+            //     {"boss_dragon", 1},
+            //     {"ellite_dragon", 5},
+            // });
 
             preloadedGroups.Add("Projectiles", new Dictionary<string, int>()
             {

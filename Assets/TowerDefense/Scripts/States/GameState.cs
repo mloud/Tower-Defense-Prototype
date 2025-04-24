@@ -46,7 +46,7 @@ namespace TowerDefense.States
         {
             int stageIndex = stateData.GetValue<int>("stage");
             var stageDefinition = await ServiceLocator.Get<IPlayerManager>().GetStageDefinition(stageIndex);
-            
+            var heroDeck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
@@ -54,7 +54,7 @@ namespace TowerDefense.States
             
             var loading = ServiceLocator.Get<ILoading>();
             loading.Show();
-            await battlePooler.Pool(loading, stageDefinition);
+            await battlePooler.Pool(loading, stageDefinition, heroDeck);
        
             var effectFactory = new PoolingEffectFactory(poolManager);
             var visualFactory = new PoolingVisualFactory(poolManager);
