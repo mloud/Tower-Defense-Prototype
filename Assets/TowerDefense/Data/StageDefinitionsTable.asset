@@ -61,7 +61,7 @@ MonoBehaviour:
       Cards: 120
       Xp: 50
   - StageName: Meet the Golem
-    StageVisualKey: environment_2
+    StageVisualKey: environment_1
     IsUnlocked: 0
     Waves:
     - Time: 0
@@ -124,19 +124,19 @@ MonoBehaviour:
       Cards: 120
       Xp: 50
   - StageName: Dragon's Ellite
-    StageVisualKey: environment_2
+    StageVisualKey: environment_1
     IsUnlocked: 1
     Waves:
     - Time: 0
-      EnemiesCount: 13
+      EnemiesCount: 6
       EnemyId: zombie
       SpawnInterval: 2
     - Time: 14
-      EnemiesCount: 10
+      EnemiesCount: 3
       EnemyId: dragon
       SpawnInterval: 3
     - Time: 26
-      EnemiesCount: 2
+      EnemiesCount: 1
       EnemyId: archer
       SpawnInterval: 2
     - Time: 35
@@ -144,21 +144,21 @@ MonoBehaviour:
       EnemyId: boss
       SpawnInterval: 3
     - Time: 45
-      EnemiesCount: 7
+      EnemiesCount: 5
       EnemyId: dragon
       SpawnInterval: 1
     - Time: 55
-      EnemiesCount: 30
+      EnemiesCount: 20
       EnemyId: zombie
-      SpawnInterval: 3
+      SpawnInterval: 2
     - Time: 65
       EnemiesCount: 5
       EnemyId: archer
       SpawnInterval: 1
     - Time: 75
-      EnemiesCount: 60
+      EnemiesCount: 10
       EnemyId: zombie
-      SpawnInterval: 4
+      SpawnInterval: 2
     - Time: 85
       EnemiesCount: 6
       EnemyId: dragon
@@ -178,17 +178,17 @@ MonoBehaviour:
     - Time: 133
       EnemiesCount: 17
       EnemyId: zombie
-      SpawnInterval: 0
-    - Time: 140
-      EnemiesCount: 3
-      EnemyId: ellite_dragon
-      SpawnInterval: 0
+      SpawnInterval: 2
     - Time: 150
       EnemiesCount: 3
       EnemyId: ellite_dragon
       SpawnInterval: 0
     - Time: 160
       EnemiesCount: 3
+      EnemyId: ellite_dragon
+      SpawnInterval: 0
+    - Time: 170
+      EnemiesCount: 2
       EnemyId: ellite_dragon
       SpawnInterval: 0
     Reward:
