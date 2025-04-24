@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
