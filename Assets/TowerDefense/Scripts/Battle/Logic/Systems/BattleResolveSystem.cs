@@ -15,8 +15,9 @@ namespace TowerDefense.Battle.Logic.Systems
         private ComponentLookup<HpComponent> hpLookup;
         public void OnCreate(ref SystemState state)
         {
+            battleFinishResolveInProgress = false;
             hpLookup = state.GetComponentLookup<HpComponent>();
-            state.RequireForUpdate<BarricadeComponent>();
+         
             state.RequireForUpdate<BattleStatisticComponent>();
             state.RequireForUpdate<EnemySpawnerComponent>();
             state.RequireForUpdate<BattleProgressionComponent>();
@@ -27,9 +28,14 @@ namespace TowerDefense.Battle.Logic.Systems
             if (battleFinishResolveInProgress)
                 return;
             hpLookup.Update(ref state);
-       
-            var barricadeEntity= SystemAPI.GetSingletonEntity<BarricadeComponent>();
-            float playerTotalHp = hpLookup[barricadeEntity].Hp;
+
+            float playerTotalHp = 0;
+
+            foreach (var (hpC, _) in SystemAPI.Query<RefRO<HpComponent>, RefRO<BarricadeComponent>>())
+            {
+                playerTotalHp += hpC.ValueRO.Hp;
+            } 
+          
             int aliveEnemies = 0;
             
             foreach (var (hpC, teamC) in SystemAPI.Query<RefRO<HpComponent>,RefRO<TeamComponent> >())
@@ -60,7 +66,7 @@ namespace TowerDefense.Battle.Logic.Systems
                 playerTotalHp = 0;
             }
 #endif
-
+            Debug.Log($"AAA PlayerTotalHP {playerTotalHp}");
 
             if (playerTotalHp <= 0)
             {

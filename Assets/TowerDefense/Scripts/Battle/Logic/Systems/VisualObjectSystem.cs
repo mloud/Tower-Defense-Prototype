@@ -40,7 +40,7 @@ namespace TowerDefense.Battle.Logic.Systems
                 }
                 else
                 {
-                    Debug.LogError($"Could not find Visual object with visual index {visualComp.ValueRO.VisualIndex}");
+                    Debug.LogError($"Could not find Visual object with visual index {visualComp.ValueRO.VisualIndex} and visualId {visualComp.ValueRO.VisualId}");
                 }
             }   
             

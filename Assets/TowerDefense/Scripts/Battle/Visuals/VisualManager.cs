@@ -104,6 +104,7 @@ namespace TowerDefense.Battle.Visuals
         public void DestroyVisualObject(int index)
         {
             var visualObject = GetVisualObject(index);
+            Debug.Assert(visualObject != null, $"No visual object with index {index} exists");
             visualObject.Die(false,()=>VisualFactory.Release(visualObject));
         }
 

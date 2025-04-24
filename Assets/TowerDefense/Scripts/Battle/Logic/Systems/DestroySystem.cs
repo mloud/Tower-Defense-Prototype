@@ -39,10 +39,13 @@ namespace TowerDefense.Battle.Logic.Systems
             {
                 destroyC.ValueRW.DestroyIn -= deltaTime;
                 if (destroyC.ValueRW.DestroyIn > 0) continue;
-                
+
                 if (visualLookup.HasComponent(entity))
                 {
-                    VisualManager.Default.DestroyVisualObject(visualLookup.GetRefRO(entity).ValueRO.VisualIndex);
+                    if (visualLookup.GetRefRO(entity).ValueRO.HasVisual)
+                    {
+                        VisualManager.Default.DestroyVisualObject(visualLookup.GetRefRO(entity).ValueRO.VisualIndex);
+                    }
                 }
 
                 if (teamLoopkup.HasComponent(entity) && teamLoopkup[entity].Team == Team.Enemy && unitLookup.HasComponent(entity))
