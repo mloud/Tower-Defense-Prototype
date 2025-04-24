@@ -24,6 +24,8 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
 
         protected override async UniTask OnInitialize()
         {
+            var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+            
             AvailableSkills = new List<ASkill>
             {
                 new IncreaseDamageSkill("Increase damage", 30, "Increases damage by {VALUE}%"),
@@ -31,13 +33,17 @@ namespace CastlePrototype.Battle.Logic.Managers.Skills
                 new IncreaseAttackDistance("Increase attack distance", 15, "Increase attack distance by {VALUE}%"),
                 new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
                 new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
-                new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}"),
-                new PlaceTrapSkill("Place palisade", 4, "Place {VALUE} palisades", "palisade")
+                new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}")
             };
+
+            if (deck.Heroes.ContainsKey("palisade"))
+            {
+                AvailableSkills.Add(new PlaceTrapSkill("Place palisade", 4, "Place {VALUE} palisades", "palisade"));
+            }
 
             AvailableSkills.ForEach(x=>x.AttachedWorld = AttachedToWorld);
 
-            var deck = await ServiceLocator.Get<IPlayerManager>().GetHeroDeck();
+       
             foreach (var (unitId, _) in deck.Heroes)
             {
                 if (unitId == "barricade" || unitId == "weapon")
