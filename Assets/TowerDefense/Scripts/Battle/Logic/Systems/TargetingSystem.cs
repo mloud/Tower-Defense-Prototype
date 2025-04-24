@@ -183,13 +183,16 @@ namespace TowerDefense.Battle.Logic.Systems
             if (targetLookup[mainTargetEntity].Target != Entity.Null)
             {
                 var target = targetLookup[mainTargetEntity].Target;
-                var targeters = targetedLookup.GetRefRW(target).ValueRW.Targeters;
-                for (int i = 0; i < targeters.Length; i++)
+                if (targetedLookup.EntityExists(target))
                 {
-                    if (targeters[i] == mainTargetEntity)
+                    var targeters = targetedLookup.GetRefRW(target).ValueRW.Targeters;
+                    for (int i = 0; i < targeters.Length; i++)
                     {
-                        targeters.RemoveAt(i);
-                        break;
+                        if (targeters[i] == mainTargetEntity)
+                        {
+                            targeters.RemoveAt(i);
+                            break;
+                        }
                     }
                 }
                 targetLookup.GetRefRW(mainTargetEntity).ValueRW.Target = Entity.Null;
