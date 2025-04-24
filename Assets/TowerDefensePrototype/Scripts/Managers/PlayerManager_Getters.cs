@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 using Cysharp.Threading.Tasks;
 
 namespace CastlePrototype.Managers

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;

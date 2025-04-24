@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CastlePrototype.Data;
+using CastlePrototype.Data.Progress;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Debugging;
@@ -13,32 +13,12 @@ namespace CastlePrototype.Managers
     {
          public async UniTask InitializePlayer()
         {
-            await CreateProgressIfNeeded(()=>new Player
-            {
-                EquippedWeapon = "weapon"
-            });
-            
             await CreateProgressIfNeeded(()=>new PlayerProgress
             {
                 Xp = 0,
                 Level = 1
             });
-
-            await CreateProgressIfNeeded(() => new WeaponDeck
-            {
-                Weapons = new Dictionary<string, WeaponProgress>
-                {
-                    {
-                        "weapon",
-                        new WeaponProgress
-                        {
-                            CardsCount = 0,
-                            Level = 1
-                        }
-                    }
-                }
-            });
-            
+ 
             await CreateProgressIfNeeded(() => new HeroDeck
             {
                 Heroes = new Dictionary<string, HeroProgress>()

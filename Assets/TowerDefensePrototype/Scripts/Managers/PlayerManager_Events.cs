@@ -1,6 +1,6 @@
 using System;
-using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 
 namespace CastlePrototype.Managers
 {

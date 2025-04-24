@@ -1,5 +1,6 @@
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 using CastlePrototype.Managers;
 using CastlePrototype.States;
 using Core.Modules.Ui.Loading;
@@ -75,10 +76,8 @@ public class CastlePrototypApp : ABaseApp
     {
         // storages
         ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgress>(new LocalStorage());
-        ServiceLocator.Get<IDataManager>().RegisterStorage<WeaponDeck>(new LocalStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDeck>(new LocalStorage());
-        ServiceLocator.Get<IDataManager>().RegisterStorage<Player>(new LocalStorage());
-
+   
         ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
         ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
@@ -86,8 +85,6 @@ public class CastlePrototypApp : ABaseApp
 
         // storage bindings   
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgress>(TypeToDataKeyBinding.PlayerProgress);
-        ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<Player>(TypeToDataKeyBinding.Player);
-        ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<WeaponDeck>(TypeToDataKeyBinding.WeaponDeck);
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<HeroDeck>(TypeToDataKeyBinding.HeroDeck);
 
         ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<StageDefinition>(TypeToDataKeyBinding.StageDefinitionsTable);

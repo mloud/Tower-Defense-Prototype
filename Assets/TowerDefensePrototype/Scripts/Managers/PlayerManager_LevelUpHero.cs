@@ -1,5 +1,6 @@
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

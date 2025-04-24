@@ -1,5 +1,5 @@
 using System;
-using CastlePrototype.Data;
+using CastlePrototype.Data.Progress;
 using CastlePrototype.Data.Definitions;
 using CastlePrototype.Ui.Popups;
 using Cysharp.Threading.Tasks;

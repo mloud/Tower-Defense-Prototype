@@ -4,9 +4,7 @@ namespace CastlePrototype.Data
     {
         
         public const string PlayerProgress = "PlayerProgression";
-        public const string WeaponDeck = "WeaponDeck";
         public const string HeroDeck = "HeroDeck";
-        public const string Player = "Player";
         
         // definitions
         public const string StageDefinitionsTable = "StageDefinitionsTable";

@@ -1,5 +1,5 @@
 using System.Linq;
-using CastlePrototype.Data;
+using CastlePrototype.Data.Progress;
 using CastlePrototype.Data.Definitions;
 using CastlePrototype.Managers;
 using CastlePrototype.Ui.Panels;

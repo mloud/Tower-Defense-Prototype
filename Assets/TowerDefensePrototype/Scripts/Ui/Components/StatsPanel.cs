@@ -1,5 +1,5 @@
 using System;
-using CastlePrototype.Data;
+using CastlePrototype.Data.Progress;
 using CastlePrototype.Data.Definitions;
 using Cysharp.Threading.Tasks;
 using OneDay.Core.Modules.Ui.Components;

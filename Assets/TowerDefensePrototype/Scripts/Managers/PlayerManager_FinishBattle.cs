@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using CastlePrototype.Data;
+using CastlePrototype.Data.Progress;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using OneDay.Core;

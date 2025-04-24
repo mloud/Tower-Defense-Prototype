@@ -1,4 +1,4 @@
-namespace CastlePrototype.Data
+namespace CastlePrototype.Data.Progress
 {
     public class HeroProgress
     {

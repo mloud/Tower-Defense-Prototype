@@ -5,6 +5,7 @@ using CastlePrototype.Battle.Logic.Managers;
 using CastlePrototype.Battle.Visuals;
 using CastlePrototype.Data;
 using CastlePrototype.Data.Definitions;
+using CastlePrototype.Data.Progress;
 using CastlePrototype.Managers;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;

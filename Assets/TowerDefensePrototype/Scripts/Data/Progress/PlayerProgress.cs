@@ -1,6 +1,6 @@
 using OneDay.Core.Modules.Data;
 
-namespace CastlePrototype.Data
+namespace CastlePrototype.Data.Progress
 {
     public interface IPlayerProgress
     {
