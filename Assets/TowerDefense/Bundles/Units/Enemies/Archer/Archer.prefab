@@ -1479,6 +1479,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: bbe148d1348e047ae8954f5971502bd7,
         type: 2}
+    - target: {fileID: 137000010151638348, guid: 3c9c8a8bf50e6b5439ab9db67bc82586,
+        type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137000011697725882, guid: 3c9c8a8bf50e6b5439ab9db67bc82586,
+        type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137000012753977332, guid: 3c9c8a8bf50e6b5439ab9db67bc82586,
+        type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198000013528734198, guid: 3c9c8a8bf50e6b5439ab9db67bc82586,
         type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState

@@ -17,7 +17,7 @@ namespace TowerDefense.Battle.Logic.Systems
     {
         private const int SpawnSquaresCount = 6;
 
-        public const int MinEnemiesInMicroWave = 2;
+        public const int MinEnemiesInMicroWave = 3;
         public const int MaxEnemiesInMicroWave = 5;
 
         // keep track where enemies were spawned to avoid their overlapping

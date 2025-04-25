@@ -1,6 +1,7 @@
 using TowerDefense.Battle.Logic.Components;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
+using Unity.Entities.UniversalDelegates;
 using Unity.Mathematics;
 
 namespace TowerDefense.Battle.Logic.Managers.Skills
@@ -21,11 +22,29 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             var battleFieldC = entityManager.CreateEntityQuery(typeof(BattleFieldComponent))
                 .GetSingleton<BattleFieldComponent>();
 
+            var center = Utils.GetCenter(battleFieldC.MinCorner, battleFieldC.MaxCorner);
+            float width = battleFieldC.MaxCorner.x - battleFieldC.MinCorner.x;
+            float height = battleFieldC.MaxCorner.y - battleFieldC.MinCorner.y;
+            
+            // use just 70 percent of width and height
+            width *= 0.6f;
+            height *= 0.5f;
+            float y = center.y - height / 2.0f;
+
+            float distanceBetween = 0;
+            if (Value > 1)
+            {
+                distanceBetween = height / (Value - 1);
+            }
+
             for (int i = 0; i < Value; i++)
             {
-                var rndPosition = GetRandomPositionForTrap(battleFieldC);
-                var trapEntity = WorldManagers.Get<UnitManager>(AttachedWorld)
-                    .CreateTrap(ref ecb, rndPosition, DefinitionId, Team.Player);
+                float3 worldPosition = float3.zero;
+                worldPosition.x = UnityEngine.Random.Range(center.x - width / 2, center.x + width / 2);
+                worldPosition.z = UnityEngine.Random.Range(y - distanceBetween * 0.2f, y + distanceBetween * 0.2f);
+                y += distanceBetween;
+
+                WorldManagers.Get<UnitManager>(AttachedWorld).CreateTrap(ref ecb, worldPosition, DefinitionId, Team.Player);
             }
 
             ecb.Playback(entityManager);

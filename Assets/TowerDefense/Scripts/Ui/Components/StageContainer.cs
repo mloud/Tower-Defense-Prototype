@@ -37,10 +37,10 @@ namespace TowerDefense.Ui.Components
             for (int i = 0; i < stageDefinitions.Count; i++)
             {
                 var stageItem = Get(i);
-                stageItem.Set(stageDefinitions[i], i, !stageDefinitions[i].IsUnlocked && i > playerProgress.UnlockedStage);
+                stageItem.Set(stageDefinitions[i], i, !stageDefinitions[i].IsUnlocked && i > (playerProgress.LastFinishedStage+1));
             }
 
-            snapScrollRect.SnapToIndex(playerProgress.UnlockedStage);
+            snapScrollRect.SnapToIndex(playerProgress.LastFinishedStage + 1);
         }
         
         private void OnCenteredItemChanged(GameObject gameObject, int itemIndex)
@@ -48,7 +48,7 @@ namespace TowerDefense.Ui.Components
             var stageWidget = gameObject.GetComponent<StageWidget>();
             SelectedStageIndex = stageWidget.StageIndex;
             // playButton.interactable = SelectedStageIndex <= playerProgress.UnlockedStage;
-            playButton.gameObject.SetActive(SelectedStageIndex <= playerProgress.UnlockedStage || stageDefinitions[itemIndex].StageName.Contains("test", StringComparison.InvariantCultureIgnoreCase));
+            playButton.gameObject.SetActive(SelectedStageIndex <= (playerProgress.LastFinishedStage + 1) || stageDefinitions[itemIndex].StageName.Contains("test", StringComparison.InvariantCultureIgnoreCase));
 
         }
     }

@@ -38,7 +38,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
 
             if (deck.Heroes.ContainsKey("palisade"))
             {
-                AvailableSkills.Add(new PlaceTrapSkill("Place palisade", 4, "Place {VALUE} palisades", "palisade"));
+                AvailableSkills.Add(new PlaceTrapSkill("Place palisade", 5, "Place {VALUE} palisades", "palisade"));
             }
 
             AvailableSkills.ForEach(x=>x.AttachedWorld = AttachedToWorld);

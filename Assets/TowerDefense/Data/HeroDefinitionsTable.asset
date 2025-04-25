@@ -13,302 +13,6 @@ MonoBehaviour:
   m_Name: HeroDefinitionsTable
   m_EditorClassIdentifier: 
   data:
-  - UnitId: weapon
-    VisualId: weapon
-    ProjectileVisualId: projectile_weapon
-    AttackDelay: 0.1
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 8
-    MoveSpeed: 0
-    Cooldown: 4
-    Damage: 180
-    AttackDistance: -1
-    TargetRange: -1
-    Hp: 0
-    Knockback: 1
-    KnockbackResistent: 0
-    FireAgainInterval: 0.5
-    Bounce: 0
-    Penetration: 0
-    Fireagain: 0
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 45
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 50
-        StatUpgradeType: 3
-        Value: 1
-      - CardsRequired: 55
-        StatUpgradeType: 1
-        Value: 10
-      - CardsRequired: 60
-        StatUpgradeType: 1
-        Value: 10
-  - UnitId: soldier
-    VisualId: soldier
-    ProjectileVisualId: projectile_soldier
-    AttackDelay: 0.1
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 8
-    MoveSpeed: 0
-    Cooldown: 4
-    Damage: 80
-    AttackDistance: 14.5
-    TargetRange: 14.5
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0.5
-    Bounce: 0
-    Penetration: 0
-    Fireagain: 1
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 40
-        StatUpgradeType: 1
-        Value: 10
-      - CardsRequired: 50
-        StatUpgradeType: 3
-        Value: 1
-      - CardsRequired: 50
-        StatUpgradeType: 4
-        Value: 1
-      - CardsRequired: 55
-        StatUpgradeType: 4
-        Value: 1
-  - UnitId: raptor
-    VisualId: raptor
-    ProjectileVisualId: projectile_soldier
-    AttackDelay: 0.1
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 10
-    MoveSpeed: 0
-    Cooldown: 7
-    Damage: 40
-    AttackDistance: 14.5
-    TargetRange: 14.5
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0.2
-    Bounce: 1
-    Penetration: 0
-    Fireagain: 20
-    FireAgainSpread: 40
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 40
-        StatUpgradeType: 1
-        Value: 10
-      - CardsRequired: 50
-        StatUpgradeType: 3
-        Value: 5
-      - CardsRequired: 50
-        StatUpgradeType: 4
-        Value: 1
-      - CardsRequired: 55
-        StatUpgradeType: 2
-        Value: 1
-  - UnitId: sniper
-    VisualId: sniper
-    ProjectileVisualId: projectile_sniper
-    AttackDelay: 0.1
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 13
-    MoveSpeed: 0
-    Cooldown: 9
-    Damage: 200
-    AttackDistance: 18
-    TargetRange: 18
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 2
-    Bounce: 0
-    Penetration: 1
-    Fireagain: 1
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 40
-        StatUpgradeType: 1
-        Value: 10
-      - CardsRequired: 100
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 100
-        StatUpgradeType: 4
-        Value: 1
-      - CardsRequired: 55
-        StatUpgradeType: 0
-        Value: 1
-  - UnitId: turret
-    VisualId: turret
-    ProjectileVisualId: projectile_turret
-    AttackDelay: 0.1
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 10
-    MoveSpeed: 0
-    Cooldown: 8
-    Damage: 180
-    AttackDistance: 15.95
-    TargetRange: 15.95
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0.5
-    Bounce: 0
-    Penetration: 1
-    Fireagain: 0
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 54
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 45
-        StatUpgradeType: 4
-        Value: 1
-      - CardsRequired: 45
-        StatUpgradeType: 1
-        Value: 20
-      - CardsRequired: 50
-        StatUpgradeType: 1
-        Value: 20
-  - UnitId: dron
-    VisualId: dron
-    ProjectileVisualId: projectile_dron
-    AttackDelay: 0
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 8
-    MoveSpeed: 0
-    Cooldown: 10
-    Damage: 350
-    AttackDistance: 13.05
-    TargetRange: 13.05
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0.5
-    Bounce: 0
-    Penetration: 0
-    Fireagain: 0
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 1.4
-    AoeDamage: 240
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 65
-        StatUpgradeType: 5
-        Value: 0.2
-      - CardsRequired: 45
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 57
-        StatUpgradeType: 1
-        Value: 20
-      - CardsRequired: 65
-        StatUpgradeType: 5
-        Value: 0.2
-  - UnitId: scorpion
-    VisualId: scorpion
-    ProjectileVisualId: projectile_scorpion
-    AttackDelay: 0
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 10
-    MoveSpeed: 0
-    Cooldown: 10
-    Damage: 15
-    AttackDistance: 15.95
-    TargetRange: 15.95
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0.1
-    Bounce: 0
-    Penetration: 0
-    Fireagain: 30
-    FireAgainSpread: 0
-    AoeOnly: 0
-    AoeRadius: 0
-    AoeDamage: 0
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 34
-        StatUpgradeType: 3
-        Value: 10
-      - CardsRequired: 34
-        StatUpgradeType: 1
-        Value: 3
-      - CardsRequired: 65
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 70
-        StatUpgradeType: 0
-        Value: -1
-  - UnitId: tank
-    VisualId: tank
-    ProjectileVisualId: projectile_tank
-    AttackDelay: 0
-    AttackType: 1
-    CreatedBySkill: 0
-    ProjectileSpeed: 8
-    MoveSpeed: 0
-    Cooldown: 14
-    Damage: 0
-    AttackDistance: 14.5
-    TargetRange: 14.5
-    Hp: 0
-    Knockback: 0
-    KnockbackResistent: 0
-    FireAgainInterval: 0
-    Bounce: 0
-    Penetration: 0
-    Fireagain: 0
-    FireAgainSpread: 0
-    AoeOnly: 1
-    AoeRadius: 1
-    AoeDamage: 400
-    UpgradePath:
-      StatsUpgrades:
-      - CardsRequired: 45
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 45
-        StatUpgradeType: 6
-        Value: 50
-      - CardsRequired: 45
-        StatUpgradeType: 0
-        Value: -1
-      - CardsRequired: 45
-        StatUpgradeType: 3
-        Value: 1
   - UnitId: barricade
     VisualId: barricade
     ProjectileVisualId: 
@@ -346,6 +50,270 @@ MonoBehaviour:
       - CardsRequired: 65
         StatUpgradeType: 7
         Value: 20
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 25
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 25
+  - UnitId: weapon
+    VisualId: weapon
+    ProjectileVisualId: projectile_weapon
+    AttackDelay: 0.1
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 8
+    MoveSpeed: 0
+    Cooldown: 4
+    Damage: 180
+    AttackDistance: -1
+    TargetRange: -1
+    Hp: 0
+    Knockback: 1
+    KnockbackResistent: 0
+    FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 45
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 50
+        StatUpgradeType: 4
+        Value: 1
+      - CardsRequired: 55
+        StatUpgradeType: 1
+        Value: 5
+      - CardsRequired: 60
+        StatUpgradeType: 1
+        Value: 7
+      - CardsRequired: 60
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 60
+        StatUpgradeType: 1
+        Value: 10
+  - UnitId: soldier
+    VisualId: soldier
+    ProjectileVisualId: projectile_soldier
+    AttackDelay: 0.1
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 8
+    MoveSpeed: 0
+    Cooldown: 4
+    Damage: 80
+    AttackDistance: 14.5
+    TargetRange: 14.5
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 1
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 40
+        StatUpgradeType: 1
+        Value: 5
+      - CardsRequired: 50
+        StatUpgradeType: 3
+        Value: 1
+      - CardsRequired: 50
+        StatUpgradeType: 1
+        Value: 5
+      - CardsRequired: 55
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 55
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 55
+        StatUpgradeType: 1
+        Value: 8
+  - UnitId: turret
+    VisualId: turret
+    ProjectileVisualId: projectile_turret
+    AttackDelay: 0.1
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 10
+    MoveSpeed: 0
+    Cooldown: 9
+    Damage: 180
+    AttackDistance: 15.95
+    TargetRange: 15.95
+    Hp: 0
+    Knockback: 1
+    KnockbackResistent: 0
+    FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 1
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 54
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 45
+        StatUpgradeType: 4
+        Value: 1
+      - CardsRequired: 45
+        StatUpgradeType: 1
+        Value: 7
+      - CardsRequired: 50
+        StatUpgradeType: 1
+        Value: 8
+      - CardsRequired: 50
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 50
+        StatUpgradeType: 4
+        Value: 1
+  - UnitId: dron
+    VisualId: dron
+    ProjectileVisualId: projectile_dron
+    AttackDelay: 0
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 8
+    MoveSpeed: 0
+    Cooldown: 10
+    Damage: 350
+    AttackDistance: 13.05
+    TargetRange: 13.05
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 1.4
+    AoeDamage: 240
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 65
+        StatUpgradeType: 5
+        Value: 0.2
+      - CardsRequired: 45
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 57
+        StatUpgradeType: 1
+        Value: 10
+      - CardsRequired: 65
+        StatUpgradeType: 5
+        Value: 0.2
+      - CardsRequired: 65
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 65
+        StatUpgradeType: 1
+        Value: 5
+  - UnitId: tank
+    VisualId: tank
+    ProjectileVisualId: projectile_tank
+    AttackDelay: 0
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 8
+    MoveSpeed: 0
+    Cooldown: 14
+    Damage: 0
+    AttackDistance: 14.5
+    TargetRange: 14.5
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 1
+    AoeRadius: 1
+    AoeDamage: 400
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 45
+        StatUpgradeType: 0
+        Value: -1
+      - CardsRequired: 45
+        StatUpgradeType: 6
+        Value: 30
+      - CardsRequired: 45
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 90
+        StatUpgradeType: 3
+        Value: 1
+      - CardsRequired: 90
+        StatUpgradeType: 1
+        Value: 10
+      - CardsRequired: 90
+        StatUpgradeType: 0
+        Value: -0.5
+  - UnitId: scorpion
+    VisualId: scorpion
+    ProjectileVisualId: projectile_scorpion
+    AttackDelay: 0
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 10
+    MoveSpeed: 0
+    Cooldown: 10
+    Damage: 15
+    AttackDistance: 15.95
+    TargetRange: 15.95
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0.1
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 30
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 34
+        StatUpgradeType: 3
+        Value: 5
+      - CardsRequired: 34
+        StatUpgradeType: 1
+        Value: 1
+      - CardsRequired: 65
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 70
+        StatUpgradeType: 1
+        Value: 1
+      - CardsRequired: 70
+        StatUpgradeType: 1
+        Value: 1
+      - CardsRequired: 70
+        StatUpgradeType: 0
+        Value: -0.5
   - UnitId: palisade
     VisualId: palisade
     ProjectileVisualId: 
@@ -373,13 +341,105 @@ MonoBehaviour:
       StatsUpgrades:
       - CardsRequired: 56
         StatUpgradeType: 7
-        Value: 10
+        Value: 0.5
       - CardsRequired: 60
         StatUpgradeType: 7
-        Value: 15
+        Value: 0.5
       - CardsRequired: 56
         StatUpgradeType: 7
-        Value: 15
+        Value: 0.5
       - CardsRequired: 65
         StatUpgradeType: 7
+        Value: 0.5
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 0.5
+      - CardsRequired: 65
+        StatUpgradeType: 7
+        Value: 1
+  - UnitId: raptor
+    VisualId: raptor
+    ProjectileVisualId: projectile_soldier
+    AttackDelay: 0.1
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 10
+    MoveSpeed: 0
+    Cooldown: 7
+    Damage: 40
+    AttackDistance: 14.5
+    TargetRange: 14.5
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0.2
+    Bounce: 1
+    Penetration: 0
+    Fireagain: 15
+    FireAgainSpread: 40
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 40
+        StatUpgradeType: 1
+        Value: 4
+      - CardsRequired: 50
+        StatUpgradeType: 3
+        Value: 3
+      - CardsRequired: 80
+        StatUpgradeType: 4
+        Value: 1
+      - CardsRequired: 70
+        StatUpgradeType: 2
+        Value: 1
+      - CardsRequired: 70
+        StatUpgradeType: 1
+        Value: 5
+      - CardsRequired: 70
+        StatUpgradeType: 0
+        Value: -1
+  - UnitId: sniper
+    VisualId: sniper
+    ProjectileVisualId: projectile_sniper
+    AttackDelay: 0.1
+    AttackType: 1
+    CreatedBySkill: 0
+    ProjectileSpeed: 13
+    MoveSpeed: 0
+    Cooldown: 9
+    Damage: 300
+    AttackDistance: 18
+    TargetRange: 18
+    Hp: 0
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 2
+    Bounce: 0
+    Penetration: 1
+    Fireagain: 1
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades:
+      - CardsRequired: 40
+        StatUpgradeType: 1
         Value: 20
+      - CardsRequired: 100
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 100
+        StatUpgradeType: 4
+        Value: 1
+      - CardsRequired: 55
+        StatUpgradeType: 0
+        Value: -0.5
+      - CardsRequired: 55
+        StatUpgradeType: 1
+        Value: 20
+      - CardsRequired: 55
+        StatUpgradeType: 3
+        Value: 1

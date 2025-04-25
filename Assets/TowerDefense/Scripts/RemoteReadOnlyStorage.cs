@@ -73,14 +73,14 @@ namespace OneDay.Core.Modules.Data
                 var fetchTask = DevelopMode
                     ? FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero)
                     : FirebaseRemoteConfig.DefaultInstance.FetchAsync();
-                
+                await fetchTask;
+               
                 bool activated = await FirebaseRemoteConfig.DefaultInstance.ActivateAsync();
                 if (!activated)
                 {
                     Debug.LogError("Could not activate FireBase remote config");
                 }
-                await fetchTask;
-
+               
                 if (!fetchTask.IsCompletedSuccessfully)
                 {
                     D.LogError($"Fetch failed for {key}", this);

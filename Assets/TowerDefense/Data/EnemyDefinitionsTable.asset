@@ -18,6 +18,7 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0.3
     AttackType: 0
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0.4
     Cooldown: 2
@@ -31,6 +32,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -41,10 +43,11 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0.3
     AttackType: 0
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0.3
     Cooldown: 4
-    Damage: 4
+    Damage: 8
     AttackDistance: 1
     TargetRange: 20
     Hp: 2500
@@ -54,6 +57,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -64,6 +68,7 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0.3
     AttackType: 0
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0.2
     Cooldown: 4
@@ -77,6 +82,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -87,19 +93,21 @@ MonoBehaviour:
     ProjectileVisualId: projectile_fireball
     AttackDelay: 0.5
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 4
     MoveSpeed: 0.25
     Cooldown: 4
-    Damage: 6
+    Damage: 7
     AttackDistance: 6
     TargetRange: 6
-    Hp: 12000
+    Hp: 5000
     Knockback: 0
     KnockbackResistent: 1
     FireAgainInterval: 0.5
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -110,6 +118,7 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0.5
     AttackType: 0
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0.4
     Cooldown: 4
@@ -123,6 +132,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -133,6 +143,7 @@ MonoBehaviour:
     ProjectileVisualId: 
     AttackDelay: 0.3
     AttackType: 0
+    CreatedBySkill: 0
     ProjectileSpeed: 0
     MoveSpeed: 0.4
     Cooldown: 2
@@ -146,6 +157,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
@@ -156,6 +168,7 @@ MonoBehaviour:
     ProjectileVisualId: projectile_archer
     AttackDelay: 0.66
     AttackType: 1
+    CreatedBySkill: 0
     ProjectileSpeed: 5
     MoveSpeed: 0.2
     Cooldown: 8
@@ -169,6 +182,7 @@ MonoBehaviour:
     Bounce: 0
     Penetration: 0
     Fireagain: 0
+    FireAgainSpread: 0
     AoeOnly: 0
     AoeRadius: 0
     AoeDamage: 0
