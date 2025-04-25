@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Meditation.States;
 using OneDay.Core;
 using OneDay.Core.Modules.Assets;
-using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Pooling;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
@@ -14,7 +13,6 @@ using TowerDefense.Managers;
 using TowerDefense.Ui.Panels;
 using TowerDefense.Ui.Views;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 namespace TowerDefense.States
@@ -22,7 +20,6 @@ namespace TowerDefense.States
     public class GameState : AState
     {
         private GameView view;
-        private IDataManager dataManager;
         private IAssetManager assetManager;
         private IPoolManager poolManager;
         
@@ -33,7 +30,6 @@ namespace TowerDefense.States
         
         public override UniTask Initialize()
         {
-            dataManager = ServiceLocator.Get<IDataManager>();
             poolManager = ServiceLocator.Get<IPoolManager>();
             
             view = ServiceLocator.Get<IUiManager>().GetView<GameView>();

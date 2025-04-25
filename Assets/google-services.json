@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "595021592459",
+    "project_id": "towerdefense-a08da",
+    "storage_bucket": "towerdefense-a08da.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595021592459:android:2fcfb8167fb1943d71218e",
+        "android_client_info": {
+          "package_name": "com.chargedmonkey.towerdefense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKL6ZT5NDvLIZLqHJHZknkb8DaaDR5As0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

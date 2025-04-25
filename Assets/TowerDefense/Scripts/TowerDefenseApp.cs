@@ -5,7 +5,11 @@ using TowerDefense.Managers;
 using TowerDefense.States;
 using Core.Modules.Ui.Loading;
 using Cysharp.Threading.Tasks;
+using Firebase;
+using Firebase.Extensions;
+using Firebase.RemoteConfig;
 using OneDay.Core;
+using OneDay.Core.Modules.Analytics;
 using OneDay.Core.Modules.Assets;
 using OneDay.Core.Modules.Audio;
 using OneDay.Core.Modules.Data;
@@ -22,6 +26,7 @@ namespace TowerDefense
 {
     public class TowerDefenseApp : ABaseApp
     {
+        [SerializeField] private bool developmentMode;
         [SerializeField] private UiManager uiManager;
         [SerializeField] private DataManager dataManager;
         [SerializeField] private AssetManager assetManager;
@@ -31,9 +36,10 @@ namespace TowerDefense
         [SerializeField] private SettingsManager settingsManager;
         [SerializeField] private PerformanceManager performanceManager;
         [SerializeField] private PoolManager poolManager;
+        [SerializeField] private RemoteConfigManager remoteConfigManager;
         [SerializeField] private BufferedEventsManager bufferedEventsManager;
         [SerializeField] private LoadingLayer loadingLayer;
-
+        
 
 
         protected override async UniTask RegisterServices()
@@ -48,8 +54,11 @@ namespace TowerDefense
             ServiceLocator.Register<IPerformanceManager>(performanceManager);
             ServiceLocator.Register<IPoolManager>(poolManager);
             ServiceLocator.Register<IBufferedEventsManager>(bufferedEventsManager);
+            ServiceLocator.Register<IRemoteConfigManager>(remoteConfigManager);
             ServiceLocator.Register<ILoading>(loadingLayer);
 
+            remoteConfigManager.SetRemoteConfigServiceServices(new FirebaseRemoteConfigService());
+            
             var initializeTasks = ServiceLocator.GetAll().Select(x => x.Initialize());
             await UniTask.WhenAll(initializeTasks);
 
@@ -82,7 +91,9 @@ namespace TowerDefense
             ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDeck>(new LocalStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<Valet>(new LocalStorage());
             
-            ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
+            //ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
+            ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new RemoteReadOnlyStorage(developmentMode));
+
             ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<PlayerProgressionDefinition>(new AddressableScriptableObjectStorage());
@@ -98,6 +109,23 @@ namespace TowerDefense
             ServiceLocator.Get<IDataManager>().RegisterTypeToKeyBinding<PlayerProgressionDefinition>(TypeToDataKeyBinding.PlayerProgressionDefinitionTable);
         }
 
-        protected override async UniTask OnBoot() { }
+
+
+        protected override async UniTask OnBoot()
+        {
+            await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+                var dependencyStatus = task.Result;
+                if (dependencyStatus == DependencyStatus.Available)
+                {
+                    Debug.Log($"Firebase Initialized");
+
+                }
+                else
+                {
+                    Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+                }
+            });
+            
+        }
     }
 }

@@ -31,30 +31,12 @@
       "dependencies": {},
       "hash": "3e97c8d815ca4a947ff93fd468e7b2e108b39150"
     },
-    "com.google.firebase.app": {
-      "version": "https://github.com/firebase-unity/firebase-app.git#12.5.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.google.external-dependency-manager": "1.2.183"
-      },
-      "hash": "cdb2abd7047d0aaeaa122bf790b46b1ac87ba187"
-    },
-    "com.google.firebase.remote-config": {
-      "version": "https://github.com/firebase-unity/firebase-remote-config.git#12.5.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.google.firebase.app": "12.5.0"
-      },
-      "hash": "683f2830db99007d496d1bdd6792bf4d4fff8c69"
-    },
     "com.oneday.unity-dev-kit": {
       "version": "https://github.com/mloud/-unity-dev-kit.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "848013c2b2834511e56d36ab7df8cd95cb92e370"
+      "hash": "2f63d244637386d7ad8d6b5581a42c8195ce60f9"
     },
     "com.unity.2d.animation": {
       "version": "9.1.3",

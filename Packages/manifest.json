@@ -4,8 +4,6 @@
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.google.external-dependency-manager": "https://github.com/googlesamples/unity-jar-resolver.git?path=upm#v1.2.183",
-    "com.google.firebase.app": "https://github.com/firebase-unity/firebase-app.git#12.5.0",
-    "com.google.firebase.remote-config": "https://github.com/firebase-unity/firebase-remote-config.git#12.5.0",
     "com.oneday.unity-dev-kit": "https://github.com/mloud/-unity-dev-kit.git",
     "net.sanukin.unisafearea":"https://github.com/sanukin39/UniSafeArea.git?path=Assets/UniSafeArea",
     "com.unity.addressables": "1.22.3",

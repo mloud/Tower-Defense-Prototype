@@ -3,8 +3,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Firebase.RemoteConfig;
+using TowerDefense.Data;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Definitions.CastlePrototype.Data.Definitions;
+using TowerDefense.Scripts.Data.Definitions.Editor;
 using TowerDefensePrototype.Scripts.Data.Definitions.Editor;
 using UnityEditor.Search;
 
@@ -71,14 +75,35 @@ public class HeroDeckEditorWindow : EditorWindow
             nameLabel.style.minWidth = 150;
 
             var editButton = new Button(() => ShowStageEditor(stage)) { text = "Edit" };
+            var uploadButton = new Button(() => UploadToFirebase(stage)) { text = "Upload" };
+            var downloadButton = new Button(() => DownloadFromFirebase(stage)) { text = "Download" };
+
+
 
             stageRow.Add(nameLabel);
             stageRow.Add(editButton);
+            stageRow.Add(uploadButton);
+            stageRow.Add(downloadButton);
+
+
 
             editorContainer.Add(stageRow);
         }
     }
 
+    private void UploadToFirebase(StageDefinitionsTable stageDefinition) => 
+        FirebaseRemoteUploader.UploadToFirebase(TypeToDataKeyBinding.StageDefinitionsTable, stageDefinition.Serialize());
+
+    private void DownloadFromFirebase(StageDefinitionsTable stageDefinition)
+    {
+        FirebaseRemoteUploader.DownloadFromFirebase(TypeToDataKeyBinding.StageDefinitionsTable)
+            .ContinueWith(json =>
+            {
+                stageDefinition.Load(json);
+                EditorUtility.SetDirty(stageDefinition);
+                AssetDatabase.SaveAssets();
+            });
+    }
 
     private void ShowStageEditor(StageDefinitionsTable stageDefinition)
     {
@@ -91,7 +116,7 @@ public class HeroDeckEditorWindow : EditorWindow
                 CreateGUI();
                 ShowStages();
             })
-            { text = "< Back to Deck" };
+            { text = "< Back to Stages" };
         editorRoot.Add(backButton);
         
         Button addNewStageButton = new Button(() =>
@@ -140,7 +165,6 @@ public class HeroDeckEditorWindow : EditorWindow
         EditorUtility.SetDirty(stageDefinition);
         AssetDatabase.SaveAssets();
     }
-
     private void AddNewStage(StageDefinitionsTable stageDefinitions)
     {
         stageDefinitions.Data.Add(new StageDefinition());
