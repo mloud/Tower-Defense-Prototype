@@ -63,15 +63,15 @@ namespace TowerDefense.Battle.Logic.Systems
                         // mark all spawn squares as free
                         for (int i = 0; i < SpawnSquaresCount; i++)
                             spawnSquares[i] = false;
-                        
+                        float spawnSquareSize = spawner.spawnBox.x / SpawnSquaresCount;
                         
                         Debug.Assert(spawnedEnemiesInTheSpawn < SpawnSquaresCount);
-                        
+                        float rndOffset = UnityEngine.Random.Range(-spawnSquareSize/2, spawnSquareSize/2);
+
                         for (int i = 0; i < spawnedEnemiesInTheSpawn; i++)
                         {
                             float3 spawnPosition = float3.zero;
                             spawnPosition.z =spawner.spawnPosition.z + UnityEngine.Random.Range(-spawner.spawnBox.z / 2, +spawner.spawnBox.z / 2);
-                            float spawnSquareSize = spawner.spawnBox.x / SpawnSquaresCount;
                             int randomSquareIndex = UnityEngine.Random.Range(0, SpawnSquaresCount);
                             for (int j = randomSquareIndex; j < randomSquareIndex + SpawnSquaresCount; j++)
                             {
@@ -79,7 +79,8 @@ namespace TowerDefense.Battle.Logic.Systems
                                 if (spawnSquares[rndSpawnSquareIndex] == false)
                                 {
                                     spawnPosition.x = spawner.spawnPosition.x - spawner.spawnBox.x / 2 +
-                                                      rndSpawnSquareIndex * spawnSquareSize + spawnSquareSize / 2;
+                                                      rndSpawnSquareIndex * spawnSquareSize + spawnSquareSize / 2 +
+                                                      rndOffset;
                                     // mark occupied
                                     spawnSquares[j % SpawnSquaresCount] = true;
                                     break;
