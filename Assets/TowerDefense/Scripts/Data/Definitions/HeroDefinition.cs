@@ -64,6 +64,14 @@ namespace TowerDefense.Data.Definitions
 
             return -1;
         }
+        
+        public int GetCoinsNeededToLevelUp(int currentLevel)
+        {
+            if (UpgradePath.StatsUpgrades.Count >= currentLevel)
+                return UpgradePath.StatsUpgrades[currentLevel - 1].CoinsRequired;
+
+            return -1;
+        }
 
         public bool IsMaxLevel(int currentLevel) => currentLevel > UpgradePath.StatsUpgrades.Count;
         

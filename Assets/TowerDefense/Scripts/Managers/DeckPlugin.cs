@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using OneDay.Core.Modules.Data;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Progress;
+using TowerDefense.Managers.Vallet;
 using UnityEngine;
 
 namespace TowerDefense.Scripts.Managers
@@ -33,10 +34,12 @@ namespace TowerDefense.Scripts.Managers
         public CurrencyChangedDelegate OnHeroLeveledUp { get; set; }
         
         private IDataManager dataManager;
+        protected IValetPlugin valetPlugin;
      
-        public DeckPlugin(IDataManager dataManager)
+        public DeckPlugin(IDataManager dataManager, IValetPlugin valetPlugin)
         {
             this.dataManager = dataManager;
+            this.valetPlugin = valetPlugin;
         }
 
         public async UniTask<HeroDeck> GetHeroDeck() =>
@@ -45,17 +48,22 @@ namespace TowerDefense.Scripts.Managers
         public async UniTask<HeroDefinition> GetHeroDefinition(string heroId) =>
             (await dataManager.GetAll<HeroDefinition>()).FirstOrDefault(x => x.UnitId == heroId);
         
-        
         public async UniTask<bool> CanLevelUpHero(string heroId)
         {
             var heroDeck = await GetHeroDeck();
             var heroProgress = heroDeck.Heroes[heroId];
             var heroDefinition = await GetHeroDefinition(heroId);
+            if (heroDefinition.IsMaxLevel(heroProgress.Level))
+                return false;
+            
             int cardsNeeded = heroDefinition.GetCardsNeededToLevelUp(heroProgress.Level);
             if (cardsNeeded > heroProgress.CardsCount)
                 return false;
-            if (heroDefinition.IsMaxLevel(heroProgress.Level))
+            var coinsHas = await valetPlugin.GetCurrency(Currency.Coins);
+            int coinsNeeded = heroDefinition.GetCoinsNeededToLevelUp(heroProgress.Level);
+            if (coinsNeeded > coinsHas)
                 return false;
+            
             return true;
         }
         
@@ -98,9 +106,18 @@ namespace TowerDefense.Scripts.Managers
                 return (false,heroProgress, heroDefinition);
             }
 
+            int coinsNeeded = heroDefinition.GetCoinsNeededToLevelUp(heroProgress.Level);
+            var coinsHas = await valetPlugin.GetCurrency(Currency.Coins);
+            if (coinsNeeded > coinsHas)
+            {
+                Debug.Assert(false, "Not enough coins");
+                return (false,heroProgress, heroDefinition);
+            }
+
             heroProgress.Level++;
             heroProgress.CardsCount -= cardsNeeded;
 
+            valetPlugin.SpendCurrency(Currency.Coins, coinsNeeded);
             await SaveHeroDeck(heroDeck);
 
             OnHeroLeveledUp?.Invoke(heroProgress, heroDefinition);

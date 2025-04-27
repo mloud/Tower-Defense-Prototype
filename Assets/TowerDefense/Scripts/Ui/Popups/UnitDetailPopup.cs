@@ -13,12 +13,13 @@ namespace TowerDefense.Ui.Popups
     public class UnitDetailPopup : UiPopup
     {
         [SerializeField] private CImage icon;
-        [SerializeField] private TextMeshProUGUI name;
+        [SerializeField] private TextMeshProUGUI unitName;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TextMeshProUGUI counter;
         [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Image progressFill;
         [SerializeField] private StatsPanel statsPanel;
+        [SerializeField] private CurrencyRequirement coindRequirement;
         private string heroId;
 
         protected void Awake()
@@ -37,10 +38,21 @@ namespace TowerDefense.Ui.Popups
             var playerManager = ServiceLocator.Get<IPlayerManager>();
             var unlockedHero = await playerManager.DeckGetter.GetUnlockedHero(heroId);
 
+            int coinsToLevelUp = unlockedHero.definition.GetCoinsNeededToLevelUp(unlockedHero.progress.Level);
+            if (coinsToLevelUp > 0)
+            {
+                coindRequirement.SetRequirement(coinsToLevelUp);
+                coindRequirement.gameObject.SetActive(true);
+            }
+            else
+            {
+                coindRequirement.gameObject.SetActive(false);
+            }
             icon.SetImage(unlockedHero.definition.VisualId);
             icon.name = unlockedHero.definition.UnitId;
             level.text = unlockedHero.progress.Level.ToString();
-          
+            unitName.text = unlockedHero.definition.UnitId;
+            
             upgradeButton.interactable = await playerManager.DeckGetter.CanLevelUpHero(heroId);
 
             bool isMaxed = unlockedHero.definition.IsMaxLevel(unlockedHero.progress.Level);

@@ -35,7 +35,7 @@ namespace TowerDefense.Managers
             
             ValetGetter = ValetPlugin = new ValetGetter(DataManager);
             ProgressionGetter = ProgressionPlugin = new ProgressionPlugin(DataManager);
-            DeckGetter = DeckPlugin = new DeckPlugin(DataManager);
+            DeckGetter = DeckPlugin = new DeckPlugin(DataManager, ValetPlugin);
             StageGetter = StagePlugin = new StagePlugin(DataManager, ValetPlugin, DeckPlugin, ProgressionPlugin);
             
             return UniTask.CompletedTask;

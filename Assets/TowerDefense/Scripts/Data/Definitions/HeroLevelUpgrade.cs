@@ -22,6 +22,7 @@ namespace TowerDefense.Data.Definitions
     public class StatUpgrade
     {
         public int CardsRequired;
+        public int CoinsRequired;
         public StatUpgradeType StatUpgradeType;
         public float Value;
     }
