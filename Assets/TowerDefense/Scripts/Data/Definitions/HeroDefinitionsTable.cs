@@ -5,7 +5,7 @@ namespace TowerDefense.Data.Definitions
 {
     [CreateAssetMenu(fileName = "HeroDefinitionsTable", menuName = "ScriptableObjects/HeroDefinitionsTable", order = 1)]
 
-    public class HeroDefinitionsTable : ScriptableObjectTable<HeroDefinition>
+    public class HeroDefinitionsTable : DefinitionTable<HeroDefinition>
     {
     }
 }

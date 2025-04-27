@@ -6,25 +6,21 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
 {
     public static class VisualElementFactory
     {
-        public static VisualElement CreatePanel(bool horizontal, float maxWidth)
+        public static VisualElement CreatePanel(bool horizontal)
         {
-            var visualElement = new VisualElement();
-            visualElement.style.flexDirection = horizontal ? FlexDirection.Row : FlexDirection.Column;
+            var visualElement = new VisualElement
+            {
+                style =
+                {
+                    flexDirection = horizontal ? FlexDirection.Row : FlexDirection.Column,
+                    alignSelf = Align.FlexStart, // Prevents stretching in parent container
+                    flexShrink = 1,
+                    flexGrow = 0,
+                    flexBasis = StyleKeyword.Auto,
+                    minWidth = 0
+                }
+            };
 
-            visualElement.style.alignSelf = Align.FlexStart;    // Prevents stretching in parent container
-            visualElement.style.flexShrink = 1;
-            visualElement.style.flexGrow = 0;
-            visualElement.style.flexBasis = StyleKeyword.Auto;
-            visualElement.style.minWidth = 0;
-            
-            
-            // visualElement.style.alignItems = Align.FlexStart;
-           // visualElement.style.justifyContent = Justify.FlexStart;
-           // visualElement.style.width = maxWidth;     // absolute width
-           // visualElement.style.maxWidth = maxWidth;      // maximum width (still responsive)
-           // visualElement.style.minWidth = maxWidth;
-            
-      
             return visualElement;
         }
 
@@ -41,9 +37,9 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
             return separator;
         }
 
-        public static ScrollView CreateScrollView(bool horizontal)
+        public static ScrollView CreateScrollView(bool horizontal, float? width = null)
         {
-            ScrollView scrollView = new ScrollView(horizontal? ScrollViewMode.Horizontal: ScrollViewMode.Vertical)
+            var scrollView = new ScrollView(horizontal? ScrollViewMode.Horizontal: ScrollViewMode.Vertical)
             {
                 style =
                 {
@@ -52,13 +48,36 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
                     borderBottomWidth = 1,
                     marginTop = 6,
                     marginBottom = 6,
-                    flexBasis = StyleKeyword.Auto,
-                    
-                }
+                    flexBasis = StyleKeyword.Auto
+                } 
             };
+            if (width.HasValue)
+            {
+                scrollView.style.width = width.Value;
+                scrollView.style.flexGrow = 0; // Don't stretch if width is fixed
+            }
             return scrollView;
         }
 
+        public static Label CreateLabel(string text, int fontSize = 14, Color? color = null, FontStyle fontStyle = FontStyle.Normal)
+        {
+            var label = new Label(text)
+            {
+                style =
+                {
+                    unityFontStyleAndWeight = fontStyle,
+                    fontSize = fontSize,
+                    color = color ?? Color.white,
+                    unityTextAlign = TextAnchor.MiddleLeft,
+                    flexGrow = 1,
+                    flexShrink = 1,
+                    flexBasis = StyleKeyword.Auto,
+                }
+            };
+
+            return label;
+        }
+        
         public static TextField CreateTextField(string title, string value)
         {
             var textField = new TextField(title)

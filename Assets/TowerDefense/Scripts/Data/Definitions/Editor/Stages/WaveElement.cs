@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TowerDefense.Battle.Logic.Components;
 using TowerDefense.Data.Definitions;
 using UnityEngine.UIElements;
 
@@ -17,7 +16,7 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
 
         protected override VisualElement CreateVisualElement()
         {
-            var visualElement = VisualElementFactory.CreateScrollView(false);
+            var visualElement = VisualElementFactory.CreateScrollView(false, null);
             visualElement.style.width = 300;
             return visualElement;
         }

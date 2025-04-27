@@ -1,10 +1,8 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Firebase.RemoteConfig;
 using TowerDefense.Data;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Definitions.CastlePrototype.Data.Definitions;
@@ -12,7 +10,7 @@ using TowerDefense.Scripts.Data.Definitions.Editor;
 using TowerDefensePrototype.Scripts.Data.Definitions.Editor;
 using UnityEditor.Search;
 
-public class HeroDeckEditorWindow : EditorWindow
+public class StagesEditorWindow : EditorWindow
 {
     private List<StageDefinitionsTable> stagesDefinitions = new();
     private VisualElement editorContainer;
@@ -20,7 +18,7 @@ public class HeroDeckEditorWindow : EditorWindow
     [MenuItem("TD/Stage Definition Editor")]
     public static void OpenWindow()
     {
-        var wnd = GetWindow<HeroDeckEditorWindow>();
+        var wnd = GetWindow<StagesEditorWindow>();
         wnd.titleContent = new GUIContent("Stage Definition Editor");
     }
 
@@ -134,7 +132,7 @@ public class HeroDeckEditorWindow : EditorWindow
             { objectType = typeof(StageDefinitionsTable), value = stageDefinition };
         editorRoot.Add(assetField);
 
-        var scrollView = VisualElementFactory.CreateScrollView(true);
+        var scrollView = VisualElementFactory.CreateScrollView(true, null);
         
         editorRoot.Add(scrollView);
         
