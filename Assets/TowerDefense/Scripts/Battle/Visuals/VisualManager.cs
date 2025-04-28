@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using OneDay.Core;
-using OneDay.Core.Extensions;
 using OneDay.Core.Modules.Audio;
 using TowerDefense.Battle.Visuals.Effects;
 using UnityEngine;
@@ -11,17 +9,17 @@ using UnityEngine;
 
 namespace TowerDefense.Battle.Visuals
 {
-    public class VisualManager : IDisposable
+    public class VisualManager : IVisualManager
     {
-        public Camera MainCamera;
+        public Camera MainCamera => mainCamera;
+        public static IVisualManager Default { get; set; }
+        public Transform UiPanel { get; private set; }
         
         private IVisualFactory VisualFactory { get; }
         private IEffectFactory EffectFactory { get; }
         private Dictionary<int, VisualObject> VisualObjectsByIndex { get; }
         private Dictionary<string, List<VisualObject>> VisualObjectsById { get; }
-        public Transform UiPanel { get; private set; }
-        
-        public static VisualManager Default { get; private set; }
+    
         
         private int visualCounter;
         private Camera mainCamera;
@@ -29,7 +27,7 @@ namespace TowerDefense.Battle.Visuals
         
         public VisualManager(IVisualFactory visualFactory, IEffectFactory effectFactory, Transform uiPanel, MonoBehaviour coroutineOwner)
         {
-            MainCamera = Camera.main;
+            mainCamera = Camera.main;
             visualCounter = -1;
             Default = this;
             VisualFactory = visualFactory;
@@ -43,7 +41,9 @@ namespace TowerDefense.Battle.Visuals
         
         public VisualObject LoadEnvironment(string environmentId) => 
             VisualFactory.Create<VisualObject>(environmentId);
-     
+
+        public void ShowDamage(int visualIndex, float damage) => GetVisualObject(visualIndex).ShowDamage(damage);
+
         public void Dispose()
         {
             foreach (var key in VisualObjectsByIndex.Keys.ToList())
@@ -114,7 +114,7 @@ namespace TowerDefense.Battle.Visuals
 
             if (effect.IsScreenSpace)
             {
-                effect.transform.SetParent(Default.UiPanel);
+                effect.transform.SetParent(UiPanel);
                 var screenPosition = mainCamera.WorldToScreenPoint(position);
                 screenPosition.z = 0;
                 effect.transform.position = screenPosition;

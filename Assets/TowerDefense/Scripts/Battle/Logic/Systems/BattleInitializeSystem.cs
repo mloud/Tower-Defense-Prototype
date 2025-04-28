@@ -1,7 +1,9 @@
+using OneDay.Core;
 using TowerDefense.Battle.Logic.Components;
 using TowerDefense.Battle.Logic.Managers;
 using TowerDefense.Battle.Logic.Managers.Slots;
 using TowerDefense.Battle.Visuals;
+using TowerDefense.Managers.Simulation;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Collections;
 using Unity.Entities;
@@ -21,6 +23,13 @@ namespace TowerDefense.Battle.Logic.Systems
             if (finished) return;
          
             var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            if (ServiceLocator.Get<ISimulationMode>().IsSimulationTypeActive(SimulationType.WithoutVisuals))
+            {
+                var simulationEntity = ecb.CreateEntity();
+                ecb.AddComponent<SimulationComponent>(simulationEntity);
+            }
+            
             CreateBattleFieldComponent(ref state);
             CreateBattleProgression(ref state, stage);
 
@@ -28,7 +37,9 @@ namespace TowerDefense.Battle.Logic.Systems
             WorldManagers.Get<StageManager>(state.World).CreateBattleStatisticEntity(ref ecb, stage);
 
 
-            var barricadePosition = VisualManager.Default.GetObjectPosition("barricade");
+            //var barricadePosition = VisualManager.Default.GetObjectPosition("barricade");
+            var barricadePosition = new float3(0, 0, -5.14f);
+
             var wallEntity = WorldManagers.Get<UnitManager>(state.World).CreateBarricade(ref state, barricadePosition);
             WorldManagers.Get<BattleEventsManager>(state.World)
                 .UpdatePlayerHp(state.EntityManager.GetComponentData<HpComponent>(wallEntity));

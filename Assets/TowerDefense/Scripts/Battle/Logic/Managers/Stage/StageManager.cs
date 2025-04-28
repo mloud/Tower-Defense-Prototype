@@ -9,6 +9,7 @@ using TowerDefense.Managers;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
+using TowerDefense.Managers.Simulation;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using Unity.Collections;
 using Unity.Entities;
@@ -41,13 +42,23 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             var battleProgress01 = (float)killedEnemies / totalEnemies;
             var runtimeStageReward = await ServiceLocator.Get<IPlayerManager>().StageGetter.FinishBattle(stage, battleProgress01, playerWon);
 
-            if (playerWon)
+            var automaticPlayManager = ServiceLocator.Get<IAutomaticPlayManager>();
+
+            if (ServiceLocator.Get<ISimulationMode>().IsActive())
             {
-                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup(runtimeStageReward);
+                await UniTask.WaitForSeconds(0.2f);
+                automaticPlayManager.ProcessBattleEnd(stage, battleProgress01, playerWon);
             }
             else
             {
-                await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenDefeatPopup(runtimeStageReward);
+                if (playerWon)
+                {
+                    await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenVictoryPopup(runtimeStageReward);
+                }
+                else
+                {
+                    await WorldManagers.Get<UiHelperManager>(AttachedToWorld).OpenDefeatPopup(runtimeStageReward);
+                }
             }
         }
        

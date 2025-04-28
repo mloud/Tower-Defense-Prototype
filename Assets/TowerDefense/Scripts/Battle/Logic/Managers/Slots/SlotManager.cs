@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using OneDay.Core.Extensions;
 using TowerDefense.Battle.Visuals;
 using Unity.Entities;
@@ -15,11 +16,16 @@ namespace TowerDefense.Battle.Logic.Managers.Slots
         {
             Slots = new List<Slot>
             {
-                new(VisualManager.Default.GetObjectPosition("slot_0")),
-                new(VisualManager.Default.GetObjectPosition("slot_1")),
-                new(VisualManager.Default.GetObjectPosition("weapon_slot")),
-                new(VisualManager.Default.GetObjectPosition("slot_2")),
-                new(VisualManager.Default.GetObjectPosition("slot_3")),
+                new(new Vector3(-3.47f, 0.0f, -6.8f)),
+                new(new Vector3(-2.21f, 0.0f, -6.33f)),
+                new(new Vector3(0.0f, 0.0f, -6.15f)),
+                new(new Vector3(2.30f, 0.0f, -6.28f)),
+                new(new Vector3(3.46f, 0.0f, -6.52f)),
+
+                // new(VisualManager.Default.GetObjectPosition("slot_1")),
+                // new(VisualManager.Default.GetObjectPosition("weapon_slot")),
+                // new(VisualManager.Default.GetObjectPosition("slot_2")),
+                // new(VisualManager.Default.GetObjectPosition("slot_3")),
             };
         }
 

@@ -44,8 +44,7 @@ namespace TowerDefense.Battle.Logic.Systems
                 {
                     if (visualLookup.HasComponent(entity))
                     {
-                        VisualManager.Default.GetVisualObject(visualLookup[entity].VisualIndex)
-                            .ShowDamage(damageC.ValueRO.Damage);
+                        VisualManager.Default.ShowDamage(visualLookup[entity].VisualIndex, damageC.ValueRO.Damage);
                     }
                 }
                 

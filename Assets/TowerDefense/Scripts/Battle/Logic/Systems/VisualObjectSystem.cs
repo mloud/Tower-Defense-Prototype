@@ -13,6 +13,9 @@ namespace TowerDefense.Battle.Logic.Systems
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (SystemAPI.HasSingleton<SimulationComponent>())
+                return;
+            
             foreach (var visualC in SystemAPI.Query<RefRW<VisualComponent>>())
             {
                 // visual not created

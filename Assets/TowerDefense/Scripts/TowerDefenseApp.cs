@@ -7,7 +7,6 @@ using Core.Modules.Ui.Loading;
 using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Extensions;
-using Firebase.RemoteConfig;
 using OneDay.Core;
 using OneDay.Core.Modules.Analytics;
 using OneDay.Core.Modules.Assets;
@@ -19,6 +18,7 @@ using OneDay.Core.Modules.Settings;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 using OneDay.Core.Modules.Update;
+using TowerDefense.Managers.Simulation;
 using UnityEngine;
 
 
@@ -38,6 +38,7 @@ namespace TowerDefense
         [SerializeField] private PoolManager poolManager;
         [SerializeField] private RemoteConfigManager remoteConfigManager;
         [SerializeField] private BufferedEventsManager bufferedEventsManager;
+        [SerializeField] private AutomaticPlayManager automaticPlayManager;
         [SerializeField] private LoadingLayer loadingLayer;
         
 
@@ -55,7 +56,9 @@ namespace TowerDefense
             ServiceLocator.Register<IPoolManager>(poolManager);
             ServiceLocator.Register<IBufferedEventsManager>(bufferedEventsManager);
             ServiceLocator.Register<IRemoteConfigManager>(remoteConfigManager);
+            ServiceLocator.Register<IAutomaticPlayManager>(automaticPlayManager);
             ServiceLocator.Register<ILoading>(loadingLayer);
+            ServiceLocator.Register<ISimulationMode>(automaticPlayManager);
 
             remoteConfigManager.SetRemoteConfigServiceServices(new FirebaseRemoteConfigService());
             
@@ -125,7 +128,8 @@ namespace TowerDefense
                     Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
                 }
             });
-            
+
+            ServiceLocator.Get<IAutomaticPlayManager>().Play();
         }
     }
 }

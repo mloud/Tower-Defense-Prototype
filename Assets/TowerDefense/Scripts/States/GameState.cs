@@ -10,6 +10,7 @@ using TowerDefense.Battle.Logic;
 using TowerDefense.Battle.Visuals;
 using TowerDefense.Battle.Visuals.Effects;
 using TowerDefense.Managers;
+using TowerDefense.Managers.Simulation;
 using TowerDefense.Ui.Panels;
 using TowerDefense.Ui.Views;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace TowerDefense.States
         private IAssetManager assetManager;
         private IPoolManager poolManager;
         
-        private VisualManager visualManager;
+        private IVisualManager visualManager;
         private BattleController battleController;
         private BattlePooler battlePooler;
       
@@ -43,24 +44,36 @@ namespace TowerDefense.States
             int stageIndex = stateData.GetValue<int>("stage");
             var stageDefinition = await ServiceLocator.Get<IPlayerManager>().StageGetter.GetStageDefinition(stageIndex);
             var heroDeck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            
+            ILoading loading = null;
+
             ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Hide(true);
             ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Hide(true);
-            
-            var loading = ServiceLocator.Get<ILoading>();
+
+            loading = ServiceLocator.Get<ILoading>();
             loading.Show();
-            await battlePooler.Pool(loading, stageDefinition, heroDeck);
-       
-            var effectFactory = new PoolingEffectFactory(poolManager);
-            var visualFactory = new PoolingVisualFactory(poolManager);
-            
-            visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel, view);
+
+
+            if (ServiceLocator.Get<ISimulationMode>().IsSimulationTypeActive(SimulationType.WithoutVisuals))
+            {
+                visualManager = new FooVisualManager();
+                VisualManager.Default = visualManager;
+            }
+            else
+            {
+                Screen.sleepTimeout = SleepTimeout.NeverSleep;
+                await battlePooler.Pool(loading, stageDefinition, heroDeck);
+                var effectFactory = new PoolingEffectFactory(poolManager);
+                var visualFactory = new PoolingVisualFactory(poolManager);
+
+                visualManager = new VisualManager(visualFactory, effectFactory, view.GameUiPanel, view);
+                visualManager.LoadEnvironment(stageDefinition.StageVisualKey);
+            }
+
             battleController = new BattleController();
-            visualManager.LoadEnvironment(stageDefinition.StageVisualKey);
 
             await battleController.InitializeBattle(stageIndex);
-            loading.Hide();
+            loading?.Hide();
+
             view.Show(true);
         }
 
@@ -76,6 +89,7 @@ namespace TowerDefense.States
             battlePooler.Clear();
             
             view.Hide(true);
+            
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
 
             return UniTask.CompletedTask;
@@ -85,6 +99,5 @@ namespace TowerDefense.States
         {
             StateMachine.SetStateAsync<MenuState>().Forget();
         }
-       
     }
 }

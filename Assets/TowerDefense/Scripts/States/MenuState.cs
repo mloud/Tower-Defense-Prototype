@@ -4,6 +4,7 @@ using OneDay.Core;
 using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 using TowerDefense.Managers;
+using TowerDefense.Managers.Simulation;
 using TowerDefense.Scripts.Managers;
 using TowerDefense.Scripts.Ui.Popups;
 using TowerDefense.Ui.Panels;
@@ -26,12 +27,11 @@ namespace TowerDefense.States
 
         public override async UniTask EnterAsync(StateData stateData = null)
         {
-            ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
-            ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Show(true);
-            
-            await view.StageContainer.Refresh();
-            view.Show(true);
-
+                ServiceLocator.Get<IUiManager>().GetPanel<MainButtonPanel>().Show(true);
+                ServiceLocator.Get<IUiManager>().GetPanel<PlayerProfilePanel>().Show(true);
+                await view.StageContainer.Refresh();
+                view.Show(true);
+          
             var bufferedEvents = ServiceLocator.Get<IBufferedEventsManager>()
                 .PopAll<NewLevelBufferedEvent>((int)BufferedEventsIds.NewLevel);
             
@@ -42,7 +42,11 @@ namespace TowerDefense.States
                 UniTask.Create(async () =>
                 {
                     await UniTask.WaitForSeconds(1.0f);
-                    ServiceLocator.Get<IUiManager>().OpenPopup<NewLevelPopup>(UiParameter.Create(bufferedEvents[0]));
+                    if (!ServiceLocator.Get<ISimulationMode>().IsActive())
+                    {
+                        ServiceLocator.Get<IUiManager>()
+                            .OpenPopup<NewLevelPopup>(UiParameter.Create(bufferedEvents[0]));
+                    }
                 }).Forget();
             }
         }

@@ -1,5 +1,7 @@
+using OneDay.Core;
 using TowerDefense.Battle.Logic.Components;
 using TowerDefense.Battle.Visuals;
+using TowerDefense.Managers.Simulation;
 using Unity.Entities;
 
 namespace TowerDefense.Battle.Logic.Systems
@@ -10,6 +12,9 @@ namespace TowerDefense.Battle.Logic.Systems
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (SystemAPI.HasSingleton<SimulationComponent>())
+                return;
+            
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
 
             foreach (var (effectC, entity) in SystemAPI.Query<RefRO<TriggerVisualEffectComponent>>()

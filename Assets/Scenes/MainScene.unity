@@ -2049,7 +2049,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sections:
   - Name: RemoteConfig
-    Enabled: 1
+    Enabled: 0
+  - Name: AutomaticPlay
+    Enabled: 0
 --- !u!4 &1279275187
 Transform:
   m_ObjectHideFlags: 0
@@ -2826,6 +2828,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230ae63dcb7d4ff89ce96283548fd082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1928322692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1928322693}
+  - component: {fileID: 1928322694}
+  - component: {fileID: 1928322695}
+  m_Layer: 0
+  m_Name: AutomaticPlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1928322693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928322692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1974416593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1928322694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928322692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495c6178a2d54cedb604b0e4131f1d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manualWorldRunner: {fileID: 1928322695}
+  timeScale: 1
+  stageToPlay: 0
+  FilenameWithResult: Simulation Results
+  gameSimulationsCount: 1
+  simulationType: 0
+  isActive: 0
+--- !u!114 &1928322695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928322692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6baee055c9eb4b8e8d8d86aa7b6bde6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simulationStepsPerFrame: 4
+  simulationDeltaTime: 0.03333334
 --- !u!1001 &1967724248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3196,6 +3264,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1511883177}
+    - targetCorrespondingSourceObject: {fileID: 8547708703040058471, guid: 19a540166a54c45008f3e5205bea6956,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1928322693}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4933623411152671197, guid: 19a540166a54c45008f3e5205bea6956,
         type: 3}
@@ -3233,6 +3305,7 @@ MonoBehaviour:
   poolManager: {fileID: 795184185}
   remoteConfigManager: {fileID: 1511883178}
   bufferedEventsManager: {fileID: 2066870307}
+  automaticPlayManager: {fileID: 1928322694}
   loadingLayer: {fileID: 1790987125}
 --- !u!4 &1974416593 stripped
 Transform:
@@ -4220,6 +4293,11 @@ PrefabInstance:
     - target: {fileID: 6353365388149011179, guid: 6b8e551d8255b4478a9aadf90e3e62a8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632137100852077288, guid: 6b8e551d8255b4478a9aadf90e3e62a8,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6895659522906998781, guid: 6b8e551d8255b4478a9aadf90e3e62a8,

@@ -10,6 +10,7 @@ using TowerDefense.Battle.Logic.EcsUtils;
 using TowerDefense.Battle.Logic.Managers.Slots;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Managers;
+using TowerDefense.Managers.Simulation;
 using TowerDefense.Scripts.Ui.Popups;
 using Unity.Entities;
 
@@ -62,7 +63,12 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             PauseUtils.SetLogicPaused(true);
             var skills = GetRandomSkills(skillsToShow);
             await ConnectSkillsToEntities(skills);
-            var selectedSkill = await OpenSkillPopup(skills);
+
+            var automaticPlayManager = ServiceLocator.Get<IAutomaticPlayManager>();
+            var selectedSkill =  ServiceLocator.Get<ISimulationMode>().IsActive()
+                ? automaticPlayManager.SelectSkill(skills)
+                : await OpenSkillPopup(skills);
+
             selectedSkill.Apply(AttachedToWorld.EntityManager);
             if (selectedSkill.SkillType == SkillType.UnlockHero || selectedSkill.SkillType == SkillType.PlaceTrap)
             {

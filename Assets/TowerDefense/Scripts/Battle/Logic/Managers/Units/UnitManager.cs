@@ -54,7 +54,7 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             
             var barricadeEntity = state.EntityManager.CreateEntity();
             state.EntityManager.AddComponentData(barricadeEntity, CreateHpComponent(definition, level));
-            state.EntityManager.AddComponentData(barricadeEntity, new LocalTransform { Position = VisualManager.Default.GetObjectPosition("barricade")});
+            state.EntityManager.AddComponentData(barricadeEntity, new LocalTransform { Position = PositionsConst.BarricadePosition});
             state.EntityManager.AddComponentData(barricadeEntity, new TeamComponent { Team = Team.Player });
             state.EntityManager.AddComponentData(barricadeEntity, new SettingComponent { DistanceAxes = new float3(0, 0, 1) });
             // mark this entity that it has already visual..Visual is part of the environment
