@@ -7,6 +7,7 @@ namespace TowerDefense.Data.Progress
         public int Xp { get; set; }
         public int Level { get; set; }
         public int UnlockedStage { get; set; }
+        public int LastFinishedStage { get; set; }
     }
     
     public class PlayerProgress : BaseDataObject, IPlayerProgress

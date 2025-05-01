@@ -58,9 +58,9 @@ MonoBehaviour:
       EnemyId: zombie
       SpawnInterval: 3
     Reward:
-      Cards: 120
-      Xp: 50
-      Coins: 100
+      Cards: 45
+      Xp: 100
+      Coins: 150
   - StageName: Meet the Golem
     StageVisualKey: environment_1
     IsUnlocked: 0
@@ -118,13 +118,17 @@ MonoBehaviour:
       EnemyId: boss_golem
       SpawnInterval: 0
     - Time: 120
-      EnemiesCount: 5
+      EnemiesCount: 3
+      EnemyId: dragon
+      SpawnInterval: 0
+    - Time: 125
+      EnemiesCount: 2
       EnemyId: dragon
       SpawnInterval: 0
     Reward:
-      Cards: 120
-      Xp: 50
-      Coins: 100
+      Cards: 46
+      Xp: 140
+      Coins: 150
   - StageName: Dragon's Ellite
     StageVisualKey: environment_1
     IsUnlocked: 0
@@ -138,7 +142,7 @@ MonoBehaviour:
       EnemyId: dragon
       SpawnInterval: 3
     - Time: 26
-      EnemiesCount: 2
+      EnemiesCount: 1
       EnemyId: archer
       SpawnInterval: 2
     - Time: 35
@@ -194,9 +198,9 @@ MonoBehaviour:
       EnemyId: ellite_dragon
       SpawnInterval: 0
     Reward:
-      Cards: 130
-      Xp: 50
-      Coins: 100
+      Cards: 47
+      Xp: 180
+      Coins: 150
   - StageName: Boss Dragon
     StageVisualKey: environment_1
     IsUnlocked: 0
@@ -266,9 +270,9 @@ MonoBehaviour:
       EnemyId: archer
       SpawnInterval: 0
     Reward:
-      Cards: 140
-      Xp: 50
-      Coins: 100
+      Cards: 48
+      Xp: 220
+      Coins: 150
   - StageName: Kill them All
     StageVisualKey: environment_1
     IsUnlocked: 0
@@ -314,6 +318,6 @@ MonoBehaviour:
       EnemyId: dragon
       SpawnInterval: 3
     Reward:
-      Cards: 150
-      Xp: 50
-      Coins: 0
+      Cards: 49
+      Xp: 260
+      Coins: 155

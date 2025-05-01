@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: PlayerProgressionDefinitionTable
   m_EditorClassIdentifier: 
   data:
-  - XpNeededToNextLevel: 0000000032000000320000003200000032000000320000003200000032000000
+  - XpNeededToNextLevel: 0000000064000000c80000002c01000090010000f401000058020000bc020000
     HeroesUnlocks:
     - 
     - 
     - scorpion
-    - raptor
+    - 
     - palisade
+    - raptor
+    - 
     - sniper
+    - 

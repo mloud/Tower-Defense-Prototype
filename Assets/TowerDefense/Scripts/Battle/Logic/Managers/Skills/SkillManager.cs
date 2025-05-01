@@ -66,7 +66,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
 
             var automaticPlayManager = ServiceLocator.Get<IAutomaticPlayManager>();
             var selectedSkill =  ServiceLocator.Get<ISimulationMode>().IsActive()
-                ? automaticPlayManager.SelectSkill(skills)
+                ? await automaticPlayManager.SelectSkill(skills)
                 : await OpenSkillPopup(skills);
 
             selectedSkill.Apply(AttachedToWorld.EntityManager);

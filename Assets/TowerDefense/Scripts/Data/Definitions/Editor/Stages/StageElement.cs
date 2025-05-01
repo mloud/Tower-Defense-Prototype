@@ -9,7 +9,10 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
 
         private TextField StageNameField { get; set; }
         private TextField StageVisualKeyField { get; set; }
+        private Label WavesCountField { get; set; }
+
         private Toggle TestField { get; set; }
+        
         public StageElement(StageDefinition stageDefinition)
         {
             StageDefinition = stageDefinition;
@@ -26,9 +29,11 @@ namespace TowerDefensePrototype.Scripts.Data.Definitions.Editor
             StageNameField = new TextField("Stage name") { value = StageDefinition.StageName };
             StageVisualKeyField = new TextField("Stage visual key") { value = StageDefinition.StageVisualKey };
             TestField = new Toggle("Test") { value = StageDefinition.IsUnlocked };
+            WavesCountField = new Label($"Waves {StageDefinition.Waves.Count}");
             VisualElement.Add(StageNameField);
             VisualElement.Add(StageVisualKeyField);
             VisualElement.Add(TestField);
+            VisualElement.Add(WavesCountField);
         }
 
         protected override void OnSave()

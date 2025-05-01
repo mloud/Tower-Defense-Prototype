@@ -162,6 +162,7 @@ public class StagesEditorWindow : EditorWindow
         rootStageElement.Save();
         EditorUtility.SetDirty(stageDefinition);
         AssetDatabase.SaveAssets();
+        ShowStageEditor(stageDefinition);
     }
     private void AddNewStage(StageDefinitionsTable stageDefinitions)
     {

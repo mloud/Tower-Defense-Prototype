@@ -38,28 +38,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 56
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 7
         Value: 10
       - CardsRequired: 60
         CoinsRequired: 0
         StatUpgradeType: 7
         Value: 15
-      - CardsRequired: 56
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 7
         Value: 15
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 7
         Value: 20
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 7
         Value: 25
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 7
         Value: 25
   - UnitId: weapon
@@ -87,28 +87,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 45
-        CoinsRequired: 50
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 0
         Value: -0.5
       - CardsRequired: 50
         CoinsRequired: 0
         StatUpgradeType: 4
         Value: 1
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 1
         Value: 5
-      - CardsRequired: 60
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 1
         Value: 7
-      - CardsRequired: 60
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 0
         Value: -0.5
       - CardsRequired: 60
-        CoinsRequired: 0
+        CoinsRequired: 115
         StatUpgradeType: 1
         Value: 10
   - UnitId: soldier
@@ -136,28 +136,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 40
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 1
         Value: 5
       - CardsRequired: 50
         CoinsRequired: 0
         StatUpgradeType: 3
         Value: 1
-      - CardsRequired: 50
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 1
         Value: 5
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 1
         Value: 8
   - UnitId: turret
@@ -185,28 +185,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 54
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 0
         Value: -0.5
       - CardsRequired: 45
         CoinsRequired: 0
         StatUpgradeType: 4
         Value: 1
-      - CardsRequired: 45
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 1
         Value: 7
-      - CardsRequired: 50
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 1
         Value: 8
       - CardsRequired: 50
-        CoinsRequired: 0
+        CoinsRequired: 105
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 50
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 4
         Value: 1
   - UnitId: dron
@@ -234,28 +234,28 @@ MonoBehaviour:
     AoeDamage: 240
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 5
         Value: 0.2
       - CardsRequired: 45
         CoinsRequired: 0
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 57
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 1
         Value: 10
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 5
         Value: 0.2
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 1
         Value: 5
   - UnitId: tank
@@ -283,28 +283,28 @@ MonoBehaviour:
     AoeDamage: 400
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 45
-        CoinsRequired: 50
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 0
         Value: -1
       - CardsRequired: 45
         CoinsRequired: 0
         StatUpgradeType: 6
         Value: 30
-      - CardsRequired: 45
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 90
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 3
         Value: 1
-      - CardsRequired: 90
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 1
         Value: 10
-      - CardsRequired: 90
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 0
         Value: -0.5
   - UnitId: scorpion
@@ -332,28 +332,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 34
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 3
         Value: 5
       - CardsRequired: 34
         CoinsRequired: 0
         StatUpgradeType: 1
         Value: 1
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 1
         Value: 1
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 1
         Value: 1
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 0
         Value: -0.5
   - UnitId: palisade
@@ -381,28 +381,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 56
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 7
         Value: 0.5
       - CardsRequired: 60
         CoinsRequired: 0
         StatUpgradeType: 7
         Value: 0.5
-      - CardsRequired: 56
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 7
         Value: 0.5
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 7
         Value: 0.5
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 7
         Value: 0.5
-      - CardsRequired: 65
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 7
         Value: 1
   - UnitId: raptor
@@ -430,28 +430,28 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 40
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 1
         Value: 4
       - CardsRequired: 50
         CoinsRequired: 0
         StatUpgradeType: 3
         Value: 3
-      - CardsRequired: 80
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 4
         Value: 1
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 2
         Value: 1
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 1
         Value: 5
-      - CardsRequired: 70
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 0
         Value: -1
   - UnitId: sniper
@@ -479,27 +479,27 @@ MonoBehaviour:
     AoeDamage: 0
     UpgradePath:
       StatsUpgrades:
-      - CardsRequired: 40
-        CoinsRequired: 0
+      - CardsRequired: 20
+        CoinsRequired: 75
         StatUpgradeType: 1
         Value: 20
       - CardsRequired: 100
         CoinsRequired: 0
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 100
-        CoinsRequired: 0
+      - CardsRequired: 30
+        CoinsRequired: 85
         StatUpgradeType: 4
         Value: 1
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 40
+        CoinsRequired: 95
         StatUpgradeType: 0
         Value: -0.5
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 50
+        CoinsRequired: 105
         StatUpgradeType: 1
         Value: 20
-      - CardsRequired: 55
-        CoinsRequired: 0
+      - CardsRequired: 60
+        CoinsRequired: 115
         StatUpgradeType: 3
         Value: 1
