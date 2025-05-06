@@ -14,7 +14,8 @@ namespace TowerDefense.Battle.Logic.Systems
         private ComponentLookup<VisualComponent> visualLookup;
         private ComponentLookup<TargetComponent> targetLookup;
         private ComponentLookup<TargetedComponent> targetedLookup;
-      
+
+        private bool isButtonDown;
         public void OnCreate(ref SystemState state)
         {
             transformLookup = state.GetComponentLookup<LocalTransform>();
@@ -31,12 +32,28 @@ namespace TowerDefense.Battle.Logic.Systems
             targetLookup.Update(ref state);
 
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
-            
-            if (Input.GetMouseButton(0))
+
+            if (Input.GetMouseButtonDown(0))
             {
+                var mousePos = Input.mousePosition;
+                var viewportPoint = VisualManager.Default.MainCamera.ScreenToViewportPoint(mousePos);
+
+                if (viewportPoint.y < 0.2f)
+                    return;
+
+                isButtonDown = true;
+
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                if (!isButtonDown)
+                    return;
+                isButtonDown = true;
+                
+                var mousePos = Input.mousePosition;
                 var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
                 var weaponScreenPos = VisualManager.Default.MainCamera.WorldToScreenPoint(transformLookup[weaponEntity].Position);
-                var mousePos = Input.mousePosition;
+              
                 var screenDir = (mousePos - weaponScreenPos).normalized;
                 var direction = new float3(screenDir.x, 0f, screenDir.y);
                 var rotation = quaternion.LookRotationSafe(direction, math.up());
@@ -63,7 +80,9 @@ namespace TowerDefense.Battle.Logic.Systems
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                
+                if (!isButtonDown)
+                    return;
+                isButtonDown = false;
                 var weaponEntity = SystemAPI.GetSingletonEntity<WeaponComponent>();
                 VisualManager.Default.GetVisualObject(visualLookup[weaponEntity].VisualIndex).SetGameObjectActive("TargetingLine", false);
                 if (state.EntityManager.HasComponent<ManualTargetingComponent>(weaponEntity))
