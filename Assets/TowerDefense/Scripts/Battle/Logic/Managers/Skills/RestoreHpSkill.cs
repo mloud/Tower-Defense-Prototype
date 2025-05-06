@@ -20,5 +20,18 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             hpC.Hp = math.min(hpC.MaxHp, hpC.Hp + Value);
             entityManager.SetComponentData(RelatedEntity, hpC);
         }
+
+        public override bool IsApplicable(EntityManager entityManager)
+        {
+            var query = entityManager.CreateEntityQuery(typeof(BarricadeComponent), typeof(HpComponent));
+
+            if (query.IsEmptyIgnoreFilter)
+                return false;
+
+            var barricadeEntity = query.GetSingletonEntity();
+            var barricadeHpC = entityManager.GetComponentData<HpComponent>(barricadeEntity);
+
+            return barricadeHpC.Hp < barricadeHpC.MaxHp;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using TowerDefense.Battle.Logic.Components;
+using TowerDefense.Battle.Logic.Managers.Slots;
 using Unity.Entities;
 using UnityEngine;
 
@@ -23,5 +24,8 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             attackC.AttackDistance *= (1 + Value / 100);
             entityManager.SetComponentData(RelatedEntity, attackC);
         }
+        
+        public override bool IsApplicable(EntityManager entityManager) => 
+            WorldManagers.Get<SlotManager>(entityManager.World).GetOccupiedSlotsCount() > 1;
     }
 }

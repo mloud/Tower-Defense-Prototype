@@ -1,5 +1,3 @@
-using TowerDefense.Battle.Logic.Components;
-using TowerDefense.Battle.Logic.EcsUtils;
 using TowerDefense.Battle.Logic.Managers.Slots;
 using TowerDefense.Battle.Visuals;
 using TowerDefensePrototype.Battle.Visuals.Effects;
@@ -31,5 +29,8 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             ecb.Playback(entityManager);
             ecb.Dispose();
         }
+
+        public override bool IsApplicable(EntityManager entityManager) =>
+            WorldManagers.Get<SlotManager>(entityManager.World).GetFirstAvailableSlot() != null;
     }
 }

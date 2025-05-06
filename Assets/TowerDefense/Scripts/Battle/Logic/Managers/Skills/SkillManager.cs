@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
+using OneDay.Core.Extensions;
 using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Ui;
 using TowerDefense.Battle.Logic.Components;
@@ -17,9 +18,12 @@ using Unity.Entities;
 namespace TowerDefense.Battle.Logic.Managers.Skills
 {
     public class SkillManager : WorldManager
-    { 
-        private List<ASkill> AvailableSkills { get; set; }
+    {
+        public List<string> UsedSkills => ActivatedSkills;
+        private List<(ASkill skill, float probability)> AvailableSkills { get; set; }
 
+        private List<string> ActivatedSkills { get; set; }
+        
         public SkillManager(World world) : base(world)
         { }
 
@@ -27,22 +31,28 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
         {
             var deck = await ServiceLocator.Get<IPlayerManager>().DeckGetter.GetHeroDeck();
             
-            AvailableSkills = new List<ASkill>
+            AvailableSkills = new List<(ASkill, float)>
             {
-                new IncreaseDamageSkill("Increase damage", 30, "Increases damage by {VALUE}%"),
-                new DecreaseAttackInterval("Decrease attack interval", 30, "Decrease attack interval by {VALUE}%"),
-                new IncreaseAttackDistance("Increase attack distance", 15, "Increase attack distance by {VALUE}%"),
-                new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),
-                new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),
-                new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}")
+                (new IncreaseDamageSkill("Increase damage", 30, "Increases damage by {VALUE}%"),10),
+                (new IncreaseDamageSkill("Increase damage", 60, "Increases damage by {VALUE}%"), 5),
+                (new DecreaseAttackInterval("Decrease attack interval", 30, "Decrease attack interval by {VALUE}%"),10),
+                (new DecreaseAttackInterval("Decrease attack interval", 45, "Decrease attack interval by {VALUE}%"),5),
+                (new IncreaseAttackDistance("Increase attack distance", 30, "Increase attack distance by {VALUE}%"),10),
+                (new IncreaseAttackDistance("Increase attack distance", 40, "Increase attack distance by {VALUE}%"),5),
+                (new IncreaseBounceCountSkill("Increase bounce count", 1, "Increase bounce by {VALUE}"),10),
+                (new IncreaseFireAgainCountSkill("Increase fire again count", 1, "Increase fire again count by {VALUE}"),10),
+                (new RestoreHpSkill("Restore HP", 20, "Increase HP by {VALUE}"),10),
+                (new RestoreHpSkill("Restore HP", 50, "Increase HP by {VALUE}"),5),
             };
+
+            ActivatedSkills = new List<string>();
 
             if (deck.Heroes.ContainsKey("palisade"))
             {
-                AvailableSkills.Add(new PlaceTrapSkill("Place palisade", 5, "Place {VALUE} palisades", "palisade"));
+                AvailableSkills.Add((new PlaceTrapSkill("Place palisade", 5, "Place {VALUE} palisades", "palisade"), 10));
             }
 
-            AvailableSkills.ForEach(x=>x.AttachedWorld = AttachedToWorld);
+            AvailableSkills.ForEach(x=>x.skill.AttachedWorld = AttachedToWorld);
 
        
             foreach (var (unitId, _) in deck.Heroes)
@@ -54,7 +64,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
                 if (definition.CreatedBySkill)
                     continue;
                 
-                AvailableSkills.Add(new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"));
+                AvailableSkills.Add((new UnlockHeroSkill("Unlock new hero", unitId, "Add new hero to battle"), 10));
             }
         }
         
@@ -70,9 +80,14 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
                 : await OpenSkillPopup(skills);
 
             selectedSkill.Apply(AttachedToWorld.EntityManager);
+            
+            // log selected skill
+            ActivatedSkills.Add($"{selectedSkill.SkillType}_{selectedSkill.DefinitionId}");
+            
+
             if (selectedSkill.SkillType == SkillType.UnlockHero || selectedSkill.SkillType == SkillType.PlaceTrap)
             {
-                AvailableSkills.Remove(selectedSkill);
+                AvailableSkills.RemoveWhen(x=>x.skill == selectedSkill);
             }
 
             PauseUtils.SetLogicPaused(false);
@@ -80,33 +95,25 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
 
         private List<ASkill> GetRandomSkills(int count)
         {
-            var skills = new List<ASkill>(AvailableSkills);
-            RemoveNotApplicableSkills(skills);
-            int realCount = Math.Min(count, skills.Count);
-
+            // selected random skills
+            var selectedSkills = new List<ASkill>();
+            // make copy of the skills
+            var validSkillsForThisSelect = new List<(ASkill skill, float probabilities)>(AvailableSkills);
+            validSkillsForThisSelect.RemoveAll(x => !x.skill.IsApplicable(AttachedToWorld.EntityManager));
             
-            int skillsToRemove = skills.Count - realCount;
-            for (int i = 0; i < skillsToRemove; i++)
-            { 
-                skills.RemoveAt(UnityEngine.Random.Range(0,skills.Count));
-            }
-            return skills;
-        }
-
-        private void RemoveNotApplicableSkills(List<ASkill> skills)
-        {
-            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetFirstAvailableSlot() == null)
+            int skillsToSelectCount = Math.Min(count, validSkillsForThisSelect.Count);
+            for (int i = 0; i < skillsToSelectCount; i++)
             {
-                skills.RemoveAll(x => x.SkillType == SkillType.UnlockHero);
+                var rndSkillIndex = validSkillsForThisSelect
+                    .GetRandomIndexWithProbabilities(
+                        validSkillsForThisSelect.Select(x => x.probabilities).ToList());
+                selectedSkills.Add(validSkillsForThisSelect[rndSkillIndex].skill);
+                validSkillsForThisSelect.RemoveAt(rndSkillIndex);
             }
-
-            // only weapon
-            if (WorldManagers.Get<SlotManager>(AttachedToWorld).GetOccupiedSlotsCount() == 1)
-            {
-                skills.RemoveAll(x => x.SkillType == SkillType.IncreaseAttackDistance);
-            }
+          
+            return selectedSkills;
         }
-        
+  
         private async UniTask ConnectSkillsToEntities(IReadOnlyList<ASkill> skills)
         {
             var heroDefs = await ServiceLocator.Get<IDataManager>().GetAll<HeroDefinition>();

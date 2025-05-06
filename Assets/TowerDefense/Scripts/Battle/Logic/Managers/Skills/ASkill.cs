@@ -24,5 +24,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             Value = value;
         }
         public abstract void Apply(EntityManager entityManager);
+
+        public virtual bool IsApplicable(EntityManager entityManager) => true;
     }
 }
