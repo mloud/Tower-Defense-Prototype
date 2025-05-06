@@ -136,7 +136,7 @@ public abstract class DefinitionWindow<T, Y> : EditorWindow where T : IDataObjec
 
         for (int i = 0; i < definitionTable.Data.Count; i++)
         {
-            var customElement = CreateTableElement(definitionTable.Data[i]);
+            var customElement = CreateTableElement(definitionTable.Data[i], i);
             saveAction += () => customElement.Save();
             scrollView.Add(customElement.VisualElement);
         }
@@ -160,5 +160,5 @@ public abstract class DefinitionWindow<T, Y> : EditorWindow where T : IDataObjec
         AssetDatabase.SaveAssets();
     }
 
-    protected abstract CustomElement CreateTableElement(T data);
+    protected abstract CustomElement CreateTableElement(T data, int index);
 }

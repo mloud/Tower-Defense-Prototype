@@ -20,7 +20,7 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor
                 typeof(bool),
             };
 
-            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public)
+            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(f => allowedTypes.Contains(f.FieldType) || f.FieldType.IsEnum);
 
             Action saveAction = null;

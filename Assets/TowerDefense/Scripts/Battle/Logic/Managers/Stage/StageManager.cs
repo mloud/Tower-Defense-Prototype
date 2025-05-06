@@ -9,6 +9,7 @@ using TowerDefense.Managers;
 using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
+using TowerDefense.Battle.Logic.Managers.Skills;
 using TowerDefense.Managers.Simulation;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Ui;
 using Unity.Collections;
@@ -47,7 +48,11 @@ namespace TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units
             if (ServiceLocator.Get<ISimulationMode>().IsActive())
             {
                 await UniTask.WaitForSeconds(0.2f);
-                automaticPlayManager.ProcessBattleEnd(stage, battleProgress01, playerWon);
+                automaticPlayManager.ProcessBattleEnd(
+                    stage, 
+                    battleProgress01, 
+                    playerWon, 
+                    WorldManagers.Get<SkillManager>(AttachedToWorld).UsedSkills);
             }
             else
             {

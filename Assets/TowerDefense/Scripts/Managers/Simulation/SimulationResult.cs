@@ -17,12 +17,13 @@ namespace TowerDefense.Managers.Simulation
         public int Percentage { get; }
         public int CardsLeveledUp { get; private set; }
 
-        public BattleSimulationResult(int stage, bool won, int percentage)
+        public List<string> UsedSkills { get; private set; }
+        public BattleSimulationResult(int stage, bool won, int percentage, List<string> usedSkills)
         {
-        
             Stage = stage;
             Won = won;
             Percentage = percentage;
+            UsedSkills = usedSkills;
         }
 
         public void AddCardsLevelUp(int count) => CardsLeveledUp = count;
@@ -44,7 +45,7 @@ namespace TowerDefense.Managers.Simulation
 
         public void LogStageResults(string filename)
         {
-            var groupedBySimulationRun = battleResults.GroupBy(x => x.SimulationRun);
+            var groupedBySimulationRun = battleResults.GroupBy(x => x.SimulationRun).ToList();
             if (!groupedBySimulationRun.Any())
             {
                 Debug.LogWarning("No simulation results found.");
@@ -52,17 +53,30 @@ namespace TowerDefense.Managers.Simulation
             }
 
             var jObject = new JObject();
-            foreach (var group in groupedBySimulationRun)
+            int cardsLeveledUp = 0;
+            foreach (var simulation in groupedBySimulationRun)
             {
                 var jData = new JObject
                 {
-                    { "NumberOfBattles", group.Count() },
-                    { "BattleProgresses", new JArray(group.Select(r => r.Percentage)) },
-                    { "CardsLeveledUp", new JArray(group.Select(r => r.CardsLeveledUp)) }
+                    { "NumberOfBattles", simulation.Count() },
+                    { "BattleProgresses", new JArray(simulation.Select(r => r.Percentage)) },
+                    { "CardsLeveledUp", new JArray(simulation.Select(r => r.CardsLeveledUp).ToList().SkipLast(1))},
+                    { "UsedSkills", new JArray(new JArray(simulation.Select(r=>r.UsedSkills)))}
                 };
-                jObject.Add($"SimulationRun {group.Key}", jData);
+                jObject.Add($"SimulationRun {simulation.Key}", jData);
+                cardsLeveledUp += simulation.Select(r => r.CardsLeveledUp).ToList().SkipLast(1).Sum();
             }
 
+            int totalBattles = groupedBySimulationRun.Sum(simulation => simulation.Count());
+         
+          
+
+            jObject["Statistic"] = new JObject
+            {
+                ["Average battles needed to win"] = totalBattles / (float)groupedBySimulationRun.Count,
+                ["Average cards leveled up between"] = cardsLeveledUp / (float)(totalBattles - battleResults.Count(x => !x.Won))
+            };
+            
             var json = jObject.ToString(Formatting.Indented);
             Debug.Log(json);
 

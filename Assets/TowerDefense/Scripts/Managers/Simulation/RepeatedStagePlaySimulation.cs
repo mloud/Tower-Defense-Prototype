@@ -40,9 +40,9 @@ namespace TowerDefense.Managers.Simulation
                     await UniTask.WaitForSeconds(0.2f);
                     StateMachineEnvironment.Default.SetStateAsync<MenuState>();
                     var leveledUpHeroes = await new SimulationTaskLevelUp().Perform<List<string>>(null);
+                    simulationResults[simulationResults.All.Count- 1].AddCardsLevelUp(leveledUpHeroes.Count);
                     simulationResults[simulationResults.All.Count - 1].SimulationRun = i;
                     simulationResults[simulationResults.All.Count - 1].BattleRun = battleCounter;
-                    simulationResults[simulationResults.All.Count- 1].AddCardsLevelUp(leveledUpHeroes.Count);
                     battleCounter++;
                 }
                 Debug.Log($"XXX === Stage simulation finished after {battleCounter} battles");
@@ -52,12 +52,12 @@ namespace TowerDefense.Managers.Simulation
         }
      
 
-        protected override void OnProcessBattleEnd(int stage, float battleProgress01, bool playerWon)
+        protected override void OnProcessBattleEnd(int stage, float battleProgress01, bool playerWon, List<string> usedSkills)
         {
             waitingForBattleEnd = false;
             stageFinished = playerWon;
             Debug.Log($"XXX battle in {stage} ended with progress: {battleProgress01}");
-            simulationResults.Add(new BattleSimulationResult(stage, playerWon, (int)Mathf.Round(battleProgress01 * 100)));
+            simulationResults.Add(new BattleSimulationResult(stage, playerWon, (int)Mathf.Round(battleProgress01 * 100), usedSkills));
         }
     }
 }

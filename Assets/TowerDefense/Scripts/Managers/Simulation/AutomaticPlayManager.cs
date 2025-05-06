@@ -27,7 +27,7 @@ namespace TowerDefense.Managers.Simulation
     {
         UniTask Play();
         UniTask<ASkill> SelectSkill(List<ASkill> proposedSkills);
-        void ProcessBattleEnd(int stage, float battleProgress01, bool playerWon);
+        void ProcessBattleEnd(int stage, float battleProgress01, bool playerWon, List<string> usedSkills);
     }
     [LogSection("AutomaticPlay")]
     public class AutomaticPlayManager : MonoBehaviour, IAutomaticPlayManager, IService, ISimulationMode
@@ -67,11 +67,11 @@ namespace TowerDefense.Managers.Simulation
         public async UniTask<ASkill> SelectSkill(List<ASkill> proposedSkills) =>
             await new SimulationTaskSelectSkill().Perform<ASkill>(proposedSkills);
         
-        public void ProcessBattleEnd(int stage, float battleProgress01, bool playerWon)
+        public void ProcessBattleEnd(int stage, float battleProgress01, bool playerWon, List<string> usedSkills)
         {
             if (simulation != null)
             {
-                simulation.ProcessBattleEnd(stage, battleProgress01, playerWon);
+                simulation.ProcessBattleEnd(stage, battleProgress01, playerWon, usedSkills);
             }
         }
 

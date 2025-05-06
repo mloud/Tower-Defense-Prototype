@@ -3,7 +3,6 @@ using TowerDefense.Data.Definitions;
 using TowerDefensePrototype.Scripts.Data.Definitions.Editor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
 {
@@ -19,7 +18,7 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
             wnd.titleContent = new GUIContent($"Heroes Editor");
         }
         
-        protected override CustomElement CreateTableElement(HeroDefinition definition)
+        protected override CustomElement CreateTableElement(HeroDefinition definition, int index)
         {
             var element = new HeroElement(definition).Create();
             return element;
