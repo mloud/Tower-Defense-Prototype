@@ -94,7 +94,8 @@ namespace TowerDefense.Battle.Logic
 
         public static float2 To2D(float3 position)
         {
-            Debug.Assert(position.y == 0);
+           // Debug.Assert(position.y == 0);
+           position.y = 0;
             return new float2(position.x, position.z);
         }
         
@@ -155,11 +156,15 @@ namespace TowerDefense.Battle.Logic
             }
 
             // Verify ray origin is inside rectangle
-            if (rayOrigin.x < rectMin.x || rayOrigin.x > rectMax.x ||
-                rayOrigin.y < rectMin.y || rayOrigin.y > rectMax.y)
-            {
-                throw new ArgumentException("Ray origin must be inside the rectangle");
-            }
+            // if (rayOrigin.x < rectMin.x || rayOrigin.x > rectMax.x ||
+            //     rayOrigin.y < rectMin.y || rayOrigin.y > rectMax.y)
+            // {
+            //     throw new ArgumentException($"Ray origin must be inside the rectangle but its {rayOrigin}");
+            // }
+            
+            rayOrigin.x = math.clamp(rayOrigin.x, rectMin.x, rectMax.x);
+            rayOrigin.y = math.clamp(rayOrigin.y, rectMin.y, rectMax.y);
+
 
             // Test intersection with each boundary
             // Left boundary (x = rectMin.X)
