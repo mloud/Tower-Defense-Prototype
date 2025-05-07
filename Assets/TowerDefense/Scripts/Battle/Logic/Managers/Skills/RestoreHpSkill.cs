@@ -19,6 +19,7 @@ namespace TowerDefense.Battle.Logic.Managers.Skills
             var hpC = entityManager.GetComponentData<HpComponent>(RelatedEntity);
             hpC.Hp = math.min(hpC.MaxHp, hpC.Hp + Value);
             entityManager.SetComponentData(RelatedEntity, hpC);
+            WorldManagers.Get<BattleEventsManager>(entityManager.World).UpdatePlayerHp(hpC);
         }
 
         public override bool IsApplicable(EntityManager entityManager)
