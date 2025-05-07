@@ -98,25 +98,27 @@ namespace TowerDefense.Battle.Logic.Systems
                         isInAttackRange = false;
                     }
                 }
-
+                
+                // update attack remaining times
+                double timeToAttack = float.MaxValue;
+                bool isMainAttack = true;
+                for (int i = 0; i < attackC.ValueRO.SecondaryAttackTimes.Length; i++)
+                {
+                    attackC.ValueRW.SecondaryAttackTimes[i] -= SystemAPI.Time.DeltaTime;
+                    timeToAttack = math.min(timeToAttack, attackC.ValueRW.SecondaryAttackTimes[i]);
+                    if (timeToAttack <= 0)
+                        isMainAttack = false;
+                }
+                attackC.ValueRW.NextMainAttackTime -= SystemAPI.Time.DeltaTime;
+                timeToAttack = math.min(timeToAttack, attackC.ValueRW.NextMainAttackTime);
+                // end of updating attack times
+                
                 if (isInAttackRange)
                 {
                     targetC.ValueRW.TargetPosition = targetPosition;
                     attackC.ValueRW.IsInAttackDistance = true;
 
-                    // update attack remaining times
-                    double timeToAttack = float.MaxValue;
-                    bool isMainAttack = true;
-                    for (int i = 0; i < attackC.ValueRO.SecondaryAttackTimes.Length; i++)
-                    {
-                        attackC.ValueRW.SecondaryAttackTimes[i] -= SystemAPI.Time.DeltaTime;
-                        timeToAttack = math.min(timeToAttack, attackC.ValueRW.SecondaryAttackTimes[i]);
-                        if (timeToAttack <= 0)
-                            isMainAttack = false;
-                    }
-                    attackC.ValueRW.NextMainAttackTime -= SystemAPI.Time.DeltaTime;
-                    timeToAttack = math.min(timeToAttack, attackC.ValueRW.NextMainAttackTime);
-                    // end of updating attack times
+                   
                
                     
                     if (!isManualTargetingActive && lookAtTargetLookup.HasComponent(attackerEntity))
