@@ -15,7 +15,7 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
         protected override string DefinitionName() => "StageDefinitionsTable";
         protected override Type DefinitionType() => typeof(HeroDefinitionsTable);
         
-        [MenuItem("TD/new Stages Definition Editor")]
+        [MenuItem("TD/Editors/Stages Definition Editor", priority = 100)]
         public static void OpenWindow()
         {
             var wnd = GetWindow<StagesEditor>();

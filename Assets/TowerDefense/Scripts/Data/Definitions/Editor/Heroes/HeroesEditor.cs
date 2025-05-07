@@ -11,7 +11,7 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
         protected override string DefinitionName() => "HeroDefinitionsTable";
         protected override Type DefinitionType() => typeof(HeroDefinitionsTable);
         
-        [MenuItem("TD/Heroes Definition Editor")]
+        [MenuItem("TD/Editors/Heroes Definition Editor", priority = 101)]
         public static void OpenWindow()
         {
             var wnd = GetWindow<HeroesEditor>();
