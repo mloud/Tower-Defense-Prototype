@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using TowerDefense.Battle.Logic.Managers.Skills;
 using TowerDefense.Data.Definitions;
 using TowerDefensePrototype.Scripts.Data.Definitions.Editor;
 using UnityEngine.UIElements;
@@ -9,9 +10,12 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
 {
     public class HeroElement : CustomElement
     {
-        private HeroDefinition HeroDefinition  { get; }
         public HeroElement(HeroDefinition definition) => HeroDefinition = definition;
+
+        private HeroDefinition HeroDefinition  { get; }
+        private ListElement<SkillType> SupportedSkills { get; set; }
         private Action saveAction;
+    
         protected override VisualElement CreateVisualElement()
         {
             var visualElement = VisualElementFactory.CreateScrollView(false, 250);
@@ -35,6 +39,10 @@ namespace TowerDefense.Scripts.Data.Definitions.Editor.Heroes
 
             var heroUpgradeElement = new HeroUpgradeElement(HeroDefinition.UpgradePath);
             VisualElement.Add(heroUpgradeElement.Create().VisualElement);
+
+         //   SupportedSkills = new ListElement<SkillType>(HeroDefinition.SupportedSkills,"Supported skills", "");
+         //   VisualElement.Add(SupportedSkills.Create().VisualElement);
+            
             saveAction += () => heroUpgradeElement.Save();
         }
 
