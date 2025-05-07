@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: aef086f1607814b82bc592e5c0dddfc7
   m_SerializeEntries:
+  - m_GUID: 034fa858621c94f31a1ad848b69a363a
+    m_Address: spider
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 06e08fc2f22f447e98b778c45c77f636
     m_Address: dron
     m_ReadOnly: 0
@@ -24,6 +29,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 08950220a828d4f0b95f4a1b3f610dd6
     m_Address: palisade
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0984d93e376a94ba19dc2d2b8a5d6b78
+    m_Address: elite_orc
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -199,6 +209,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4a8adb0c5a5641b5b0d688edfe186a6
     m_Address: environment_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6eec9d6239334ed9887bc52f62277c2
+    m_Address: boss_minotaur
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
