@@ -1,4 +1,4 @@
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public interface IPlugin
     { }

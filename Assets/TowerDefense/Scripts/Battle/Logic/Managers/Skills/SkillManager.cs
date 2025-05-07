@@ -8,11 +8,10 @@ using OneDay.Core.Modules.Data;
 using OneDay.Core.Modules.Ui;
 using TowerDefense.Battle.Logic.Components;
 using TowerDefense.Battle.Logic.EcsUtils;
-using TowerDefense.Battle.Logic.Managers.Slots;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Managers;
 using TowerDefense.Managers.Simulation;
-using TowerDefense.Scripts.Ui.Popups;
+using TowerDefense.Ui.Popups;
 using Unity.Entities;
 
 namespace TowerDefense.Battle.Logic.Managers.Skills

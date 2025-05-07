@@ -1,7 +1,7 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public class ManualWorldRunner : MonoBehaviour
     {

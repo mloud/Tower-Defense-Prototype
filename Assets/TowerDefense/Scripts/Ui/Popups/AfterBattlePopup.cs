@@ -6,7 +6,7 @@ using TowerDefense.Managers;
 using TowerDefense.Ui.Components;
 using UnityEngine;
 
-namespace TowerDefense.Scripts.Ui.Popups
+namespace TowerDefense.Ui.Popups
 {
     public class AfterBattlePopup : UiPopup
     {

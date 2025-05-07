@@ -3,7 +3,7 @@ using TowerDefense.States;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Scripts.Ui.Popups
+namespace TowerDefense.Ui.Popups
 {
     public class DefeatPopup : AfterBattlePopup
     {

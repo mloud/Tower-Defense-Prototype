@@ -1,6 +1,6 @@
 using TowerDefense.Managers;
 
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public class NewLevelBufferedEvent : BufferedEvent
     {

@@ -1,7 +1,6 @@
 using TowerDefense.Battle.Logic.Components;
 using TowerDefensePrototype.Scripts.Battle.Logic.Managers.Units;
 using Unity.Entities;
-using Unity.Entities.UniversalDelegates;
 using Unity.Mathematics;
 
 namespace TowerDefense.Battle.Logic.Managers.Skills

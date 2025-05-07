@@ -3,11 +3,10 @@ using OneDay.Core;
 using OneDay.Core.Modules.Ui;
 using TMPro;
 using TowerDefense.Managers;
-using TowerDefense.Scripts.Managers;
 using TowerDefense.Ui.Components;
 using UnityEngine;
 
-namespace TowerDefense.Scripts.Ui.Popups
+namespace TowerDefense.Ui.Popups
 {
     public class NewLevelPopup : UiPopup
     {

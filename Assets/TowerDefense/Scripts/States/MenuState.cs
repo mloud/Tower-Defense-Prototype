@@ -5,9 +5,8 @@ using OneDay.Core.Modules.Sm;
 using OneDay.Core.Modules.Ui;
 using TowerDefense.Managers;
 using TowerDefense.Managers.Simulation;
-using TowerDefense.Scripts.Managers;
-using TowerDefense.Scripts.Ui.Popups;
 using TowerDefense.Ui.Panels;
+using TowerDefense.Ui.Popups;
 using TowerDefense.Ui.Views;
 using UnityEngine;
 

@@ -13,7 +13,7 @@ using TowerDefense.Managers;
 using TowerDefense.Managers.Vallet;
 using UnityEngine;
 
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public interface IStageGetter
     {

@@ -4,7 +4,7 @@ using OneDay.Core.Modules.Data;
 using TowerDefense.Data.Definitions;
 using TowerDefense.Data.Progress;
 
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public delegate void XpChangedDelegate(int newXp, int nextXpNeeded, int prevLevel, int currentLevel);
     public interface IProgressionGetter

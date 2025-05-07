@@ -3,7 +3,6 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using OneDay.Core.Modules.Data;
 using TowerDefense.Data.Progress;
-using TowerDefense.Scripts.Managers;
 using UnityEngine;
 
 namespace TowerDefense.Managers.Vallet

@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using OneDay.Core;
 using OneDay.Core.Modules.Data;
 using TowerDefense.Managers.Vallet;
-using TowerDefense.Scripts.Managers;
 using UnityEngine;
 
 namespace TowerDefense.Managers

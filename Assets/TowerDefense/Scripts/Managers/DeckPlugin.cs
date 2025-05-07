@@ -6,7 +6,7 @@ using TowerDefense.Data.Progress;
 using TowerDefense.Managers.Vallet;
 using UnityEngine;
 
-namespace TowerDefense.Scripts.Managers
+namespace TowerDefense.Managers
 {
     public delegate void CurrencyChangedDelegate(HeroProgress progress, HeroDefinition definition);
   
