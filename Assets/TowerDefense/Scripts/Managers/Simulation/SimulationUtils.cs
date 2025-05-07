@@ -10,11 +10,13 @@ namespace TowerDefense.Managers.Simulation
     {
         public static void SavePlayerStateToFile()
         {
+            #if UNITY_EDITOR
             if (!PlayerPrefs.HasKey(TypeToDataKeyBinding.PlayerProgress))
             {
                 EditorUtility.DisplayDialog("Player progress not found", "Run the game first to create player", "OK");
                 return;
             }
+            #endif
          
             var table = JArray.Parse(PlayerPrefs.GetString(TypeToDataKeyBinding.PlayerProgress));
             Debug.Assert(table.Count > 0);
