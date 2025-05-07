@@ -18,306 +18,522 @@ MonoBehaviour:
     IsUnlocked: 0
     Waves:
     - Time: 0
-      EnemiesCount: 4
+      EnemiesCount: 7
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 15
+      SpawnInterval: 2
+    - Time: 17.380959
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 30.027752
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 43.220226
       EnemiesCount: 5
       EnemyId: dragon
-      SpawnInterval: 3
-    - Time: 30
-      EnemiesCount: 5
+      SpawnInterval: 2
+    - Time: 57.572495
+      EnemiesCount: 7
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 45
-      EnemiesCount: 10
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 63
-      EnemiesCount: 1
+      SpawnInterval: 2
+    - Time: 71.63721
+      EnemiesCount: 2
       EnemyId: archer
-      SpawnInterval: 3
-    - Time: 60
-      EnemiesCount: 1
-      EnemyId: boss
-      SpawnInterval: 3
-    - Time: 60
-      EnemiesCount: 5
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 80
-      EnemiesCount: 10
+      SpawnInterval: 2
+    - Time: 81.62715
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 95
-      EnemiesCount: 6
+    - Time: 94.933464
+      EnemiesCount: 5
       EnemyId: dragon
       SpawnInterval: 2
-    - Time: 105
-      EnemiesCount: 10
+    - Time: 105.540184
+      EnemiesCount: 7
       EnemyId: zombie
-      SpawnInterval: 3
+      SpawnInterval: 2
+    - Time: 116.87632
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
     Reward:
       Cards: 45
       Xp: 100
-      Coins: 150
+      Coins: 100
   - StageName: Meet the Golem
     StageVisualKey: environment_1
     IsUnlocked: 0
     Waves:
     - Time: 0
       EnemiesCount: 5
-      EnemyId: dragon
-      SpawnInterval: 3
-    - Time: 15
-      EnemiesCount: 7
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 30
-      EnemiesCount: 7
+      SpawnInterval: 2
+    - Time: 14.180041
+      EnemiesCount: 5
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 45
-      EnemiesCount: 10
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 60
+      SpawnInterval: 2
+    - Time: 25.676254
       EnemiesCount: 4
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 63
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 39.13823
+      EnemiesCount: 4
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 50.953728
       EnemiesCount: 2
       EnemyId: archer
-      SpawnInterval: 3
-    - Time: 60
-      EnemiesCount: 1
-      EnemyId: boss
-      SpawnInterval: 3
-    - Time: 60
+      SpawnInterval: 2
+    - Time: 63.092846
       EnemiesCount: 5
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 80
-      EnemiesCount: 10
-      EnemyId: zombie
       SpawnInterval: 2
-    - Time: 95
-      EnemiesCount: 5
-      EnemyId: dragon
-      SpawnInterval: 2
-    - Time: 105
+    - Time: 74.99375
       EnemiesCount: 4
       EnemyId: dragon
-      SpawnInterval: 3
-    - Time: 110
-      EnemiesCount: 10
+      SpawnInterval: 2
+    - Time: 84.30201
+      EnemiesCount: 1
+      EnemyId: boss
+      SpawnInterval: 2
+    - Time: 96.629036
+      EnemiesCount: 5
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 115
+    - Time: 106.27767
+      EnemiesCount: 4
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 116.05937
+      EnemiesCount: 5
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 124.537964
+      EnemiesCount: 5
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 132.45657
+      EnemiesCount: 4
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 139.88754
       EnemiesCount: 1
       EnemyId: boss_golem
-      SpawnInterval: 0
-    - Time: 120
-      EnemiesCount: 3
+      SpawnInterval: 2
+    - Time: 146.44647
+      EnemiesCount: 4
       EnemyId: dragon
-      SpawnInterval: 0
-    - Time: 125
-      EnemiesCount: 2
-      EnemyId: dragon
-      SpawnInterval: 0
+      SpawnInterval: 2
     Reward:
       Cards: 46
       Xp: 140
-      Coins: 150
+      Coins: 100
   - StageName: Dragon's Ellite
     StageVisualKey: environment_1
     IsUnlocked: 0
     Waves:
     - Time: 0
-      EnemiesCount: 15
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 14
-      EnemiesCount: 4
-      EnemyId: dragon
-      SpawnInterval: 3
-    - Time: 26
+    - Time: 10.560251
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 23.473347
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 34.17432
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 44.855385
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 55.421417
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 67.50154
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 78.30288
+      EnemiesCount: 7
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 88.99681
       EnemiesCount: 1
       EnemyId: archer
       SpawnInterval: 2
-    - Time: 35
-      EnemiesCount: 1
-      EnemyId: boss
-      SpawnInterval: 3
-    - Time: 45
-      EnemiesCount: 4
-      EnemyId: dragon
-      SpawnInterval: 1
-    - Time: 55
-      EnemiesCount: 18
+    - Time: 99.68786
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 65
-      EnemiesCount: 2
-      EnemyId: archer
-      SpawnInterval: 1
-    - Time: 75
-      EnemiesCount: 14
+    - Time: 110.73063
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 85
-      EnemiesCount: 4
-      EnemyId: dragon
-      SpawnInterval: 0
-    - Time: 100
-      EnemiesCount: 1
-      EnemyId: boss
-      SpawnInterval: 0
-    - Time: 110
-      EnemiesCount: 20
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 120
-      EnemiesCount: 4
-      EnemyId: dragon
-      SpawnInterval: 0
-    - Time: 133
-      EnemiesCount: 15
+    - Time: 118.39576
+      EnemiesCount: 7
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 150
+    - Time: 126.69383
       EnemiesCount: 2
       EnemyId: ellite_dragon
-      SpawnInterval: 0
-    - Time: 160
+      SpawnInterval: 2
+    - Time: 133.99551
       EnemiesCount: 2
       EnemyId: ellite_dragon
-      SpawnInterval: 0
-    - Time: 170
+      SpawnInterval: 2
+    - Time: 140.68675
       EnemiesCount: 2
       EnemyId: ellite_dragon
-      SpawnInterval: 0
+      SpawnInterval: 2
     Reward:
       Cards: 47
       Xp: 180
-      Coins: 150
+      Coins: 100
   - StageName: Boss Dragon
     StageVisualKey: environment_1
     IsUnlocked: 0
     Waves:
     - Time: 0
-      EnemiesCount: 20
+      EnemiesCount: 9
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 15
+    - Time: 14.263799
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 26.086948
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 40.064682
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 50.201233
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 60.271862
       EnemiesCount: 2
       EnemyId: archer
-      SpawnInterval: 0
-    - Time: 22
-      EnemiesCount: 20
-      EnemyId: zombie
-      SpawnInterval: 4
-    - Time: 35
+      SpawnInterval: 2
+    - Time: 73.06916
       EnemiesCount: 6
       EnemyId: dragon
-      SpawnInterval: 3
-    - Time: 38
-      EnemiesCount: 1
-      EnemyId: ellite_dragon
-      SpawnInterval: 0
-    - Time: 42
-      EnemiesCount: 10
-      EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 50
-      EnemiesCount: 3
-      EnemyId: dragon
-      SpawnInterval: 0
-    - Time: 65
-      EnemiesCount: 3
-      EnemyId: archer
-      SpawnInterval: 0
-    - Time: 70
-      EnemiesCount: 4
-      EnemyId: boss
-      SpawnInterval: 0
-    - Time: 75
-      EnemiesCount: 10
+      SpawnInterval: 2
+    - Time: 83.22743
+      EnemiesCount: 9
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 85
-      EnemiesCount: 2
-      EnemyId: archer
-      SpawnInterval: 1
-    - Time: 100
-      EnemiesCount: 10
+    - Time: 94.223976
+      EnemiesCount: 9
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 115
+      SpawnInterval: 2
+    - Time: 102.79028
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 112.636086
+      EnemiesCount: 9
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 121.36726
       EnemiesCount: 4
       EnemyId: ellite_dragon
-      SpawnInterval: 0
-    - Time: 125
+      SpawnInterval: 2
+    - Time: 130.57895
       EnemiesCount: 1
       EnemyId: boss_dragon
-      SpawnInterval: 0
-    - Time: 140
-      EnemiesCount: 10
+      SpawnInterval: 2
+    - Time: 139.88794
+      EnemiesCount: 5
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 150
-      EnemiesCount: 2
-      EnemyId: archer
-      SpawnInterval: 0
+      SpawnInterval: 2
+    - Time: 149.19897
+      EnemiesCount: 5
+      EnemyId: zombie
+      SpawnInterval: 2
     Reward:
       Cards: 48
       Xp: 220
-      Coins: 150
+      Coins: 100
   - StageName: Kill them All
     StageVisualKey: environment_1
     IsUnlocked: 0
     Waves:
     - Time: 0
-      EnemiesCount: 27
+      EnemiesCount: 14
       EnemyId: zombie
-      SpawnInterval: 3
-    - Time: 25
+      SpawnInterval: 2
+    - Time: 10.041688
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 22.868917
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 34.7532
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 43.00827
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 52.192894
       EnemiesCount: 2
       EnemyId: archer
-      SpawnInterval: 0
-    - Time: 30
-      EnemiesCount: 40
+      SpawnInterval: 2
+    - Time: 62.953632
+      EnemiesCount: 14
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 55
-      EnemiesCount: 35
+    - Time: 72.55774
+      EnemiesCount: 14
       EnemyId: zombie
       SpawnInterval: 2
-    - Time: 70
-      EnemiesCount: 8
-      EnemyId: dragon
-      SpawnInterval: 0
-    - Time: 75
-      EnemiesCount: 50
+    - Time: 80.264145
+      EnemiesCount: 14
       EnemyId: zombie
-      SpawnInterval: 1
-    - Time: 105
-      EnemiesCount: 10
-      EnemyId: dragon
-      SpawnInterval: 1
-    - Time: 110
-      EnemiesCount: 1
-      EnemyId: boss_dragon
-      SpawnInterval: 0
-    - Time: 120
-      EnemiesCount: 60
+      SpawnInterval: 2
+    - Time: 87.3086
+      EnemiesCount: 14
       EnemyId: zombie
-      SpawnInterval: 1
-    - Time: 140
-      EnemiesCount: 20
-      EnemyId: dragon
-      SpawnInterval: 3
+      SpawnInterval: 2
+    - Time: 92.625015
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 98.96489
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 105.02695
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 109.55363
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 114.784294
+      EnemiesCount: 14
+      EnemyId: zombie
+      SpawnInterval: 2
     Reward:
       Cards: 49
       Xp: 260
-      Coins: 155
+      Coins: 100
+  - StageName: Angry Orcs
+    StageVisualKey: environment_1
+    IsUnlocked: 0
+    Waves:
+    - Time: 0
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 15.857712
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 27.59763
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 37.825314
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 51.471622
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 61.468555
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 70.9807
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 80.108215
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 92.092964
+      EnemiesCount: 3
+      EnemyId: elite_orc
+      SpawnInterval: 2
+    - Time: 103.61014
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 111.490326
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 121.944176
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 131.06291
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 140.03159
+      EnemiesCount: 4
+      EnemyId: elite_orc
+      SpawnInterval: 2
+    - Time: 149.36208
+      EnemiesCount: 15
+      EnemyId: zombie
+      SpawnInterval: 2
+    Reward:
+      Cards: 60
+      Xp: 300
+      Coins: 100
+  - StageName: Sweet Revenge
+    StageVisualKey: environment_1
+    IsUnlocked: 0
+    Waves:
+    - Time: 0
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 14.871411
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 25.867054
+      EnemiesCount: 16
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 39.122395
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 50.52112
+      EnemiesCount: 16
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 61.90036
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 73.764885
+      EnemiesCount: 11
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 83.81792
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 95.23937
+      EnemiesCount: 11
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 105.850365
+      EnemiesCount: 2
+      EnemyId: elite_orc
+      SpawnInterval: 2
+    - Time: 116.36815
+      EnemiesCount: 1
+      EnemyId: boss_golem
+      SpawnInterval: 2
+    - Time: 126.27941
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 136.60457
+      EnemiesCount: 32
+      EnemyId: spider
+      SpawnInterval: 2
+    - Time: 144.5735
+      EnemiesCount: 2
+      EnemyId: elite_orc
+      SpawnInterval: 2
+    - Time: 152.25543
+      EnemiesCount: 16
+      EnemyId: zombie
+      SpawnInterval: 2
+    Reward:
+      Cards: 65
+      Xp: 340
+      Coins: 100
+  - StageName: Minotaur
+    StageVisualKey: environment_1
+    IsUnlocked: 0
+    Waves:
+    - Time: 0
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 14.934887
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 30.460999
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 41.866417
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 52.128883
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 61.55767
+      EnemiesCount: 2
+      EnemyId: archer
+      SpawnInterval: 2
+    - Time: 74.38199
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 87.604996
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 100.27391
+      EnemiesCount: 12
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 112.062546
+      EnemiesCount: 2
+      EnemyId: ellite_dragon
+      SpawnInterval: 2
+    - Time: 121.98818
+      EnemiesCount: 1
+      EnemyId: boss_minotaur
+      SpawnInterval: 2
+    - Time: 131.02928
+      EnemiesCount: 12
+      EnemyId: dragon
+      SpawnInterval: 2
+    - Time: 139.83731
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    - Time: 146.8117
+      EnemiesCount: 2
+      EnemyId: elite_orc
+      SpawnInterval: 2
+    - Time: 153.70924
+      EnemiesCount: 17
+      EnemyId: zombie
+      SpawnInterval: 2
+    Reward:
+      Cards: 70
+      Xp: 380
+      Coins: 100

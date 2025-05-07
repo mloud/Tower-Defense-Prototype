@@ -72,7 +72,7 @@ MonoBehaviour:
     ProjectileSpeed: 0
     MoveSpeed: 0.2
     Cooldown: 4
-    Damage: 4
+    Damage: 8
     AttackDistance: 2
     TargetRange: 20
     Hp: 8000
@@ -98,12 +98,37 @@ MonoBehaviour:
     MoveSpeed: 0.25
     Cooldown: 4
     Damage: 7
-    AttackDistance: 6
-    TargetRange: 6
+    AttackDistance: 4.5
+    TargetRange: 4.5
     Hp: 5000
     Knockback: 0
     KnockbackResistent: 1
     FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades: []
+  - UnitId: boss_minotaur
+    VisualId: boss_minotaur
+    ProjectileVisualId: 
+    AttackDelay: 0.5
+    AttackType: 0
+    CreatedBySkill: 0
+    ProjectileSpeed: 0
+    MoveSpeed: 0.4
+    Cooldown: 4
+    Damage: 8
+    AttackDistance: 2.5
+    TargetRange: 2.5
+    Hp: 6000
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0
     Bounce: 0
     Penetration: 0
     Fireagain: 0
@@ -179,6 +204,56 @@ MonoBehaviour:
     Knockback: 0
     KnockbackResistent: 1
     FireAgainInterval: 0.5
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades: []
+  - UnitId: elite_orc
+    VisualId: elite_orc
+    ProjectileVisualId: 
+    AttackDelay: 0.2
+    AttackType: 0
+    CreatedBySkill: 0
+    ProjectileSpeed: 0
+    MoveSpeed: 0.5
+    Cooldown: 3
+    Damage: 3
+    AttackDistance: 1.4
+    TargetRange: 20
+    Hp: 1800
+    Knockback: 0
+    KnockbackResistent: 1
+    FireAgainInterval: 0
+    Bounce: 0
+    Penetration: 0
+    Fireagain: 0
+    FireAgainSpread: 0
+    AoeOnly: 0
+    AoeRadius: 0
+    AoeDamage: 0
+    UpgradePath:
+      StatsUpgrades: []
+  - UnitId: spider
+    VisualId: spider
+    ProjectileVisualId: 
+    AttackDelay: 0.2
+    AttackType: 0
+    CreatedBySkill: 0
+    ProjectileSpeed: 0
+    MoveSpeed: 0.8
+    Cooldown: 1
+    Damage: 0.5
+    AttackDistance: 0.5
+    TargetRange: 0.5
+    Hp: 100
+    Knockback: 0
+    KnockbackResistent: 0
+    FireAgainInterval: 0
     Bounce: 0
     Penetration: 0
     Fireagain: 0

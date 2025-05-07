@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2091df934949518eca8d9ceb59eea4, type: 3}
+  m_Name: StageGeneratorConfig_Stage_1
+  m_EditorClassIdentifier: 
+  WavesCount: 15
+  MinDelayBetweenWaves: 9
+  MaxDelayBetweenWaves: 14
+  TotalHp: 15000
+  TotalDps: 35
+  UnitsUsed:
+  - zombie
+  - dragon
+  UnitsProbabilities:
+  - 80
+  - 20
+  RequiredWaves:
+  - WaveIndex: 4
+    EnemyCount: 2
+    SpawnInterval: 0
+    EnemyId: archer
+  - WaveIndex: 7
+    EnemyCount: 1
+    SpawnInterval: 0
+    EnemyId: boss
+  - WaveIndex: 13
+    EnemyCount: 1
+    SpawnInterval: 0
+    EnemyId: boss_golem
+  DelayCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.1
+      inSlope: -0.45000005
+      outSlope: -0.45000005
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.65
+      inSlope: -0.45000005
+      outSlope: -0.45000005
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
