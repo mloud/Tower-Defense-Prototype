@@ -152,4 +152,5 @@ MonoBehaviour:
   id: TextDamage
   isScreenSpace: 1
   destroyAfterFinished: 0
+  playOnEnable: 0
   label: {fileID: 5359889357480145077}
