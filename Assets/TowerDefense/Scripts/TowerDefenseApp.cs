@@ -94,8 +94,8 @@ namespace TowerDefense
             ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDeck>(new LocalStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<Valet>(new LocalStorage());
             
-            //ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
-            ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new RemoteReadOnlyStorage(developmentMode));
+            ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new AddressableScriptableObjectStorage());
+            //ServiceLocator.Get<IDataManager>().RegisterStorage<StageDefinition>(new RemoteReadOnlyStorage(developmentMode));
 
             ServiceLocator.Get<IDataManager>().RegisterStorage<EnemyDefinition>(new AddressableScriptableObjectStorage());
             ServiceLocator.Get<IDataManager>().RegisterStorage<HeroDefinition>(new AddressableScriptableObjectStorage());
