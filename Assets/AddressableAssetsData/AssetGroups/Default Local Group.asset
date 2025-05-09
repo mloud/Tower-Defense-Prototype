@@ -122,11 +122,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6868c80403c1447fea9de5bcb526b407
-    m_Address: soldier
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69c73db73802d4eeaaa56a6d6a8089b5
     m_Address: StageDefinitionsTable
     m_ReadOnly: 0
@@ -229,6 +224,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cdb21943026fb4ac992cd1aac2bb9767
     m_Address: projectile_fireball
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1ff3e44ed5614e64b3cfedc40396778
+    m_Address: soldier
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
